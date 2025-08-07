@@ -10,7 +10,6 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-color: map.get($colors-primary, 'black');
   color: map.get($colors-primary, 'white');
 
   .background {
@@ -24,7 +23,7 @@
     position: relative;
     z-index: 10;
     width: 100%;
-    max-width: 80rem; // max-w-7xl
+    max-width: 100rem; // Increased from 90rem
     margin: 0 auto;
     padding: 6rem 1rem; // py-24 px-4
     justify-content: center;
@@ -66,23 +65,14 @@
   }
 
   .pricingGrid {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    justify-content: center;
     gap: 2rem; // gap-8
 
-    @media (min-width: 768px) {
-      grid-template-columns: repeat(2, 1fr); // md:grid-cols-2
-    }
-
-    @media (min-width: 1024px) {
-      grid-template-columns: repeat(3, 1fr); // lg:grid-cols-3
-    }
-
     .pricingCardWrapper {
+      width: 36rem; // Set a fixed, wider width
       display: flex;
       justify-content: center;
-      // width: 100%;
-      width: 32rem;
     }
   }
 }

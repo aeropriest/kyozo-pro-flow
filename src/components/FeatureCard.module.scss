@@ -17,6 +17,8 @@
   backdrop-filter: blur(10px);
   border: 0.5px solid map.get($colors-primary, 'gray');
   background-color: #121212; /* Adding solid background color */
+  z-index: 3; /* Ensure it's above background images */
+  isolation: isolate; /* Create a new stacking context */
 }   
 
 .cardContent {

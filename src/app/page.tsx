@@ -12,6 +12,7 @@ import styles from '@/styles/page.module.scss';
 import Marquee, { marqueeClasses } from '@/components/Marquee';
 import Toolkit from '@/components/Toolkit';
 import BubbleMarquee from '@/components/BubbleMarquee';
+import BottomText from '@/components/BottomText';
 
 export default function Home() {
   return (
@@ -20,7 +21,9 @@ export default function Home() {
         <AnimeText text="Discover Your Creative Universe" fontSize="7rem" fontWeight={800} />
       </section>      
       <BackgroundImages />
-      <FeatureCard />
+      <section className={styles.featureSection}>
+        <FeatureCard />
+      </section>  
       <section className={styles.heroSection}>
         <ScrollRevealText text="Where Creative Minds Converge" fontSize="7rem" fontWeight={800} />
       </section>
@@ -115,6 +118,7 @@ export default function Home() {
         <Toolkit />
       </section>      
       <FixedFooter />
+      <BottomText text="Join the Kyozo creative universe" fontSize="7rem" fontWeight={800} />
       </main>
   );
 }

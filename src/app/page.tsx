@@ -10,24 +10,22 @@ import FeatureCard from '@/components/FeatureCard';
 import BackgroundImages from '@/components/BackgroundImages';
 import styles from '@/styles/page.module.scss';
 import Marquee, { marqueeClasses } from '@/components/Marquee';
-import Toolkit from '@/components/Toolkit';
+import Hero from '@/components/Hero';
 import BubbleMarquee from '@/components/BubbleMarquee';
 import BottomText from '@/components/BottomText';
 import PricingSection from '@/components/PricingSection';
+import Toolkit from '@/components/Toolkit';
 
 export default function Home() {
   return (
     <main className={styles.mainContainer}>
       <section className={styles.heroSection}>
-        <AnimeText text="Discover Your Creative Universe" fontSize="7rem" fontWeight={800} />
-      </section>      
+        <Hero />
+      </section>
       <BackgroundImages />
       <section className={styles.featureSection}>
         <FeatureCard />
       </section>  
-      <section className={styles.heroSection}>
-        <ScrollRevealText text="Where Creative Minds Converge" fontSize="7rem" fontWeight={800} />
-      </section>
       <section className={styles.section}>
         <SlidingCards>
           <SlideCard0 />

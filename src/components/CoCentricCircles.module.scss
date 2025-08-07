@@ -1,0 +1,106 @@
+@use '../styles/colors' as *;
+@use 'sass:map';
+@use 'sass:math';
+
+$ring-count: 5;
+$animation-duration: 4s;
+$animation-delay-step: math.div($animation-duration, $ring-count);
+$initial-scale: 0.1; // Start from 10% size
+$scale-step: 0.2; // 20% increase per ring
+
+// Helper for dynamic delay
+@function ring-delay($i) {
+  @return ($i - 1) * $animation-delay-step;
+}
+
+// Optional, for z-index
+@function ring-z($i) {
+  @return $ring-count - $i;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.animatedConcentricRings {
+  width: 100vmin;
+  height: 100vmin;
+  position: relative;
+  margin: 0 auto;
+
+  // Rings: loop for all rings with decreasing gaps
+  @for $i from 1 through $ring-count {
+    $scale: $initial-scale + (($i - 1) * $scale-step);
+    $opacity: 1 - (($i - 1) * 0.2);
+    $size: 100% - (($i - 1) * 10%);
+
+    .ring#{$i} {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale($scale);
+      opacity: 0;
+      z-index: ring-z($i);
+      animation: expandRings $animation-duration infinite;
+      animation-delay: ring-delay($i);
+      width: $size;
+      height: $size;
+      border: 1px solid rgba(255, 255, 255, $opacity);
+      background: none;
+      box-sizing: border-box;
+
+      // Innermost circle is just a line without fill
+      @if $i == 1 {
+        width: 100%;
+        height: 100%;
+        background: none;
+        border: 1px solid white;
+        transform: translate(-50%, -50%) scale(0);
+        animation: expandRings $animation-duration infinite;
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+@keyframes expandRings {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.8;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+// Expand animation for all rings
+@keyframes expandRings {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.8;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}

@@ -22,12 +22,12 @@
   
   &::before {
     left: 0;
-    background: linear-gradient(to right, map.get($colors-primary, 'dark-gray'), transparent);
+    // background: linear-gradient(to right, map.get($colors-primary, 'dark-gray'), transparent);
   }
   
   &::after {
     right: 0;
-    background: linear-gradient(to left, map.get($colors-primary, 'dark-gray'), transparent);
+    // background: linear-gradient(to left, map.get($colors-primary, 'dark-gray'), transparent);
   }
 }
 
@@ -95,10 +95,10 @@
   font-size: 1.5rem;
   font-weight: 600;
   color: map.get($colors-primary, 'white');
-  background: linear-gradient(90deg, map.get($colors-primary, 'accent-purple'), map.get($colors-primary, 'accent-blue'));
+  // background: linear-gradient(90deg, map.get($colors-primary, 'accent-purple'), map.get($colors-primary, 'accent-blue'));
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  color: white;
   transition: all 0.3s ease;
   
   &:hover {

@@ -1,40 +1,28 @@
 'use client';
-import React, { forwardRef, ChangeEvent, ForwardedRef } from 'react';
-import styles from './Checkbox.module.scss';
+import React from 'react';
+import styles from './CoCentricCircles.module.scss';
 
-const CoCentricCircles = forwardRef<HTMLInputElement, CoCentricCirclesProps>(({
-  label,
-  checked,
-  onChange,
-  name,
-  id,
-  disabled = false,
-  className = '',
-  ...props
-}, ref) => {
-  const checkboxId = id || name;
-  
+const CoCentricCircles = () => {
+  // Array of rings for rendering with index to stagger animation & styles
+  const rings = [1, 2, 3, 4, 5];
+
   return (
-    <div className={`${styles.checkboxWrapper} ${className}`}>
-      <label className={styles.checkboxContainer}>
-        <input
-          ref={ref}
-          type="checkbox"
-          id={checkboxId}
-          name={name}
-          checked={checked}
-          onChange={onChange}
-          disabled={disabled}
-          className={styles.checkboxInput}
-          {...props}
-        />
-        <span className={styles.checkmark}></span>
-        {label && <span className={styles.checkboxLabel}>{label}</span>}
-      </label>
+    <div className={styles.container}>
+      <div className={styles.animatedConcentricRings}>
+        {rings.map((ring, index) => (
+          <div 
+            key={ring} 
+            className={styles[`ring${ring}`]} 
+            style={{
+              animationDelay: `${index * 0.5}s`,
+              opacity: 1 - index * 0.175,  // from 1 to 0.3 opacity approximately
+              transformOrigin: 'center',
+            }}
+          />
+        ))}
+      </div>
     </div>
   );
-});
-
-CoCentricCircles.displayName = 'CoCentricCircles';
+};
 
 export default CoCentricCircles;

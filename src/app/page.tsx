@@ -13,6 +13,7 @@ import Marquee, { marqueeClasses } from '@/components/Marquee';
 import Toolkit from '@/components/Toolkit';
 import BubbleMarquee from '@/components/BubbleMarquee';
 import BottomText from '@/components/BottomText';
+import CoCentricCircles from '@/components/CoCentricCircles';
 
 export default function Home() {
   return (
@@ -45,7 +46,10 @@ export default function Home() {
       </section>
       <section>
         <Toolkit />
-      </section>      
+      </section>   
+      <section>
+        <CoCentricCircles />
+      </section>   
       <section className={styles.section}>
         <BubbleMarquee 
           categories={[

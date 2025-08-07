@@ -1,0 +1,100 @@
+@use '../styles/colors' as *;
+@use 'sass:map';
+
+.inputWrapper {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: map.get($colors-primary, 'white');
+}
+
+.required {
+  color: map.get($colors-primary, 'accent-pink');
+  margin-left: 0.25rem;
+}
+
+.inputContainer {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: transparent;
+    border: 2px solid transparent;
+    border-radius: 9999px; // Fully rounded
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 0;
+    background-image: linear-gradient(#181818, #181818), 
+                    linear-gradient(90deg, map.get($colors-primary, 'accent-pink'), map.get($colors-primary, 'accent-blue'));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+}
+
+.input {
+  position: relative;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: map.get($colors-primary, 'white');
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px; // Fully rounded
+  transition: all 0.2s ease;
+  z-index: 1;
+  
+  &:focus {
+    outline: none;
+    border-color: transparent;
+    background-color: rgba(255, 255, 255, 0.08);
+    
+    & + .inputContainer::before {
+      opacity: 1;
+    }
+  }
+  
+  &:focus-visible {
+    outline: none;
+  }
+  
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// Focus state with gradient border
+.inputContainer:focus-within::before {
+  opacity: 1;
+}
+
+// Error state
+.hasError {
+  border-color: map.get($colors-primary, 'error');
+  
+  &:focus {
+    border-color: map.get($colors-primary, 'error');
+  }
+}
+
+.errorMessage {
+  color: map.get($colors-primary, 'error');
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  margin-left: 0.5rem;
+}

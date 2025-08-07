@@ -1,0 +1,280 @@
+@use '../styles/colors' as *;
+@use 'sass:map';
+
+.dialogBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  
+  &.active {
+    opacity: 1;
+  }
+  
+  &:not(.active) {
+    transition: opacity 0.5s ease;
+  }
+}
+
+.dialogContainer {
+  position: relative;
+  background-color: map.get($colors-primary, 'dark-gray');
+  color: map.get($colors-primary, 'white');
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  border: 1px solid map.get($colors-primary, 'gray');
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  transform: scale(0.95);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  
+  &.active {
+    transform: scale(1);
+    opacity: 1;
+  }
+  
+  &:not(.active) {
+    transform: scale(0.95);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+}
+
+.dialogContent {
+  position: relative;
+  overflow: hidden;
+}
+
+// Curtain animation elements
+.curtainLeft,
+.curtainRight {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  background-color: map.get($colors-primary, 'dark-gray');
+  z-index: 10;
+  transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.curtainLeft {
+  left: 0;
+  transform: translateX(0);
+  
+  &.active {
+    transform: translateX(-100%);
+  }
+}
+
+.curtainRight {
+  right: 0;
+  transform: translateX(0);
+  
+  &.active {
+    transform: translateX(100%);
+  }
+}
+
+// Dialog is closing - curtains close from sides to middle
+.dialogBackdrop:not(.active) {
+  .curtainLeft {
+    transform: translateX(50%);
+    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  
+  .curtainRight {
+    transform: translateX(-50%);
+    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+  }
+}
+
+.dialogHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dialogTitle {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: map.get($colors-primary, 'white');
+}
+
+.closeButton {
+  background: transparent;
+  border: none;
+  color: map.get($colors-primary, 'white');
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px map.get($colors-primary, 'accent-pink');
+  }
+}
+
+.dialogBody {
+  padding: 1.5rem;
+  overflow-y: auto;
+  max-height: calc(90vh - 70px);
+}
+
+// Tabs styling
+.tabsContainer {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  width: 100%;
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  color: map.get($colors-primary, 'white');
+  padding: 0.5rem 1rem;
+  border-radius: 9999px; // Fully rounded
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px map.get($colors-primary, 'accent-pink');
+  }
+}
+
+.activeTab {
+  background: linear-gradient(90deg, map.get($colors-primary, 'accent-pink'), map.get($colors-primary, 'accent-purple'));
+  color: map.get($colors-primary, 'white');
+}
+
+// Custom Input styling
+.inputContainer {
+  position: relative;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: map.get($colors-primary, 'white');
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px; // Fully rounded
+  transition: all 0.2s ease;
+  
+  &:focus {
+    outline: none;
+    border-color: transparent;
+    box-shadow: 0 0 0 2px transparent;
+    background-clip: padding-box;
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(90deg, map.get($colors-primary, 'accent-pink'), map.get($colors-primary, 'accent-purple'));
+      border-radius: 9999px;
+      z-index: -1;
+    }
+  }
+  
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+// Custom Checkbox styling
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.checkboxInput {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: relative;
+  height: 20px;
+  width: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  margin-right: 0.5rem;
+  transition: all 0.2s ease;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+}
+
+.checkboxInput:checked ~ .checkmark {
+  background-color: map.get($colors-primary, 'accent-pink');
+  border-color: map.get($colors-primary, 'accent-pink');
+  
+  &::after {
+    display: block;
+  }
+}
+
+.checkboxLabel {
+  margin-left: 0.5rem;
+  font-size: 0.875rem;
+  user-select: none;
+}

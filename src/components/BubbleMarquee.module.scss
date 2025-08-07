@@ -5,8 +5,6 @@
   width: 100%;
   display: block; /* Changed from flex to block to avoid any flex gaps */
   overflow: hidden;
-  background-color: #000;
-  font-size: 0; /* Remove any potential whitespace between rows */
 }
 
 .bubbleRowContainer {

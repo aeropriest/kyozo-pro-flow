@@ -24,7 +24,7 @@ const BottomText: React.FC<BottomTextProps> = ({
 
   return (
     <div style={{
-      minHeight: '100vh',
+      minHeight: '80vh',
       width: '100%',
       display: 'flex',
       flexDirection: 'column',

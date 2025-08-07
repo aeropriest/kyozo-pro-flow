@@ -22,7 +22,14 @@ export default function Home() {
       <section className={styles.heroSection}>
         <AnimeText text="Where Creative Minds Converge" fontSize="7rem" fontWeight={800} />
       </section>
-    </main>
+      <section className={styles.section}>
+        <SlidingCards>
+          <SlideCard0 />
+          <SlideCard1 />
+          <SlideCard2 />
+        </SlidingCards>
+      </section>
+      </main>
   );
 }
 

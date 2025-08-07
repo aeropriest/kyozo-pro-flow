@@ -1,0 +1,100 @@
+@use '../styles/colors' as *;
+@use 'sass:map';
+
+.bubble-section {
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+  overflow: hidden;
+  background-color: #0a0a0a;
+
+  @media (min-width: 640px) {
+    // padding-top: 8rem; // sm:py-32
+    // padding-bottom: 8rem;
+  }
+}
+
+.bubble-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bubble-row {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.bubble {
+  border-radius: 9999px;
+  border-width: 1px;
+  // padding-left: 4rem;  
+  // padding-right: 4rem;
+  // padding-top: 2rem;   
+  // padding-bottom: 2rem;
+  padding: 2rem 6rem;
+  margin: 0 0.75rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+
+  &-text {
+    font-size: 1.5rem;    // text-2xl
+    font-weight: 500;     // font-medium
+    white-space: nowrap;
+    color: white;
+    transition: color 0.2s ease-in-out;
+  }
+
+  &.hovered {
+    color: #0D0D0D;
+    
+    .bubble-text {
+      color: #0D0D0D;
+    }
+  }
+  
+  // Color classes for each row
+  &.music {
+    border-color: map.get($colors-primary, 'accent-blue');
+    
+    &.hovered {
+      background-color: map.get($colors-primary, 'accent-blue');
+    }
+  }
+  
+  &.artMovements {
+    border-color: map.get($colors-primary, 'accent-pink');
+    
+    &.hovered {
+      background-color: map.get($colors-primary, 'accent-pink');
+    }
+  }
+  
+  &.crafts {
+    border-color: map.get($colors-primary, 'accent-yellow');
+    
+    &.hovered {
+      background-color: map.get($colors-primary, 'accent-yellow');
+    }
+  }
+  
+  &.fashion {
+    border-color: map.get($colors-primary, 'accent-coral');
+    
+    &.hovered {
+      background-color: map.get($colors-primary, 'accent-coral');
+    }
+  }
+  
+  &.performance {
+    border-color: map.get($colors-primary, 'accent-mint');
+    
+    &.hovered {
+      background-color: map.get($colors-primary, 'accent-mint');
+    }
+  }
+}

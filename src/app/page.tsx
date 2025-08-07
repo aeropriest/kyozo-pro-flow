@@ -1,3 +1,4 @@
+'use client';
 import SlidingCards from '@/components/SlidingCards';
 import AnimeText from '@/components/AnimeText';
 import ScrollRevealText from '@/components/ScrollRevealText';
@@ -6,6 +7,7 @@ import SlideCard1 from '@/components/SlideCard1';
 import SlideCard2 from '@/components/SlideCard2';
 import FixedFooter from '@/components/FixedFooter';
 import FeatureCard from '@/components/FeatureCard';
+import BackgroundImages from '@/components/BackgroundImages';
 import styles from '@/styles/page.module.scss';
 import Marquee, { marqueeClasses } from '@/components/Marquee';
 import Toolkit from '@/components/Toolkit';
@@ -16,10 +18,9 @@ export default function Home() {
     <main className={styles.mainContainer}>
       <section className={styles.heroSection}>
         <AnimeText text="Discover Your Creative Universe" fontSize="7rem" fontWeight={800} />
-      </section>
-      <section className={styles.section}>
-        <FeatureCard />
-      </section>
+      </section>      
+      <BackgroundImages />
+      <FeatureCard />
       <section className={styles.heroSection}>
         <ScrollRevealText text="Where Creative Minds Converge" fontSize="7rem" fontWeight={800} />
       </section>

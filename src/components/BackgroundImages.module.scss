@@ -1,0 +1,76 @@
+.backgroundContainer {
+  position: relative;
+  width: 100%;
+  height: 0; /* No height to avoid creating space */
+  overflow: visible; /* Allow content to overflow */
+  z-index: 1;
+  margin-top: -15vh; /* Pull up to overlap with hero section */
+}
+
+.leftImage, .rightImage {
+  position: absolute;
+  height: 80vh; /* Taller to span across sections */
+  opacity: 0; /* Start invisible for animation */
+  z-index: -1; /* Ensure they stay behind content */
+}
+
+.leftImage {
+  width: 15%; /* Half the size of the right image */
+  left: 0; /* Flush with left edge */
+  top: -28vh; /* Position partly in hero section */
+}
+
+.rightImage {
+  width: 18%; /* Keep current size */
+  right: 0;
+  top: -26vh; /* Position partly in hero section */
+}
+
+/* Animation for left image */
+.animateLeft {
+  animation: slideInLeft 1.2s ease-out forwards;
+}
+
+/* Animation for right image */
+.animateRight {
+  animation: slideInRight 1.2s ease-out forwards;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .leftImage, .rightImage {
+    width: 60%;
+  }
+}
+
+@media (max-width: 480px) {
+  .backgroundContainer {
+    height: 30vh;
+  }
+  
+  .leftImage, .rightImage {
+    width: 80%;
+  }
+}

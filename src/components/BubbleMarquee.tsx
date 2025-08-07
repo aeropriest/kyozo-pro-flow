@@ -1,55 +1,85 @@
-"use client";
+'use client';
 
-import React, { useState } from 'react';
-import { Marquee } from './Marquee';
+import React from 'react';
 import styles from './BubbleMarquee.module.scss';
+import { bubbleRowColors } from '@/lib/colors';
 
-const Bubble = ({ text, colorClass }: { text: string; colorClass: string }) => {
-  const [isHovered, setIsHovered] = useState(false);
+interface BubbleItem {
+  text: string;
+  color?: string;
+}
+
+interface BubbleRowProps {
+  items: BubbleItem[];
+  direction: 'left' | 'right';
+  speed?: number;
+  category: keyof typeof bubbleRowColors;
+}
+
+const BubbleRow: React.FC<BubbleRowProps> = ({ 
+  items, 
+  direction, 
+  speed = 30, 
+  category 
+}) => {
+  const rowColor = bubbleRowColors[category];
   
-  const bubbleClasses = `${styles.bubble} ${styles[colorClass]} ${isHovered ? styles.hovered : ''}`;
-
   return (
-    <div
-      className={bubbleClasses}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <span className={styles['bubble-text']}>{text}</span>
+    <div className={styles.bubbleRowContainer}>
+      <div 
+        className={`${styles.bubbleRow} ${direction === 'right' ? styles.toRight : styles.toLeft}`}
+        style={{ 
+          '--scroll-duration': `${speed}s`,
+          '--row-color': rowColor
+        } as React.CSSProperties}
+      >
+        {/* Original items */}
+        {items.map((item, index) => (
+          <div 
+            key={`item-${index}`} 
+            className={styles.bubble}
+            style={item.color ? { backgroundColor: item.color } : undefined}
+          >
+            {item.text}
+          </div>
+        ))}
+        
+        {/* Duplicate items for seamless looping */}
+        {items.map((item, index) => (
+          <div 
+            key={`item-dup-${index}`} 
+            className={styles.bubble}
+            style={item.color ? { backgroundColor: item.color } : undefined}
+            aria-hidden="true"
+          >
+            {item.text}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
-const bubbleRows = [
-  { colorClass: 'music', duration: '30s', reverse: false, tags: ['Rock', 'Jazz', 'R&B', 'Trance', 'Techno', 'House','Rock', 'Jazz', 'R&B', 'Trance'] },
-  { colorClass: 'artMovements', duration: '35s', reverse: true, tags: ['Pop Art', 'Bauhaus', 'Expressionism', 'Futurism','Pop Art', 'Bauhaus', 'Expressionism', 'Futurism'] },
-  { colorClass: 'crafts', duration: '25s', reverse: false, tags: ['Candle-making', 'Crochet', 'Jewelry', 'Painting','Candle-making', 'Crochet', 'Jewelry', 'Painting'] },
-  { colorClass: 'fashion', duration: '32s', reverse: true, tags: ['Classic', 'Chic', 'Grunge','Classic', 'Chic', 'Grunge','Classic', 'Chic', 'Grunge',] },
-  { colorClass: 'performance', duration: '38s', reverse: false, tags: ['Musical', 'Digital', 'Circus','Musical', 'Digital', 'Circus','Musical', 'Digital', 'Circus'] },
-];
+interface BubbleMarqueeProps {
+  categories: {
+    category: keyof typeof bubbleRowColors;
+    items: BubbleItem[];
+  }[];
+}
 
-const BubbleMarquee: React.FC = () => {
+const BubbleMarquee: React.FC<BubbleMarqueeProps> = ({ categories }) => {
   return (
-    <section className={styles['bubble-section']}>
-      <div className={styles['bubble-rows']}>
-        {bubbleRows.map((row, rowIndex) => {
-          const rotationAngle = rowIndex % 2 === 0 ? 0.2 : -0.2;
-          return (
-            <div
-              key={rowIndex}
-              className={styles['bubble-row']}
-              style={{
-                transform: `rotate(${rotationAngle}deg)`,
-              }}
-            >
-                {row.tags.map((tag, tagIndex) => (
-                  <Bubble key={tagIndex} text={tag} colorClass={row.colorClass} />
-                ))}
-            </div>
-          );
-        })}
-      </div>
-    </section>
+    <div className={styles.bubbleMarqueeContainer}>
+      {categories.map((row, index) => (
+        <BubbleRow 
+          key={`row-${index}`}
+          items={row.items}
+          direction={index % 2 === 0 ? 'left' : 'right'}
+          speed={30 + (index * 5)} // Slightly different speeds for each row
+          category={row.category}
+        />
+      ))}
+    </div>
   );
 };
 

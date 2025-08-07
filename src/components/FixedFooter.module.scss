@@ -1,5 +1,6 @@
-@use '../styles/colors' as *;
 @use 'sass:map';
+@use 'sass:color';
+@use '../styles/colors' as *;
 
 .fixedFooter {
   position: fixed;
@@ -23,11 +24,11 @@
 .logoButtonContainer {
   display: flex;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: color-with-opacity(map.get($colors-primary, 'black'), 0.3);
   border-radius: 9999px;
   padding: 0.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background-color: rgba(0, 0, 0, 0.8);
+  border: 1px solid map.get($colors-ui, 'border');
+  background-color: color-with-opacity(map.get($colors-primary, 'black'), 0.8);
 }
 
 .buttonLogo {

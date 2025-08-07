@@ -147,10 +147,57 @@
 }
 
 .phoneBackgroundGradient {
-  width: 500px;
-  height: 500px;
+  width: 1000px;
+  height: 1000px;
   border-radius: 50%;
-  background: radial-gradient(circle at center, #86efac 0%, #5fb4ff 40%, #d8b4fe 100%);
-  box-shadow: 0 0 40px rgba(134, 239, 172, 0.5);
-  filter: blur(40px);
+  background-color: transparent;
+  position: relative;
+  overflow: hidden;
+  
+  // Animated expanding ring
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: transparent;
+    background-image: 
+      conic-gradient(
+        from 0deg,
+        #7b3b78,
+        #2b4b8f,
+        #e78b76,
+        #7b3b78
+      );
+    -webkit-mask: 
+      radial-gradient(circle at center, 
+        transparent 10%, 
+        transparent 22%, 
+        rgba(0, 0, 0, 0.1) 24%,
+        rgba(0, 0, 0, 0.4) 26%,
+        rgba(0, 0, 0, 0.7) 28%, 
+        rgba(0, 0, 0, 0.7) 32%,
+        rgba(0, 0, 0, 0.4) 34%,
+        rgba(0, 0, 0, 0.1) 36%,
+        transparent 38%
+      );
+    mask: 
+      radial-gradient(circle at center, 
+        transparent 0%, 
+        transparent 22%, 
+        rgba(0, 0, 0, 0.1) 24%,
+        rgba(0, 0, 0, 0.4) 26%,
+        rgba(0, 0, 0, 0.7) 28%, 
+        rgba(0, 0, 0, 0.7) 32%,
+        rgba(0, 0, 0, 0.4) 34%,
+        rgba(0, 0, 0, 0.1) 36%,
+        transparent 38%
+      );
+    filter: blur(5px);
+    animation: expandRing 1s infinite; /* Animation speed doubled */
+  }
 }

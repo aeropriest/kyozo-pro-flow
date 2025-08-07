@@ -1,0 +1,95 @@
+@use '../styles/colors' as *;
+@use 'sass:map';
+
+.bubbleMarqueeContainer {
+  width: 100%;
+  display: block; /* Changed from flex to block to avoid any flex gaps */
+  overflow: hidden;
+}
+
+.bubbleRowContainer {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  height: 11.2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.bubbleRow {
+  display: flex;
+  position: absolute;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.bubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 7rem;
+  border-radius: 6rem;
+  font-weight: 400;
+  font-size: 2.5rem; /* Reset font size for bubble text */
+  color: #fff;
+  background-color: transparent;
+  border: 1.5px solid var(--row-color, #fff);
+  transition: background-color 0.3s ease;
+  cursor: default;
+  margin-top: 0;
+  margin-bottom: 0;
+  &:hover {
+    background-color: var(--row-color, #fff);
+    color: #000;
+  }
+}
+
+.toLeft {
+  animation: scroll-left var(--scroll-duration, 30s) linear infinite;
+}
+
+.toRight {
+  animation: scroll-right var(--scroll-duration, 30s) linear infinite;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+// Media queries for responsive design
+@media (max-width: 768px) {
+  .bubbleRowContainer {
+    line-height: 0 !important;
+    // height: 3.5rem;
+  }
+  
+  .bubble {
+    // padding: 0.5rem 1.25rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .bubbleRowContainer {
+    // height: 3rem;
+  }
+  
+  .bubble {
+    // padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+  }
+}

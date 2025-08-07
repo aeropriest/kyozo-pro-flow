@@ -16,10 +16,13 @@
 
 .featureSection {
   width: 100%;
-  padding: 80px 20px;
+  padding: 120px 20px 80px; /* Increased top padding to move card lower */
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  z-index: 2; /* Ensure it's above background images */
+  margin-top: 40px; /* Additional spacing from hero section */
 }
 
 .page {

@@ -1,0 +1,88 @@
+@use 'sass:map';
+@use 'sass:color';
+@use '../styles/colors' as *;
+
+.pricingSection {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: map.get($colors-primary, 'black');
+  color: map.get($colors-primary, 'white');
+
+  .background {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 80rem; // max-w-7xl
+    margin: 0 auto;
+    padding: 6rem 1rem; // py-24 px-4
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    @media (min-width: 640px) {
+      padding: 6rem 1.5rem; // sm:px-6
+    }
+
+    @media (min-width: 1024px) {
+      padding: 6rem 2rem; // lg:px-8
+    }
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 4rem; // mb-16
+
+    h2 {
+      font-size: 2.25rem; // text-4xl
+      font-weight: 700; // font-bold
+      color: map.get($colors-primary, 'white');
+      margin-bottom: 1rem; // mb-4
+
+      @media (min-width: 768px) {
+        font-size: 3rem; // md:text-5xl
+      }
+    }
+
+    p {
+      font-size: 1.25rem; // text-xl
+      color: map.get($colors-ui, 'foreground-light'); // text-gray-400
+      max-width: 42rem; // max-w-2xl
+      margin: 0 auto;
+    }
+  }
+
+  .pricingGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem; // gap-8
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr); // md:grid-cols-2
+    }
+
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr); // lg:grid-cols-3
+    }
+
+    .pricingCardWrapper {
+      display: flex;
+      justify-content: center;
+      // width: 100%;
+      width: 32rem;
+    }
+  }
+}

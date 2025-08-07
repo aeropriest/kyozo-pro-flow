@@ -2,7 +2,7 @@
 
 import React, { ReactNode } from 'react';
 import styles from './Marquee.module.scss';
-import CheckmarkIcon from './CheckMarkIcon';
+import { FaCircleCheck } from "react-icons/fa6";
 
 
 // Export class names for use in parent components
@@ -30,13 +30,13 @@ export const Marquee: React.FC<MarqueeProps> = ({ children, duration = '40s', re
         {/* Render children twice for a seamless loop */}
         {childrenArray.map((child, index) => (
           <div key={index} className={styles.marqueeItem}>
-            <CheckmarkIcon />
+            <FaCircleCheck size={24}/>
             {child}
           </div>
         ))}
         {childrenArray.map((child, index) => (
           <div key={`clone-${index}`} className={styles.marqueeItem} aria-hidden="true">
-            <CheckmarkIcon />
+            <FaCircleCheck size={24}/>
             {child}
           </div>
         ))}

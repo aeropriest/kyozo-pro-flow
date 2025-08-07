@@ -53,17 +53,6 @@
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.checkmarkIcon {
-  width: 25px;
-  height: 25px;
-  margin-right: 0.75rem;
-  color: black;
-  background-color: white;
-  border-radius: 50%;
-  padding: 2px;
-  flex-shrink: 0;
-}
-
 .marquee {
   animation: marquee-scroll 30s linear infinite;
 }
@@ -95,11 +84,12 @@
   font-size: 1.5rem;
   font-weight: 600;
   color: map.get($colors-primary, 'white');
-  // background: linear-gradient(90deg, map.get($colors-primary, 'accent-purple'), map.get($colors-primary, 'accent-blue'));
+  background: linear-gradient(90deg, map.get($colors-primary, 'accent-purple'), map.get($colors-primary, 'accent-blue'));
   -webkit-background-clip: text;
   background-clip: text;
   color: white;
   transition: all 0.3s ease;
+  padding-left: 0.75rem;
   
   &:hover {
     transform: scale(1.05);

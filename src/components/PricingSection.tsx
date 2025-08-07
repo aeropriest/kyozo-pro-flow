@@ -22,15 +22,7 @@ const PricingSection = () => {
       </div>
       
       {/* Content overlay */}
-      <div className={styles.content}>
-        {/* Section header */}
-        <div className={styles.header}>
-          <h2>Simple, transparent pricing</h2>
-          <p>
-            Choose the perfect plan for your needs. No hidden fees, no surprises.
-          </p>
-        </div>
-        
+      <div className={styles.content}>        
         {/* Pricing cards */}
         <div className={styles.pricingGrid}>
           {pricingData.map((data) => (

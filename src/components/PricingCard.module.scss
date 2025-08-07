@@ -3,8 +3,9 @@
   border-radius: 1.5rem; // rounded-3xl
   padding: 2px; // p-[2px]
   width: 100%;
-  max-width: 28rem; // max-w-md
+  // max-width: 28rem; // max-w-md
   background: linear-gradient(to bottom right, var(--from-color), var(--via-color) 25%, #4b5563 60%);
+  
   
   .cardInner {
     display: flex;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { PricingCardData } from '../types';
-import CheckMarkIcon from './CheckMarkIcon';
 import styles from './PricingCard.module.scss';
+import { FaCircleCheck } from "react-icons/fa6";
 
 // Color mapping for subtitle colors
 const colorMap: Record<string, string> = {
@@ -68,7 +68,7 @@ const PricingCard: React.FC<PricingCardData> = ({
         <ul className={styles.featuresList}>
           {(features as string[]).map((feature, index) => (
             <li key={index}>
-              <CheckMarkIcon />
+              <FaCircleCheck size={24}/>
               <span>{feature}</span>
             </li>
           ))}

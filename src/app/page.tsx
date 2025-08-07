@@ -13,7 +13,7 @@ import Marquee, { marqueeClasses } from '@/components/Marquee';
 import Toolkit from '@/components/Toolkit';
 import BubbleMarquee from '@/components/BubbleMarquee';
 import BottomText from '@/components/BottomText';
-import CoCentricCircles from '@/components/CoCentricCircles';
+import PriceCircles from '@/components/PriceCircles';
 
 export default function Home() {
   return (
@@ -36,6 +36,9 @@ export default function Home() {
         </SlidingCards>
       </section>
       <section>
+        <Toolkit />
+      </section>   
+      <section>
         <Marquee duration="30s" reverse={false}>
           <span className={marqueeClasses.text}>Rediscovering your creative passion</span>
           <span className={marqueeClasses.text}>Prompts to Turbocharge Your Creative Process</span>
@@ -45,10 +48,7 @@ export default function Home() {
         </Marquee>
       </section>
       <section>
-        <Toolkit />
-      </section>   
-      <section>
-        <CoCentricCircles />
+        <PriceCircles />
       </section>   
       <section className={styles.section}>
         <BubbleMarquee 

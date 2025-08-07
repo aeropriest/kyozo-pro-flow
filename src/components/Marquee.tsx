@@ -2,19 +2,14 @@
 
 import React, { ReactNode } from 'react';
 import styles from './Marquee.module.scss';
+import CheckmarkIcon from './CheckMarkIcon';
+
 
 // Export class names for use in parent components
 export const marqueeClasses = {
   text: styles.marqueeText,
   image: styles.marqueeImage
 };
-
-// Checkmark icon component
-const CheckmarkIcon = () => (
-  <svg className={styles.checkmarkIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" fill="currentColor" />
-  </svg>
-);
 
 interface MarqueeProps {
   children: ReactNode;

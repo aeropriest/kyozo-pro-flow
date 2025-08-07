@@ -1,41 +1,70 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './CoCentricCircles.module.scss';
 
+const NUM_CIRCLES = 5;
+const SPEED = 0.25;
+
 const CoCentricCircles = () => {
-  const [circles, setCircles] = useState<number[]>([]);
-  const totalCircles = 5; // Number of circles in the animation
-  const circleDuration = 2; // Duration for each circle animation in seconds
+  const [time, setTime] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const animationFrameId = useRef<number>(0);
+  const containerSize = useRef<number>(1000);
 
   useEffect(() => {
-    // Initial set of circles
-    const initialCircles = Array.from({ length: totalCircles }, (_, i) => i);
-    setCircles(initialCircles);
+    if (containerRef.current) {
+      const { offsetWidth, offsetHeight } = containerRef.current;
+      containerSize.current = Math.sqrt(offsetWidth ** 2 + offsetHeight ** 2);
+    }
 
-    // Add a new circle at regular intervals
-    const interval = setInterval(() => {
-      setCircles(prev => {
-        // Remove the oldest circle and add a new one
-        const newCircles = [...prev.slice(1), prev[prev.length - 1] + 1];
-        return newCircles;
-      });
-    }, circleDuration * 1000 / 2); // Add new circle every half the animation duration
+    const animate = (timestamp: number) => {
+      setTime(timestamp);
+      animationFrameId.current = requestAnimationFrame(animate);
+    };
 
-    return () => clearInterval(interval);
+    animationFrameId.current = requestAnimationFrame(animate);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId.current);
+    };
   }, []);
+
+  const circles = Array.from({ length: NUM_CIRCLES }).map((_, i) => {
+    const maxSize = containerSize.current;
+    // The gap between circles is based on the number of circles to space them out evenly.
+    const initialOffset = (maxSize / NUM_CIRCLES) * i;
+    
+    const size = ((time * SPEED) + initialOffset) % maxSize;
+    
+    // Opacity fades as the circle grows.
+    const opacity = 0.3 * (1 - size / maxSize);
+
+    return {
+      id: i,
+      size: size,
+      opacity: Math.max(0, opacity),
+    };
+  });
 
   return (
     <div className={styles.container}>
-      <div className={styles.animatedConcentricRings}>
-        {circles.map((circleId, index) => (
-          <div 
-            key={circleId}
+      <div 
+        ref={containerRef}
+        className={styles.animatedConcentricRings}
+      >
+        {circles.map(circle => (
+          <div
+            key={circle.id}
             className={styles.circle}
             style={{
-              '--delay': `${(index / totalCircles) * circleDuration}s`,
-              '--duration': `${circleDuration}s`,
-              '--opacity': 1 - (index / totalCircles) * 0.8, // Fade out as circles expand
-            } as React.CSSProperties}
+              width: `${circle.size}px`,
+              height: `${circle.size}px`,
+              opacity: circle.opacity,
+              transform: 'translate(-50%, -50%)',
+              top: '50%',
+              left: '50%',
+            }}
           />
         ))}
       </div>

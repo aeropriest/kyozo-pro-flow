@@ -73,27 +73,6 @@
   // width: 65%;
 }
 
-.cardButton {
-  display: inline-block;
-  background: linear-gradient(90deg, map.get($colors-primary, 'accent-purple'), map.get($colors-primary, 'accent-blue'));
-  border: none;
-  border-radius: 30px;
-  padding: 14px 32px;
-  color: map.get($colors-primary, 'white');
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  max-width: fit-content;
-  text-decoration: none;
-  
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(map.get($colors-primary, 'black'), 0.2);
-    background: linear-gradient(90deg, map.get($colors-primary, 'accent-pink'), map.get($colors-primary, 'accent-blue'));
-  }
-}
-
 .phoneContainer {
   position: relative;
   width: 420px; /* Increased by 20% from 350px */
@@ -109,28 +88,91 @@
 .phoneImage {
   object-fit: cover;
   object-position: left top;
-  width: 420px; /* Increased by 20% from 350px */
-  height: 660px; /* Increased by 20% from 550px */
+  width: 378px; /* Reduced by 10% from 420px */
+  height: 594px; /* Reduced by 10% from 660px */
   margin-bottom: -30px; /* Push bottom half outside the container */
   z-index: 1;
 }
 
 .backgroundGradient {
   position: absolute;
-  bottom: 200px; /* Move higher up */
-  right: 25%; /* Move more to the left */
-  width: 500px;
-  height: 500px;
-  z-index: 1;
+  top: 50%;
+  right: -1%;
+  width: 1000px;
+  height: 1000px;
+  transform: translateY(-50%);
+  z-index: 0;
   pointer-events: none;
 }
 
-.backgroundGlow {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  top: 60%; /* Move higher up */
-  right: 30%; /* Move more to the left */
-  transform: translateY(-50%);
-  z-index: -1;
+.phoneBackgroundGradient {
+  width: 1000px;
+  height: 1000px;
+  border-radius: 50%;
+  background-color: transparent;
+  position: relative;
+  overflow: hidden;
+  
+  // Animated expanding ring
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: transparent;
+    background-image: 
+      conic-gradient(
+        from 0deg,
+        #7b3b78,
+        #2b4b8f,
+        #e78b76,
+        #7b3b78
+      );
+    -webkit-mask: 
+      radial-gradient(circle at center, 
+        transparent 10%, 
+        transparent 22%, 
+        rgba(0, 0, 0, 0.1) 24%,
+        rgba(0, 0, 0, 0.4) 26%,
+        rgba(0, 0, 0, 0.7) 28%, 
+        rgba(0, 0, 0, 0.7) 32%,
+        rgba(0, 0, 0, 0.4) 34%,
+        rgba(0, 0, 0, 0.1) 36%,
+        transparent 38%
+      );
+    mask: 
+      radial-gradient(circle at center, 
+        transparent 0%, 
+        transparent 22%, 
+        rgba(0, 0, 0, 0.1) 24%,
+        rgba(0, 0, 0, 0.4) 26%,
+        rgba(0, 0, 0, 0.7) 28%, 
+        rgba(0, 0, 0, 0.7) 32%,
+        rgba(0, 0, 0, 0.4) 34%,
+        rgba(0, 0, 0, 0.1) 36%,
+        transparent 38%
+      );
+    filter: blur(1px);
+    animation: expandRing 1s infinite; /* Animation speed doubled */
+  }
+}
+
+@keyframes expandRing {
+  0% {
+    width: 50%;
+    height: 50%;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    width: 200%;
+    height: 200%;
+    opacity: 0;
+  }
 }

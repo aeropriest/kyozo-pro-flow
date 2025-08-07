@@ -1,9 +1,9 @@
 import SlidingCards from '@/components/SlidingCards';
 import AnimeText from '@/components/AnimeText';
+import ScrollRevealText from '@/components/ScrollRevealText';
 import SlideCard0 from '@/components/SlideCard0';
 import SlideCard1 from '@/components/SlideCard1';
 import SlideCard2 from '@/components/SlideCard2';
-import SlideCard4 from '@/components/SlideCard4';
 import FixedFooter from '@/components/FixedFooter';
 import FeatureCard from '@/components/FeatureCard';
 import styles from '@/styles/page.module.scss';
@@ -21,15 +21,8 @@ export default function Home() {
         <FeatureCard />
       </section>
       <section className={styles.heroSection}>
-        <AnimeText text="Where Creative Minds Converge" fontSize="7rem" fontWeight={800} />
+        <ScrollRevealText text="Where Creative Minds Converge" fontSize="7rem" fontWeight={800} />
       </section>
-      <Marquee duration="30s" reverse={false}>
-        <span className={marqueeClasses.text}>Rediscovering your creative passion</span>
-        <span className={marqueeClasses.text}>Prompts to Turbocharge Your Creative Process</span>
-        <span className={marqueeClasses.text}>BPM heartrate and running</span>
-        <span className={marqueeClasses.text}>The creative paradox</span>
-        <span className={marqueeClasses.text}>Rediscovering your creative passion</span>
-      </Marquee>
       <section className={styles.section}>
         <SlidingCards>
           <SlideCard0 />

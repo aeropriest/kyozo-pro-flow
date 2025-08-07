@@ -10,8 +10,7 @@
   box-shadow: 0 8px 32px rgba(map.get($colors-primary, 'black'), 0.2);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Top align all content */
-  // gap: 30px;
+  justify-content: flex-start; /* Top align all content */  // gap: 30px;
   position: relative;
   overflow: hidden;
   border-radius: 30px;
@@ -58,11 +57,12 @@
 }
 
 .categoryLabel {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 300;
+
 
   letter-spacing: 0.1em;
-  color: map.get($colors-primary, 'light-gray');
+  color: map.get($colors-primary, 'lighter-gray');
   margin: 0 0 8px 0;
 }
 
@@ -84,9 +84,15 @@
   margin: 0;
   padding-top: 30px;
   padding-bottom: 30px;
+  // padding-right: 80px
+  width: 65%;
 }
 
-.cardButton {
+.customButtonContainer {
+  margin-top: 10px;
+}
+
+.customButton {
   display: inline-block;
   background: linear-gradient(90deg, map.get($colors-primary, 'accent-purple'), map.get($colors-primary, 'accent-blue'));
   border: none;

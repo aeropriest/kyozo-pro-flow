@@ -5,7 +5,6 @@ import AnimeText from '../components/AnimeText';
 import SlideCard0 from '../components/SlideCard0';
 import SlideCard1 from '../components/SlideCard1';
 import SlideCard2 from '../components/SlideCard2';
-import HeroSection from '../components/HeroSection';
 import FixedFooter from '../components/FixedFooter';
 import FeatureCard from '../components/FeatureCard';
 import styles from '../styles/page.module.scss';
@@ -29,6 +28,7 @@ export default function Home() {
           <SlideCard2 />
         </SlidingCards>
       </section>
+      <FixedFooter />
       </main>
   );
 }

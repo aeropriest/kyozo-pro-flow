@@ -45,15 +45,12 @@
 }
 
 .rightContent {
-  width: 50%; /* Take remaining 50% of the card */
+  width: 50%;
   display: flex;
-  justify-content: flex-start; /* Left align content */
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  overflow: visible;
-  // background-color: #ffffff;
-  // border: 0.5px solid map.get($colors-primary, 'gray');
-  padding: 30px 0 0 30px; /* Add padding to left-align content */
+  overflow: hidden;
 }
 
 .categoryLabel {

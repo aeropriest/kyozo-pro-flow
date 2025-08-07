@@ -3,13 +3,6 @@ import { PricingCardData } from '../types';
 import styles from './PricingCard.module.scss';
 import { FaCircleCheck } from "react-icons/fa6";
 
-// Color mapping for subtitle colors
-const colorMap: Record<string, string> = {
-  'blue-400': '#60a5fa',
-  'purple-400': '#c084fc',
-  'amber-400': '#fbbf24',
-};
-
 const PricingCard: React.FC<PricingCardData> = ({
   title,
   subtitle,
@@ -21,10 +14,6 @@ const PricingCard: React.FC<PricingCardData> = ({
 }) => {
   const [fromClass, toClass] = gradient.split(' ');
   const viaClass = toClass.replace('to-', 'via-');
-
-  // Creates a smoother gradient that transitions from the accent colors
-  // in the corner to the neutral gray over a larger area.
-  const gradientClasses = `bg-gradient-to-br ${fromClass} ${viaClass} via-25% to-neutral-600 to-60%`;
 
   // Extract colors from gradient for CSS variables
   const [fromColor, toColor] = gradient.split(' ');
@@ -56,7 +45,7 @@ const PricingCard: React.FC<PricingCardData> = ({
           <hr />
           <p 
             className={styles.subtitle} 
-            style={{ color: colorMap[subtitleColor] || colorMap['blue-400'] }}
+
           >
             {subtitle}
           </p>

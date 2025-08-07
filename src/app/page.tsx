@@ -43,6 +43,9 @@ export default function Home() {
           <span className={marqueeClasses.text}>Rediscovering your creative passion</span>
         </Marquee>
       </section>
+      <section>
+        <Toolkit />
+      </section>      
       <section className={styles.section}>
         <BubbleMarquee 
           categories={[
@@ -114,9 +117,6 @@ export default function Home() {
           ]}
         />
       </section>
-      <section>
-        <Toolkit />
-      </section>      
       <FixedFooter />
       <BottomText text="Join the Kyozo creative universe" fontSize="7rem" fontWeight={800} />
       </main>

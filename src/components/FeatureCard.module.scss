@@ -113,7 +113,54 @@
   position: relative;
   overflow: hidden;
   
-  // Animated expanding ring
+  // First animated expanding ring
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: transparent;
+    background-image: 
+      conic-gradient(
+        from 0deg,
+        #7b3b78,
+        #2b4b8f,
+        #e78b76,
+        #7b3b78
+      );
+    -webkit-mask: 
+      radial-gradient(circle at center, 
+        transparent 10%, 
+        transparent 26%, 
+        rgba(0, 0, 0, 0.0525) 27%,
+        rgba(0, 0, 0, 0.21) 28%,
+        rgba(0, 0, 0, 0.3675) 29%, 
+        rgba(0, 0, 0, 0.3675) 31%,
+        rgba(0, 0, 0, 0.21) 32%,
+        rgba(0, 0, 0, 0.0525) 33%,
+        transparent 34%
+      );
+    mask: 
+      radial-gradient(circle at center, 
+        transparent 0%, 
+        transparent 26%, 
+        rgba(0, 0, 0, 0.0525) 27%,
+        rgba(0, 0, 0, 0.21) 28%,
+        rgba(0, 0, 0, 0.3675) 29%, 
+        rgba(0, 0, 0, 0.3675) 31%,
+        rgba(0, 0, 0, 0.21) 32%,
+        rgba(0, 0, 0, 0.0525) 33%,
+        transparent 34%
+      );
+    filter: blur(1px);
+    animation: expandRing 2s infinite;
+  }
+  
+  // Second animated expanding ring with delay
   &::after {
     content: '';
     position: absolute;
@@ -135,29 +182,29 @@
     -webkit-mask: 
       radial-gradient(circle at center, 
         transparent 10%, 
-        transparent 22%, 
-        rgba(0, 0, 0, 0.1) 24%,
-        rgba(0, 0, 0, 0.4) 26%,
-        rgba(0, 0, 0, 0.7) 28%, 
-        rgba(0, 0, 0, 0.7) 32%,
-        rgba(0, 0, 0, 0.4) 34%,
-        rgba(0, 0, 0, 0.1) 36%,
-        transparent 38%
+        transparent 26%, 
+        rgba(0, 0, 0, 0.0525) 27%,
+        rgba(0, 0, 0, 0.21) 28%,
+        rgba(0, 0, 0, 0.3675) 29%, 
+        rgba(0, 0, 0, 0.3675) 31%,
+        rgba(0, 0, 0, 0.21) 32%,
+        rgba(0, 0, 0, 0.0525) 33%,
+        transparent 34%
       );
     mask: 
       radial-gradient(circle at center, 
         transparent 0%, 
-        transparent 22%, 
-        rgba(0, 0, 0, 0.1) 24%,
-        rgba(0, 0, 0, 0.4) 26%,
-        rgba(0, 0, 0, 0.7) 28%, 
-        rgba(0, 0, 0, 0.7) 32%,
-        rgba(0, 0, 0, 0.4) 34%,
-        rgba(0, 0, 0, 0.1) 36%,
-        transparent 38%
+        transparent 26%, 
+        rgba(0, 0, 0, 0.0525) 27%,
+        rgba(0, 0, 0, 0.21) 28%,
+        rgba(0, 0, 0, 0.3675) 29%, 
+        rgba(0, 0, 0, 0.3675) 31%,
+        rgba(0, 0, 0, 0.21) 32%,
+        rgba(0, 0, 0, 0.0525) 33%,
+        transparent 34%
       );
     filter: blur(1px);
-    animation: expandRing 1s infinite; /* Animation speed doubled */
+    animation: expandRing 2s infinite 1.4s; /* 1.4s delay to start when first circle is at 70% */
   }
 }
 

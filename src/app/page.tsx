@@ -13,7 +13,7 @@ import Marquee, { marqueeClasses } from '@/components/Marquee';
 import Toolkit from '@/components/Toolkit';
 import BubbleMarquee from '@/components/BubbleMarquee';
 import BottomText from '@/components/BottomText';
-import PriceCircles from '@/components/PriceCircles';
+import PricingSection from '@/components/PricingSection';
 
 export default function Home() {
   return (
@@ -48,7 +48,7 @@ export default function Home() {
         </Marquee>
       </section>
       <section>
-        <PriceCircles />
+        <PricingSection />
       </section>   
       <section className={styles.section}>
         <BubbleMarquee 

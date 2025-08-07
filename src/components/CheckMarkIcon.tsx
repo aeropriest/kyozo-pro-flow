@@ -17,4 +17,4 @@ const CheckMarkIcon = ({ className, ...props }: CheckMarkIconProps) => (
   </svg>
 );
 
-export default CheckmarkIcon;
+export default CheckMarkIcon;

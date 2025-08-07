@@ -1,0 +1,41 @@
+@use '../styles/colors' as *;
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.animatedConcentricRings {
+  position: relative;
+  width: 80%;
+  height: 60%;
+  margin: 0;
+  pointer-events: none;
+}
+
+.circle {
+  position: absolute;
+  border: 4px solid rgba(255, 255, 255);
+  border-radius: 50%;
+  transform-origin: center;
+  will-change: transform, opacity;
+  pointer-events: none;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  box-sizing: border-box;
+  background: none;
+  will-change: transform, opacity;
+  
+  // Ensure smooth animation
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}

@@ -23,7 +23,7 @@ const SlideCard1: React.FC<SlideCard1Props> = ({ className = '' }) => {
           </div>
         </div>
         <div className={styles.rightContent}>
-          <Image src="/card-3.png" alt="Phone" width={800} height={800} />
+          <Image src="/image_mosaic.png" alt="Phone" width={800} height={800} />
         </div>
       </div>      
     </div>

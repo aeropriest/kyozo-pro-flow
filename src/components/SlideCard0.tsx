@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './SlideCard0.module.scss';
 import Button from './Button';
 import Image from 'next/image';
+import VideoWall from './VideoWall';
 
 interface SlideCard0Props {
   className?: string;
@@ -23,7 +24,7 @@ const SlideCard0: React.FC<SlideCard0Props> = ({ className = '' }) => {
           </div>
         </div>
         <div className={styles.rightContent}>
-          <Image src="/card-3.png" alt="Phone" width={800} height={800} />
+          <Image src="/video_wall.png" alt="Phone" width={800} height={800} />
         </div>
       </div>
     </div>

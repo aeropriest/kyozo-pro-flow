@@ -1,10 +1,9 @@
 import SlidingCards from '../components/SlidingCards';
-import Card from '../components/Card';
-import Button from '../components/Button';
 import AnimeText from '../components/AnimeText';
 import SlideCard0 from '../components/SlideCard0';
 import SlideCard1 from '../components/SlideCard1';
 import SlideCard2 from '../components/SlideCard2';
+import SlideCard4 from '../components/SlideCard4';
 import FixedFooter from '../components/FixedFooter';
 import FeatureCard from '../components/FeatureCard';
 import styles from '../styles/page.module.scss';
@@ -15,9 +14,9 @@ export default function Home() {
       <section className={styles.heroSection}>
         <AnimeText text="Discover Your Creative Universe" fontSize="7rem" fontWeight={800} />
       </section>
-      <section className={styles.section}>
-        <FeatureCard />
-      </section>
+      {/* <section className={styles.section}>
+        <SlideCard4 />
+      </section> */}
       <section className={styles.heroSection}>
         <AnimeText text="Where Creative Minds Converge" fontSize="7rem" fontWeight={800} />
       </section>

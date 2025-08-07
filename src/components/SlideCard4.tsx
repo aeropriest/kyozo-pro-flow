@@ -1,17 +1,20 @@
 'use client';
 import React from 'react';
-import styles from './FeatureCard.module.scss';
+import styles from './SlideCard4.module.scss';
 import Button from './Button';
 import Image from 'next/image';
-import shapeStyles from '@/app/demo/shapes.module.scss'
-// import { phoneBackgroundGradient } from '../shapes.module.scss';
+import shapeStyles from '@/app/demo/shapes.module.scss';
 
-const FeatureCard = () => {
+interface SlideCard4Props {
+  className?: string;
+}
+
+const SlideCard4: React.FC<SlideCard4Props> = ({ className = '' }) => {
   return (
-    <div className={styles.cardContainer}>
+    <div className={`${styles.cardContainer} ${className}`}>
       <div className={styles.cardContent}>
         <div className={styles.leftContent}>
-          <h2 className={styles.cardTitle}>Connect. Explore. Engage.</h2>
+          <h2 className={styles.cardTitle}>Connect.Explore.Engage.</h2>
           <p className={styles.cardDescription}>
             Connect with visionary creators and forward-thinking communities.
           </p>
@@ -19,9 +22,8 @@ const FeatureCard = () => {
             <Button variant="outline-only" href="#">Join the waitlist</Button>
           </div>
         </div>
-        
-        <div className={styles.phoneContainer}>
-          <Image src="/iphone.png" alt="Phone" width={400} height={800} className={styles.phoneImage} />
+        <div className={styles.rightContent}>
+          <Image src="/iphone.png" alt="Phone" width={800} height={800} />
         </div>
       </div>
       <div className={styles.backgroundGradient}>
@@ -31,4 +33,4 @@ const FeatureCard = () => {
   );
 };
 
-export default FeatureCard;
+export default SlideCard4;

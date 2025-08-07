@@ -7,6 +7,7 @@ import SlideCard4 from '../components/SlideCard4';
 import FixedFooter from '../components/FixedFooter';
 import FeatureCard from '../components/FeatureCard';
 import styles from '../styles/page.module.scss';
+import Marquee, { marqueeClasses } from '../components/Marquee';
 
 export default function Home() {
   return (
@@ -20,6 +21,13 @@ export default function Home() {
       <section className={styles.heroSection}>
         <AnimeText text="Where Creative Minds Converge" fontSize="7rem" fontWeight={800} />
       </section>
+      <Marquee duration="30s" reverse={false}>
+        <span className={marqueeClasses.text}>Rediscovering your creative passion</span>
+        <span className={marqueeClasses.text}>Prompts to Turbocharge Your Creative Process</span>
+        <span className={marqueeClasses.text}>BPM heartrate and running</span>
+        <span className={marqueeClasses.text}>The creative paradox</span>
+        <span className={marqueeClasses.text}>Rediscovering your creative passion</span>
+      </Marquee>
       <section className={styles.section}>
         <SlidingCards>
           <SlideCard0 />

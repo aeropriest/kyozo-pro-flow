@@ -3,8 +3,7 @@ import React from 'react';
 import styles from './FeatureCard.module.scss';
 import Button from './Button';
 import Image from 'next/image';
-import shapeStyles from '@/app/demo/shapes.module.scss'
-// import { phoneBackgroundGradient } from '../shapes.module.scss';
+import shapeStyles from '@/app/demo/shapes.module.scss';
 
 const FeatureCard = () => {
   return (
@@ -20,13 +19,13 @@ const FeatureCard = () => {
           </div>
         </div>
         
-        <div className={styles.phoneContainer}>
+        <div className={styles.rightContent}>
           <Image src="/iphone.png" alt="Phone" width={400} height={800} className={styles.phoneImage} />
         </div>
       </div>
-      <div className={styles.backgroundGradient}>
-        <div className={`${shapeStyles.shapeDemo} ${shapeStyles.phoneBackgroundGradient}`}></div>
-      </div>      
+      {/* <div className={styles.backgroundGradient}>
+        <div className={shapeStyles.phoneBackgroundGradient}></div>
+      </div> */}
     </div>
   );
 };

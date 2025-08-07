@@ -17,9 +17,9 @@ export default function Home() {
       <section className={styles.heroSection}>
         <AnimeText text="Discover Your Creative Universe" fontSize="7rem" fontWeight={800} />
       </section>
-      {/* <section className={styles.section}>
-        <SlideCard4 />
-      </section> */}
+      <section className={styles.section}>
+        <FeatureCard />
+      </section>
       <section className={styles.heroSection}>
         <AnimeText text="Where Creative Minds Converge" fontSize="7rem" fontWeight={800} />
       </section>

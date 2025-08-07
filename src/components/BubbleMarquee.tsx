@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import styles from './BubbleMarquee.module.scss';
 import { bubbleRowColors } from '@/lib/colors';
 
@@ -19,10 +19,20 @@ interface BubbleRowProps {
 const BubbleRow: React.FC<BubbleRowProps> = ({ 
   items, 
   direction, 
-  speed = 30, 
+  speed = 10, 
   category 
 }) => {
   const rowColor = bubbleRowColors[category];
+  
+  // Create enough duplicates to fill the screen width
+  const repeatedItems = useMemo(() => {
+    // Create 4 sets of items to ensure the row is never empty
+    const repeated = [];
+    for (let i = 0; i < 4; i++) {
+      repeated.push(...items);
+    }
+    return repeated;
+  }, [items]);
   
   return (
     <div className={styles.bubbleRowContainer}>
@@ -33,23 +43,23 @@ const BubbleRow: React.FC<BubbleRowProps> = ({
           '--row-color': rowColor
         } as React.CSSProperties}
       >
-        {/* Original items */}
-        {items.map((item, index) => (
+        {/* First set of repeated items */}
+        {repeatedItems.map((item, index) => (
           <div 
             key={`item-${index}`} 
             className={styles.bubble}
-            style={item.color ? { backgroundColor: item.color } : undefined}
+            style={{ borderColor: rowColor }}
           >
             {item.text}
           </div>
         ))}
         
-        {/* Duplicate items for seamless looping */}
-        {items.map((item, index) => (
+        {/* Second set for seamless looping */}
+        {repeatedItems.map((item, index) => (
           <div 
             key={`item-dup-${index}`} 
             className={styles.bubble}
-            style={item.color ? { backgroundColor: item.color } : undefined}
+            style={{ borderColor: rowColor }}
             aria-hidden="true"
           >
             {item.text}
@@ -75,7 +85,8 @@ const BubbleMarquee: React.FC<BubbleMarqueeProps> = ({ categories }) => {
           key={`row-${index}`}
           items={row.items}
           direction={index % 2 === 0 ? 'left' : 'right'}
-          speed={30 + (index * 5)} // Slightly different speeds for each row
+          // speed={60 + (index * 5)} // Reduced speed (higher number = slower animation)
+          speed={80}
           category={row.category}
         />
       ))}

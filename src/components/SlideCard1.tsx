@@ -1,8 +1,8 @@
 'use client';
 import React from 'react';
 import styles from './SlideCard1.module.scss';
-import Image from 'next/image';
 import Button from './Button';
+import ParallaxGallery from '@/components/ParallaxGallary';
 
 interface SlideCard1Props {
   className?: string;
@@ -23,7 +23,7 @@ const SlideCard1: React.FC<SlideCard1Props> = ({ className = '' }) => {
           </div>
         </div>
         <div className={styles.rightContent}>
-          <Image src="/image_mosaic.png" alt="Phone" width={800} height={800} />
+          <ParallaxGallery />
         </div>
       </div>      
     </div>

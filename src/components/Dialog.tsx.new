@@ -1,5 +1,6 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
+
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './Dialog.module.scss';
 import { Tab } from './Tab';
 
@@ -22,64 +23,49 @@ interface DialogProps {
 const Dialog: React.FC<DialogProps> = ({
   isOpen,
   onClose,
-  title,
   children,
-  className = '',
+  title,
   showTabs = false,
   tabs = [],
   activeTab = 0,
   onTabChange = () => {},
+  className = '',
   showCloseButton = true,
 }) => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
 
-  // Handle animation states
   useEffect(() => {
     if (isOpen) {
       setIsVisible(true);
-      // Small delay to ensure visibility before animation starts
-      setTimeout(() => setIsAnimating(true), 10);
-    } else if (isVisible) {
+      setIsAnimating(true);
+      document.body.style.overflow = 'hidden';
+    } else {
       setIsAnimating(false);
-      // Wait for close animation to finish before hiding
-      const timer = setTimeout(() => setIsVisible(false), 600);
+      const timer = setTimeout(() => {
+        setIsVisible(false);
+        document.body.style.overflow = '';
+      }, 300); // Match this with your CSS transition duration
+
       return () => clearTimeout(timer);
     }
-  }, [isOpen, isVisible]);
+  }, [isOpen]);
 
-  // Close when clicking outside
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (
-      e.target instanceof HTMLElement &&
-      e.target.className &&
-      typeof e.target.className === 'string' &&
-      e.target.className.includes(styles.dialogOverlay) &&
-      dialogRef.current &&
-      !dialogRef.current.contains(e.target)
-    ) {
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
       onClose();
     }
   };
 
-  // Handle escape key
-  useEffect(() => {
-    const handleEscKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
-        onClose();
-      }
-    };
-
-    document.addEventListener('keydown', handleEscKey);
-    return () => document.removeEventListener('keydown', handleEscKey);
-  }, [isOpen, onClose]);
-
   if (!isVisible) return null;
 
   return (
-    <div className={styles.dialogOverlay} onClick={handleBackdropClick}>
-      <div
+    <div 
+      className={`${styles.dialogOverlay} ${isAnimating ? styles.active : ''}`}
+      onClick={handleBackdropClick}
+    >
+      <div 
         ref={dialogRef}
         className={`${styles.dialogContainer} ${isAnimating ? styles.active : ''} ${className}`}
         aria-modal="true"
@@ -89,7 +75,7 @@ const Dialog: React.FC<DialogProps> = ({
           {/* Curtain animation elements */}
           <div className={`${styles.curtainLeft} ${isAnimating ? styles.active : ''}`}></div>
           <div className={`${styles.curtainRight} ${isAnimating ? styles.active : ''}`}></div>
-
+          
           {/* Dialog header with title and tabs */}
           <div className={styles.dialogHeader}>
             {title && (
@@ -97,7 +83,7 @@ const Dialog: React.FC<DialogProps> = ({
                 <h2>{title}</h2>
               </div>
             )}
-
+            
             {showTabs && tabs.length > 0 && (
               <div className={styles.tabsContainer}>
                 {tabs.map((tab, index) => (
@@ -111,21 +97,22 @@ const Dialog: React.FC<DialogProps> = ({
                 ))}
               </div>
             )}
-
+            
             {showCloseButton && (
-              <button
-                className={styles.closeButton}
+              <button 
+                className={styles.closeButton} 
                 onClick={onClose}
                 aria-label="Close dialog"
-                type="button"
               >
                 &times;
               </button>
             )}
           </div>
-
+          
           {/* Dialog body */}
-          <div className={styles.dialogBody}>{children}</div>
+          <div className={styles.dialogBody}>
+            {children}
+          </div>
         </div>
       </div>
     </div>

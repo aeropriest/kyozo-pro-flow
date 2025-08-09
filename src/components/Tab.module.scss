@@ -1,0 +1,47 @@
+@use '../styles/colors' as *;
+
+.tab {
+  position: relative;
+  padding: 0.5rem 1.5rem;
+  background: transparent;
+  border: none;
+  color: color('primary', 'lighter-gray');
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+
+  &:hover {
+    color: color('primary', 'white');
+  }
+
+  &.active {
+    background-color: color('primary', 'dark-gray');
+    color: color('primary', 'white');
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+}
+
+.tabLabel {
+  position: relative;
+  z-index: 1;
+}
+
+.tabCount {
+  background-color: color('primary', 'accent-pink');
+  color: color('primary', 'white');
+  border-radius: 9999px;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  min-width: 1.5rem;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

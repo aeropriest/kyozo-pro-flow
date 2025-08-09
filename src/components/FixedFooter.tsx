@@ -42,7 +42,10 @@ const FixedFooter: React.FC<FixedFooterProps> = ({ className = '' }) => {
   });
 
   const [activeTab, setActiveTab] = useState(0);
-  const tabs = ['Kyozo', 'KyozoPro'];
+  const tabs = [
+    { label: 'Kyozo', count: 24 },
+    { label: 'KyozoPro', count: 12 }
+  ];
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

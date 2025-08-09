@@ -11,7 +11,7 @@
   margin-bottom: 0.5rem;
   font-size: 0.875rem;
   font-weight: 500;
-  color: map.get($colors-primary, 'white');
+  color: map.get($colors-primary, 'dark-text-color');
 }
 
 .required {
@@ -48,7 +48,7 @@
   padding: 0.75rem 1rem;
   font-size: 1rem;
   background-color: rgba(255, 255, 255, 0.05);
-  color: map.get($colors-primary, 'white');
+  color: map.get($colors-primary, 'dark-text-color');
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 9999px; // Fully rounded
   transition: all 0.2s ease;

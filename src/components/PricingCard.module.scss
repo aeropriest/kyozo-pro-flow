@@ -8,7 +8,7 @@
   padding: 2px; // p-[2px]
   width: 100%;
   // max-width: 28rem; // max-w-md
-  background: linear-gradient(to bottom right, var(--from-color), var(--via-color) 25%, map.get($colors-primary, 'gray') 60%);
+  background: linear-gradient(to bottom right, var(--from-color), var(--via-color) 25%, map.get($colors-primary, 'mediam-background-color') 60%);
   
   
   .cardInner {
@@ -18,14 +18,14 @@
     width: 100%;
     height: 100%;
     border-radius: 1.375rem; // rounded-[22px]
-    background-color: map.get($colors-primary, 'dark-gray'); // bg-[#1C1C1E]
+    background-color: map.get($colors-primary, 'lighter-background-color'); // bg-[#1C1C1E]
     padding: 2rem; // p-8
   }
 
   h2 {
     font-size: 2.25rem; // text-5xl
     font-weight: 900; // font-black
-    color: map.get($colors-primary, 'white'); // text-white
+    color: map.get($colors-primary, 'dark-text-color'); // text-white
     line-height: 1;
   }
 
@@ -44,7 +44,7 @@
     margin-top: 0.5rem; // mt-2
     font-size: 1.875rem; // text-3xl
     font-weight: 700; // font-bold
-    color: map.get($colors-primary, 'white'); // text-white
+    color: map.get($colors-primary, 'dark-text-color'); // text-white
     letter-spacing: -0.025em; // tracking-tight
     display: flex;
     align-items: baseline;

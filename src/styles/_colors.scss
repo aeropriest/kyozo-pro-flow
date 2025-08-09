@@ -7,10 +7,10 @@
 // Primary Colors
 $colors-primary: (
   'pagebg': #111111,
-  'black': #000000,
-  'white': #ffffff,
-  'dark-gray': #181818,  // Background color
-  'gray': #4d4d4d,      // Medium gray
+  'background-color': #000000,
+  'dark-text-color': #ffffff,
+  'lighter-background-color': #181818,  // Background color
+  'mediam-background-color': #4d4d4d,      // Medium gray
   'light-gray': #1B1B1B,
   'lighter-gray': #AAAAAA,
   'accent-pink': #D3439A, // Pink accent color from waitlist button
@@ -36,10 +36,10 @@ $colors-primary: (
 
 // UI Colors
 $colors-ui: (
-  'background': map.get($colors-primary, 'dark-gray'),
-  'background-light': map.get($colors-primary, 'white'),
-  'foreground': map.get($colors-primary, 'white'),
-  'foreground-light': map.get($colors-primary, 'dark-gray'),
+  'background': map.get($colors-primary, 'lighter-background-color'),
+  'background-light': map.get($colors-primary, 'dark-text-color'),
+  'foreground': map.get($colors-primary, 'dark-text-color'),
+  'foreground-light': map.get($colors-primary, 'lighter-background-color'),
   'border': rgba(255, 255, 255, 0.1),
   'border-light': rgba(0, 0, 0, 0.1),
   'overlay': rgba(0, 0, 0, 0.5),
@@ -57,8 +57,8 @@ $colors-semantic: (
 // Gradient Colors
 $colors-gradients: (
   'primary': linear-gradient(135deg, map.get($colors-primary, 'accent-pink') 0%, map.get($colors-primary, 'accent-purple') 100%),
-  'dark': linear-gradient(135deg, map.get($colors-primary, 'black') 0%, map.get($colors-primary, 'dark-gray') 100%),
-  'light': linear-gradient(135deg, map.get($colors-primary, 'white') 0%, map.get($colors-primary, 'light-gray') 100%),
+  'dark': linear-gradient(135deg, map.get($colors-primary, 'background-color') 0%, map.get($colors-primary, 'lighter-background-color') 100%),
+  'light': linear-gradient(135deg, map.get($colors-primary, 'dark-text-color') 0%, map.get($colors-primary, 'light-gray') 100%),
 );
 
 // Function to get a color with opacity
@@ -195,16 +195,16 @@ $colors-gradients: (
 
 // Theme color maps for light and dark modes
 $theme-light: (
-  'background': map-get($colors-primary, 'white'),
-  'foreground': map-get($colors-primary, 'dark-gray'),
+  'background': map-get($colors-primary, 'dark-text-color'),
+  'foreground': map-get($colors-primary, 'lighter-background-color'),
   'border': rgba(0, 0, 0, 0.1),
   'muted': rgba(0, 0, 0, 0.6),
   'accent': map-get($colors-primary, 'accent-blue'),
 );
 
 $theme-dark: (
-  'background': map-get($colors-primary, 'dark-gray'),
-  'foreground': map-get($colors-primary, 'white'),
+  'background': map-get($colors-primary, 'lighter-background-color'),
+  'foreground': map-get($colors-primary, 'dark-text-color'),
   'border': rgba(255, 255, 255, 0.1),
   'muted': rgba(255, 255, 255, 0.6),
   'accent': map-get($colors-primary, 'accent-pink'),

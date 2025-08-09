@@ -24,11 +24,11 @@
 .logoButtonContainer {
   display: flex;
   align-items: center;
-  background-color: color-with-opacity(map.get($colors-primary, 'black'), 0.3);
+  background-color: color-with-opacity(map.get($colors-primary, 'background-color'), 0.3);
   border-radius: 9999px;
   padding: 0.25rem;
   border: 1px solid map.get($colors-ui, 'border');
-  background-color: color-with-opacity(map.get($colors-primary, 'black'), 0.8);
+  background-color: color-with-opacity(map.get($colors-primary, 'background-color'), 0.8);
 }
 
 .buttonLogo {
@@ -48,7 +48,7 @@
 
 // Dialog and form styles
 .waitlistDialog {
-  background-color: map.get($colors-primary, 'dark-gray');
+  background-color: map.get($colors-primary, 'lighter-background-color');
   max-width: 500px;
 }
 

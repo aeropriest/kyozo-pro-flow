@@ -41,12 +41,12 @@
 // Style variants
 .primary {
   background: map.get($colors-primary, 'accent-pink');
-  color: map.get($colors-primary, 'white');
+  color: map.get($colors-primary, 'dark-text-color');
   border: none;
   
   &:hover, &:focus {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(map.get($colors-primary, 'black'), 0.2);
+    box-shadow: 0 4px 8px rgba(map.get($colors-primary, 'background-color'), 0.2);
     background: darken(map.get($colors-primary, 'accent-pink'), 5%);
   }
   
@@ -57,7 +57,7 @@
 
 .outline {
   background: transparent;
-  color: map.get($colors-primary, 'white');
+  color: map.get($colors-primary, 'dark-text-color');
   border: 2px solid map.get($colors-primary, 'accent-pink');
   box-shadow: 0 0 0 0 rgba(map.get($colors-primary, 'accent-pink'), 0);
   
@@ -74,7 +74,7 @@
 
 .outline-only {
   background: transparent;
-  color: map.get($colors-primary, 'white');
+  color: map.get($colors-primary, 'dark-text-color');
   border: 1px solid map.get($colors-primary, 'accent-pink');
   
   &:hover, &:focus {
@@ -88,7 +88,7 @@
 
 .solid {
   background-color: map.get($colors-primary, 'accent-pink');
-  color: map.get($colors-primary, 'white');
+  color: map.get($colors-primary, 'dark-text-color');
   border: none;
   
   &:hover, &:focus {

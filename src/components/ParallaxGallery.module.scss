@@ -1,3 +1,6 @@
+@use 'sass:map';
+@use '../styles/_colors.scss' as *;
+
 .parallax-gallery {
   position: absolute; /* Position absolutely to fill the entire parent */
   top: 0;
@@ -11,8 +14,8 @@
 
 .parallax-gallery__background {
   height: 100%;
-  background: #171717; // neutral-900
-  color: #fff;
+  background: map.get($colors-primary, 'lighter-background-color'); // Use color variable
+  color: map.get($colors-primary, 'dark-text-color');
 }
 
 .parallax-gallery__viewport {
@@ -51,8 +54,8 @@
 .parallax-image__container {
   overflow: hidden;
   border-radius: 1rem;
-  background: #262626; // neutral-800
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  background: map.get($colors-primary, 'light-gray'); // Use color variable
+  box-shadow: 0 10px 25px rgba(map.get($colors-primary, 'background-color'), 0.3);
   
   @media (min-width: 768px) {
     border-radius: 1.25rem;

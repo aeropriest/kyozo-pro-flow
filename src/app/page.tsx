@@ -1,20 +1,23 @@
 'use client';
-import SlidingCards from '@/components/SlidingCards';
-import AnimeText from '@/components/AnimeText';
-import ScrollRevealText from '@/components/ScrollRevealText';
-import SlideCard0 from '@/components/SlideCard0';
-import SlideCard1 from '@/components/SlideCard1';
-import SlideCard2 from '@/components/SlideCard2';
-import FixedFooter from '@/components/FixedFooter';
-import FeatureCard from '@/components/FeatureCard';
-import BackgroundImages from '@/components/BackgroundImages';
+import {
+  SlidingCards,
+  AnimeText,
+  ScrollRevealText,
+  SlideCard0,
+  SlideCard1,
+  SlideCard2,
+  FixedFooter,
+  FeatureCard,
+  BackgroundImages,
+  Marquee,
+  Hero,
+  BubbleMarquee,
+  BottomText,
+  PricingSection,
+  Toolkit
+} from '@/components';
 import styles from '@/styles/page.module.scss';
-import Marquee, { marqueeClasses } from '@/components/Marquee';
-import Hero from '@/components/Hero';
-import BubbleMarquee from '@/components/BubbleMarquee';
-import BottomText from '@/components/BottomText';
-import PricingSection from '@/components/PricingSection';
-import Toolkit from '@/components/Toolkit';
+import { marqueeClasses } from '@/components/Marquee';
 
 export default function Home() {
   return (

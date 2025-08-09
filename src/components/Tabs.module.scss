@@ -14,7 +14,7 @@
 .tab {
   background: transparent;
   border: none;
-  color: map.get($colors-primary, 'white');
+  color: map.get($colors-primary, 'dark-text-color');
   padding: 0.5rem 1rem;
   border-radius: 9999px; // Fully rounded
   cursor: pointer;
@@ -34,5 +34,5 @@
 
 .activeTab {
   background: linear-gradient(90deg, map.get($colors-primary, 'accent-pink'), map.get($colors-primary, 'accent-purple'));
-  color: map.get($colors-primary, 'white');
+  color: map.get($colors-primary, 'dark-text-color');
 }

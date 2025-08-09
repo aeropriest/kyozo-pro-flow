@@ -60,7 +60,7 @@
 .checkboxLabel {
   margin-left: 0.75rem;
   font-size: 0.875rem;
-  color: map.get($colors-primary, 'white');
+  color: map.get($colors-primary, 'dark-text-color');
 }
 
 .checkboxInput:disabled ~ .checkmark {

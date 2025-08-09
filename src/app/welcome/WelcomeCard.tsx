@@ -56,7 +56,8 @@ const WelcomeCard: React.FC<WelcomeCardProps> = ({
               </Button>
             )}
             <Button 
-              variant={currentStep === totalSteps - 1 ? "primary" : "outline-only"}
+              // variant={currentStep === totalSteps - 1 ? "primary" : "outline-only"}
+              variant="outline-only" 
               onClick={onNext}
               className={styles.navButton}
             >
@@ -65,7 +66,13 @@ const WelcomeCard: React.FC<WelcomeCardProps> = ({
           </div>
         </div>
         <div className={styles.rightContent}>
-          <Image src={step.image} alt={step.title} width={800} height={800} />
+          <Image 
+            src={step.image} 
+            alt={step.title} 
+            width={800} 
+            height={800} 
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
         </div>
       </div>      
     </div>

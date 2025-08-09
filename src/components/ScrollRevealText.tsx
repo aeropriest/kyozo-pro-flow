@@ -105,7 +105,7 @@ const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
                 
                 const letterStyle: CSSProperties = {
                   display: 'inline-block',
-                  color: isRevealed ? '#ffffff' : '#444444', // White when revealed, gray when hidden
+                  color: isRevealed ? 'var(--color-white)' : 'var(--color-gray)', // White when revealed, gray when hidden
                   transition: 'color 0.2s ease',
                 };
                 

@@ -23,7 +23,7 @@ const AnimeText: React.FC<AnimeTextProps> = ({ text, fontSize = '7rem', fontWeig
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#121212',
+      backgroundColor: 'var(--color-dark-gray)',
       position: 'absolute',
       top: 0,
       left: 0
@@ -41,10 +41,10 @@ const AnimeText: React.FC<AnimeTextProps> = ({ text, fontSize = '7rem', fontWeig
             {word.split('').map((letter, letterIndex) => {
               const letterStyle: CSSProperties = {
                 display: 'inline-block',
-                color: '#444444', // Initial gray color
+                color: 'var(--color-gray)', // Initial gray color
                 transition: 'color 0.5s ease',
                 transitionDelay: `${(wordIndex * word.length + letterIndex) * 0.05}s`,
-                ...(isLoaded && { color: '#ffffff' }) // Animate to white when loaded
+                ...(isLoaded && { color: 'var(--color-white)' }) // Animate to white when loaded
               };
               
               return (

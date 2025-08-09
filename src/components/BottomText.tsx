@@ -31,7 +31,7 @@ const BottomText: React.FC<BottomTextProps> = ({
       justifyContent: 'center',
       alignItems: 'center',
       padding: '2rem',
-      backgroundColor: '#0a0a0a', // Match the dark theme background color
+      backgroundColor: 'var(--color-black)', // Using color system
       position: 'relative',
       overflow: 'hidden'
     }}>
@@ -105,10 +105,10 @@ const BottomText: React.FC<BottomTextProps> = ({
                   key={`${wordIndex}-${letterIndex}`}
                   style={{
                     display: 'inline-block',
-                    color: '#444444',
+                    color: 'var(--color-gray)',
                     transition: 'color 0.5s ease',
                     transitionDelay: `${(wordIndex * 0.1 + letterIndex * 0.05)}s`,
-                    ...(isLoaded && { color: '#ffffff' })
+                    ...(isLoaded && { color: 'var(--color-white)' })
                   }}
                 >
                   {letter}
@@ -137,7 +137,7 @@ const BottomText: React.FC<BottomTextProps> = ({
       {/* Copyright */}
       <div style={{
         width: '100%',
-        color: '#ffffff',
+        color: 'var(--color-white)',
         marginTop: '4rem',
         textAlign: 'center',
         fontSize: '0.875rem',

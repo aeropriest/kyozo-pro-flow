@@ -1,8 +1,9 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '@/app/welcome/Welcome.module.scss';
 import Image from 'next/image';
 import Button from '@/components/Button';
+import LoginStep from './LoginStep';
 
 interface WelcomeCardProps {
   className?: string;
@@ -54,6 +55,34 @@ const WelcomeCard: React.FC<WelcomeCardProps> = ({
       if (onNext) onNext();
     }, 500);
   };
+  // Special handling for step 2 (Login/Verification)
+  if (currentStep === 1 && step.component === 'SignupStep') {
+    return (
+      <div className={`${styles.cardContainer} ${className}`}>
+        <div className={styles.cardContent}>
+          <div className={styles.leftContent}>
+            <p className={styles.categoryLabel}>STEP {currentStep + 1} OF {totalSteps}</p>
+            <h2 className={styles.cardTitle}>{step.title}</h2>
+            <p className={styles.cardDescription}>
+              {step.subtitle}
+            </p>
+            <LoginStep onNext={onNext} onBack={onBack} />
+          </div>
+          <div className={styles.rightContent}>
+            <Image 
+              src={step.image} 
+              alt={step.title} 
+              width={800} 
+              height={800} 
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          </div>
+        </div>      
+      </div>
+    );
+  }
+
+  // Default card for other steps
   return (
     <div className={`${styles.cardContainer} ${className}`}>
       <div className={styles.cardContent}>

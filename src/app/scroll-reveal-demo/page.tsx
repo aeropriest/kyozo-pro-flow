@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import ScrollRevealText from '@/components/ScrollRevealText';
+import { ScrollRevealText } from '@/components';
 
 export default function ScrollRevealDemo() {
   return (

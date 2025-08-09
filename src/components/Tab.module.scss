@@ -17,12 +17,12 @@
   white-space: nowrap;
 
   &:hover {
-    color: color('primary', 'white');
+    color: color('primary', 'dark-text-color');
   }
 
   &.active {
-    background-color: color('primary', 'dark-gray');
-    color: color('primary', 'white');
+    background-color: color('primary', 'lighter-background-color');
+    color: color('primary', 'dark-text-color');
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
 }
@@ -34,7 +34,7 @@
 
 .tabCount {
   background-color: color('primary', 'accent-pink');
-  color: color('primary', 'white');
+  color: color('primary', 'dark-text-color');
   border-radius: 9999px;
   padding: 0.125rem 0.5rem;
   font-size: 0.75rem;

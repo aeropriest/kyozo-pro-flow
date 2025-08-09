@@ -8,7 +8,7 @@
   overflow: hidden;
   padding: 100px 20px;
   text-align: center;
-  color: map.get($colors-primary, 'white');
+  color: map.get($colors-primary, 'dark-text-color');
   background-color: map.get($colors-primary, 'pagebg');
   display: flex;
   align-items: center;

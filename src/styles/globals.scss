@@ -4,15 +4,15 @@
 
 :root {
   // Base UI colors - light theme
-  --background: #{map.get($colors-primary, 'black')}; // Black background
-  --foreground: #{map.get($colors-primary, 'white')}; // White text
-  --border: rgba(#{map.get($colors-primary, 'white')}, 0.1); // Light border
-  --overlay: rgba(#{map.get($colors-primary, 'black')}, 0.5); // Dark overlay
+  --background: #{map.get($colors-primary, 'background-color')}; // Black background
+  --foreground: #{map.get($colors-primary, 'dark-text-color')}; // White text
+  --border: rgba(#{map.get($colors-primary, 'dark-text-color')}, 0.1); // Light border
+  --overlay: rgba(#{map.get($colors-primary, 'background-color')}, 0.5); // Dark overlay
   
   // Primary colors
-  --black: #{map.get($colors-primary, 'black')};
-  --white: #{map.get($colors-primary, 'white')};
-  --dark-gray: #{map.get($colors-primary, 'dark-gray')};
+  --black: #{map.get($colors-primary, 'background-color')};
+  --white: #{map.get($colors-primary, 'dark-text-color')};
+  --dark-gray: #{map.get($colors-primary, 'lighter-background-color')};
   --light-gray: #{map.get($colors-primary, 'light-gray')};
   
   // Accent colors
@@ -30,9 +30,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #{map.get($colors-primary, 'dark-gray')}; // Dark background
-    --foreground: #{map.get($colors-primary, 'white')}; // White text
-    --border: rgba(#{map.get($colors-primary, 'white')}, 0.1); // Light border
+    --background: #{map.get($colors-primary, 'lighter-background-color')}; // Dark background
+    --foreground: #{map.get($colors-primary, 'dark-text-color')}; // White text
+    --border: rgba(#{map.get($colors-primary, 'dark-text-color')}, 0.1); // Light border
     --accent: #{map.get($colors-primary, 'accent-pink')}; // Pink accent
   }
 }

@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './SlideCard0.module.scss';
 import Button from './Button';
 import Image from 'next/image';
-import VideoWall from '@/app/wall/VideoWall'
+import VideoWall from '@/components/VideoWall'
 
 interface SlideCard0Props {
   className?: string;

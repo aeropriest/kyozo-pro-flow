@@ -52,6 +52,7 @@
   position: relative;
   overflow: hidden;
   // border: 0.5px solid map.get($colors-primary, 'mediam-background-color');
+  background-color: map.get($colors-primary, 'accent-pink');
   padding: 0; /* Remove padding */
   height: 100%;
 

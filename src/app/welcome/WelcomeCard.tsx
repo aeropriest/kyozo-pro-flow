@@ -31,6 +31,29 @@ const WelcomeCard: React.FC<WelcomeCardProps> = ({
   onNext,
   onBack
 }) => {
+  // Function to handle WhatsApp message sending for step 1
+  const handleWhatsAppClick = () => {
+    // Prepare WhatsApp message content
+    const phoneNumber = '85260434478'; // Format without + for WhatsApp API
+    const welcomeMessage = encodeURIComponent(
+      "Hello! Welcome to Kyozo. Click the link below to continue your onboarding process:"
+    );
+    const onboardingLink = encodeURIComponent(
+      `${window.location.origin}/welcome?step=2`
+    );
+    
+    // Note: WhatsApp API doesn't directly support sending images through URL parameters
+    // In a real implementation, you would need a WhatsApp Business API to send media
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${welcomeMessage}%0A%0A${onboardingLink}%0A%0A(Note: In a full implementation, this message would include the Kyozo welcome image)`;
+    
+    // Open WhatsApp in a new tab
+    window.open(whatsappUrl, '_blank');
+    
+    // Proceed to next step after a short delay
+    setTimeout(() => {
+      if (onNext) onNext();
+    }, 500);
+  };
   return (
     <div className={`${styles.cardContainer} ${className}`}>
       <div className={styles.cardContent}>
@@ -55,14 +78,23 @@ const WelcomeCard: React.FC<WelcomeCardProps> = ({
                 Back
               </Button>
             )}
-            <Button 
-              // variant={currentStep === totalSteps - 1 ? "primary" : "outline-only"}
-              variant="outline-only" 
-              onClick={onNext}
-              className={styles.navButton}
-            >
-              {currentStep === totalSteps - 1 ? 'Get Started' : 'Next'}
-            </Button>
+            {currentStep === 0 && step.component === 'WelcomeStep' ? (
+              <Button 
+                variant="primary"
+                onClick={handleWhatsAppClick}
+                className={styles.navButton}
+              >
+                Hello Kyozo
+              </Button>
+            ) : (
+              <Button 
+                variant={currentStep === totalSteps - 1 ? "primary" : "outline-only"}
+                onClick={onNext}
+                className={styles.navButton}
+              >
+                {currentStep === totalSteps - 1 ? 'Get Started' : 'Next'}
+              </Button>
+            )}
           </div>
         </div>
         <div className={styles.rightContent}>

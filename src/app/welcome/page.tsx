@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import WelcomeCard from './WelcomeCard';
 
 export default function Home() {
@@ -55,7 +56,31 @@ export default function Home() {
       component: 'DashboardStep',
     },
   ];
+  const searchParams = useSearchParams();
   const [currentStep, setCurrentStep] = useState(0);
+
+  // Initialize step from URL parameter if present
+  useEffect(() => {
+    const stepParam = searchParams.get('step');
+    if (stepParam) {
+      const step = parseInt(stepParam, 10) - 1; // Convert to 0-based index
+      if (!isNaN(step) && step >= 0 && step < STEPS.length) {
+        setCurrentStep(step);
+      }
+    }
+  }, [searchParams]);
+
+  // Update URL when step changes
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const newStep = currentStep + 1; // Convert to 1-based for URL
+    
+    // Only update URL if it's different to prevent unnecessary history entries
+    if (url.searchParams.get('step') !== newStep.toString()) {
+      url.searchParams.set('step', newStep.toString());
+      window.history.pushState({}, '', url);
+    }
+  }, [currentStep]);
 
   const handleNext = () => {
     if (currentStep < STEPS.length - 1) {

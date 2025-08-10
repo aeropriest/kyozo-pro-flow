@@ -1,38 +1,56 @@
 
 import React from 'react';
+import styles from '@/app/welcome/welcome.module.scss';
 
 interface CustomCheckboxProps {
   id: string;
   name: string;
-  label: string;
+  label: string | React.ReactNode;
   checked: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
 }
 
 const CheckIcon: React.FC<{className?: string}> = ({ className }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className={className}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-    </svg>
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    fill="none" 
+    viewBox="0 0 24 24" 
+    strokeWidth={3} 
+    stroke="currentColor" 
+    className={className}
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+  </svg>
 );
 
-const CustomCheckbox: React.FC<CustomCheckboxProps> = ({ id, name, label, checked, onChange }) => {
+const CustomCheckbox: React.FC<CustomCheckboxProps> = ({ 
+  id, 
+  name, 
+  label, 
+  checked, 
+  onChange,
+  className = ''
+}) => {
   return (
-    <label htmlFor={id} className="flex items-center space-x-4 cursor-pointer group">
-      <div className="relative">
-        <input
-          id={id}
-          name={name}
-          type="checkbox"
-          checked={checked}
-          onChange={onChange}
-          className="peer absolute opacity-0 w-6 h-6"
-        />
-        <div className={`w-6 h-6 rounded flex items-center justify-center transition-all duration-200 ease-in-out ${checked ? 'bg-[#E0407B] border-[#E0407B]' : 'bg-transparent border-2 border-gray-500 group-hover:border-gray-400'}`}>
-          <CheckIcon className={`w-4 h-4 text-white transition-opacity duration-200 ${checked ? 'opacity-100' : 'opacity-0'}`} />
+    <div className={`${styles.checkboxContainer} ${className}`}>
+      <label htmlFor={id} className={styles.checkboxLabel}>
+        <div className={styles.checkboxWrapper}>
+          <input
+            id={id}
+            name={name}
+            type="checkbox"
+            checked={checked}
+            onChange={onChange}
+            className={styles.checkboxInput}
+          />
+          <div className={`${styles.checkbox} ${checked ? styles.checked : ''}`}>
+            <CheckIcon className={styles.checkIcon} />
+          </div>
         </div>
-      </div>
-      <span className="text-gray-300 select-none">{label}</span>
-    </label>
+        <span className={styles.checkboxText}>{label}</span>
+      </label>
+    </div>
   );
 };
 

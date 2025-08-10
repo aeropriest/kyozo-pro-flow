@@ -170,7 +170,7 @@ const SignupStep: React.FC<SignupStepProps> = ({ onNext, onBack }) => {
 
         <Button
           type="button"
-          variant="outline"
+          variant="outline-only"
           onClick={() => console.log('Continue with Google')}
           className={styles.googleButton}
         >

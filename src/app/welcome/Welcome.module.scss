@@ -111,10 +111,11 @@
 /* Auth Form Styles */
 .authForm {
   width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 40px 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 20px 0;
   color: map.get($colors-primary, 'dark-text-color');
+  text-align: left;
 
   h2 {
     font-size: 2rem;
@@ -130,51 +131,123 @@
   }
 }
 
-.signupForm1 {
+.signupForm {
   display: flex;
   flex-direction: column;
-  // gap: 2px;
-  width: 100%;
+  // gap: 8px;
+  width: 70%;
+  text-align: left;
 }
 
 .nameFields {
   display: flex;
-  gap: 16px;
+  gap: 8px;
   width: 100%;
+  margin-bottom: 4px;
 }
 
 .inputField {
-  width: 100%;
-  padding: 14px 16px;
+  width: 50%;
+  // padding: 12px 16px;
   font-size: 0.95rem;
-  border: 1px solid var(--border-color);
+  // border: 1px solid map.get($colors-primary, 'border-color');
   border-radius: 8px;
-  // background: var(--input-bg, #2a2a3a);
-  color: var(--text-primary);
+  // background: white;
+  color: map.get($colors-primary, 'dark-text-color');
   transition: all 0.2s ease;
+  margin-bottom: 4px;
   
   &:focus {
     outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.1);
+    border-color: map.get($colors-primary, 'accent-pink');
+    box-shadow: 0 0 0 2px rgba(map.get($colors-primary, 'accent-pink'), 0.1);
   }
   
   &::placeholder {
-    color: var(--text-tertiary);
+    color: map.get($colors-primary, 'light-gray');
   }
 }
 
+/* Checkbox Styles */
 .checkboxContainer {
   margin: 8px 0 4px;
   
-  label {
+  .checkboxLabel {
     display: flex;
     align-items: flex-start;
     gap: 12px;
     font-size: 0.9rem;
-    color: var(--text-secondary);
+    color: map.get($colors-primary, 'dark-text-color');
     cursor: pointer;
     line-height: 1.4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .checkboxWrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  
+  .checkboxInput {
+    position: absolute;
+    opacity: 0;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    cursor: pointer;
+    z-index: 1;
+  }
+  
+  .checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid map.get($colors-primary, 'accent-pink');
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    background: white;
+    flex-shrink: 0;
+    margin-top: 2px;
+    
+    &.checked {
+      background-color: map.get($colors-primary, 'accent-pink');
+      border-color: map.get($colors-primary, 'accent-pink');
+    }
+  }
+  
+  .checkIcon {
+    width: 14px;
+    height: 14px;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    
+    .checked & {
+      opacity: 1;
+    }
+  }
+  
+  .checkboxText {
+    color: map.get($colors-primary, 'dark-text-color');
+    font-size: 0.9rem;
+    line-height: 1.4;
+    user-select: none;
+    
+    a {
+      color: map.get($colors-primary, 'accent-pink');
+      text-decoration: none;
+      font-weight: 500;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
 
@@ -186,10 +259,10 @@
 
 .signupButton {
   width: 100%;
-  padding: 14px;
+  padding: 12px;
   font-size: 1rem;
   font-weight: 600;
-  background: var(--primary-color);
+  background: map.get($colors-primary, 'accent-pink');
   color: white;
   border: none;
   border-radius: 8px;

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styles from '@/app/welcome/Welcome.module.scss';
 import Image from 'next/image';
 import Button from '@/components/Button';
-import LoginStep from './LoginStep';
+import SignupStep from './SignupStep';
 
 interface WelcomeCardProps {
   className?: string;
@@ -66,7 +66,7 @@ const WelcomeCard: React.FC<WelcomeCardProps> = ({
             <p className={styles.cardDescription}>
               {step.subtitle}
             </p>
-            <LoginStep onNext={onNext} onBack={onBack} />
+            <SignupStep onNext={onNext} onBack={onBack} />
           </div>
           <div className={styles.rightContent}>
             <Image 

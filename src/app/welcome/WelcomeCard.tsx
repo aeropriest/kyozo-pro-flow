@@ -69,13 +69,18 @@ const WelcomeCard: React.FC<WelcomeCardProps> = ({
             <SignupStep onNext={onNext} onBack={onBack} />
           </div>
           <div className={styles.rightContent}>
-            <Image 
-              src={step.image} 
-              alt={step.title} 
-              width={800} 
-              height={800} 
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
+            <div className={styles.videoContainer}>
+              <video 
+                autoPlay 
+                loop 
+                muted 
+                playsInline
+                className={styles.video}
+              >
+                <source src="/form-right.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
           </div>
         </div>      
       </div>
@@ -97,17 +102,9 @@ const WelcomeCard: React.FC<WelcomeCardProps> = ({
               </>
             )}
           </p>
-          <div className={styles.navigationButtons}>
-            {currentStep > 0 && (
-              <Button 
-                variant="outline-only" 
-                onClick={onBack}
-                className={styles.navButton}
-              >
-                Back
-              </Button>
-            )}
-            {currentStep === 0 && step.component === 'WelcomeStep' ? (
+          
+          {step.component === 'WelcomeStep' && (
+            <div className={styles.navigationButtons}>
               <Button 
                 variant="primary"
                 onClick={handleWhatsAppClick}
@@ -115,27 +112,34 @@ const WelcomeCard: React.FC<WelcomeCardProps> = ({
               >
                 Hello Kyozo
               </Button>
-            ) : (
-              <Button 
-                variant={currentStep === totalSteps - 1 ? "primary" : "outline-only"}
-                onClick={onNext}
-                className={styles.navButton}
-              >
-                {currentStep === totalSteps - 1 ? 'Get Started' : 'Next'}
-              </Button>
-            )}
+            </div>
+          )}
+          
+          <div className={styles.stepIndicator}>
+            {Array.from({ length: totalSteps }).map((_, index) => (
+              <div 
+                key={index} 
+                className={`${styles.stepDot} ${index === currentStep ? styles.active : ''}`}
+              />
+            ))}
           </div>
         </div>
+        
         <div className={styles.rightContent}>
-          <Image 
-            src={step.image} 
-            alt={step.title} 
-            width={800} 
-            height={800} 
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          />
+          {step.component === 'WelcomeStep' && (
+            <div className={styles.imageContainer}>
+              <Image 
+                src={step.image} 
+                alt={step.title} 
+                width={800}
+                height={800}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                priority
+              />
+            </div>
+          )}
         </div>
-      </div>      
+      </div>
     </div>
   );
 };

@@ -26,10 +26,9 @@ const SignupStep: React.FC<SignupStepProps> = ({ onNext, onBack }) => {
     terms: false,
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [isVerifying, setIsVerifying] = useState(false);
   const [error, setError] = useState('');
   const [verificationSent, setVerificationSent] = useState(false);
-  const [emailSentTo, setEmailSentTo] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -82,7 +81,6 @@ const SignupStep: React.FC<SignupStepProps> = ({ onNext, onBack }) => {
       }
 
       setVerificationSent(true);
-      setEmailSentTo(formData.email);
     } catch (err: any) {
       console.error('Error:', err);
       setError(err.message || 'An error occurred. Please try again.');
@@ -109,7 +107,7 @@ const SignupStep: React.FC<SignupStepProps> = ({ onNext, onBack }) => {
 
   const handleVerificationComplete = async (code: string) => {
     try {
-      setIsVerifying(true);
+      setIsLoading(true);
       setError('');
       
       const response = await fetch('/api/auth/verify-code', {
@@ -132,7 +130,7 @@ const SignupStep: React.FC<SignupStepProps> = ({ onNext, onBack }) => {
       console.error('Verification error:', err);
       setError(err.message || 'Invalid verification code. Please try again.');
     } finally {
-      setIsVerifying(false);
+      setIsLoading(false);
     }
   };
 
@@ -140,12 +138,9 @@ const SignupStep: React.FC<SignupStepProps> = ({ onNext, onBack }) => {
   if (verificationSent) {
     return (
       <div className={styles.authForm}>
-        <h2>Check your email</h2>
+        <h2>Verify your email</h2>
         <p className={styles.subtitle}>
-          We've sent a 6-digit verification code to <strong>{emailSentTo}</strong>
-        </p>
-        <p className={styles.verificationNote}>
-          Please enter the code to verify your email address.
+          We've sent a 6-digit verification code to <strong>{formData.email}</strong>
         </p>
 
         {error && <div className={styles.errorMessage}>{error}</div>}
@@ -155,7 +150,6 @@ const SignupStep: React.FC<SignupStepProps> = ({ onNext, onBack }) => {
             length={6}
             onComplete={handleVerificationComplete}
             error={error}
-            disabled={isVerifying}
           />
           
           <div className={styles.resendContainer}>
@@ -168,22 +162,7 @@ const SignupStep: React.FC<SignupStepProps> = ({ onNext, onBack }) => {
               {isLoading ? 'Sending...' : 'Resend code'}
             </button>
           </div>
-          
-          <button 
-            className={styles.backButton}
-            onClick={() => setVerificationSent(false)}
-            disabled={isLoading}
-          >
-            Back to sign up
-          </button>
         </div>
-        
-        {isVerifying && (
-          <div className={styles.verifyingOverlay}>
-            <div className={styles.verifyingSpinner} />
-            <p>Verifying your code...</p>
-          </div>
-        )}
       </div>
     );
   }
@@ -273,12 +252,7 @@ const SignupStep: React.FC<SignupStepProps> = ({ onNext, onBack }) => {
           disabled={isLoading}
           className={styles.signupButton}
         >
-          {isLoading ? (
-            <>
-              <span className={styles.spinner}></span>
-              Sending code...
-            </>
-          ) : 'Sign Up'}
+          {isLoading ? 'Sending code...' : 'Sign Up'}
         </Button>
 
         <div className={styles.divider}>
@@ -291,12 +265,8 @@ const SignupStep: React.FC<SignupStepProps> = ({ onNext, onBack }) => {
           className={styles.googleButton}
           disabled={isLoading}
         >
-          {isLoading ? (
-            <span className={styles.spinner}></span>
-          ) : (
-            <FcGoogle className={styles.googleIcon} />
-          )}
-          {isLoading ? 'Signing in...' : 'Sign up with Google'}
+          <FcGoogle className={styles.googleIcon} />
+          Sign up with Google
         </Button>
       </form>
     </div>

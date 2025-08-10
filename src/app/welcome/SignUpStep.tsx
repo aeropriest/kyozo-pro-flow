@@ -157,8 +157,7 @@ const SignupStep: React.FC<SignupStepProps> = ({ onNext, onBack }) => {
         {error && <p className={styles.error}>{error}</p>}
 
         <Button 
-          type="submit" 
-          variant="outline-only"
+          type="submit"
           disabled={isLoading}
           className={styles.signupButton}
         >
@@ -171,7 +170,6 @@ const SignupStep: React.FC<SignupStepProps> = ({ onNext, onBack }) => {
 
         <Button
           type="button"
-          variant="outline-only"
           onClick={() => console.log('Continue with Google')}
           className={styles.googleButton}
         >

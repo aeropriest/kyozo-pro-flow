@@ -307,9 +307,9 @@
   padding: 12px 16px;
   font-size: 0.95rem;
   font-weight: 500;
-  background: transparent;
+  background: map.get($colors-primary, 'accent-pink');
   color: var(--text-primary);
-  border: 1px solid var(--border-color);
+  border: 1px solid map.get($colors-primary, 'accent-pink');
   border-radius: 8px;
   cursor: pointer;
   display: flex;

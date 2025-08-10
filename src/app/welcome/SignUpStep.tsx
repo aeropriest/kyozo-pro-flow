@@ -158,6 +158,7 @@ const SignupStep: React.FC<SignupStepProps> = ({ onNext, onBack }) => {
 
         <Button 
           type="submit" 
+          variant="outline-only"
           disabled={isLoading}
           className={styles.signupButton}
         >

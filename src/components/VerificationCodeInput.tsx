@@ -7,13 +7,15 @@ interface VerificationCodeInputProps {
   onComplete?: (code: string) => void;
   className?: string;
   error?: string;
+  disabled?: boolean;
 }
 
 const VerificationCodeInput: React.FC<VerificationCodeInputProps> = ({
   length = 6,
   onComplete,
   className = '',
-  error = ''
+  error = '',
+  disabled = false
 }) => {
   const [code, setCode] = useState<string[]>(Array(length).fill(''));
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
@@ -97,7 +99,8 @@ const VerificationCodeInput: React.FC<VerificationCodeInputProps> = ({
             onChange={(e) => handleChange(index, e.target.value)}
             onKeyDown={(e) => handleKeyDown(e, index)}
             onPaste={handlePaste}
-            className={`${styles.input} ${error ? styles.error : ''}`}
+            className={`${styles.input} ${error ? styles.error : ''} ${disabled ? styles.disabled : ''}`}
+            disabled={disabled}
             aria-label={`Digit ${index + 1} of verification code`}
           />
         ))}

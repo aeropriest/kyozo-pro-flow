@@ -1,8 +1,6 @@
 'use client';
 import {
   SlidingCards,
-  AnimeText,
-  ScrollRevealText,
   SlideCard0,
   SlideCard1,
   SlideCard2,

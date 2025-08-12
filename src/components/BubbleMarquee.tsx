@@ -4,13 +4,13 @@ import React, { useMemo } from 'react';
 import styles from './BubbleMarquee.module.scss';
 import { colors } from '../lib/colors.generated';
 
-// Bubble row colors using centralized color system
+// Bubble row colors using centralized accent colors from color system
 const bubbleRowColors = {
-  music: colors.textDark,        // Using centralized text color
-  artMovements: colors.textDark, // Using centralized text color
-  crafts: colors.textDark,       // Using centralized text color
-  fashion: colors.textDark,      // Using centralized text color
-  performance: colors.textDark,  // Using centralized text color
+  music: colors.accentBlue,        // Blue accent for music
+  artMovements: colors.accentPurple, // Purple accent for art movements
+  crafts: colors.accentOrange,     // Orange accent for crafts
+  fashion: colors.borderAccent,    // Pink accent for fashion (using borderAccent which is pink)
+  performance: colors.accentTeal,  // Teal accent for performance
 };
 
 interface BubbleItem {

@@ -1,6 +1,8 @@
 'use client';
 import React from 'react';
-import styles from './SlideCard2.module.scss';
+// import styles from './SlideCard2.module.scss';
+import styles from './SlideCardStyle.module.scss';
+
 import Image from 'next/image';
 import Button from './Button';
 

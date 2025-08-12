@@ -16,6 +16,7 @@
   border-radius: 30px;
   backdrop-filter: blur(10px);
   border: 0.5px solid map.get($colors-primary, 'mediam-background-color');  
+  z-index: 1;
 }   
 
 .cardContent {

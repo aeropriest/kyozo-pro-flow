@@ -4,6 +4,8 @@
 .slidingCardsContainer {
   position: relative;
   width: 100%;
+  // background-color: #059669;
+  z-index: 1; /* Lowest z-index in the stack */
 }
 
 .stickyContainer {
@@ -12,6 +14,7 @@
   height: 100vh;
   width: 100%;
   overflow: hidden;
+  z-index: 1;
 }
 
 .cardWrapper {

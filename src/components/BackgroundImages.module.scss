@@ -26,6 +26,22 @@
   }
 }
 
+.darkBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #111111; /* Dark gray background for dark theme */
+  z-index: -3; /* Behind light background */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  
+  &.visible {
+    opacity: 1;
+  }
+}
+
 .leftImage, .rightImage {
   position: absolute;
   height: 80vh; /* Taller to span across sections */

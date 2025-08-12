@@ -1,11 +1,16 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './FeatureCard.module.scss';
 import Button from './Button';
 import Image from 'next/image';
 import shapeStyles from '@/app/demo/shapes.module.scss';
 
 const FeatureCard = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
   return (
     <div className={styles.cardContainer}>
       <div className={styles.backgroundGradient}>
@@ -13,8 +18,8 @@ const FeatureCard = () => {
       </div>
       <div className={styles.cardContent}>
         <div className={styles.leftContent}>
-          <h2 className={styles.cardTitle}>Connect. Explore. Engage.</h2>
-          <p className={styles.cardDescription}>
+          <h2 className={`${styles.cardTitle} ${isLoaded ? styles.loaded : ''}`}>Connect. Explore. Engage.</h2>
+          <p className={`${styles.cardDescription} ${isLoaded ? styles.loaded : ''}`}>
             Connect with visionary creators and forward-thinking communities.
           </p>
           <div>

@@ -83,19 +83,23 @@
 
 .copyright {
   width: 100%;
-  color: map.get($colors-primary, 'dark-text-color');
+  color: var(--text-secondary); // Initial gray color
   margin-top: 4rem;
   text-align: center;
   font-size: 0.875rem;
-  transition: opacity 0.5s ease;
-  transition-delay: 0.7s;
-  z-index: 2;
-  
+  opacity: 0.7;
+  transition: color 0.3s ease;
+
   &.loaded {
-    opacity: 1;
+    color: var(--text-primary) !important; // Force theme text color when loaded
   }
-  
-  &:not(.loaded) {
-    opacity: 0;
-  }
+}
+
+// Ensure copyright text is always visible in both themes
+:global([data-theme="dark"]) .copyright.loaded {
+  color: var(--text-primary) !important; // Use theme text color
+}
+
+:global([data-theme="light"]) .copyright.loaded {
+  color: var(--text-primary) !important; // Use theme text color
 }

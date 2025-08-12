@@ -1,14 +1,4 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* Theme-aware CSS custom properties are defined in _variables.scss */
 
 html,
 body {
@@ -17,11 +7,21 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: var(--text-primary);
+  background: var(--bg-primary);
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme-specific text colors for ZoomText component */
+[data-theme="dark"] .zoom-text-letter {
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .zoom-text-letter {
+  color: #111827 !important;
 }
 
 * {

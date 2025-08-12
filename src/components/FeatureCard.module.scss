@@ -69,19 +69,47 @@
   // background: linear-gradient(90deg, var(--text-primary), #d8b4fe);
   -webkit-background-clip: text;
   background-clip: text;
-  color: var(--text-primary);
+  color: var(--text-secondary); // Initial gray color
   line-height: 1.0; /* Reduced line height to bring lines closer together */
+  transition: color 0.3s ease;
+
+  &.loaded {
+    color: var(--text-primary) !important; // Force theme text color when loaded
+  }
+}
+
+// Ensure feature card title is always visible in both themes
+:global([data-theme="dark"]) .cardTitle.loaded {
+  color: var(--text-primary) !important; // Use theme text color
+}
+
+:global([data-theme="light"]) .cardTitle.loaded {
+  color: var(--text-primary) !important; // Use theme text color
 }
 
 .cardDescription {
   font-size: 1.2rem;
   line-height: 1.6;
-  color: var(--text-secondary);
+  color: var(--text-secondary); // Initial gray color
   margin: 0;
   padding-top: 30px;
   padding-bottom: 30px;
+  transition: color 0.3s ease;
   // padding-right: 80px
   // width: 65%;
+
+  &.loaded {
+    color: var(--text-secondary) !important; // Force theme text color when loaded
+  }
+}
+
+// Ensure feature card description is always visible in both themes
+:global([data-theme="dark"]) .cardDescription.loaded {
+  color: var(--text-secondary) !important; // Use theme secondary text color
+}
+
+:global([data-theme="light"]) .cardDescription.loaded {
+  color: var(--text-secondary) !important; // Use theme secondary text color
 }
 
 .phoneContainer {

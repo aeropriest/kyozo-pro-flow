@@ -11,11 +11,20 @@
   margin-bottom: 0.5rem;
   font-size: 0.875rem;
   font-weight: 500;
-  color: map.get($colors-primary, 'dark-text-color');
+  color: var(--text-primary);
+}
+
+// Ensure input label is always visible in both themes
+[data-theme="dark"] .label {
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .label {
+  color: #111827 !important;
 }
 
 .required {
-  color: map.get($colors-primary, 'accent-pink');
+  color: #ec4899;
   margin-left: 0.25rem;
 }
 
@@ -48,7 +57,7 @@
   padding: 0.75rem 1rem;
   font-size: 1rem;
   background-color: rgba(255, 255, 255, 0.05);
-  color: map.get($colors-primary, 'dark-text-color');
+  color: var(--text-primary);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 9999px; // Fully rounded
   transition: all 0.2s ease;
@@ -93,7 +102,7 @@
 }
 
 .errorMessage {
-  color: map.get($colors-primary, 'error');
+  color: #dc2626;
   font-size: 0.75rem;
   margin-top: 0.25rem;
   margin-left: 0.5rem;

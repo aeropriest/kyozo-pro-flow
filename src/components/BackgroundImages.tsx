@@ -40,6 +40,8 @@ const BackgroundImages = () => {
 
   return (
     <div className={styles.backgroundContainer}>
+      {/* Dark background for dark theme */}
+      <div className={`${styles.darkBackground} ${!isLightTheme ? styles.visible : ''}`} />
       {/* Tiled light background for light theme */}
       <div className={`${styles.tiledBackground} ${isLightTheme ? styles.visible : ''}`} />
       

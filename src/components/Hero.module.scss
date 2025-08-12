@@ -115,9 +115,18 @@
 .letter {
   display: inline-block;
   color: var(--text-secondary); // Initial gray color
-  transition: color 0.5s ease;
+  transition: color 0.3s ease; // Faster transition
 
   &.loaded {
-    color: var(--text-primary); // Animate to theme text color when loaded
+    color: var(--text-primary) !important; // Force theme text color when loaded
   }
+}
+
+// Ensure hero text is always visible in both themes
+[data-theme="dark"] .letter.loaded {
+  color: #ffffff !important; // Force white text in dark theme
+}
+
+[data-theme="light"] .letter.loaded {
+  color: #111827 !important; // Force dark text in light theme
 }

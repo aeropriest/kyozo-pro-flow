@@ -80,6 +80,15 @@ margin-top: 80px;
   margin: 0 0 8px 0;
 }
 
+// Ensure category label is always visible in both themes
+[data-theme="dark"] .categoryLabel {
+  color: #f3f4f6 !important;
+}
+
+[data-theme="light"] .categoryLabel {
+  color: #6b7280 !important;
+}
+
 // Styles for the main card title.
 .cardTitle {
   font-size: 4.8rem;
@@ -91,6 +100,15 @@ margin-top: 80px;
   line-height: 1.0; /* Reduced line height to bring lines closer together */
 }
 
+// Ensure card title is always visible in both themes
+[data-theme="dark"] .cardTitle {
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .cardTitle {
+  color: #111827 !important;
+}
+
 // Styles for the card description text.
 .cardDescription {
   font-size: 1rem;
@@ -100,4 +118,13 @@ margin-top: 80px;
   padding-top: 30px;
   padding-bottom: 30px;
   width: 65%;
+}
+
+// Ensure card description is always visible in both themes
+[data-theme="dark"] .cardDescription {
+  color: #f3f4f6 !important;
+}
+
+[data-theme="light"] .cardDescription {
+  color: #374151 !important;
 }

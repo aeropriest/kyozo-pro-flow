@@ -74,6 +74,7 @@ const ZoomText: React.FC<ZoomTextProps> = ({
                   display: 'inline-block',
                   color: 'var(--text-primary)'
                 }}
+                className="zoom-text-letter"
               >
                 {letter}
               </span>

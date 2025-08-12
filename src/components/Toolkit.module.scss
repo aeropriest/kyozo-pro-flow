@@ -90,8 +90,9 @@ $ring-four-color: #B59962; /* innermost ring */
 .socialMediaTitle {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--text-secondary); // Initial gray color
   line-height: 1.25 !important;
+  transition: color 0.3s ease;
 
   @media (min-width: 640px) {
     font-size: 6rem;
@@ -99,6 +100,19 @@ $ring-four-color: #B59962; /* innermost ring */
   @media (min-width: 1024px) {
     font-size: 8rem;
   }
+
+  &.loaded {
+    color: var(--text-primary) !important; // Force theme text color when loaded
+  }
+}
+
+// Ensure social media title is always visible in both themes
+:global([data-theme="dark"]) .socialMediaTitle.loaded {
+  color: var(--text-primary) !important; // Use theme text color
+}
+
+:global([data-theme="light"]) .socialMediaTitle.loaded {
+  color: var(--text-primary) !important; // Use theme text color
 }
 
 .socialMediaBubble {
@@ -114,15 +128,26 @@ $ring-four-color: #B59962; /* innermost ring */
 .socialMediaText {
   font-size: 1.875rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--text-secondary); // Initial gray color
   letter-spacing: 0.025em;
+  transition: color 0.3s ease;
 
   @media (min-width: 640px) {
     font-size: 2.25rem;
   }
-  @media (min-width: 1024px) {
-    font-size: 3rem;
+
+  &.loaded {
+    color: var(--text-primary) !important; // Force theme text color when loaded
   }
+}
+
+// Ensure social media text is always visible in both themes
+:global([data-theme="dark"]) .socialMediaText.loaded {
+  color: var(--text-primary) !important; // Use theme text color
+}
+
+:global([data-theme="light"]) .socialMediaText.loaded {
+  color: var(--text-primary) !important; // Use theme text color
 }
 
 .creativeLabSection {
@@ -204,8 +229,9 @@ $ring-four-color: #B59962; /* innermost ring */
 .creativeLabTitle {
   font-size: 3rem;
   font-weight: 900;
-  color: var(--text-primary);
+  color: var(--text-secondary); // Initial gray color
   line-height: 1.25 !important;
+  transition: color 0.3s ease;
 
   @media (min-width: 768px) {
     font-size: 3.75rem;
@@ -213,6 +239,19 @@ $ring-four-color: #B59962; /* innermost ring */
   @media (min-width: 1024px) {
     font-size: 4.5rem;
   }
+
+  &.loaded {
+    color: var(--text-primary) !important; // Force theme text color when loaded
+  }
+}
+
+// Ensure creative lab title is always visible in both themes
+:global([data-theme="dark"]) .creativeLabTitle.loaded {
+  color: var(--text-primary) !important; // Use theme text color
+}
+
+:global([data-theme="light"]) .creativeLabTitle.loaded {
+  color: var(--text-primary) !important; // Use theme text color
 }
 
 .sectionNumberLeft {
@@ -236,20 +275,48 @@ $ring-four-color: #B59962; /* innermost ring */
 }
 
 .description {
-  color: var(--text-secondary);
+  color: var(--text-secondary); // Initial gray color
   font-size: 1rem;
   line-height: 1.625;
   max-width: 28rem;
+  transition: color 0.3s ease;
+
+  &.loaded {
+    color: var(--text-secondary) !important; // Force theme text color when loaded
+  }
+}
+
+// Ensure description is always visible in both themes
+:global([data-theme="dark"]) .description.loaded {
+  color: var(--text-secondary) !important; // Use theme secondary text color
+}
+
+:global([data-theme="light"]) .description.loaded {
+  color: var(--text-secondary) !important; // Use theme secondary text color
 }
 
 .ctaLink {
   margin-top: 2rem;
-  color: var(--text-primary);
+  color: var(--text-secondary); // Initial gray color
   font-weight: 600;
   font-size: 1rem;
   display: inline-flex;
   align-items: center;
   align-self: flex-start;
+  transition: color 0.3s ease;
+
+  &.loaded {
+    color: var(--text-primary) !important; // Force theme text color when loaded
+  }
+}
+
+// Ensure CTA link is always visible in both themes
+:global([data-theme="dark"]) .ctaLink.loaded {
+  color: var(--text-primary) !important; // Use theme text color
+}
+
+:global([data-theme="light"]) .ctaLink.loaded {
+  color: var(--text-primary) !important; // Use theme text color
 }
 
 .sectionNumberRight {

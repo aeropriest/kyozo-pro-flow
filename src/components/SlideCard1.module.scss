@@ -71,7 +71,7 @@
 
 
   letter-spacing: 0.1em;
-  color: map.get($colors-primary, 'lighter-gray');
+  color: var(--text-secondary);
   margin: 0 0 8px 0;
 }
 
@@ -82,14 +82,14 @@
   // background: linear-gradient(90deg, map.get($colors-primary, 'dark-text-color'), map.get($colors-primary, 'accent-light-purple'));
   -webkit-background-clip: text;
   background-clip: text;
-  color: map.get($colors-primary, 'dark-text-color');
+  color: var(--text-primary);
   line-height: 1.0; /* Reduced line height to bring lines closer together */
 }
 
 .cardDescription {
   font-size: 1rem;
   line-height: 1.6;
-  color: map.get($colors-primary, 'dark-text-color');
+  color: var(--text-primary);
   margin: 0;
   padding-top: 30px;
   padding-bottom: 30px;

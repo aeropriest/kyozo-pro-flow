@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+import React, { useState, useEffect } from 'react';
 import styles from './Toolkit.module.scss';
 import ArrowIcon from './icons/ArrowIcon';
 
@@ -14,6 +15,11 @@ const Toolkit: React.FC<ToolkitProps> = ({
   ctaText = 'Check out CreativeLab',
   ctaUrl = '#',
 }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
   return (
     <>
       <section className={styles.socialMediaSection}>
@@ -23,9 +29,9 @@ const Toolkit: React.FC<ToolkitProps> = ({
           <div className={styles.circleComponentRing2}></div>
           <div className={styles.circleComponentRing1}></div>
         </div>
-        <div className={styles.socialMediaTitle}>We are not</div>
+        <div className={`${styles.socialMediaTitle} ${isLoaded ? styles.loaded : ''}`}>We are not</div>
         <div className={styles.socialMediaBubble}>
-          <span className={styles.socialMediaText}>Social Media</span>
+          <span className={`${styles.socialMediaText} ${isLoaded ? styles.loaded : ''}`}>Social Media</span>
         </div>
       </section>
 
@@ -33,7 +39,7 @@ const Toolkit: React.FC<ToolkitProps> = ({
         <div className={styles.gridContainer}>
           {/* Left side */}
           <div className={styles.leftColumn}>
-            <h2 className={styles.creativeLabTitle}>
+            <h2 className={`${styles.creativeLabTitle} ${isLoaded ? styles.loaded : ''}`}>
               CreativeLab
               <br />
               Your creative
@@ -45,8 +51,8 @@ const Toolkit: React.FC<ToolkitProps> = ({
 
           {/* Right side */}
           <div className={styles.rightColumn}>
-            <p className={styles.description}>{description}</p>
-            <a href={ctaUrl} className={styles.ctaLink}>
+            <p className={`${styles.description} ${isLoaded ? styles.loaded : ''}`}>{description}</p>
+            <a href={ctaUrl} className={`${styles.ctaLink} ${isLoaded ? styles.loaded : ''}`}>
               {ctaText}
               <ArrowIcon />
             </a>

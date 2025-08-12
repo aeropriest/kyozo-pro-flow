@@ -7,12 +7,11 @@
 
 // Styles for the main card container.
 .cardContainer {
-  width: calc(100% - 60px); /* Account for left and right margins */
+  width: calc(100% - 80px); /* Account for left and right margins */
   height: calc(100vh - 160px); /* Account for top and bottom margins */
-//   margin: 20px 60px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 80px;
+margin-left: 40px;
+// margin-right: 20px;
+margin-top: 80px;
   background: map.get($colors-primary, 'lighter-background-color');
   padding: 10px;
   box-shadow: 0 8px 32px rgba(map.get($colors-primary, 'background-color'), 0.2);
@@ -24,7 +23,7 @@
   border-radius: 30px;
   backdrop-filter: blur(10px);
   border: 0.5px solid map.get($colors-primary, 'mediam-background-color');
-//   background-color: red;
+//   background-color: green;
   z-index: 3; /* Highest z-index in the stack (above green and purple) */
 }
 

@@ -33,7 +33,7 @@ $ring-four-color: #B59962; /* innermost ring */
   align-items: center;
   top: -20rem;
   left: -18rem;
-  z-index: 1; // Ensure circles appear above the sliding cards container
+  z-index: 2; // Place circles behind green (z-index 5) but above the base layer
   
   /* Center circle with a radial gradient */
   &::before {

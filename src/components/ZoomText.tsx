@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState, useEffect, CSSProperties } from 'react';
-import { colors } from '../lib/colors.generated';
+import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+import styles from './ZoomText.module.scss';
 
 interface ZoomTextProps {
   text: string;
@@ -44,43 +44,28 @@ const ZoomText: React.FC<ZoomTextProps> = ({
   return (
     <div 
       ref={ref} // Add ref for intersection observer
-      style={{
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        overflow: 'hidden'
-      }}
+      className={styles.container}
     >
-      <h1 style={{
-        fontSize: fontSize,
-        fontWeight: fontWeight,
-        textAlign: 'center',
-        maxWidth: '1200px',
-        padding: '0 2rem',
-        margin: 0,
-        lineHeight: '1.1',
-        letterSpacing: '-0.02em',
-        opacity: isLoaded ? 1 : 0.3, // Start at 30% opacity
-        transform: isLoaded ? 'scale(1)' : 'scale(0.1)',
-        transition: `transform ${duration} ease-out ${delay}, opacity ${duration} ease-out ${delay}`,
-        transformOrigin: 'center center'
-      }}>
+      <h1 
+        className={`${styles.title} ${isLoaded ? styles.loaded : styles.loading}`}
+        style={{
+          fontSize: fontSize,
+          fontWeight: fontWeight,
+          transition: `transform ${duration} ease-out ${delay}, opacity ${duration} ease-out ${delay}`
+        }}
+      >
         {words.map((word, wordIndex) => (
-          <span key={wordIndex} style={{ display: 'inline-block', margin: '0 0.5rem' }}>
+          <span key={wordIndex} className={styles.word}>
             {word.split('').map((letter, letterIndex) => (
               <span
                 key={`${wordIndex}-${letterIndex}`}
-                style={{
-                  display: 'inline-block',
-                  color: colors.textDark // Using centralized color system - primary('dark-text-color')
-                }}
+                className={styles.letter}
               >
                 {letter}
               </span>
             ))}
             {/* Add a space after each word except the last one */}
-            {wordIndex < words.length - 1 && <span style={{ display: 'inline-block', width: '0.3rem' }}></span>}
+            {wordIndex < words.length - 1 && <span className={styles.space}></span>}
           </span>
         ))}
       </h1>

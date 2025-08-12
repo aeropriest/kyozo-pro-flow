@@ -83,17 +83,17 @@
 .marqueeText {
   font-size: 1.5rem;
   font-weight: 600;
-  color: map.get($colors-primary, 'dark-text-color');
-  background: linear-gradient(90deg, map.get($colors-primary, 'accent-purple'), map.get($colors-primary, 'accent-blue'));
+  color: var(--text-primary);
+  background: linear-gradient(90deg, #b19cd9, #4169e1);
   -webkit-background-clip: text;
   background-clip: text;
-  color: map.get($colors-primary, 'dark-text-color');
+  color: var(--text-primary);
   transition: all 0.3s ease;
   padding-left: 0.75rem;
   
   &:hover {
     transform: scale(1.05);
-    background: linear-gradient(90deg, map.get($colors-primary, 'accent-pink'), map.get($colors-primary, 'accent-purple'));
+    background: linear-gradient(90deg, #D3439A, #b19cd9);
     -webkit-background-clip: text;
     background-clip: text;
   }

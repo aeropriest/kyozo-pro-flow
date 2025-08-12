@@ -32,16 +32,16 @@
   border-radius: 6rem;
   font-weight: 400;
   font-size: 2.5rem; /* Reset font size for bubble text */
-  color: #fff;
+  color: var(--text-primary);
   background-color: transparent;
-  border: 1.5px solid var(--row-color, #fff);
+  border: 1.5px solid var(--row-color, var(--text-primary));
   transition: background-color 0.3s ease;
   cursor: default;
   margin-top: 0;
   margin-bottom: 0;
   &:hover {
-    background-color: var(--row-color, #fff);
-    color: #000;
+    background-color: var(--row-color, var(--text-primary));
+    color: var(--bg-primary);
   }
 }
 
@@ -85,10 +85,6 @@
 }
 
 @media (max-width: 480px) {
-  .bubbleRowContainer {
-    // height: 3rem;
-  }
-  
   .bubble {
     // padding: 0.4rem 1rem;
     font-size: 0.8rem;

@@ -72,7 +72,7 @@ const ZoomText: React.FC<ZoomTextProps> = ({
                 key={`${wordIndex}-${letterIndex}`}
                 style={{
                   display: 'inline-block',
-                  color: 'var(--color-white)'
+                  color: 'var(--text-primary)'
                 }}
               >
                 {letter}

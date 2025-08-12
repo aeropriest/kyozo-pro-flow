@@ -61,7 +61,7 @@
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: white;
+  color: var(--text-primary);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   
   @media (min-width: 768px) {
@@ -71,7 +71,7 @@
 
 .cardText {
   font-size: 1.25rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-secondary);
   margin-bottom: 2rem;
   
   @media (min-width: 768px) {

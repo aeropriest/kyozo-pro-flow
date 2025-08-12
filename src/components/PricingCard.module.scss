@@ -8,7 +8,16 @@
   padding: 2px; // p-[2px]
   width: 100%;
   // max-width: 28rem; // max-w-md
-  background: linear-gradient(to bottom right, var(--from-color), var(--via-color) 25%, map.get($colors-primary, 'mediam-background-color') 60%);
+  background: linear-gradient(to bottom right, var(--from-color), var(--via-color) 25%, var(--bg-tertiary) 60%);
+  border: 1px solid var(--border-color);
+  
+  [data-theme="light"] & {
+    border: 1px solid #ec4899; // Pink border in light theme
+  }
+  
+  [data-theme="dark"] & {
+    border: 1px solid var(--border-color);
+  }
   
   
   .cardInner {
@@ -18,20 +27,29 @@
     width: 100%;
     height: 100%;
     border-radius: 1.375rem; // rounded-[22px]
-    background-color: map.get($colors-primary, 'lighter-background-color'); // bg-[#1C1C1E]
+    background-color: var(--bg-secondary); // bg-[#1C1C1E]
     padding: 2rem; // p-8
+    border: 1px solid var(--border-color);
+    
+    [data-theme="light"] & {
+      border: 1px solid rgba(236, 72, 153, 0.3); // Subtle pink border in light theme
+    }
+    
+    [data-theme="dark"] & {
+      border: 1px solid var(--border-color);
+    }
   }
 
   h2 {
     font-size: 2.25rem; // text-5xl
     font-weight: 900; // font-black
-    color: map.get($colors-primary, 'dark-text-color'); // text-white
+    color: var(--text-primary); // text-white
     line-height: 1;
   }
 
   hr {
     margin: 1.5rem 0; // my-6
-    border-color: map.get($colors-ui, 'border'); // border-white/20
+    border-color: var(--border-color); // border-white/20
   }
 
   .subtitle {
@@ -44,7 +62,7 @@
     margin-top: 0.5rem; // mt-2
     font-size: 1.875rem; // text-3xl
     font-weight: 700; // font-bold
-    color: map.get($colors-primary, 'dark-text-color'); // text-white
+    color: var(--text-primary); // text-white
     letter-spacing: -0.025em; // tracking-tight
     display: flex;
     align-items: baseline;
@@ -53,7 +71,7 @@
     span {
       font-size: 2rem; // text-xl
       font-weight: 500; // font-medium
-      color: map.get($colors-primary, 'lighter-gray'); // text-gray-400
+      color: var(--text-secondary); // text-gray-400
     }
   }
 
@@ -67,7 +85,7 @@
       display: flex;
       align-items: center;
       gap: 0.75rem; // gap-3
-      color: map.get($colors-primary, 'lighter-gray'); // text-gray-300
+      color: var(--text-secondary); // text-gray-300
     }
   }
 }

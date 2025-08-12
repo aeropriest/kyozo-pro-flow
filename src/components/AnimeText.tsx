@@ -51,10 +51,10 @@ const AnimeText: React.FC<AnimeTextProps> = ({ text, fontSize = '7rem', fontWeig
             {word.split('').map((letter, letterIndex) => {
               const letterStyle: CSSProperties = {
                 display: 'inline-block',
-                color: 'var(--color-gray)', // Initial gray color
+                color: 'var(--text-secondary)', // Initial gray color
                 transition: 'color 0.5s ease',
                 transitionDelay: `${(wordIndex * word.length + letterIndex) * 0.05}s`,
-                ...(isLoaded && { color: 'var(--color-white)' }) // Animate to white when loaded
+                ...(isLoaded && { color: 'var(--text-primary)' }) // Animate to theme text color when loaded
               };
               
               return (

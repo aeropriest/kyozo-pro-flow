@@ -90,7 +90,7 @@ $ring-four-color: #B59962; /* innermost ring */
 .socialMediaTitle {
   font-size: 1rem;
   font-weight: 700;
-  color: white;
+  color: var(--text-primary);
   line-height: 1.25 !important;
 
   @media (min-width: 640px) {
@@ -114,7 +114,7 @@ $ring-four-color: #B59962; /* innermost ring */
 .socialMediaText {
   font-size: 1.875rem;
   font-weight: 700;
-  color: white;
+  color: var(--text-primary);
   letter-spacing: 0.025em;
 
   @media (min-width: 640px) {
@@ -204,7 +204,7 @@ $ring-four-color: #B59962; /* innermost ring */
 .creativeLabTitle {
   font-size: 3rem;
   font-weight: 900;
-  color: white;
+  color: var(--text-primary);
   line-height: 1.25 !important;
 
   @media (min-width: 768px) {
@@ -224,6 +224,10 @@ $ring-four-color: #B59962; /* innermost ring */
   font-family: monospace;
   font-size: 1.5rem;
   user-select: none;
+  
+  [data-theme="light"] & {
+    color: rgba(0, 0, 0, 0.1);
+  }
 
   @media (min-width: 768px) {
     right: 25%;
@@ -232,7 +236,7 @@ $ring-four-color: #B59962; /* innermost ring */
 }
 
 .description {
-  color: #d4d4d4;
+  color: var(--text-secondary);
   font-size: 1rem;
   line-height: 1.625;
   max-width: 28rem;
@@ -240,7 +244,7 @@ $ring-four-color: #B59962; /* innermost ring */
 
 .ctaLink {
   margin-top: 2rem;
-  color: white;
+  color: var(--text-primary);
   font-weight: 600;
   font-size: 1rem;
   display: inline-flex;
@@ -257,6 +261,10 @@ $ring-four-color: #B59962; /* innermost ring */
   font-family: monospace;
   font-size: 1.5rem;
   user-select: none;
+  
+  [data-theme="light"] & {
+    color: rgba(0, 0, 0, 0.1);
+  }
 
   @media (min-width: 768px) {
     right: 0;

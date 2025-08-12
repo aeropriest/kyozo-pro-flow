@@ -13,6 +13,17 @@
   width: 100%;
   height: 100vh;
   position: relative;
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  margin: 20px;
+  
+  [data-theme="light"] & {
+    border: 1px solid rgba(236, 72, 153, 0.2); // Very subtle pink border in light theme
+  }
+  
+  [data-theme="dark"] & {
+    border: 1px solid var(--border-color);
+  }
 }
 
 .featureSection {
@@ -24,6 +35,17 @@
   position: relative;
   z-index: 2; /* Ensure it's above background images */
   margin-top: 40px; /* Additional spacing from hero section */
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  margin: 40px 20px;
+  
+  [data-theme="light"] & {
+    border: 1px solid rgba(236, 72, 153, 0.3); // Subtle pink border in light theme
+  }
+  
+  [data-theme="dark"] & {
+    border: 1px solid var(--border-color);
+  }
 }
 
 .page {

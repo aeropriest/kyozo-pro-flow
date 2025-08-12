@@ -40,14 +40,31 @@
 
 // Style variants
 .primary {
-  background: map.get($colors-primary, 'accent-pink');
-  color: map.get($colors-primary, 'dark-text-color');
+  background: #ec4899; // Pink in both themes
+  color: white;
   border: none;
+  
+  [data-theme="light"] & {
+    background: #ec4899;
+    color: white;
+  }
+  
+  [data-theme="dark"] & {
+    background: var(--accent-color);
+    color: var(--text-primary);
+  }
   
   &:hover, &:focus {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(map.get($colors-primary, 'background-color'), 0.2);
-    background: darken(map.get($colors-primary, 'accent-pink'), 5%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    
+    [data-theme="light"] & {
+      background: #db2777; // Darker pink on hover
+    }
+    
+    [data-theme="dark"] & {
+      background: #f472b6; // Lighter pink on hover
+    }
   }
   
   &:active {
@@ -57,14 +74,30 @@
 
 .outline {
   background: transparent;
-  color: map.get($colors-primary, 'dark-text-color');
-  border: 2px solid map.get($colors-primary, 'accent-pink');
-  box-shadow: 0 0 0 0 rgba(map.get($colors-primary, 'accent-pink'), 0);
+  border: 2px solid #ec4899; // Default pink border
+  
+  [data-theme="light"] & {
+    color: #ec4899; // Pink text in light theme
+    border: 2px solid #ec4899; // Pink border in light theme
+  }
+  
+  [data-theme="dark"] & {
+    color: var(--text-primary);
+    border: 2px solid var(--accent-color);
+  }
   
   &:hover, &:focus {
-    border-color: map.get($colors-primary, 'accent-purple');
-    box-shadow: 0 0 0 4px rgba(map.get($colors-primary, 'accent-purple'), 0.3);
     transform: translateY(-2px);
+    
+    [data-theme="light"] & {
+      border-color: #db2777; // Darker pink on hover
+      box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.3);
+    }
+    
+    [data-theme="dark"] & {
+      border-color: #f472b6;
+      box-shadow: 0 0 0 4px rgba(244, 114, 182, 0.3);
+    }
   }
   
   &:active {
@@ -74,11 +107,26 @@
 
 .outline-only {
   background: transparent;
-  color: map.get($colors-primary, 'dark-text-color');
-  border: 1px solid map.get($colors-primary, 'accent-pink');
+  border: 1px solid #ec4899; // Default pink border
+  
+  [data-theme="light"] & {
+    color: #ec4899; // Pink text in light theme
+    border: 1px solid #ec4899; // Pink border in light theme
+  }
+  
+  [data-theme="dark"] & {
+    color: var(--text-primary);
+    border: 1px solid var(--accent-color);
+  }
   
   &:hover, &:focus {
-    border-color: map.get($colors-primary, 'accent-purple');
+    [data-theme="light"] & {
+      border-color: #db2777; // Darker pink on hover
+    }
+    
+    [data-theme="dark"] & {
+      border-color: #f472b6;
+    }
   }
   
   &:active {
@@ -87,15 +135,35 @@
 }
 
 .solid {
-  background-color: map.get($colors-primary, 'accent-pink');
-  color: map.get($colors-primary, 'dark-text-color');
   border: none;
   
+  [data-theme="light"] & {
+    background-color: #ec4899; // Pink background in light theme
+    color: white;
+  }
+  
+  [data-theme="dark"] & {
+    background-color: var(--accent-color);
+    color: var(--text-primary);
+  }
+  
   &:hover, &:focus {
-    background-color: lighten(map.get($colors-primary, 'accent-pink'), 5%);
+    [data-theme="light"] & {
+      background-color: #f472b6; // Lighter pink on hover
+    }
+    
+    [data-theme="dark"] & {
+      background-color: #f472b6;
+    }
   }
   
   &:active {
-    background-color: darken(map.get($colors-primary, 'accent-pink'), 5%);
+    [data-theme="light"] & {
+      background-color: #db2777; // Darker pink on active
+    }
+    
+    [data-theme="dark"] & {
+      background-color: #db2777;
+    }
   }
 }

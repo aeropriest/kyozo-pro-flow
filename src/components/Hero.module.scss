@@ -8,13 +8,13 @@
   overflow: hidden;
   padding: 100px 20px;
   text-align: center;
-  color: map.get($colors-primary, 'dark-text-color');
-  background-color: map.get($colors-primary, 'pagebg');
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   // CSS custom properties for SVG colors
-  --hero-accent-color: #{map.get($colors-primary, 'accent-yellow')};
+  --hero-accent-color: var(--accent-color);
 }
 
 .gradient {
@@ -97,7 +97,7 @@
   font-weight: 800;
   text-align: center;
   max-width: 1200px;
-  color: map.get($colors-primary, 'dark-text-color');
+  color: var(--text-primary);
   line-height: 1.1;
 }
 
@@ -114,10 +114,10 @@
 
 .letter {
   display: inline-block;
-  color: map.get($colors-primary, 'lighter-gray'); // Initial gray color
+  color: var(--text-secondary); // Initial gray color
   transition: color 0.5s ease;
 
   &.loaded {
-    color: map.get($colors-primary, 'dark-text-color'); // Animate to theme text color when loaded
+    color: var(--text-primary); // Animate to theme text color when loaded
   }
 }

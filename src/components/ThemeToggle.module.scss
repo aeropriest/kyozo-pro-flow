@@ -14,27 +14,37 @@
   }
 
   &:focus {
-    outline: 2px solid var(--color-primary);
+    outline: 2px solid #ec4899;
     outline-offset: 2px;
     border-radius: 50px;
   }
 }
 
 .toggleTrack {
-  width: 120px;
-  height: 64px;
-  background: var(--toggle-track-bg);
+  width: 80px;
+  height: 40px;
   border-radius: 50px;
   position: relative;
   transition: all 0.3s ease;
-  border: 2px solid var(--toggle-border);
-  box-shadow: var(--toggle-shadow);
+  border: 2px solid #ddd;
+  
+  // Light theme (default)
+  background: #f0f0f0;
+  
+  [data-theme="light"] & {
+    background: #f0f0f0;
+    border-color: #ddd;
+  }
+  
+  [data-theme="dark"] & {
+    background: #333;
+    border-color: #555;
+  }
 }
 
 .toggleThumb {
-  width: 28px;
-  height: 28px;
-  background: var(--toggle-thumb-bg);
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   position: absolute;
   top: 50%;
@@ -43,16 +53,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--toggle-thumb-shadow);
-
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  
+  // Light theme positioning and colors
   &.light {
-    left: 2px;
-    color: var(--color-sun);
+    left: 4px;
+    background: white;
+    color: #fbbf24; // Sun color
   }
 
   &.dark {
-    left: calc(100% - 30px);
-    color: var(--color-moon);
+    left: calc(100% - 36px); // Position on the right side
+    background: #374151; // Dark gray background
+    color: #f3f4f6; // Light moon color
   }
 }
 
@@ -72,12 +85,21 @@
   }
 
   .toggleTrack {
-    width: 50px;
-    height: 28px;
+    width: 60px;
+    height: 32px;
   }
 
   .toggleThumb {
-    width: 24px;
+    width: 26px;
+    height: 26px;
+    
+    &.light {
+      left: 3px;
+    }
+    
+    &.dark {
+      left: calc(100% - 29px);
+    }
     height: 24px;
 
     &.dark {

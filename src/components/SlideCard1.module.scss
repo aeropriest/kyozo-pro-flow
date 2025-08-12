@@ -5,9 +5,9 @@
   width: calc(100% - 80px); /* Account for left and right margins */
   height: calc(100vh - 80px); /* Account for top and bottom margins */
   margin: 40px 40px;
-  background: map.get($colors-primary, 'lighter-background-color');
+  background-color: var(--bg-secondary);
   padding: 10px;
-  box-shadow: 0 8px 32px rgba(map.get($colors-primary, 'background-color'), 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   justify-content: flex-start; /* Top align all content */  // gap: 30px;
@@ -15,7 +15,15 @@
   overflow: hidden;
   border-radius: 30px;
   backdrop-filter: blur(10px);
-  border: 0.5px solid map.get($colors-primary, 'mediam-background-color');  
+  border: 0.5px solid var(--border-color);
+  
+  [data-theme="light"] & {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+  
+  [data-theme="dark"] & {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
 }   
 
 .cardContent {

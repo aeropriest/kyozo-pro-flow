@@ -31,9 +31,28 @@ function exportColorsToTypeScript() {
   accentPurple: #{map.get(colors.$colors-primary, 'accent-purple')};
   accentBlue: #{map.get(colors.$colors-primary, 'accent-blue')};
   
-  // UI colors
-  cardBackground: #{map.get(colors.$colors-ui, 'card-background')};
-  inputBackground: #{map.get(colors.$colors-ui, 'input-background')};
+  // Background colors
+  pageBackground: #{map.get(colors.$colors-backgrounds, 'page')};
+  mainBackground: #{map.get(colors.$colors-backgrounds, 'main')};
+  lighterBackground: #{map.get(colors.$colors-backgrounds, 'lighter')};
+  mediumBackground: #{map.get(colors.$colors-backgrounds, 'medium')};
+  overlayBackground: #{map.get(colors.$colors-backgrounds, 'overlay')};
+  glassBackground: #{map.get(colors.$colors-backgrounds, 'glass')};
+  inputBackground: #{map.get(colors.$colors-backgrounds, 'input')};
+  inputHoverBackground: #{map.get(colors.$colors-backgrounds, 'input-hover')};
+  
+  // Card colors
+  cardBackground: #{map.get(colors.$colors-cards, 'background')};
+  cardBorder: #{map.get(colors.$colors-cards, 'border')};
+  cardShadow: #{map.get(colors.$colors-cards, 'shadow')};
+  cardHover: #{map.get(colors.$colors-cards, 'hover')};
+  
+  // Border colors
+  borderDefault: #{map.get(colors.$colors-borders, 'default')};
+  borderLight: #{map.get(colors.$colors-borders, 'light')};
+  borderMedium: #{map.get(colors.$colors-borders, 'medium')};
+  borderAccent: #{map.get(colors.$colors-borders, 'accent')};
+  borderTransparent: #{map.get(colors.$colors-borders, 'transparent')};
 }
 `;
 
@@ -84,9 +103,28 @@ export const colors = {
   accentPurple: '${colorEntries.accentPurple}',
   accentBlue: '${colorEntries.accentBlue}',
   
-  // UI colors
-  cardBackground: '${colorEntries.cardBackground}',
+  // Background colors
+  pageBackground: '${colorEntries.pageBackground}',
+  mainBackground: '${colorEntries.mainBackground}',
+  lighterBackground: '${colorEntries.lighterBackground}',
+  mediumBackground: '${colorEntries.mediumBackground}',
+  overlayBackground: '${colorEntries.overlayBackground}',
+  glassBackground: '${colorEntries.glassBackground}',
   inputBackground: '${colorEntries.inputBackground}',
+  inputHoverBackground: '${colorEntries.inputHoverBackground}',
+  
+  // Card colors
+  cardBackground: '${colorEntries.cardBackground}',
+  cardBorder: '${colorEntries.cardBorder}',
+  cardShadow: '${colorEntries.cardShadow}',
+  cardHover: '${colorEntries.cardHover}',
+  
+  // Border colors
+  borderDefault: '${colorEntries.borderDefault}',
+  borderLight: '${colorEntries.borderLight}',
+  borderMedium: '${colorEntries.borderMedium}',
+  borderAccent: '${colorEntries.borderAccent}',
+  borderTransparent: '${colorEntries.borderTransparent}',
 } as const;
 
 export type ColorKey = keyof typeof colors;

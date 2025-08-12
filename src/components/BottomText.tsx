@@ -33,7 +33,7 @@ const BottomText: React.FC<BottomTextProps> = ({
       justifyContent: 'center',
       alignItems: 'center',
       padding: '2rem',
-      backgroundColor: '#000000', // Using centralized color system - primary('background-color')
+      backgroundColor: colors.pageBackground, // Using centralized color system - page background
       position: 'relative',
       overflow: 'hidden'
     }}>

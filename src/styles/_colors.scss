@@ -6,10 +6,10 @@
 
 // Primary Colors
 $colors-primary: (
-  'pagebg': #111111,
+  'pagebg': #00ff00, // TESTING: Changed to green
   'background-color': #000000,
   'dark-text-color': #ff0000, // TESTING: Final red test for complete centralized control
-  'lighter-background-color': #181818,  // Background color
+  'lighter-background-color': #0000ff,  // TESTING: Changed to blue for cards
   'mediam-background-color': #4d4d4d,      // Medium gray
   'light-gray': #1B1B1B,
   'lighter-gray': #AAAAAA,
@@ -63,7 +63,37 @@ $colors-common: (
   'current': currentColor,
 );
 
-// UI Colors
+// Background Colors
+$colors-backgrounds: (
+  'page': map.get($colors-primary, 'pagebg'),                    // Main page background
+  'main': map.get($colors-primary, 'background-color'),          // Primary background
+  'lighter': map.get($colors-primary, 'lighter-background-color'), // Card/component backgrounds
+  'medium': map.get($colors-primary, 'mediam-background-color'),  // Medium backgrounds
+  'overlay': rgba(0, 0, 0, 0.5),                                // Dark overlay
+  'overlay-light': rgba(255, 255, 255, 0.5),                   // Light overlay
+  'glass': rgba(38, 38, 38, 0.3),                              // Glass/blur backgrounds
+  'input': rgba(255, 255, 255, 0.05),                          // Input backgrounds
+  'input-hover': rgba(255, 255, 255, 0.08),                    // Input hover backgrounds
+);
+
+// Card Colors
+$colors-cards: (
+  'background': map.get($colors-primary, 'lighter-background-color'), // Card backgrounds
+  'border': map.get($colors-primary, 'mediam-background-color'),       // Card borders
+  'shadow': rgba(0, 0, 0, 0.2),                                       // Card shadows
+  'hover': rgba(255, 255, 255, 0.05),                                 // Card hover states
+);
+
+// Border Colors
+$colors-borders: (
+  'default': rgba(255, 255, 255, 0.1),                         // Default borders
+  'light': rgba(255, 255, 255, 0.2),                           // Light borders
+  'medium': map.get($colors-primary, 'mediam-background-color'), // Medium borders
+  'accent': map.get($colors-primary, 'accent-pink'),            // Accent borders
+  'transparent': transparent,                                    // Transparent borders
+);
+
+// UI Colors (legacy - keeping for compatibility)
 $colors-ui: (
   'background': map.get($colors-primary, 'lighter-background-color'),
   'background-light': map.get($colors-primary, 'dark-text-color'),
@@ -220,6 +250,12 @@ $colors-gradients: (
     @return map-get($colors-standard, $name);
   } @else if $category == 'common' {
     @return map-get($colors-common, $name);
+  } @else if $category == 'backgrounds' {
+    @return map-get($colors-backgrounds, $name);
+  } @else if $category == 'cards' {
+    @return map-get($colors-cards, $name);
+  } @else if $category == 'borders' {
+    @return map-get($colors-borders, $name);
   } @else {
     @error "Unknown color category: #{$category}";
     @return null;
@@ -241,6 +277,18 @@ $colors-gradients: (
 
 @function ui($name) {
   @return color('ui', $name);
+}
+
+@function backgrounds($name) {
+  @return color('backgrounds', $name);
+}
+
+@function cards($name) {
+  @return color('cards', $name);
+}
+
+@function borders($name) {
+  @return color('borders', $name);
 }
 
 // Theme color maps for light and dark modes

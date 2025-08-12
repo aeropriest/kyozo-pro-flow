@@ -12,7 +12,7 @@
 margin-left: 40px;
 // margin-right: 20px;
 margin-top: 80px;
-  background: map.get($colors-primary, 'lighter-background-color');
+  background: cards('background');
   padding: 10px;
   box-shadow: 0 8px 32px rgba(map.get($colors-primary, 'background-color'), 0.2);
   display: flex;
@@ -22,7 +22,7 @@ margin-top: 80px;
   overflow: hidden;
   border-radius: 30px;
   backdrop-filter: blur(10px);
-  border: 0.5px solid map.get($colors-primary, 'mediam-background-color');
+  border: 0.5px solid cards('border');
 //   background-color: green;
   z-index: 3; /* Highest z-index in the stack (above green and purple) */
 }

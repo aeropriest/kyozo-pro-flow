@@ -105,11 +105,11 @@ $ring-four-color: #B59962;       // Could be moved to colors.scss as 'toolkit-ri
 .socialMediaBubble {
   margin-top: 2.5rem;
   padding: 1.25rem 3rem;
-  background-color: rgba(38, 38, 38, 0.3);
+  background-color: backgrounds('glass');
   border-radius: 9999px;
   box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid borders('default');
 }
 
 .socialMediaText {

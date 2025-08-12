@@ -5,7 +5,7 @@
 export const colors = {
   // Primary colors
   background: '#000000',
-  backgroundLighter: '#181818',
+  backgroundLighter: '#0000ff',
   textDark: '#ff0000',
   
   // Standard colors
@@ -18,9 +18,28 @@ export const colors = {
   accentPurple: '#b19cd9',
   accentBlue: '#4169e1',
   
-  // UI colors
-  cardBackground: 'undefined',
-  inputBackground: 'undefined',
+  // Background colors
+  pageBackground: '#00ff00',
+  mainBackground: '#000000',
+  lighterBackground: '#0000ff',
+  mediumBackground: '#4d4d4d',
+  overlayBackground: 'rgba(0, 0, 0, 0.5)',
+  glassBackground: 'rgba(38, 38, 38, 0.3)',
+  inputBackground: 'rgba(255, 255, 255, 0.05)',
+  inputHoverBackground: 'rgba(255, 255, 255, 0.08)',
+  
+  // Card colors
+  cardBackground: '#0000ff',
+  cardBorder: '#4d4d4d',
+  cardShadow: 'rgba(0, 0, 0, 0.2)',
+  cardHover: 'rgba(255, 255, 255, 0.05)',
+  
+  // Border colors
+  borderDefault: 'rgba(255, 255, 255, 0.1)',
+  borderLight: 'rgba(255, 255, 255, 0.2)',
+  borderMedium: '#4d4d4d',
+  borderAccent: '#D3439A',
+  borderTransparent: 'transparent',
 } as const;
 
 export type ColorKey = keyof typeof colors;

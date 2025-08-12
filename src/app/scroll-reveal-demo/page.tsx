@@ -2,11 +2,12 @@
 
 import React from 'react';
 import { ScrollRevealText } from '@/components';
+import { colors } from '../../lib/colors.generated';
 
 export default function ScrollRevealDemo() {
   return (
     <div style={{ 
-      backgroundColor: '#121212', 
+      backgroundColor: colors.pageBackground, 
       color: '#ffffff',
       minHeight: '300vh' // Make page scrollable
     }}>

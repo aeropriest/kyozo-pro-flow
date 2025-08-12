@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect } from 'react';
 
 import styles from './Hero.module.scss';
@@ -34,7 +35,7 @@ const Hero: React.FC<HeroProps> = ({
               cx="440"
               cy="440"
               r="120"
-              stroke="#EEC87E"
+              stroke="var(--hero-accent-color)"
               strokeOpacity="1.0"
               strokeWidth="50"
             />
@@ -42,7 +43,7 @@ const Hero: React.FC<HeroProps> = ({
               cx="440"
               cy="440"
               r="220"
-              stroke="#EEC87E"
+              stroke="var(--hero-accent-color)"
               strokeOpacity="1.0"
               strokeWidth="50"
             />

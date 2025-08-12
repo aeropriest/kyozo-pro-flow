@@ -43,7 +43,7 @@
 
 .main {
   min-height: calc(100vh - 60px);
-  background-color: #121212; // Dark gray background from color palette
+  background-color: var(--bg-primary); // Theme-aware background
 }
 
 @media (max-width: map-get($breakpoints, 'mobile')) {

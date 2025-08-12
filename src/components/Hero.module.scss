@@ -13,6 +13,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  // CSS custom properties for SVG colors
+  --hero-accent-color: #{map.get($colors-primary, 'accent-yellow')};
 }
 
 .gradient {
@@ -95,7 +97,7 @@
   font-weight: 800;
   text-align: center;
   max-width: 1200px;
-  color: white;
+  color: map.get($colors-primary, 'dark-text-color');
   line-height: 1.1;
 }
 
@@ -112,10 +114,10 @@
 
 .letter {
   display: inline-block;
-  color: #444444; // Initial gray color
+  color: map.get($colors-primary, 'lighter-gray'); // Initial gray color
   transition: color 0.5s ease;
 
   &.loaded {
-    color: #ffffff; // Animate to white when loaded
+    color: map.get($colors-primary, 'dark-text-color'); // Animate to theme text color when loaded
   }
 }

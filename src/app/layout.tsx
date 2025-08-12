@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import { ClientThemeWrapper } from "@/components";
 import "../styles/main.scss";
 
 const geistSans = Geist({
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable}`}>
+        <ClientThemeWrapper />
         {children}
       </body>
     </html>

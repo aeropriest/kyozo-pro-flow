@@ -17,7 +17,7 @@
   border-radius: 30px;
   backdrop-filter: blur(10px);
   border: 0.5px solid map.get($colors-primary, 'mediam-background-color');
-  background-color: #121212; /* Adding solid background color */
+  background-color: var(--bg-primary); /* Theme-aware background color */
   z-index: 3; /* Ensure it's above background images */
   isolation: isolate; /* Create a new stacking context */
 }   

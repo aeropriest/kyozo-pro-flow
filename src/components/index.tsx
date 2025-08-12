@@ -21,6 +21,8 @@ export { default as Dialog } from './Dialog';
 export { default as Tab } from './Tab';
 export { default as Tabs } from './Tabs';
 export { default as CheckMarkIcon } from './CheckMarkIcon';
+export { default as ThemeToggle } from './ThemeToggle';
+export { default as ClientThemeWrapper } from './ClientThemeWrapper';
 
 // Layout components
 export { default as FixedFooter } from './FixedFooter';

@@ -1,10 +1,12 @@
-import { useEffect, useRef } from 'react';
+'use client';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import styles from './BackgroundImages.module.scss';
 
 const BackgroundImages = () => {
   const leftImageRef = useRef<HTMLDivElement>(null);
   const rightImageRef = useRef<HTMLDivElement>(null);
+  const [isLightTheme, setIsLightTheme] = useState(false);
 
   useEffect(() => {
     // Animation for left image
@@ -16,10 +18,31 @@ const BackgroundImages = () => {
     if (rightImageRef.current) {
       rightImageRef.current.classList.add(styles.animateRight);
     }
+    
+    // Check for theme changes
+    const checkTheme = () => {
+      const theme = document.documentElement.getAttribute('data-theme');
+      setIsLightTheme(theme === 'light');
+    };
+    
+    // Initial check
+    checkTheme();
+    
+    // Listen for theme changes
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme']
+    });
+    
+    return () => observer.disconnect();
   }, []);
 
   return (
     <div className={styles.backgroundContainer}>
+      {/* Tiled light background for light theme */}
+      <div className={`${styles.tiledBackground} ${isLightTheme ? styles.visible : ''}`} />
+      
       <div ref={leftImageRef} className={styles.leftImage}>
         <Image 
           src="/left-top.png" 

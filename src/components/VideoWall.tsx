@@ -1,3 +1,4 @@
+'use client'
 import React, { useMemo, useEffect } from 'react';
 import styles from './VideoWall.module.scss';
 

@@ -7,6 +7,25 @@
   margin-top: -15vh; /* Pull up to overlap with hero section */
 }
 
+.tiledBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('/page-bg-light.png');
+  background-repeat: no-repeat;
+  background-size: cover; /* Cover entire viewport for seamless appearance */
+  background-position: center;
+  z-index: -2; /* Behind all other content */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  
+  &.visible {
+    opacity: 1;
+  }
+}
+
 .leftImage, .rightImage {
   position: absolute;
   height: 80vh; /* Taller to span across sections */

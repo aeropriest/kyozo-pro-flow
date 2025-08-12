@@ -16,6 +16,7 @@ function exportColorsToTypeScript() {
 :export {
   // Primary colors
   darkTextColor: #{map.get(colors.$colors-primary, 'dark-text-color')};
+  secondaryTextColor: #{map.get(colors.$colors-primary, 'secondary-text-color')};
   backgroundColor: #{map.get(colors.$colors-primary, 'background-color')};
   backgroundLighter: #{map.get(colors.$colors-primary, 'lighter-background-color')};
   
@@ -92,6 +93,7 @@ export const colors = {
   background: '${colorEntries.backgroundColor}',
   backgroundLighter: '${colorEntries.backgroundLighter}',
   textDark: '${colorEntries.darkTextColor}',
+  textSecondary: '${colorEntries.secondaryTextColor}',
   
   // Standard colors
   white: '${colorEntries.white}',

@@ -2,7 +2,16 @@
 
 import React, { useMemo } from 'react';
 import styles from './BubbleMarquee.module.scss';
-import { bubbleRowColors } from '@/lib/colors';
+import { colors } from '../lib/colors.generated';
+
+// Bubble row colors using centralized color system
+const bubbleRowColors = {
+  music: colors.textDark,        // Using centralized text color
+  artMovements: colors.textDark, // Using centralized text color
+  crafts: colors.textDark,       // Using centralized text color
+  fashion: colors.textDark,      // Using centralized text color
+  performance: colors.textDark,  // Using centralized text color
+};
 
 interface BubbleItem {
   text: string;

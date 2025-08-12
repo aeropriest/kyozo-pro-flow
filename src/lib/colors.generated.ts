@@ -7,6 +7,7 @@ export const colors = {
   background: '#000000',
   backgroundLighter: '#0000ff',
   textDark: '#ff0000',
+  textSecondary: '#006400',
   
   // Standard colors
   white: '#ff0000',

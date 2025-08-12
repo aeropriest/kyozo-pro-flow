@@ -106,7 +106,7 @@ const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
                 
                 const letterStyle: CSSProperties = {
                   display: 'inline-block',
-                  color: isRevealed ? colors.textDark : 'var(--color-gray)', // Using centralized color system - primary('dark-text-color')
+                  color: isRevealed ? colors.textDark : colors.textSecondary, // Using centralized color system - secondary text
                   transition: 'color 0.2s ease',
                 };
                 

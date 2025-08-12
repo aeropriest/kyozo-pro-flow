@@ -112,7 +112,7 @@
 
 .letter {
   display: inline-block;
-  color: #444444; // Initial gray color
+  color: map.get($colors-primary, 'secondary-text-color'); // Using centralized dark green
   transition: color 0.5s ease;
 
   &.loaded {

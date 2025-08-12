@@ -52,7 +52,7 @@ const AnimeText: React.FC<AnimeTextProps> = ({ text, fontSize = '7rem', fontWeig
             {word.split('').map((letter, letterIndex) => {
               const letterStyle: CSSProperties = {
                 display: 'inline-block',
-                color: 'var(--color-gray)', // Initial gray color
+                color: colors.textSecondary, // Using centralized secondary text color
                 transition: 'color 0.5s ease',
                 transitionDelay: `${(wordIndex * word.length + letterIndex) * 0.05}s`,
                 ...(isLoaded && { color: colors.textDark }) // Using centralized color system - primary('dark-text-color')

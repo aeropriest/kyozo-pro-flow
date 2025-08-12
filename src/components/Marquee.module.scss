@@ -49,8 +49,14 @@
   flex-shrink: 0;
   white-space: nowrap;
   border-radius: 15px;
-  background-color: #1a1a1a;
+  background-color: cards('background');
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 4px 8px rgba(0, 0, 0, 0.2);
+  
+  // Style the check circle icons
+  svg {
+    color: map.get($colors-primary, 'dark-text-color');
+    margin-right: 0.5rem;
+  }
 }
 
 .marquee {

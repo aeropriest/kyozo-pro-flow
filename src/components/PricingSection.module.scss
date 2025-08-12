@@ -58,7 +58,7 @@
 
     p {
       font-size: 1.25rem; // text-xl
-      color: map.get($colors-ui, 'foreground-light'); // text-gray-400
+      color: map.get($colors-primary, 'secondary-text-color'); // Using centralized dark green
       max-width: 42rem; // max-w-2xl
       margin: 0 auto;
     }

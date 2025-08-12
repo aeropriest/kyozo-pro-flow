@@ -18,8 +18,8 @@ $ring-four-color: #B59962; /* innermost ring */
   justify-content: center;
   padding: 8rem 1rem;
   text-align: center;
-  overflow: hidden; // Ensure circles don't cause horizontal scrolling
-  z-index: 2; // Lower z-index so circles can be visible
+  overflow: visible; // Allow circles to overflow and be visible
+  z-index: auto; // Let normal stacking context apply
   // background-color: #8b5cf6;
 }
 
@@ -33,7 +33,7 @@ $ring-four-color: #B59962; /* innermost ring */
   align-items: center;
   top: -20rem;
   left: -18rem;
-  z-index: -1; // Place behind content but visible
+  z-index: 1; // Ensure circles appear above the sliding cards container
   
   /* Center circle with a radial gradient */
   &::before {

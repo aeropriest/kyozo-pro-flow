@@ -54,8 +54,11 @@
   
   // Style the check circle icons
   svg {
-    color: map.get($colors-primary, 'dark-text-color');
     margin-right: 0.5rem;
+    
+    @include themify($themes) {
+      color: themed('text');
+    }
   }
 }
 
@@ -89,13 +92,16 @@
 .marqueeText {
   font-size: 1.5rem;
   font-weight: 600;
-  color: map.get($colors-primary, 'dark-text-color');
   background: linear-gradient(90deg, map.get($colors-primary, 'accent-purple'), map.get($colors-primary, 'accent-blue'));
   -webkit-background-clip: text;
   background-clip: text;
   // Removed conflicting hardcoded color: white declaration
   transition: all 0.3s ease;
   padding-left: 0.75rem;
+  
+  @include themify($themes) {
+    color: themed('text');
+  }
   
   &:hover {
     transform: scale(1.05);

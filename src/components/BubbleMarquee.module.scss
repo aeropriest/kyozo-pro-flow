@@ -32,16 +32,23 @@
   border-radius: 6rem;
   font-weight: 400;
   font-size: 2.5rem; /* Reset font size for bubble text */
-  color: map.get($colors-primary, 'dark-text-color');
   background-color: transparent;
   border: 1.5px solid var(--row-color, map.get($colors-primary, 'dark-text-color'));
   transition: background-color 0.3s ease;
   cursor: default;
   margin-top: 0;
   margin-bottom: 0;
+  
+  @include themify($themes) {
+    color: themed('text');
+  }
+  
   &:hover {
     background-color: var(--row-color, map.get($colors-primary, 'dark-text-color'));
-    color: map.get($colors-primary, 'background-color');
+    
+    @include themify($themes) {
+      color: themed('page-bg');
+    }
   }
 }
 

@@ -4,10 +4,10 @@
 
 export const colors = {
   // Primary colors
-  background: '#000000',
-  backgroundLighter: '#0000ff',
-  textDark: '#ff0000',
-  textSecondary: '#006400',
+  background: '#111111',
+  backgroundLighter: '#181818',
+  textDark: '#ffffff',
+  textSecondary: '#313131',
   
   // Standard colors
   white: '#ff0000',
@@ -20,25 +20,25 @@ export const colors = {
   accentBlue: '#4169e1',
   
   // Background colors
-  pageBackground: '#00ff00',
-  mainBackground: '#000000',
-  lighterBackground: '#0000ff',
-  mediumBackground: '#4d4d4d',
+  pageBackground: '#111111',
+  mainBackground: '#111111',
+  lighterBackground: '#181818',
+  mediumBackground: '#313131',
   overlayBackground: 'rgba(0, 0, 0, 0.5)',
   glassBackground: 'rgba(38, 38, 38, 0.3)',
   inputBackground: 'rgba(255, 255, 255, 0.05)',
   inputHoverBackground: 'rgba(255, 255, 255, 0.08)',
   
   // Card colors
-  cardBackground: '#0000ff',
-  cardBorder: '#4d4d4d',
+  cardBackground: '#181818',
+  cardBorder: '#313131',
   cardShadow: 'rgba(0, 0, 0, 0.2)',
   cardHover: 'rgba(255, 255, 255, 0.05)',
   
   // Border colors
   borderDefault: 'rgba(255, 255, 255, 0.1)',
   borderLight: 'rgba(255, 255, 255, 0.2)',
-  borderMedium: '#4d4d4d',
+  borderMedium: '#313131',
   borderAccent: '#D3439A',
   borderTransparent: 'transparent',
 } as const;

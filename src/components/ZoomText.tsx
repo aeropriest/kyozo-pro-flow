@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, CSSProperties } from 'react';
-import { colors } from '../lib/colors';
+import { colors } from '../lib/colors.generated';
 import { useInView } from 'react-intersection-observer';
 
 interface ZoomTextProps {

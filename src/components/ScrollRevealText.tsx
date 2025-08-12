@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, CSSProperties } from 'react';
-import { colors } from '../lib/colors';
+import { colors } from '../lib/colors.generated';
 
 interface ScrollRevealTextProps {
   text: string;

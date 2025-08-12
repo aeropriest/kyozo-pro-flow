@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Button from './Button';
 import ZoomText from './ZoomText';
-import { colors } from '../lib/colors';
+import { colors } from '../lib/colors.generated';
 
 interface BottomTextProps {
   text?: string;

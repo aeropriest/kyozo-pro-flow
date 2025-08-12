@@ -101,8 +101,13 @@
 
 .word {
   display: inline-block;
-  margin: 0 0.2rem; // Adjusted margin to match AnimeText
+  margin: 0 0.5rem; // Increased margin for better spacing
   white-space: nowrap;
+}
+
+.wordSpace {
+  display: inline-block;
+  width: 0.3rem; // Additional space between words
 }
 
 .letter {

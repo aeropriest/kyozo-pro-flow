@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Button from './Button';
+import ZoomText from './ZoomText';
 
 interface BottomTextProps {
   text?: string;
@@ -85,39 +86,16 @@ const BottomText: React.FC<BottomTextProps> = ({
         </div>
       </div>
       
-      {/* Main text */}
-      <h1 style={{
-        fontSize: fontSize,
-        fontWeight: fontWeight,
-        textAlign: 'center',
-        maxWidth: '1000px',
-        padding: '0 2rem',
-        margin: '0 0 2rem 0',
-        lineHeight: '1.1',
-        letterSpacing: '-0.02em',
-        zIndex: 2
-      }}>
-        {words.map((word, wordIndex) => (
-          <span key={wordIndex} style={{ display: 'inline-block', margin: '0 0.2rem' }}>
-            {word.split('').map((letter, letterIndex) => {
-              return (
-                <span
-                  key={`${wordIndex}-${letterIndex}`}
-                  style={{
-                    display: 'inline-block',
-                    color: 'var(--color-gray)',
-                    transition: 'color 0.5s ease',
-                    transitionDelay: `${(wordIndex * 0.1 + letterIndex * 0.05)}s`,
-                    ...(isLoaded && { color: 'var(--color-white)' })
-                  }}
-                >
-                  {letter}
-                </span>
-              );
-            })}
-          </span>
-        ))}
-      </h1>
+      {/* Main text with zoom effect */}
+      <div style={{ margin: '0 0 2rem 0', zIndex: 2 }}>
+        <ZoomText 
+          text={text}
+          fontSize={fontSize}
+          fontWeight={fontWeight}
+          duration="500ms"
+          delay="300ms"
+        />
+      </div>
       
       {/* Button */}
       <div style={{

@@ -2,9 +2,14 @@ import React, { useState, useEffect } from 'react';
 
 import styles from './Hero.module.scss';
 
-const Hero = () => {
+interface HeroProps {
+  text?: string;
+}
+
+const Hero: React.FC<HeroProps> = ({ 
+  text = 'Discover Your Creative Universe'
+}) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const text = 'Discover Your Creative Universe';
   const words = text.split(' ');
 
   useEffect(() => {
@@ -57,6 +62,8 @@ const Hero = () => {
                   {letter === ' ' ? '\u00A0' : letter}
                 </span>
               ))}
+              {/* Add a space after each word except the last one */}
+              {wordIndex < words.length - 1 && <span className={styles.wordSpace}></span>}
             </span>
           ))}
         </h1>

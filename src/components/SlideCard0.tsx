@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
-import styles from './SlideCard0.module.scss';
+// import styles from './SlideCard0.module.scss';
+import styles from './SlideCardStyle.module.scss';
 import Button from './Button';
 import Image from 'next/image';
 import VideoWall from '@/components/VideoWall'

@@ -1,37 +1,47 @@
+// This consolidated SCSS code simplifies the styles for your cards,
+// ensuring a consistent appearance across all instances by using a single
+// set of class definitions.
+
 @use '../styles/colors' as *;
 @use 'sass:map';
 
+// Styles for the main card container.
 .cardContainer {
-  width: calc(100% - 80px); /* Account for left and right margins */
-  height: calc(100vh - 80px); /* Account for top and bottom margins */
-  margin: 40px 40px;
+  width: calc(100% - 60px); /* Account for left and right margins */
+  height: calc(100vh - 160px); /* Account for top and bottom margins */
+//   margin: 20px 60px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 80px;
   background: map.get($colors-primary, 'lighter-background-color');
   padding: 10px;
   box-shadow: 0 8px 32px rgba(map.get($colors-primary, 'background-color'), 0.2);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Top align all content */  // gap: 30px;
+  justify-content: flex-start; /* Top align all content */
   position: relative;
   overflow: hidden;
   border-radius: 30px;
   backdrop-filter: blur(10px);
-  border: 0.5px solid map.get($colors-primary, 'mediam-background-color');  
-}   
+  border: 0.5px solid map.get($colors-primary, 'mediam-background-color');
+//   background-color: red;
+  z-index: 3; /* Highest z-index in the stack (above green and purple) */
+}
 
+// Styles for the content section inside the card.
 .cardContent {
   display: flex;
   flex-direction: row;
-  // gap: 40px;
-  align-items: stretch; /* Make items stretch to full height */
+  align-items: flex-start; /* Top align items horizontally */
   justify-content: space-between;
   margin-top: 0; /* Don't push content to bottom */
-  height: 100%; /* Take full height of parent */
-  
+
   @media (max-width: 768px) {
     flex-direction: column-reverse;
   }
 }
 
+// Styles for the left content pane.
 .leftContent {
   width: 50%;
   display: flex;
@@ -39,45 +49,42 @@
   text-align: left;
   gap: 10px;
   padding: 30px 0 0 30px; /* Reduced top padding */
-  // background-color: map.get($colors-primary, 'accent-purple'); /* Removed background color */
   margin-bottom: 20px;
   justify-content: flex-start; /* Top align content */
   height: 100%; /* Take full height of parent */
 }
 
+// Styles for the right content pane.
 .rightContent {
-  width: 60%; /* Take remaining 60% of the card */
+  width: 60%;
   display: flex;
-  justify-content: flex-start; /* Left align content */
-  align-items: stretch; /* Make children stretch to full height */
+  justify-content: center;
+  align-items: center;
   position: relative;
-  overflow: visible;
-  height: 100%; /* Take full height of parent */  
-  // border: 0.5px solid map.get($colors-primary, 'accent-purple'); /* Removed border */
-  padding: 0; /* Remove padding to allow full-height content */
+  overflow: hidden;
 }
 
+// Styles for the category label text.
 .categoryLabel {
   font-size: 1rem;
   font-weight: 300;
-
-
   letter-spacing: 0.1em;
   color: map.get($colors-primary, 'lighter-gray');
   margin: 0 0 8px 0;
 }
 
+// Styles for the main card title.
 .cardTitle {
   font-size: 4.8rem;
   font-weight: 700;
   margin: 0;
-  // background: linear-gradient(90deg, map.get($colors-primary, 'dark-text-color'), map.get($colors-primary, 'accent-light-purple'));
   -webkit-background-clip: text;
   background-clip: text;
   color: map.get($colors-primary, 'dark-text-color');
   line-height: 1.0; /* Reduced line height to bring lines closer together */
 }
 
+// Styles for the card description text.
 .cardDescription {
   font-size: 1rem;
   line-height: 1.6;
@@ -85,6 +92,5 @@
   margin: 0;
   padding-top: 30px;
   padding-bottom: 30px;
-  // padding-right: 80px
   width: 65%;
 }

@@ -2,9 +2,10 @@
 @use 'sass:map';
 
 .cardContainer {
-  width: calc(100% - 200px); /* Account for left and right margins */
+  width: calc(100% - 40px); /* Account for left and right margins */
   height: calc(100vh - 160px); /* Account for top and bottom margins */
-  margin: 20px 100px;
+  margin-top: -20px;
+  // margin: -20px 40px;
   background: map.get($colors-primary, 'lighter-background-color');
   padding: 10px;
   box-shadow: 0 8px 32px rgba(map.get($colors-primary, 'background-color'), 0.2);

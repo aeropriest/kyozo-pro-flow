@@ -292,31 +292,41 @@ $colors-gradients: (
   @return color('borders', $name);
 }
 
-// Theme color maps for light and dark modes
-$theme-light: (
-  'background': map-get($colors-primary, 'dark-text-color'),
-  'foreground': map-get($colors-primary, 'lighter-background-color'),
-  'border': rgba(0, 0, 0, 0.1),
-  'muted': rgba(0, 0, 0, 0.6),
-  'accent': map-get($colors-primary, 'accent-blue'),
+// SCSS Mixin Theming System (inspired by David Xu's approach)
+// Define all themes in a single map
+$themes: (
+  dark: (
+    page-bg: #{map.get($colors-primary, 'background-color')},
+    card-bg: #{map.get($colors-primary, 'lighter-background-color')},
+    text: #{map.get($colors-primary, 'dark-text-color')},
+    secondary-text: #{map.get($colors-primary, 'secondary-text-color')},
+    border: #{map.get($colors-primary, 'mediam-background-color')},
+    accent: #{map.get($colors-primary, 'accent-pink')},
+  ),
+  light: (
+    page-bg: #ffffff,
+    card-bg: #f8f9fa,
+    text: #1a1a1a,
+    secondary-text: #6c757d,
+    border: #e9ecef,
+    accent: #{map.get($colors-primary, 'accent-pink')},
+  ),
 );
 
-$theme-dark: (
-  'background': map-get($colors-primary, 'lighter-background-color'),
-  'foreground': map-get($colors-primary, 'dark-text-color'),
-  'border': rgba(255, 255, 255, 0.1),
-  'muted': rgba(255, 255, 255, 0.6),
-  'accent': map-get($colors-primary, 'accent-pink'),
-);
+// Global theme map variable (will be set by the mixin)
+$theme-map: null !global;
 
-// Helper function to get theme color
-@function theme-color($theme, $key) {
-  @if $theme == 'light' {
-    @return map-get($theme-light, $key);
-  } @else if $theme == 'dark' {
-    @return map-get($theme-dark, $key);
-  } @else {
-    @error "Unknown theme: #{$theme}";
-    @return null;
+// Themify mixin - generates theme-specific CSS classes
+@mixin themify($themes) {
+  @each $name, $values in $themes {
+    :global(.#{$name}-theme) & {
+      $theme-map: $values !global;
+      @content;
+    }
   }
+}
+
+// Function to get themed values
+@function themed($key) {
+  @return map.get($theme-map, $key);
 }

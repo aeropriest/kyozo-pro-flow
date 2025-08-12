@@ -8,11 +8,14 @@
   overflow: hidden;
   padding: 100px 20px;
   text-align: center;
-  color: map.get($colors-primary, 'dark-text-color');
-  background-color: map.get($colors-primary, 'pagebg');
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  @include themify($themes) {
+    color: themed('text');
+    background-color: themed('page-bg');
+  }
 }
 
 .gradient {
@@ -95,8 +98,11 @@
   font-weight: 800;
   text-align: center;
   max-width: 1200px;
-  color: map.get($colors-primary, 'dark-text-color');
   line-height: 1.1;
+  
+  @include themify($themes) {
+    color: themed('text');
+  }
 }
 
 .word {
@@ -112,10 +118,15 @@
 
 .letter {
   display: inline-block;
-  color: map.get($colors-primary, 'secondary-text-color'); // Using centralized dark green
   transition: color 0.5s ease;
+  
+  @include themify($themes) {
+    color: themed('secondary-text');
+  }
 
   &.loaded {
-    color: map.get($colors-primary, 'dark-text-color'); // Animate to centralized text color when loaded
+    @include themify($themes) {
+      color: themed('text'); // Animate to centralized text color when loaded
+    }
   }
 }

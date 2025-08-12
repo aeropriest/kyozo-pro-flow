@@ -1,11 +1,15 @@
 @use './variables' as *;
+@use './colors' as *;
 
 .mainContainer {
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: backgrounds('page');
+  
+  @include themify($themes) {
+    background-color: themed('page-bg');
+  }
 }
 
 .heroSection {

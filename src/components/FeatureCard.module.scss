@@ -6,9 +6,7 @@
   height: calc(100vh - 160px); /* Account for top and bottom margins */
   margin-top: -20px;
   // margin: -20px 40px;
-  background: map.get($colors-primary, 'lighter-background-color');
   padding: 10px;
-  box-shadow: 0 8px 32px rgba(map.get($colors-primary, 'background-color'), 0.2);
   display: flex;
   flex-direction: column;
   justify-content: flex-start; /* Top align all content */  // gap: 30px;
@@ -16,10 +14,14 @@
   overflow: hidden;
   border-radius: 30px;
   backdrop-filter: blur(10px);
-  border: 0.5px solid map.get($colors-primary, 'mediam-background-color');
-  background-color: cards('background'); /* Using centralized card background */
   z-index: 3; /* Ensure it's above background images */
   isolation: isolate; /* Create a new stacking context */
+  
+  @include themify($themes) {
+    background-color: themed('card-bg');
+    border: 0.5px solid themed('border');
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
 }   
 
 .cardContent {
@@ -62,19 +64,25 @@
   // background: linear-gradient(90deg, map.get($colors-primary, 'dark-text-color'), map.get($colors-primary, 'accent-light-purple'));
   -webkit-background-clip: text;
   background-clip: text;
-  color: map.get($colors-primary, 'dark-text-color');
   line-height: 1.0; /* Reduced line height to bring lines closer together */
+  
+  @include themify($themes) {
+    color: themed('text');
+  }
 }
 
 .cardDescription {
   font-size: 1.2rem;
   line-height: 1.6;
-  color: map.get($colors-primary, 'dark-text-color');
   margin: 0;
   padding-top: 30px;
   padding-bottom: 30px;
   // padding-right: 80px
   // width: 65%;
+  
+  @include themify($themes) {
+    color: themed('text');
+  }
 }
 
 .phoneContainer {

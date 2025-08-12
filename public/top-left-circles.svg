@@ -1,0 +1,18 @@
+<svg width="600" height="600" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Center gradient circle -->
+  <circle cx="300" cy="300" r="80" fill="url(#centerGradient)"/>
+  
+  <!-- Concentric circles -->
+  <circle cx="300" cy="300" r="120" stroke="#E0B878" stroke-width="20" fill="none"/>
+  <circle cx="300" cy="300" r="180" stroke="#A78BCA" stroke-width="20" fill="none"/>
+  <circle cx="300" cy="300" r="240" stroke="#D38B8B" stroke-width="20" fill="none"/>
+  <circle cx="300" cy="300" r="300" stroke="#7EBEB2" stroke-width="20" fill="none"/>
+  
+  <!-- Gradient definitions -->
+  <defs>
+    <radialGradient id="centerGradient" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(300 300) rotate(90) scale(80)">
+      <stop offset="0" stop-color="#A78BCA"/>
+      <stop offset="1" stop-color="#7EBEB2"/>
+    </radialGradient>
+  </defs>
+</svg>

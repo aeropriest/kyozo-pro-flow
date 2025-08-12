@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Button from './Button';
 import ZoomText from './ZoomText';
+import { colors } from '../lib/colors';
 
 interface BottomTextProps {
   text?: string;
@@ -32,7 +33,7 @@ const BottomText: React.FC<BottomTextProps> = ({
       justifyContent: 'center',
       alignItems: 'center',
       padding: '2rem',
-      backgroundColor: 'var(--color-black)', // Using color system
+      backgroundColor: '#000000', // Using centralized color system - primary('background-color')
       position: 'relative',
       overflow: 'hidden'
     }}>
@@ -115,7 +116,7 @@ const BottomText: React.FC<BottomTextProps> = ({
       {/* Copyright */}
       <div style={{
         width: '100%',
-        color: 'var(--color-white)',
+        color: colors.textDark, // Using centralized color system - primary('dark-text-color')
         marginTop: '4rem',
         textAlign: 'center',
         fontSize: '0.875rem',

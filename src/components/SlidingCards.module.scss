@@ -61,7 +61,7 @@
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: white;
+  color: map.get($colors-primary, 'dark-text-color');
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   
   @media (min-width: 768px) {

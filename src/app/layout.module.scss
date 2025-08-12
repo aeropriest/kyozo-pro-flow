@@ -1,4 +1,5 @@
 @import '../styles/variables';
+@use '../styles/colors' as colors;
 
 .nav {
   display: flex;
@@ -43,7 +44,7 @@
 
 .main {
   min-height: calc(100vh - 60px);
-  background-color: #121212; // Dark gray background from color palette
+  background-color: colors.primary('lighter-background-color'); // Dark gray background from color palette
 }
 
 @media (max-width: map-get($breakpoints, 'mobile')) {

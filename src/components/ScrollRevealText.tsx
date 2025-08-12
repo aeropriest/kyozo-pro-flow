@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, CSSProperties } from 'react';
+import { colors } from '../lib/colors';
 
 interface ScrollRevealTextProps {
   text: string;
@@ -105,7 +106,7 @@ const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
                 
                 const letterStyle: CSSProperties = {
                   display: 'inline-block',
-                  color: isRevealed ? 'var(--color-white)' : 'var(--color-gray)', // White when revealed, gray when hidden
+                  color: isRevealed ? colors.textDark : 'var(--color-gray)', // Using centralized color system - primary('dark-text-color')
                   transition: 'color 0.2s ease',
                 };
                 

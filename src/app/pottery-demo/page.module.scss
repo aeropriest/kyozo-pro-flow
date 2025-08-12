@@ -2,7 +2,7 @@
   min-height: 100vh;
   padding: 2rem;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  color: map.get($colors-primary, 'dark-text-color');
 }
 
 .header {

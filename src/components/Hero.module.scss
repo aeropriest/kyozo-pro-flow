@@ -95,7 +95,7 @@
   font-weight: 800;
   text-align: center;
   max-width: 1200px;
-  color: white;
+  color: map.get($colors-primary, 'dark-text-color');
   line-height: 1.1;
 }
 
@@ -116,6 +116,6 @@
   transition: color 0.5s ease;
 
   &.loaded {
-    color: #ffffff; // Animate to white when loaded
+    color: map.get($colors-primary, 'dark-text-color'); // Animate to centralized text color when loaded
   }
 }

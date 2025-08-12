@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, CSSProperties } from 'react';
+import { colors } from '../lib/colors';
 import { useInView } from 'react-intersection-observer';
 
 interface ZoomTextProps {
@@ -72,7 +73,7 @@ const ZoomText: React.FC<ZoomTextProps> = ({
                 key={`${wordIndex}-${letterIndex}`}
                 style={{
                   display: 'inline-block',
-                  color: 'var(--color-white)'
+                  color: colors.textDark // Using centralized color system - primary('dark-text-color')
                 }}
               >
                 {letter}

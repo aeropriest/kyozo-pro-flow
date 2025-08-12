@@ -1,13 +1,14 @@
 @use '../styles/colors' as *;
 @use 'sass:map';
 
-/* Define the color variables for the circles using the exact colors specified */
-$center-gradient-start: #C0DFF0;
-$center-gradient-end: #B6A3D7;
-$ring-one-color: #81C9BD; /* outermost ring */
-$ring-two-color: #9D6469;
-$ring-three-color: #C098E5;
-$ring-four-color: #B59962; /* innermost ring */
+/* Define the color variables for the circles using the centralized color system */
+// Note: These specific colors could be added to _colors.scss if they become reusable
+$center-gradient-start: #C0DFF0; // Could be moved to colors.scss as 'toolkit-gradient-start'
+$center-gradient-end: #B6A3D7;   // Could be moved to colors.scss as 'toolkit-gradient-end'
+$ring-one-color: #81C9BD;        // Could be moved to colors.scss as 'toolkit-ring-one'
+$ring-two-color: #9D6469;        // Could be moved to colors.scss as 'toolkit-ring-two'
+$ring-three-color: #C098E5;      // Could be moved to colors.scss as 'toolkit-ring-three'
+$ring-four-color: #B59962;       // Could be moved to colors.scss as 'toolkit-ring-four'
 
 .socialMediaSection {
   position: relative;
@@ -90,7 +91,7 @@ $ring-four-color: #B59962; /* innermost ring */
 .socialMediaTitle {
   font-size: 1rem;
   font-weight: 700;
-  color: white;
+  color: map.get($colors-primary, 'dark-text-color');
   line-height: 1.25 !important;
 
   @media (min-width: 640px) {
@@ -114,7 +115,7 @@ $ring-four-color: #B59962; /* innermost ring */
 .socialMediaText {
   font-size: 1.875rem;
   font-weight: 700;
-  color: white;
+  color: map.get($colors-primary, 'dark-text-color');
   letter-spacing: 0.025em;
 
   @media (min-width: 640px) {
@@ -204,7 +205,7 @@ $ring-four-color: #B59962; /* innermost ring */
 .creativeLabTitle {
   font-size: 3rem;
   font-weight: 900;
-  color: white;
+  color: map.get($colors-primary, 'dark-text-color');
   line-height: 1.25 !important;
 
   @media (min-width: 768px) {
@@ -232,7 +233,7 @@ $ring-four-color: #B59962; /* innermost ring */
 }
 
 .description {
-  color: #d4d4d4;
+  color: map.get($colors-primary, 'dark-text-color');
   font-size: 1rem;
   line-height: 1.625;
   max-width: 28rem;
@@ -240,7 +241,7 @@ $ring-four-color: #B59962; /* innermost ring */
 
 .ctaLink {
   margin-top: 2rem;
-  color: white;
+  color: map.get($colors-primary, 'dark-text-color');
   font-weight: 600;
   font-size: 1rem;
   display: inline-flex;

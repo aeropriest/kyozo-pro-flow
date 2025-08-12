@@ -8,7 +8,7 @@
 $colors-primary: (
   'pagebg': #111111,
   'background-color': #000000,
-  'dark-text-color': #ffffff,
+  'dark-text-color': #ff0000, // TESTING: Final red test for complete centralized control
   'lighter-background-color': #181818,  // Background color
   'mediam-background-color': #4d4d4d,      // Medium gray
   'light-gray': #1B1B1B,
@@ -32,6 +32,35 @@ $colors-primary: (
   'warning': #ff9800, // Warning orange
   'error': #f44336,   // Error red
   'info': #2196f3,    // Info blue
+);
+
+// Standard Colors (from _variables.scss)
+$colors-standard: (
+  'white': #ff0000, // TESTING: Final red test for complete centralized control
+  'gray-100': #f3f4f6,
+  'gray-300': #d1d5db,
+  'gray-800': #1f2937,
+  'gray-900': #111827,
+  'blue-500': #3b82f6,
+  'indigo-100': #e0e7ff,
+  'indigo-600': #4f46e5,
+  'green-500': #10b981,
+  'teal-100': #ccfbf1,
+  'teal-600': #0d9488,
+  'purple-500': #8b5cf6,
+  'violet-100': #ede9fe,
+  'violet-600': #7c3aed,
+  'rose-500': #f43f5e,
+  'red-100': #fee2e2,
+  'red-600': #dc2626,
+);
+
+// Common hardcoded colors found in codebase
+$colors-common: (
+  'black': #000000,
+  'white': #ff0000, // TESTING: Final red test for complete centralized control
+  'transparent': transparent,
+  'current': currentColor,
 );
 
 // UI Colors
@@ -187,10 +216,31 @@ $colors-gradients: (
     @return map-get($colors-semantic, $name);
   } @else if $category == 'gradient' {
     @return map-get($colors-gradients, $name);
+  } @else if $category == 'standard' {
+    @return map-get($colors-standard, $name);
+  } @else if $category == 'common' {
+    @return map-get($colors-common, $name);
   } @else {
     @error "Unknown color category: #{$category}";
     @return null;
   }
+}
+
+// Convenience functions for commonly used colors
+@function primary($name) {
+  @return color('primary', $name);
+}
+
+@function standard($name) {
+  @return color('standard', $name);
+}
+
+@function common($name) {
+  @return color('common', $name);
+}
+
+@function ui($name) {
+  @return color('ui', $name);
 }
 
 // Theme color maps for light and dark modes

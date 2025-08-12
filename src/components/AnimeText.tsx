@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, CSSProperties } from 'react';
+import { colors } from '../lib/colors';
 import { useInView } from 'react-intersection-observer';
 
 interface AnimeTextProps {
@@ -54,7 +55,7 @@ const AnimeText: React.FC<AnimeTextProps> = ({ text, fontSize = '7rem', fontWeig
                 color: 'var(--color-gray)', // Initial gray color
                 transition: 'color 0.5s ease',
                 transitionDelay: `${(wordIndex * word.length + letterIndex) * 0.05}s`,
-                ...(isLoaded && { color: 'var(--color-white)' }) // Animate to white when loaded
+                ...(isLoaded && { color: colors.textDark }) // Using centralized color system - primary('dark-text-color')
               };
               
               return (

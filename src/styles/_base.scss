@@ -1,5 +1,6 @@
 // Base styles
 @use 'variables' as *;
+@use 'colors' as colors;
 
 * {
   margin: 0;
@@ -11,7 +12,7 @@ body {
   font-family: $font-family-sans;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #111111;
+  background-color: colors.primary('pagebg');
   color: $color-white;
   min-height: 100vh;
   margin: 0;

@@ -17,7 +17,7 @@ const Toolkit: React.FC<ToolkitProps> = ({
   return (
     <>
       <section className={styles.socialMediaSection}>
-        <h1 className={styles.socialMediaTitle}>We are not</h1>
+        <div className={styles.socialMediaTitle}>We are not</div>
         <div className={styles.socialMediaBubble}>
           <span className={styles.socialMediaText}>Social Media</span>
         </div>

@@ -11,8 +11,8 @@
 }
 
 .socialMediaTitle {
-  font-size: 4.5rem;
-  font-weight: 900;
+  font-size: 1rem;
+  font-weight: 700;
   color: white;
   line-height: 1.25 !important;
 
@@ -50,29 +50,78 @@
 
 .creativeLabSection {
   position: relative;
-  width: 100%;
-  max-width: 72rem;
-  margin: 0 auto;
+  width: 100vw;      // full viewport width
+  max-width: none;   // remove max-width constraint
+  margin: 0;         // remove auto centering margin
   padding: 6rem 1.5rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;  // adjust size to fit design
+    height: 200px;
+    background-image: url('/bottom-right.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+    z-index: 1;
+  }
 
   @media (min-width: 640px) {
     padding: 6rem 2rem;
   }
 }
 
+
 .gridContainer {
   display: grid;
   grid-template-columns: 1fr;
   gap: 3rem 4rem;
-  align-items: center;
-
+  align-items: end;  // align items to the bottom
+  justify-content: flex-end;
+  position: relative; // needed for absolute background image
+  
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 .leftColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.rightColumn {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;  // push content to bottom
+  height: 100%;
+
+  .decorativeShape {
+    background-color: green;
+    position: absolute;
+    top: 50%;
+    left: 250%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 90deg at 50% 50%,
+      #3b82f6 0%,
+      #8b5cf6 50%,
+      #3b82f6 100%
+    );
+    filter: blur(100px);
+    opacity: 0.15;
+    z-index: -1;
+    pointer-events: none;
+  }
 }
 
 .creativeLabTitle {
@@ -102,34 +151,6 @@
   @media (min-width: 768px) {
     right: 25%;
     transform: translateX(0);
-  }
-}
-
-.rightColumn {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-
-  .decorativeShape {
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    background: conic-gradient(
-      from 90deg at 50% 50%,
-      #3b82f6 0%,
-      #8b5cf6 50%,
-      #3b82f6 100%
-    );
-    filter: blur(100px);
-    opacity: 0.15;
-    z-index: -1;
-    pointer-events: none;
   }
 }
 

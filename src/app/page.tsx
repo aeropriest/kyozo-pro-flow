@@ -17,7 +17,6 @@ import {
   Toolkit
 } from '@/components';
 import styles from '@/styles/page.module.scss';
-import { marqueeClasses } from '@/components/Marquee';
 
 export default function Home() {
   return (
@@ -40,6 +39,22 @@ export default function Home() {
         <Toolkit />
       </section>   
       <section>
+      <Marquee 
+          categories={[
+            {
+              category: 'music',
+              items: [
+                { text: 'Rediscovering your creative passion' },
+                { text: 'Prompts to Turbocharge Your Creative Process' },
+                { text: 'BPM heartrate and running' },
+                { text: 'The creative paradox' },
+                { text: 'Rediscovering your creative passion' },
+              ]
+            },
+          ]}
+        />
+      </section>      
+      {/* <section>
         <Marquee duration="30s" reverse={false}>
           <span className={marqueeClasses.text}>Rediscovering your creative passion</span>
           <span className={marqueeClasses.text}>Prompts to Turbocharge Your Creative Process</span>
@@ -47,7 +62,7 @@ export default function Home() {
           <span className={marqueeClasses.text}>The creative paradox</span>
           <span className={marqueeClasses.text}>Rediscovering your creative passion</span>
         </Marquee>
-      </section>
+      </section> */}
       <section>
         <PricingSection />
       </section>   

@@ -34,13 +34,15 @@
   font-size: 2.5rem; /* Reset font size for bubble text */
   background-color: transparent;
   border: 1.5px solid var(--row-color);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  color: var(--row-color); /* Use row color for text */
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
   cursor: default;
   margin-top: 0;
   margin-bottom: 0;
   
-  @include themify($themes) {
-    color: themed('text');
+  /* Check icon color */
+  svg {
+    color: var(--row-color);
   }
   
   &:hover {
@@ -48,6 +50,13 @@
     
     @include themify($themes) {
       color: themed('page-bg');
+    }
+    
+    /* Check icon color on hover */
+    svg {
+      @include themify($themes) {
+        color: themed('page-bg');
+      }
     }
   }
 }

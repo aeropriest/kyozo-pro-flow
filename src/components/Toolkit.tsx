@@ -17,12 +17,7 @@ const Toolkit: React.FC<ToolkitProps> = ({
   return (
     <>
       <section className={styles.socialMediaSection}>
-        <div className={styles.circleComponent}>
-          <div className={styles.circleComponentRing4}></div>
-          <div className={styles.circleComponentRing3}></div>
-          <div className={styles.circleComponentRing2}></div>
-          <div className={styles.circleComponentRing1}></div>
-        </div>
+
         <div className={styles.socialMediaTitle}>We are not</div>
         <div className={styles.socialMediaBubble}>
           <span className={styles.socialMediaText}>Social Media</span>

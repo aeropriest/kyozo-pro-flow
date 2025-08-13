@@ -38,6 +38,17 @@ const BackgroundImages = () => {
           priority
         />
       </div>
+      
+      {/* Toolkit Circle Component */}
+      <div className={styles.toolkitCircleComponent}>
+        <div className={styles.circleComponentRing4}></div>
+        <div className={styles.circleComponentRing3}></div>
+        <div className={styles.circleComponentRing2}></div>
+        <div className={styles.circleComponentRing1}></div>
+      </div>
+      
+      {/* Toolkit Background SVG */}
+      <div className={styles.toolkitBackgroundSvg}></div>
     </div>
   );
 };

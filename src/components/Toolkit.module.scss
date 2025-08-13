@@ -1,14 +1,7 @@
 @use '../styles/colors' as *;
 @use 'sass:map';
 
-/* Define the color variables for the circles using the centralized color system */
-// Note: These specific colors could be added to _colors.scss if they become reusable
-$center-gradient-start: #C0DFF0; // Could be moved to colors.scss as 'toolkit-gradient-start'
-$center-gradient-end: #B6A3D7;   // Could be moved to colors.scss as 'toolkit-gradient-end'
-$ring-one-color: #81C9BD;        // Could be moved to colors.scss as 'toolkit-ring-one'
-$ring-two-color: #9D6469;        // Could be moved to colors.scss as 'toolkit-ring-two'
-$ring-three-color: #C098E5;      // Could be moved to colors.scss as 'toolkit-ring-three'
-$ring-four-color: #B59962;       // Could be moved to colors.scss as 'toolkit-ring-four'
+
 
 .socialMediaSection {
   position: relative;
@@ -24,69 +17,9 @@ $ring-four-color: #B59962;       // Could be moved to colors.scss as 'toolkit-ri
   // background-color: #8b5cf6;
 }
 
-/* The core component styling for the concentric circles */
-.circleComponent {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: -20rem;
-  left: -18rem;
-  z-index: 2; // Place circles behind green (z-index 5) but above the base layer
-  
-  /* Center circle with a radial gradient */
-  &::before {
-    content: '';
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: radial-gradient(circle at center, $center-gradient-start 0%, $center-gradient-end 100%);
-    z-index: 5;
-  }
-}
 
-/* Ring 1 (closest to center) */
-.circleComponentRing1 {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  border: 28px solid $ring-four-color;
-  z-index: 4;
-}
 
-/* Ring 2 */
-.circleComponentRing2 {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  border: 28px solid $ring-three-color;
-  z-index: 3;
-}
 
-/* Ring 3 */
-.circleComponentRing3 {
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  border-radius: 50%;
-  border: 28px solid $ring-two-color;
-  z-index: 2;
-}
-
-/* Ring 4 (outermost) */
-.circleComponentRing4 {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  border: 28px solid $ring-one-color;
-  z-index: 1;
-}
 
 .socialMediaTitle {
   font-size: 1rem;
@@ -139,19 +72,7 @@ $ring-four-color: #B59962;       // Could be moved to colors.scss as 'toolkit-ri
   margin: 0;         // remove auto centering margin
   padding: 6rem 1.5rem;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: -10rem;
-    right: 0;
-    width: 200px;  // adjust size to fit design
-    height: 200px;
-    background-image: url('/bottom-right.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    pointer-events: none;
-    z-index: 1;
-  }
+
 
   @media (min-width: 640px) {
     padding: 6rem 2rem;

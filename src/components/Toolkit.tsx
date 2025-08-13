@@ -40,7 +40,6 @@ const Toolkit: React.FC<ToolkitProps> = ({
               <br />
               toolkit
             </h2>
-            <span className={styles.sectionNumberLeft}>02</span>
           </div>
 
           {/* Right side */}
@@ -50,7 +49,6 @@ const Toolkit: React.FC<ToolkitProps> = ({
               {ctaText}
               <ArrowIcon />
             </a>
-            <span className={styles.sectionNumberRight}>03</span>
             <div className={styles.decorativeShape}></div>
           </div>
         </div>

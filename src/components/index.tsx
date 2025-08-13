@@ -4,6 +4,8 @@
 export { default as SlideCard0 } from './SlideCard0';
 export { default as SlideCard1 } from './SlideCard1';
 export { default as SlideCard2 } from './SlideCard2';
+export { default as NewSlidingCard } from './NewSlidingCard';
+export { default as NewSlidingCards } from './NewSlidingCards';
 export { default as Card } from './Card';
 export { default as FeatureCard } from './FeatureCard';
 export { default as PricingCard } from './PricingCard';

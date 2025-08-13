@@ -43,6 +43,11 @@ interface ParallaxImageProps {
   progress: number;
 }
 
+interface ParallaxGalleryProps {
+  externalMousePosition?: { x: number; y: number };
+  className?: string;
+}
+
 const IMAGES: ImageData[] = [
   { src: '/Parallax1.jpg', alt: 'DJ at a concert with hands up' },
   { src: '/Parallax2.jpg', alt: 'Singer on stage with smoke' },
@@ -86,9 +91,14 @@ const ParallaxImage: React.FC<ParallaxImageProps> = ({ image, targetTransform, p
   );
 };
 
-const ParallaxGallery: React.FC = () => {
-  // Use our custom hook for mouse tracking
-  const { mousePosition, isHovering, setIsHovering } = useMousePosition();
+const ParallaxGallery: React.FC<ParallaxGalleryProps> = ({ 
+  externalMousePosition,
+  className = ''
+}) => {
+  const { mousePosition: internalMousePosition, isHovering, setIsHovering } = useMousePosition();
+  
+  // Use external mouse position if provided, otherwise use internal
+  const mousePosition = externalMousePosition || internalMousePosition;
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Handle mouse enter/leave for the container

@@ -35,10 +35,7 @@ export default function Home() {
         <FeatureCard />
       </section>  
       <section>
-      <p>Where creative minds converge</p>  
-      </section>
-      <section>
-        <ParallaxGallery />
+        <ScrollRevealText text="Where creative minds converge" />  
       </section>
       <section className={styles.section}>
         <SlidingCards>

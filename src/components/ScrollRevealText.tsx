@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect, useRef, CSSProperties } from 'react';
-import { colors } from '../lib/colors.generated';
 
 interface ScrollRevealTextProps {
   text: string;
@@ -13,9 +12,9 @@ interface ScrollRevealTextProps {
 
 const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
   text,
-  fontSize = '4rem',
-  fontWeight = 700,
-  threshold = 0.1,
+  fontSize = '8rem',
+  fontWeight = 800,
+  threshold = 0.3,
   revealSpeed = 1.0
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -53,8 +52,10 @@ const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
         visiblePercentage = Math.min(Math.max(scrolledDistance / totalScrollDistance, 0), 1);
       }
       
-      // Apply revealSpeed factor to control how quickly text reveals
-      const adjustedProgress = Math.pow(visiblePercentage, 1 / revealSpeed);
+      // Apply revealSpeed factor and make text fully revealed at 70% scroll
+      // Scale the progress so that 0.7 becomes 1.0 (fully revealed)
+      const scaledProgress = Math.min(visiblePercentage / 0.9, 1);
+      const adjustedProgress = Math.pow(scaledProgress, 1 / revealSpeed);
       setScrollProgress(adjustedProgress);
     };
     
@@ -92,7 +93,7 @@ const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
             .reduce((acc, w) => acc + w.length, 0) + wordIndex;
           
           return (
-            <span key={wordIndex} style={{ display: 'inline-block', margin: '0 0.2rem' }}>
+            <span key={wordIndex} style={{ display: 'inline-block', marginRight: '1rem' }}>
               {word.split('').map((letter, letterIndex) => {
                 // Calculate the overall index of this letter in the entire text
                 const overallLetterIndex = previousWordsLetterCount + letterIndex;
@@ -106,7 +107,7 @@ const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
                 
                 const letterStyle: CSSProperties = {
                   display: 'inline-block',
-                  color: isRevealed ? colors.textDark : colors.textSecondary, // Using centralized color system - secondary text
+                  color: isRevealed ? 'var(--foreground)' : 'rgba(128, 128, 128, 0.6)',
                   transition: 'color 0.2s ease',
                 };
                 

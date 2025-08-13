@@ -68,8 +68,11 @@ margin-top: 80px;
   font-size: 1rem;
   font-weight: 300;
   letter-spacing: 0.1em;
-  color: map.get($colors-primary, 'secondary-text-color');
   margin: 0 0 8px 0;
+  
+  @include themify($themes) {
+    color: themed('secondary-text');
+  }
 }
 
 // Styles for the main card title.

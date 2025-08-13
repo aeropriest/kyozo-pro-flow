@@ -40,3 +40,12 @@ a {
     color-scheme: dark;
   }
 }
+
+/* Light theme texture background */
+html.light-theme body {
+  background-image: url('/light-texture-bg.png');
+  background-repeat: repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}

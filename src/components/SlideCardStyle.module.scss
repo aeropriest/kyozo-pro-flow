@@ -12,16 +12,18 @@
 margin-left: 40px;
 // margin-right: 20px;
 margin-top: 80px;
-  background: cards('background');
   padding: 10px;
-  box-shadow: 0 8px 32px rgba(map.get($colors-primary, 'background-color'), 0.2);
+  
+  @include themify($themes) {
+    background-color: themed('card-bg');
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
   display: flex;
   flex-direction: column;
   justify-content: flex-start; /* Top align all content */
   position: relative;
   overflow: hidden;
   border-radius: 30px;
-  backdrop-filter: blur(10px);
   border: 0.5px solid cards('border');
 //   background-color: green;
   z-index: 3; /* Highest z-index in the stack (above green and purple) */
@@ -82,16 +84,22 @@ margin-top: 80px;
   margin: 0;
   -webkit-background-clip: text;
   background-clip: text;
-  color: map.get($colors-primary, 'dark-text-color');
   line-height: 1.0; /* Reduced line height to bring lines closer together */
+  
+  @include themify($themes) {
+    color: themed('text');
+  }
 }
 
 // Styles for the card description text.
 .cardDescription {
   font-size: 1rem;
   line-height: 1.6;
-  color: map.get($colors-primary, 'dark-text-color');
   margin: 0;
+  
+  @include themify($themes) {
+    color: themed('text');
+  }
   padding-top: 30px;
   padding-bottom: 30px;
   width: 65%;

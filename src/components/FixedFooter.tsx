@@ -2,6 +2,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import Image from 'next/image';
 import Button from './Button';
+import DialogX from './DialogX';
 import Dialog from './Dialog';
 import Input from './Input';
 import Checkbox from './Checkbox';
@@ -90,84 +91,14 @@ const FixedFooter: React.FC<FixedFooterProps> = ({ className = '' }) => {
         </div>
       </div>
       
-      {/* Dialog component */}
+      {/* DialogX component */}
       <Dialog 
         isOpen={isDialogOpen} 
         onClose={closeDialog}
-        title="Join the waitlist"
-        showTabs={true}
-        tabs={tabs}
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-        className={styles.waitlistDialog}
-      >
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <div className={styles.formRow}>
-            <Input
-              name="firstName"
-              placeholder="Firstname *"
-              value={formData.firstName}
-              onChange={handleInputChange}
-              required
-              className={styles.input}
-            />
-            
-            <Input
-              name="lastName"
-              placeholder="Lastname *"
-              value={formData.lastName}
-              onChange={handleInputChange}
-              required
-              className={styles.input}
-            />
-          </div>
-          
-          <div className={styles.formRow}>
-            <Input
-              name="phone"
-              placeholder="Phone"
-              value={formData.phone}
-              onChange={handleInputChange}
-              className={styles.input}
-            />
-            
-            <Input
-              name="email"
-              placeholder="Email *"
-              value={formData.email}
-              onChange={handleInputChange}
-              required
-              className={styles.input}
-            />
-          </div>
-          
-          <div>
-            <Checkbox
-              name="newsletter"
-              label="Subscribe to newsletter"
-              checked={formData.newsletter}
-              onChange={handleCheckboxChange}
-              className={styles.checkbox}
-            />
-            
-            <Checkbox
-              name="whatsapp"
-              label="Receive updates via WhatsApp"
-              checked={formData.whatsapp}
-              onChange={handleCheckboxChange}
-              className={styles.checkbox}
-            />
-          </div>
-          
-          <Button 
-            variant="primary"
-            type="submit"
-            className={styles.submitButton}
-          >
-            Join Waitlist
-          </Button>
-        </form>
-      </Dialog>
+        title="Join Kyozo"
+        subtitle="Join Kyozo"
+        children={<div>Join Kyozo</div>}
+      />
     </footer>
   );
 };

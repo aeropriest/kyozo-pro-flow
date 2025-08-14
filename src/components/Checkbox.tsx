@@ -1,51 +1,36 @@
 'use client';
-import React, { forwardRef, ChangeEvent, ForwardedRef } from 'react';
+
+import React, { ChangeEvent } from 'react';
 import styles from './Checkbox.module.scss';
 
 interface CheckboxProps {
-  label?: string;
-  checked?: boolean;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  name?: string;
-  id?: string;
-  disabled?: boolean;
+  name: string;
+  label: string;
+  checked: boolean;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   className?: string;
-  [key: string]: any; // For any additional props
 }
 
-const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
+const Checkbox: React.FC<CheckboxProps> = ({
+  name,
   label,
   checked,
   onChange,
-  name,
-  id,
-  disabled = false,
-  className = '',
-  ...props
-}, ref) => {
-  const checkboxId = id || name;
-  
+  className = ''
+}) => {
   return (
-    <div className={`${styles.checkboxWrapper} ${className}`}>
-      <label className={styles.checkboxContainer}>
-        <input
-          ref={ref}
-          type="checkbox"
-          id={checkboxId}
-          name={name}
-          checked={checked}
-          onChange={onChange}
-          disabled={disabled}
-          className={styles.checkboxInput}
-          {...props}
-        />
-        <span className={styles.checkmark}></span>
-        {label && <span className={styles.checkboxLabel}>{label}</span>}
-      </label>
-    </div>
+    <label className={`${styles.checkboxContainer} ${className}`}>
+      <input
+        type="checkbox"
+        name={name}
+        checked={checked}
+        onChange={onChange}
+        className={styles.checkboxInput}
+      />
+      <span className={styles.checkmark}></span>
+      <span className={styles.label}>{label}</span>
+    </label>
   );
-});
-
-Checkbox.displayName = 'Checkbox';
+};
 
 export default Checkbox;

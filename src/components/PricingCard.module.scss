@@ -1,37 +1,45 @@
-@use 'sass:map';
-@use 'sass:color';
-@use '../styles/colors' as *;
+@use '../styles/themes/theme-variables' as *;
 
 .card {
   position: relative;
   border-radius: 1.5rem; // rounded-3xl
   padding: 2px; // p-[2px]
   width: 100%;
-  // max-width: 28rem; // max-w-md
-  background: linear-gradient(to bottom right, var(--from-color), var(--via-color) 25%, map.get($colors-primary, 'mediam-background-color') 60%);
+  height: 95%;
   
+  background: linear-gradient(to bottom right, var(--from-color), var(--via-color) 25%, var(--text-color) 60%);
+
+  border-top: none; // ensure no border top to override padding border
+  border-left: none; // no left border
+  border-bottom: 1px solid var(--text-secondary); // add bottom gray border
+  border-right: 1px solid var(--text-secondary); // add right gray border
+  border-radius: 1.5rem; // border-radius for all corners (as you have already)
   
   .cardInner {
     display: flex;
     flex-direction: column;
     gap: 1.5rem; // gap-6
-    width: 100%;
-    height: 100%;
+    width: 130%; // Made 20% wider
     border-radius: 1.375rem; // rounded-[22px]
-    background-color: map.get($colors-primary, 'lighter-background-color'); // bg-[#1C1C1E]
+    background-color: var(--card-bg); // Use theme variable
     padding: 2rem; // p-8
+    height: 100%;
+    border-bottom: 1px solid var(--text-secondary);
+    border-right: 1px solid var(--text-secondary);
+    border-radius: 1.5rem; // keep your rounded corners
   }
+
 
   h2 {
     font-size: 2.25rem; // text-5xl
     font-weight: 900; // font-black
-    color: map.get($colors-primary, 'dark-text-color'); // text-white
+    color: var(--heading-color); // Use theme variable
     line-height: 1;
   }
 
   hr {
     margin: 1.5rem 0; // my-6
-    border-color: map.get($colors-ui, 'border'); // border-white/20
+    border-color: var(--border-color); // Use theme variable
   }
 
   .subtitle {
@@ -41,10 +49,11 @@
   }
 
   .price {
-    margin-top: 0.5rem; // mt-2
+    margin-top: 0.25rem; // reduced from 0.5rem
+    margin-bottom: 0.25rem; // added to reduce gap to features list
     font-size: 1.875rem; // text-3xl
     font-weight: 700; // font-bold
-    color: map.get($colors-primary, 'dark-text-color'); // text-white
+    color: var(--heading-color); // Use theme variable
     letter-spacing: -0.025em; // tracking-tight
     display: flex;
     align-items: baseline;
@@ -53,21 +62,27 @@
     span {
       font-size: 2rem; // text-xl
       font-weight: 500; // font-medium
-      color: map.get($colors-primary, 'lighter-gray'); // text-gray-400
+      color: var(--text-secondary); // Use theme variable
     }
   }
 
   .featuresList {
     display: flex;
     flex-direction: column;
-    gap: 1rem; // gap-4
-    margin-top: 0.5rem; // mt-2
+    gap: 1.2rem; // further reduced gap
+    margin-top: 0; // removed top margin to reduce gap with blue section
+    margin-bottom: 0; // remove space below
+    padding-left: 0; // left align list items
+    padding-bottom: 0; // remove bottom padding completely
 
     li {
+      font-size: 1rem;
       display: flex;
       align-items: center;
       gap: 0.75rem; // gap-3
-      color: map.get($colors-primary, 'lighter-gray'); // text-gray-300
+      color: var(--text-secondary); // Use sliding card title color
+      text-align: left; // ensure left alignment
+      justify-content: flex-start; // ensure left alignment
     }
   }
 }

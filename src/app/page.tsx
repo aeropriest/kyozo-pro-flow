@@ -1,129 +1,108 @@
 'use client';
-import {
-  SlidingCards,
-  AnimeText,
-  ScrollRevealText,
-  SlideCard0,
-  SlideCard1,
-  SlideCard2,
-  FixedFooter,
-  FeatureCard,
-  BackgroundImages,
-  Marquee,
-  Hero,
-  BubbleMarquee,
-  BottomText,
-  PricingSection,
-  Toolkit
-} from '@/components';
-import styles from '@/styles/page.module.scss';
-import { marqueeClasses } from '@/components/Marquee';
 
+import Hero from "@/components/Hero";
+import BackgroundImages from "@/components/BackgroundImages";
+import ThemeToggle from "@/components/ThemeToggle";
+import SlidingCards from "@/components/SlidingCards";
+import FeatureCard from "@/components/FeatureCard";
+import ScrollRevealText from "@/components/ScrollRevealText";
+import SlidingCard from "@/components/SlidingCard";
+import ParallaxGallery from "@/components/ParallaxGallery";
+import VideoWall from "@/components/VideoWall";
+import Button from "@/components/Button";
+import Toolkit from "@/components/Toolkit";
+import Marquee from "@/components/Marquee";
+import BubbleMarquee from "@/components/BubbleMarquee";
+import BottomText from "@/components/BottomText";
+import PricingSection from "@/components/PricingSection";
+import Image from "next/image";
+import PriceCircles from "@/components/PriceCircles";
 export default function Home() {
+  
   return (
-    <main className={styles.mainContainer}>
-      <section className={styles.heroSection}>
-        <Hero />
-      </section>
+    <div className="container">
+      <ThemeToggle />
+      <Hero text="Discover Your Creative Universe" />
       <BackgroundImages />
-      <section className={styles.featureSection}>
-        <FeatureCard />
-      </section>  
-      <section className={styles.section}>
-        <SlidingCards>
-          <SlideCard0 />
-          <SlideCard1 />
-          <SlideCard2 />
-        </SlidingCards>
-      </section>
-      <section>
-        <Toolkit />
-      </section>   
-      <section>
-        <Marquee duration="30s" reverse={false}>
-          <span className={marqueeClasses.text}>Rediscovering your creative passion</span>
-          <span className={marqueeClasses.text}>Prompts to Turbocharge Your Creative Process</span>
-          <span className={marqueeClasses.text}>BPM heartrate and running</span>
-          <span className={marqueeClasses.text}>The creative paradox</span>
-          <span className={marqueeClasses.text}>Rediscovering your creative passion</span>
-        </Marquee>
-      </section>
-      <section>
-        <PricingSection />
-      </section>   
-      <section className={styles.section}>
+      <FeatureCard />
+      {/* <ScrollRevealText text="Where creative minds converge" />       */}
+      <SlidingCards>
+        <SlidingCard
+          subtitle="INSIDER ACCESS"
+          title="Exclusive access and insights"
+          text="Experience the creative world through an insider's lens. Kyozo is an eco-system of creative communities - that gives you exclusive access to updates and insights from the creative luminaries driving cultural evolution."
+          button={<Button variant="accent-border" size="medium" href="#">Join the waitlist</Button>}
+          content={<VideoWall />}
+        />
+        <SlidingCard
+          subtitle="COMMUNITY ACCESS"
+          title="Engage with visionary communities"
+          text="Join and interact with diverse communities, from niche artistic circles to industry-leading collectives. Engage with passionate individuals who share your creative interests."
+          button={<Button variant="accent-border" size="medium" href="#">Join the waitlist</Button>}
+          content={<ParallaxGallery />}
+        />
+        <SlidingCard
+          subtitle="CREATOR TOOLS"
+          title="Grow your creative community"
+          text="Are you a creative professional, community organizer, or small business owner working within the creative industries? We understand the challenges of nurturing and growing a dedicated audience, so we built KyozoPro, a comprehensive platform that enhances genuine connections and unlocks new opportunities."
+          button={<Button variant="accent-border" size="medium" href="#">Join the waitlist</Button>}
+          content={<Image src="/card-3.png" alt="Phone" width={800} height={800} />}
+        />
+      </SlidingCards>      
+      <Toolkit />
+      <Marquee 
+          categories={[
+            {
+              category: 'music',
+              items: [
+                { text: 'Rediscovering your creative passion' },
+                { text: 'Prompts to Turbocharge Your Creative Process' },
+                { text: 'BPM heartrate and running' },
+                { text: 'The creative paradox' },
+                { text: 'Rediscovering your creative passion' },
+              ]
+            },           
+          ]}
+        />
+      
+      <PricingSection />      
+       
         <BubbleMarquee 
           categories={[
             {
               category: 'music',
               items: [
-                { text: 'Funk' },
-                { text: 'Hip-Hop' },
-                { text: 'Rock' },
-                { text: 'Jazz' },
-                { text: 'R&B' },
-                { text: 'Classical' },
-                { text: 'Electronic' },
-                { text: 'Folk' }
+                { text: 'Music' },
               ]
             },
             {
-              category: 'artMovements',
+              category: 'classicism',
               items: [
-                { text: 'Futurism' },
                 { text: 'Classicism' },
-                { text: 'Cubism' },
-                { text: 'Modernism' },
-                { text: 'Impressionism' },
-                { text: 'Surrealism' },
-                { text: 'Expressionism' },
-                { text: 'Minimalism' }
               ]
             },
             {
-              category: 'crafts',
+              category: 'jewelry',
               items: [
-                { text: 'Recycling' },
-                { text: 'Tufting' },
-                { text: 'Wood Burning' },
-                { text: 'Candle-making' },
-                { text: 'Pottery' },
-                { text: 'Knitting' },
-                { text: 'Embroidery' },
-                { text: 'Origami' }
+                { text: 'Jewelry' },
               ]
             },
             {
-              category: 'fashion',
+              category: 'vintage',
               items: [
                 { text: 'Vintage' },
-                { text: 'Boho' },
-                { text: 'Punk' },
-                { text: 'Avant-garde' },
-                { text: 'Streetwear' },
-                { text: 'Minimalist' },
-                { text: 'Athleisure' },
-                { text: 'Haute Couture' }
               ]
             },
             {
-              category: 'performance',
+              category: 'minimal',
               items: [
-                { text: 'Slam Poetry' },
-                { text: 'Improv' },
-                { text: 'Stand-ups' },
-                { text: 'Storytelling' },
-                { text: 'Monologues' },
-                { text: 'Puppetry' },
-                { text: 'Mime' },
-                { text: 'Dance' }
+                { text: 'Minimal' },
               ]
             }
           ]}
         />
-      </section>
-      <FixedFooter />
-      <BottomText text="Join the Kyozo creative universe" fontSize="7rem" fontWeight={800} />
-      </main>
+     
+      <BottomText text="Join the creative universe" fontSize="6rem" fontWeight={700} />
+    </div>
   );
 }

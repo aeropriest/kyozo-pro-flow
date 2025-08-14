@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useEffect, useRef, CSSProperties } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import styles from './ScrollRevealText.module.scss';
 
 interface ScrollRevealTextProps {
   text: string;
@@ -12,9 +13,9 @@ interface ScrollRevealTextProps {
 
 const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
   text,
-  fontSize = '4rem',
-  fontWeight = 700,
-  threshold = 0.1,
+  fontSize = '8rem',
+  fontWeight = 800,
+  threshold = 0.3,
   revealSpeed = 1.0
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -30,8 +31,6 @@ const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
       const windowHeight = window.innerHeight;
       
       // Calculate how far the element is through the viewport
-      // Start when element enters viewport from bottom
-      // End when element is about to leave viewport from top
       const elementHeight = rect.height;
       const elementTop = rect.top;
       const elementBottom = rect.bottom;
@@ -46,14 +45,16 @@ const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
         // Element hasn't entered viewport yet
         visiblePercentage = 0;
       } else {
-        // Element is partially visible
-        const totalScrollDistance = windowHeight + elementHeight;
+        // Element is partially visible - start animation earlier
+        // Calculate scroll progress based on element position in viewport
+        const totalScrollDistance = windowHeight + elementHeight * 0.7;
         const scrolledDistance = windowHeight - elementTop;
         visiblePercentage = Math.min(Math.max(scrolledDistance / totalScrollDistance, 0), 1);
       }
       
-      // Apply revealSpeed factor to control how quickly text reveals
-      const adjustedProgress = Math.pow(visiblePercentage, 1 / revealSpeed);
+      // Apply revealSpeed factor and make text fully revealed at 50% scroll
+      const scaledProgress = Math.min(visiblePercentage / 0.5, 1);
+      const adjustedProgress = Math.pow(scaledProgress, 1 / revealSpeed);
       setScrollProgress(adjustedProgress);
     };
     
@@ -62,27 +63,15 @@ const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
     
     return () => window.removeEventListener('scroll', handleScroll);
   }, [revealSpeed]);
-  
+
   return (
     <div 
       ref={containerRef}
-      style={{
-        marginTop: '4rem',
-        minHeight: '80vh',
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '2rem'
-      }}
+      className={styles.scrollRevealContainer}
     >
-      <h1 style={{
+      <h1 className={styles.scrollRevealText} style={{
         fontSize: fontSize,
-        fontWeight: fontWeight,
-        textAlign: 'center',
-        maxWidth: '1200px',
-        padding: '0 2rem',
-        margin: 0
+        fontWeight: fontWeight
       }}>
         {words.map((word, wordIndex) => {
           // Calculate the starting letter index for this word in the overall text
@@ -91,33 +80,33 @@ const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
             .reduce((acc, w) => acc + w.length, 0) + wordIndex;
           
           return (
-            <span key={wordIndex} style={{ display: 'inline-block', margin: '0 0.2rem' }}>
+            <span key={wordIndex} className={styles.word}>
               {word.split('').map((letter, letterIndex) => {
                 // Calculate the overall index of this letter in the entire text
                 const overallLetterIndex = previousWordsLetterCount + letterIndex;
                 
                 // Calculate the threshold at which this letter should reveal
-                // Divide by total letters to get a value between 0 and 1
                 const letterThreshold = overallLetterIndex / totalLetters;
                 
                 // Determine if this letter should be revealed based on scroll progress
                 const isRevealed = scrollProgress >= letterThreshold;
                 
-                const letterStyle: CSSProperties = {
-                  display: 'inline-block',
-                  color: isRevealed ? 'var(--color-white)' : 'var(--color-gray)', // White when revealed, gray when hidden
-                  transition: 'color 0.2s ease',
-                };
+                // Calculate transition delay based on letter position
+                // This creates a sequential reveal effect similar to Hero component
+                const transitionDelay = `${overallLetterIndex * 0.05}s`;
                 
                 return (
                   <span
                     key={`${wordIndex}-${letterIndex}`}
-                    style={letterStyle}
+                    className={`${styles.letter} ${isRevealed ? styles.revealed : ''}`}
+                    style={{ transitionDelay }}
                   >
-                    {letter}
+                    {letter === ' ' ? '\u00A0' : letter}
                   </span>
                 );
               })}
+              {/* Add a space after each word except the last one */}
+              {wordIndex < words.length - 1 && <span className={styles.wordSpace}></span>}
             </span>
           );
         })}

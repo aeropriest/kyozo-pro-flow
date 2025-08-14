@@ -1,46 +1,80 @@
 'use client';
 
-import React, { ReactNode } from 'react';
+import React, { useMemo } from 'react';
 import styles from './Marquee.module.scss';
 import { FaCircleCheck } from "react-icons/fa6";
 
+// Category types for the marquee
+type CategoryType = 'music' | 'artMovements' | 'crafts' | 'fashion' | 'performance';
 
-// Export class names for use in parent components
-export const marqueeClasses = {
-  text: styles.marqueeText,
-  image: styles.marqueeImage
-};
-
-interface MarqueeProps {
-  children: ReactNode;
-  duration?: string;
-  reverse?: boolean;
+interface Item {
+  text: string;
 }
 
-export const Marquee: React.FC<MarqueeProps> = ({ children, duration = '40s', reverse = false }) => {
-  const animationClass = reverse ? styles.marqueeReverse : styles.marquee;
-  const childrenArray = React.Children.toArray(children);
+interface RowProps {
+  items: Item[];
+  direction: 'left' | 'right';
+  speed?: number;
+  category: CategoryType;
+}
 
+const Row: React.FC<RowProps> = ({ 
+  items, 
+  direction, 
+  speed = 10, 
+  category 
+}) => {
+  // Create enough duplicates to fill the screen width
+  const repeatedItems = useMemo(() => {
+    // Create 4 sets of items to ensure the row is never empty
+    const repeated = [];
+    for (let i = 0; i < 4; i++) {
+      repeated.push(...items);
+    }
+    return repeated;
+  }, [items]);
+  
   return (
-    <div className={styles.marqueeContainer}>
-      <div
-        className={`${styles.marqueeContent} ${animationClass}`}
-        style={{ animationDuration: duration }}
+    <div className={styles.rowContainer}>
+      <div 
+        className={`${styles.row} ${direction === 'right' ? styles.toRight : styles.toLeft}`}
+        style={{ 
+          '--scroll-duration': `${speed}s`
+        } as React.CSSProperties}
       >
-        {/* Render children twice for a seamless loop */}
-        {childrenArray.map((child, index) => (
-          <div key={index} className={styles.marqueeItem}>
-            <FaCircleCheck size={24}/>
-            {child}
-          </div>
-        ))}
-        {childrenArray.map((child, index) => (
-          <div key={`clone-${index}`} className={styles.marqueeItem} aria-hidden="true">
-            <FaCircleCheck size={24}/>
-            {child}
+        {/* First set of repeated items */}
+        {repeatedItems.map((item, index) => (
+          <div 
+            key={`item-${index}`} 
+            className={`${styles.item} ${styles[category]}`}
+          >
+            <FaCircleCheck size={24}/> <span>{item.text}</span>
           </div>
         ))}
       </div>
+    </div>
+  );
+};
+
+interface MarqueeProps {
+  categories: {
+    category: CategoryType;
+    items: Item[];
+  }[];
+}
+
+const Marquee: React.FC<MarqueeProps> = ({ categories }) => {
+  return (
+    <div className={styles.marqueeContainer}>
+      {categories.map((row, index) => (
+        <Row 
+          key={`row-${index}`}
+          items={row.items}
+          direction={index % 2 === 0 ? 'left' : 'right'}
+          speed={80} // Slower animation for better readability
+          category={row.category}
+        />
+      ))}
     </div>
   );
 };

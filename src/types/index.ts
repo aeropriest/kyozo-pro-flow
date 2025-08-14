@@ -3,9 +3,7 @@ export interface PricingCardData {
   subtitle: string;
   price: string;
   priceDescription: string;
-  features: (string | React.ReactNode)[];
+  features: string[];
   gradient: string;
   subtitleColor: string;
 }
-
-export {};

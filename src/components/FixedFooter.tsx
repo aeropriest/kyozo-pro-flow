@@ -80,9 +80,10 @@ const FixedFooter: React.FC<FixedFooterProps> = ({ className = '' }) => {
             className={styles.buttonLogo}
           />
           <Button 
-            variant="primary" 
+            variant="accent-fill" 
             onClick={openDialog}
             className={styles.joinButton}
+            size="small"
           >
             Join
           </Button>

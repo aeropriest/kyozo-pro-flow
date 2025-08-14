@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { PricingCardData } from '../types';
 import styles from './PricingCard.module.scss';
@@ -21,19 +23,19 @@ const PricingCard: React.FC<PricingCardData> = ({
   
   // Convert Tailwind color classes to CSS variables
   const colorMap: Record<string, string> = {
-    'from-blue-500': '#3b82f6',
+    'from-blue-500': 'var(--accent-blue)',
     'to-cyan-500': '#06b6d4',
-    'from-purple-500': '#a855f7',
-    'to-pink-500': '#ec4899',
+    'from-purple-500': 'var(--accent-purple)',
+    'to-pink-500': 'var(--accent-pink)',
     'from-amber-500': '#f59e0b',
     'to-orange-500': '#f97316',
-    'via-blue-500': '#3b82f6',
-    'via-purple-500': '#a855f7',
+    'via-blue-500': 'var(--accent-blue)',
+    'via-purple-500': 'var(--accent-purple)',
     'via-amber-500': '#f59e0b',
   };
 
   const style = {
-    '--from-color': colorMap[fromColor] || '#3b82f6',
+    '--from-color': colorMap[fromColor] || 'var(--accent-blue)',
     '--via-color': colorMap[viaColor] || colorMap[toColor] || '#06b6d4',
   } as React.CSSProperties;
 
@@ -43,10 +45,7 @@ const PricingCard: React.FC<PricingCardData> = ({
         <header>
           <h2>{title}</h2>
           <hr />
-          <p 
-            className={styles.subtitle} 
-
-          >
+          <p className={styles.subtitle}>
             {subtitle}
           </p>
           <p className={styles.price}>
@@ -55,9 +54,9 @@ const PricingCard: React.FC<PricingCardData> = ({
         </header>
 
         <ul className={styles.featuresList}>
-          {(features as string[]).map((feature, index) => (
+          {features.map((feature, index) => (
             <li key={index}>
-              <FaCircleCheck size={24}/>
+              <FaCircleCheck size={25} style={{ color: 'var(--text-secondary)' }}/>
               <span>{feature}</span>
             </li>
           ))}

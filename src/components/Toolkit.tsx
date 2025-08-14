@@ -17,12 +17,6 @@ const Toolkit: React.FC<ToolkitProps> = ({
   return (
     <>
       <section className={styles.socialMediaSection}>
-        <div className={styles.circleComponent}>
-          <div className={styles.circleComponentRing4}></div>
-          <div className={styles.circleComponentRing3}></div>
-          <div className={styles.circleComponentRing2}></div>
-          <div className={styles.circleComponentRing1}></div>
-        </div>
         <div className={styles.socialMediaTitle}>We are not</div>
         <div className={styles.socialMediaBubble}>
           <span className={styles.socialMediaText}>Social Media</span>
@@ -40,7 +34,6 @@ const Toolkit: React.FC<ToolkitProps> = ({
               <br />
               toolkit
             </h2>
-            <span className={styles.sectionNumberLeft}>02</span>
           </div>
 
           {/* Right side */}
@@ -50,8 +43,6 @@ const Toolkit: React.FC<ToolkitProps> = ({
               {ctaText}
               <ArrowIcon />
             </a>
-            <span className={styles.sectionNumberRight}>03</span>
-            <div className={styles.decorativeShape}></div>
           </div>
         </div>
       </section>

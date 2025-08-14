@@ -1,42 +1,42 @@
-@use '../styles/colors' as *;
+@use '../styles/themes/theme-variables' as *;
 
 .container {
   position: relative;
   width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100%;
   overflow: hidden;
-  transform: scale(0.8);
 }
 
 .animatedConcentricRings {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100vh;
-  margin: 0;
-  pointer-events: none;
+  height: 100%;
+  z-index: 0;
 }
 
 .circle {
   position: absolute;
-  border: 4px solid rgba(255, 255, 255);
   border-radius: 50%;
-  transform-origin: center;
-  will-change: transform, opacity;
+  border: 1px solid rgba(255, 255, 255, 1);
+  background: transparent;
   pointer-events: none;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-  box-sizing: border-box;
-  background: none;
-  will-change: transform, opacity;
   
-  // Ensure smooth animation
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
+  &:nth-child(odd) {
+    border-color: rgba(255,255,255, 1); // Purple with higher opacity
+    border-width: 2px;
+  }
+  
+  &:nth-child(even) {
+    border-color: rgba(255, 255, 255, 1); // Blue with higher opacity
+    border-width: 2px;
+  }
+}
+
+.contentContainer {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
 }

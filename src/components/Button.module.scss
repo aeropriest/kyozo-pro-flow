@@ -1,101 +1,175 @@
-@use '../styles/colors' as *;
-@use 'sass:map';
+@use '../styles/themes/theme-variables' as *;
 
 .button {
-  display: inline-block;
-  font-weight: 600;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  cursor: pointer;
-  user-select: none;
-  border: 2px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
-  line-height: 1.5;
-  border-radius: 9999px; // Fully rounded
-  transition: all 0.2s ease-in-out;
+  font-weight: 100;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
   text-decoration: none;
-  
-  &:focus {
-    outline: none;
-  }
+  border: none;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  gap: 0.5rem;
 }
 
 // Size variants
 .small {
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
+  border-radius: 24px;
 }
 
 .medium {
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
+  border-radius: 30px;
 }
 
 .large {
   padding: 1rem 2rem;
   font-size: 1.125rem;
+  border-radius: 36px;
 }
 
-// Style variants
+.fullWidth {
+  width: 100%;
+}
+
+// Icon positioning
+.iconLeft {
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.iconRight {
+  margin-left: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  position: relative;
+  z-index: 1;
+}
+
 .primary {
-  background: map.get($colors-primary, 'accent-pink');
-  color: map.get($colors-primary, 'dark-text-color');
-  border: none;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   
-  &:hover, &:focus {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(map.get($colors-primary, 'background-color'), 0.2);
-    background: darken(map.get($colors-primary, 'accent-pink'), 5%);
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   }
+}
+
+.secondary {
+  background-color: var(--button-bg);
+  color: var(--button-text);
   
-  &:active {
-    transform: translateY(0);
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    background-color: var(--button-bg-hover);
   }
 }
 
 .outline {
   background: transparent;
-  color: map.get($colors-primary, 'dark-text-color');
-  border: 2px solid map.get($colors-primary, 'accent-pink');
-  box-shadow: 0 0 0 0 rgba(map.get($colors-primary, 'accent-pink'), 0);
+  box-shadow: none;
+  border: 0.5px solid var(--button-bg);
+  color: var(--button-text);
   
-  &:hover, &:focus {
-    border-color: map.get($colors-primary, 'accent-purple');
-    box-shadow: 0 0 0 4px rgba(map.get($colors-primary, 'accent-purple'), 0.3);
-    transform: translateY(-2px);
-  }
-  
-  &:active {
-    transform: translateY(0);
+  &:hover {
+    transform: translateY(-3px);
+    background-color: rgba(0, 0, 0, 0.05);
   }
 }
 
 .outline-only {
   background: transparent;
-  color: map.get($colors-primary, 'dark-text-color');
-  border: 1px solid map.get($colors-primary, 'accent-pink');
+  box-shadow: none;
+  border: 0.5px solid rgba(255, 255, 255, 0.6);
+  color: white;
+  border-radius: 20px;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.875rem;
   
-  &:hover, &:focus {
-    border-color: map.get($colors-primary, 'accent-purple');
-  }
-  
-  &:active {
-    opacity: 0.9;
+  &:hover {
+    transform: translateY(-3px);
+    background-color: rgba(0, 0, 0, 0.05);
   }
 }
 
-.solid {
-  background-color: map.get($colors-primary, 'accent-pink');
-  color: map.get($colors-primary, 'dark-text-color');
-  border: none;
+.gradient {
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   
-  &:hover, &:focus {
-    background-color: lighten(map.get($colors-primary, 'accent-pink'), 5%);
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
   }
+}
+
+.accent {
+  background-color: var(--accent-pink);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   
-  &:active {
-    background-color: darken(map.get($colors-primary, 'accent-pink'), 5%);
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    background-color: var(--accent-purple);
+  }
+}
+
+.minimal {
+  background: transparent;
+  color: var(--text-color);
+  padding: 0.5rem;
+  border-radius: 4px;
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+// New variants based on the provided images
+.accent-border {
+  background: transparent;
+  border: 0.5px solid var(--accent-pink);
+  color: var(--accent-pink);
+  border-radius: 9999px;
+  font-weight: 200;
+  box-shadow: none;
+  
+  &:hover {
+    background-color: var(--accent-pink);
+    color: white;
+    transform: translateY(-2px);
+  }
+}
+
+.accent-fill {
+  background-color: var(--accent-pink);
+  color: white;
+  border-radius: 9999px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+  &:hover {
+    background-color: transparent;
+    border: 2px solid var(--accent-pink);
+    color: var(--accent-pink);
+    transform: translateY(-2px);
   }
 }

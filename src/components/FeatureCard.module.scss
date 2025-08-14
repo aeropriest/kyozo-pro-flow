@@ -1,25 +1,26 @@
-@use '../styles/colors' as *;
+@use '../styles/themes/theme-variables' as *;
 @use 'sass:map';
 
 .cardContainer {
-  width: calc(100% - 40px); /* Account for left and right margins */
-  height: calc(100vh - 160px); /* Account for top and bottom margins */
-  margin-top: -20px;
-  // margin: -20px 40px;
-  background: map.get($colors-primary, 'lighter-background-color');
-  padding: 10px;
-  box-shadow: 0 8px 32px rgba(map.get($colors-primary, 'background-color'), 0.2);
+  width: calc(100% - 4rem); /* Account for 5rem left and 5rem right margins */
+  height: calc(100vh - 8rem); /* Account for top and bottom margins */
+  margin-top: 10rem;
+  margin-left: 2rem;
+  margin-bottom: 6rem;
+  
   display: flex;
   flex-direction: column;
   justify-content: flex-start; /* Top align all content */  // gap: 30px;
   position: relative;
   overflow: hidden;
-  border-radius: 30px;
-  backdrop-filter: blur(10px);
-  border: 0.5px solid map.get($colors-primary, 'mediam-background-color');
-  background-color: #121212; /* Adding solid background color */
   z-index: 3; /* Ensure it's above background images */
   isolation: isolate; /* Create a new stacking context */
+  
+  border-radius: 30px;
+  backdrop-filter: blur(10px);
+  background-color: var(--card-bg);
+  border: 0.5px solid var(--text-color);
+  box-shadow: var(--card-shadow);
 }   
 
 .cardContent {
@@ -59,22 +60,21 @@
   font-size: 4.8rem;
   font-weight: 700;
   margin: 0;
-  // background: linear-gradient(90deg, map.get($colors-primary, 'dark-text-color'), map.get($colors-primary, 'accent-light-purple'));
   -webkit-background-clip: text;
   background-clip: text;
-  color: map.get($colors-primary, 'dark-text-color');
   line-height: 1.0; /* Reduced line height to bring lines closer together */
+  color: var(--heading-color);
 }
 
 .cardDescription {
   font-size: 1.2rem;
   line-height: 1.6;
-  color: map.get($colors-primary, 'dark-text-color');
   margin: 0;
   padding-top: 30px;
   padding-bottom: 30px;
   // padding-right: 80px
   // width: 65%;
+  color: var(--text-color);
 }
 
 .phoneContainer {
@@ -101,7 +101,7 @@
 .backgroundGradient {
   position: absolute;
   top: 50%;
-  right: -1%;
+  right: -5%;
   width: 1000px;
   height: 1000px;
   transform: translateY(-50%);
@@ -116,6 +116,7 @@
   background-color: transparent;
   position: relative;
   overflow: hidden;
+
   
   // First animated expanding ring
   &::before {

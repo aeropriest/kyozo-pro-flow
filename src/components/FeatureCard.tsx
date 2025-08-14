@@ -3,7 +3,6 @@ import React from 'react';
 import styles from './FeatureCard.module.scss';
 import Button from './Button';
 import Image from 'next/image';
-import shapeStyles from '@/app/demo/shapes.module.scss';
 
 const FeatureCard = () => {
   return (
@@ -18,7 +17,7 @@ const FeatureCard = () => {
             Connect with visionary creators and forward-thinking communities.
           </p>
           <div>
-            <Button variant="outline-only" href="#">Join the waitlist</Button>
+          <Button variant="accent-border" size="medium" href="#">Join the waitlist</Button>
           </div>
         </div>
         

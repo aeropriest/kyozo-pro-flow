@@ -1,0 +1,238 @@
+@use '../styles/themes/theme-variables' as *;
+
+// Dialog overlay
+.dialogOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 2rem;
+  
+  &.open {
+    opacity: 1;
+  }
+}
+
+// Main dialog container
+.dialogBox {
+  position: relative;
+  width: calc(100% - 4rem);
+  max-width: 1600px;
+  height: calc(100vh - 8rem);
+  display: flex;
+  overflow: hidden;
+  border-radius: 30px;
+  backdrop-filter: blur(10px);
+  background-color: var(--card-bg);
+  border: 0.5px solid var(--text-secondary);
+  box-shadow: var(--card-shadow, 0 10px 25px rgba(0, 0, 0, 0.3));
+}
+
+// Close button
+.dialogCloseButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.2s ease;
+  
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: white;
+  }
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  &.visible {
+    opacity: 1;
+    transform: scale(1);
+    transition-delay: 0.3s;
+  }
+}
+
+// Curtain half container
+.dialogCurtainHalf {
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  
+  &:first-child {
+    .dialogPanel {
+      transform-origin: right center;
+      clip-path: inset(0 50% 0 0); // Start with half width from center
+      
+      &.open {
+        clip-path: inset(0 0 0 0); // Full width (visible)
+      }
+    }
+  }
+  
+  &:last-child {
+    .dialogPanel {
+      transform-origin: left center;
+      clip-path: inset(0 0 0 50%); // Start with half width from center
+      
+      &.open {
+        clip-path: inset(0 0 0 0); // Full width (visible)
+      }
+    }
+  }
+}
+
+// Panel base styles
+.dialogPanel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: clip-path 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: clip-path;
+  
+  &.left {
+    background-color: white;
+    border-right: 0.5px solid var(--text-secondary);
+  }
+  
+  &.right {
+    background-color: var(--card-bg);
+  }
+}
+
+// Content inside panels
+.dialogContent {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  transition-delay: 0.2s;
+  display: flex;
+  flex-direction: column;
+  
+  &.visible {
+    opacity: 1;
+  }
+  
+  // Left panel content styling (matching SlidingCard)
+  .left & {
+    padding: 30px 30px 30px 40px;
+    justify-content: center;
+    
+    // SlideCard-like styling for text elements
+    h1, h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0;
+      color: var(--heading-color);
+      line-height: 1.1;
+    }
+    
+    p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin: 0;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      color: var(--text-color);
+    }
+    
+    // Category label styling from SlideCard
+    .categoryLabel {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 0;
+      margin-bottom: 10px;
+      color: var(--text-color);
+      opacity: 0.7;
+    }
+  }
+  
+  // Right panel content styling
+  .right & {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+// Custom form elements styling using SCSS
+
+// Mixins for common styles
+@mixin gradient-background {
+  background: linear-gradient(to right, var(--accent-blue), var(--accent-purple));
+}
+
+@mixin fully-rounded {
+  border-radius: 9999px;
+}
+
+// Custom input styling
+.customInput {
+  input {
+    @include fully-rounded;
+    padding: 0.85rem 1.25rem;
+    transition: all 0.2s ease;
+    
+    &:focus {
+      outline: none;
+      border-color: transparent;
+      box-shadow: 0 0 0 2px transparent;
+      background-image: linear-gradient(white, white), 
+                      linear-gradient(to right, var(--accent-blue), var(--accent-purple));
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      border: 1px solid transparent;
+    }
+  }
+}
+
+// Custom button styling
+.customButton {
+  button {
+    @include fully-rounded;
+    @include gradient-background;
+    padding: 0.85rem 1.5rem;
+    border: none;
+    color: white;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+
+// Custom checkbox styling
+.customCheckbox {
+  .checkboxInput {
+    &:checked + .checkmark {
+      @include gradient-background;
+      border-color: transparent;
+    }
+  }
+}

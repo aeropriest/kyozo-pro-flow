@@ -1,22 +1,23 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
+
+import React, { useEffect, useRef } from 'react';
 import styles from './Dialog.module.scss';
-import { Tab } from './Tab';
+
+interface Tab {
+  label: string;
+  count?: number;
+}
 
 interface DialogProps {
   isOpen: boolean;
   onClose: () => void;
-  children: React.ReactNode;
   title?: string;
+  children: React.ReactNode;
+  className?: string;
   showTabs?: boolean;
-  tabs?: Array<{
-    label: string;
-    count?: number;
-  }>;
+  tabs?: Tab[];
   activeTab?: number;
   onTabChange?: (index: number) => void;
-  className?: string;
-  showCloseButton?: boolean;
 }
 
 const Dialog: React.FC<DialogProps> = ({
@@ -28,104 +29,92 @@ const Dialog: React.FC<DialogProps> = ({
   showTabs = false,
   tabs = [],
   activeTab = 0,
-  onTabChange = () => {},
-  showCloseButton = true,
+  onTabChange = () => {}
 }) => {
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
 
-  // Handle animation states
+  // Close dialog when clicking outside
   useEffect(() => {
-    if (isOpen) {
-      setIsVisible(true);
-      // Small delay to ensure visibility before animation starts
-      setTimeout(() => setIsAnimating(true), 10);
-    } else if (isVisible) {
-      setIsAnimating(false);
-      // Wait for close animation to finish before hiding
-      const timer = setTimeout(() => setIsVisible(false), 600);
-      return () => clearTimeout(timer);
-    }
-  }, [isOpen, isVisible]);
-
-  // Close when clicking outside
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (
-      e.target instanceof HTMLElement &&
-      e.target.className &&
-      typeof e.target.className === 'string' &&
-      e.target.className.includes(styles.dialogOverlay) &&
-      dialogRef.current &&
-      !dialogRef.current.contains(e.target)
-    ) {
-      onClose();
-    }
-  };
-
-  // Handle escape key
-  useEffect(() => {
-    const handleEscKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dialogRef.current && !dialogRef.current.contains(event.target as Node)) {
         onClose();
       }
     };
 
-    document.addEventListener('keydown', handleEscKey);
-    return () => document.removeEventListener('keydown', handleEscKey);
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, [isOpen, onClose]);
 
-  if (!isVisible) return null;
+  // Close dialog on escape key
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [isOpen, onClose]);
+
+  // Prevent body scrolling when dialog is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
 
   return (
-    <div className={styles.dialogOverlay} onClick={handleBackdropClick}>
-      <div
+    <div className={styles.overlay}>
+      <div 
         ref={dialogRef}
-        className={`${styles.dialogContainer} ${isAnimating ? styles.active : ''} ${className}`}
-        aria-modal="true"
-        role="dialog"
+        className={`${styles.dialog} ${className}`}
+        onClick={(e) => e.stopPropagation()}
       >
-        <div className={styles.dialogContent}>
-          {/* Curtain animation elements */}
-          <div className={`${styles.curtainLeft} ${isAnimating ? styles.active : ''}`}></div>
-          <div className={`${styles.curtainRight} ${isAnimating ? styles.active : ''}`}></div>
+        <div className={styles.header}>
+          {title && <h2 className={styles.title}>{title}</h2>}
+          <button className={styles.closeButton} onClick={onClose}>
+            <span className={styles.closeIcon}>×</span>
+          </button>
+        </div>
 
-          {/* Dialog header with title and tabs */}
-          <div className={styles.dialogHeader}>
-            {title && (
-              <div className={styles.dialogTitle}>
-                <h2>{title}</h2>
-              </div>
-            )}
-
-            {showTabs && tabs.length > 0 && (
-              <div className={styles.tabsContainer}>
-                {tabs.map((tab, index) => (
-                  <Tab
-                    key={index}
-                    label={tab.label}
-                    count={tab.count}
-                    isActive={index === activeTab}
-                    onClick={() => onTabChange(index)}
-                  />
-                ))}
-              </div>
-            )}
-
-            {showCloseButton && (
+        {showTabs && tabs.length > 0 && (
+          <div className={styles.tabs}>
+            {tabs.map((tab, index) => (
               <button
-                className={styles.closeButton}
-                onClick={onClose}
-                aria-label="Close dialog"
-                type="button"
+                key={index}
+                className={`${styles.tab} ${index === activeTab ? styles.activeTab : ''}`}
+                onClick={() => onTabChange(index)}
               >
-                &times;
+                {tab.label}
+                {tab.count !== undefined && (
+                  <span className={styles.tabCount}>{tab.count}</span>
+                )}
               </button>
-            )}
+            ))}
           </div>
+        )}
 
-          {/* Dialog body */}
-          <div className={styles.dialogBody}>{children}</div>
+        <div className={styles.content}>
+          {children}
         </div>
       </div>
     </div>

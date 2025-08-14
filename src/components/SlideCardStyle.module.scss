@@ -1,106 +1,110 @@
-// This consolidated SCSS code simplifies the styles for your cards,
-// ensuring a consistent appearance across all instances by using a single
-// set of class definitions.
+@use '../styles/themes/theme-variables' as *;
 
-@use '../styles/colors' as *;
-@use 'sass:map';
-
-// Styles for the main card container.
 .cardContainer {
-  width: calc(100% - 80px); /* Account for left and right margins */
-  height: calc(100vh - 160px); /* Account for top and bottom margins */
-margin-left: 40px;
-// margin-right: 20px;
-margin-top: 80px;
-  padding: 10px;
-  
-  @include themify($themes) {
-    background-color: themed('card-bg');
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  }
+  width: calc(100% - 4rem); /* Account for 5rem left and 5rem right margins */
+  height: calc(100vh - 8rem); /* Account for top and bottom margins */
+  margin-left: 2rem;
+  // margin-bottom: -12rem;
+  margin-top: 4rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Top align all content */
+  justify-content: flex-start;
   position: relative;
   overflow: hidden;
+  z-index: 3;
+  isolation: isolate;
+
   border-radius: 30px;
-  border: 0.5px solid cards('border');
-//   background-color: green;
-  z-index: 3; /* Highest z-index in the stack (above green and purple) */
+  backdrop-filter: blur(10px);
+  background-color: var(--card-bg);
+  border: 0.5px solid var(--text-color);
+  box-shadow: var(--card-shadow);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    // background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+    z-index: -1;
+  }
 }
 
-// Styles for the content section inside the card.
 .cardContent {
   display: flex;
   flex-direction: row;
-  align-items: flex-start; /* Top align items horizontally */
+  gap: 40px;
+  align-items: flex-end;
   justify-content: space-between;
-  margin-top: 0; /* Don't push content to bottom */
-
+  margin-top: auto;
+  height: 100%;
+  
   @media (max-width: 768px) {
     flex-direction: column-reverse;
   }
 }
 
-// Styles for the left content pane.
 .leftContent {
-  width: 50%;
+  width: 500px;
   display: flex;
   flex-direction: column;
-  text-align: left;
   gap: 10px;
-  padding: 30px 0 0 30px; /* Reduced top padding */
-  margin-bottom: 20px;
-  justify-content: flex-start; /* Top align content */
-  height: 100%; /* Take full height of parent */
+  padding: 0 0 0 160px;
+  margin-bottom: 30px;
+  justify-content: flex-end;
+  height: 100%;
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0 20px;
+  }
 }
 
-// Styles for the right content pane.
 .rightContent {
-  width: 60%;
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
-// Styles for the category label text.
 .categoryLabel {
-  font-size: 1rem;
-  font-weight: 300;
+  font-size: 0.9rem;
+  font-weight: 600;
   letter-spacing: 0.1em;
-  margin: 0 0 8px 0;
-  
-  @include themify($themes) {
-    color: themed('secondary-text');
-  }
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--text-color);
+  opacity: 0.7;
 }
 
-// Styles for the main card title.
 .cardTitle {
   font-size: 4.8rem;
   font-weight: 700;
   margin: 0;
   -webkit-background-clip: text;
   background-clip: text;
-  line-height: 1.0; /* Reduced line height to bring lines closer together */
+  line-height: 1.0;
+  color: var(--heading-color);
   
-  @include themify($themes) {
-    color: themed('text');
+  @media (max-width: 768px) {
+    font-size: 3.5rem;
   }
 }
 
-// Styles for the card description text.
 .cardDescription {
-  font-size: 1rem;
+  font-size: 1.2rem;
   line-height: 1.6;
   margin: 0;
-  
-  @include themify($themes) {
-    color: themed('text');
-  }
   padding-top: 30px;
   padding-bottom: 30px;
-  width: 65%;
+  color: var(--text-color);
+  
+  @media (max-width: 768px) {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 }

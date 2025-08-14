@@ -1,7 +1,6 @@
-@use '../styles/colors' as *;
-@use 'sass:map';
+@use '../styles/themes/theme-variables' as *;
 
-.dialogOverlay {
+.overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -9,305 +8,122 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 1000;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  padding: 1rem;
-  
-  &.active {
-    opacity: 1;
-  }
-  
-  &:not(.active) {
-    transition: opacity 0.3s ease;
-  }
+  backdrop-filter: blur(4px);
 }
 
-.dialogContainer {
-  position: relative;
-  background-color: color('primary', 'lighter-background-color');
-  color: color('primary', 'dark-text-color');
-  border-radius: 16px;
-  width: 100%;
-  max-width: 500px;
+.dialog {
+  background-color: var(--background-color);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 600px;
   max-height: 90vh;
-  border: 1px solid color('primary', 'mediam-background-color');
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-  transform: scale(0.95);
-  opacity: 0;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
-              opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  &.active {
-    transform: scale(1);
-    opacity: 1;
-  }
-  
-  &:not(.active) {
-    transform: scale(0.95);
-    opacity: 0;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
-                opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+  overflow-y: auto;
+  padding: 1.5rem;
+  animation: fadeIn 0.3s ease;
+  border: 1px solid var(--border-color);
 }
 
-.dialogContent {
-  position: relative;
-  overflow: hidden;
-}
-
-// Curtain animation elements
-.curtainLeft,
-.curtainRight {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 50%;
-  background-color: map.get($colors-primary, 'lighter-background-color');
-  z-index: 10;
-  transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-}
-
-.curtainLeft {
-  left: 0;
-  transform: translateX(0);
-  
-  &.active {
-    transform: translateX(-100%);
-  }
-}
-
-.curtainRight {
-  right: 0;
-  transform: translateX(0);
-  
-  &.active {
-    transform: translateX(100%);
-  }
-}
-
-// Dialog is closing - curtains close from sides to middle
-.dialogOverlay:not(.active) {
-  .curtainLeft {
-    transform: translateX(50%);
-    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-  }
-  
-  .curtainRight {
-    transform: translateX(-50%);
-    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-  }
-}
-
-.dialogHeader {
+.header {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1.5rem 1.5rem 1rem;
-  border-bottom: 1px solid color('primary', 'mediam-background-color');
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
 }
 
-.dialogTitle {
-  margin: 0;
-  font-size: 1.25rem;
+.title {
+  font-size: 1.5rem;
   font-weight: 600;
-  color: color('primary', 'dark-text-color');
-  text-align: center;
-  width: 100%;
-  padding: 0 1.5rem;
-  margin-bottom: 0.5rem;
+  margin: 0;
+  color: var(--text-color);
 }
 
 .closeButton {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
   background: transparent;
   border: none;
-  color: color('primary', 'light-gray');
-  font-size: 1.5rem;
   cursor: pointer;
   padding: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
   border-radius: 50%;
-  transition: all 0.2s ease;
-  z-index: 20;
+  transition: background-color 0.2s ease;
   
   &:hover {
-    color: color('primary', 'dark-text-color');
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px color('primary', 'accent-pink');
-  }
-  
-  &::before {
-    content: '×';
-    display: block;
-    line-height: 1;
+    background-color: rgba(0, 0, 0, 0.05);
   }
 }
 
-.dialogBody {
-  padding: 1.5rem;
-  overflow-y: auto;
-  max-height: calc(90vh - 150px); // Account for header and tabs
-  
-  @media (max-height: 600px) {
-    max-height: 60vh;
-  }
-  
-  // Custom scrollbar
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-  
-  &::-webkit-scrollbar-track {
-    background: color('primary', 'lighter-background-color');
-  }
-  
-  &::-webkit-scrollbar-thumb {
-    background-color: color('primary', 'mediam-background-color');
-    border-radius: 3px;
-  }
-  
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: color('primary', 'light-gray');
-  }
+.closeIcon {
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--text-color);
 }
 
-// Tabs container
-.tabsContainer {
+.content {
+  margin-top: 1rem;
+}
+
+.tabs {
   display: flex;
-  gap: 0.5rem;
-  overflow-x: auto;
-  padding: 0.25rem 0;
-  width: 100%;
-  scrollbar-width: none; // Hide scrollbar for Firefox
-  -ms-overflow-style: none; // Hide scrollbar for IE/Edge
-  
-  &::-webkit-scrollbar {
-    display: none; // Hide scrollbar for Chrome/Safari
-  }
-  
-  // Add some padding to account for the scrollbar
-  padding-bottom: 0.5rem;
-  margin-bottom: -0.5rem;
-  
-  // Scroll snap
-  scroll-snap-type: x mandatory;
-  
-  > * {
-    scroll-snap-align: start;
-  }
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
+  gap: 1rem;
 }
 
-// Tab styles are now in Tab.module.scss
-
-// Custom Input styling
-.inputContainer {
-  position: relative;
-  margin-bottom: 1rem;
-  width: 100%;
-}
-
-.input {
-  width: 100%;
+.tab {
+  background: transparent;
+  border: none;
   padding: 0.75rem 1rem;
+  cursor: pointer;
   font-size: 1rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  color: map.get($colors-primary, 'dark-text-color');
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 9999px; // Fully rounded
-  transition: all 0.2s ease;
+  font-weight: 500;
+  color: var(--text-secondary);
+  position: relative;
+  transition: color 0.2s ease;
   
-  &:focus {
-    outline: none;
-    border-color: transparent;
-    box-shadow: 0 0 0 2px transparent;
-    background-clip: padding-box;
-    position: relative;
+  &:hover {
+    color: var(--text-color);
+  }
+  
+  &.activeTab {
+    color: var(--text-color);
+    font-weight: 600;
     
-    &::before {
+    &::after {
       content: '';
       position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      background: linear-gradient(90deg, map.get($colors-primary, 'accent-pink'), map.get($colors-primary, 'accent-purple'));
-      border-radius: 9999px;
-      z-index: -1;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--accent-pink);
     }
   }
-  
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-  }
 }
 
-// Custom Checkbox styling
-.checkboxContainer {
-  display: flex;
+.tabCount {
+  display: inline-flex;
   align-items: center;
-  margin-bottom: 1rem;
-  cursor: pointer;
-}
-
-.checkboxInput {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-.checkmark {
-  position: relative;
-  height: 20px;
-  width: 20px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-  margin-right: 0.5rem;
-  transition: all 0.2s ease;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    display: none;
-    left: 6px;
-    top: 2px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-  }
-}
-
-.checkboxInput:checked ~ .checkmark {
-  background-color: map.get($colors-primary, 'accent-pink');
-  border-color: map.get($colors-primary, 'accent-pink');
-  
-  &::after {
-    display: block;
-  }
-}
-
-.checkboxLabel {
+  justify-content: center;
+  background-color: var(--accent-pink);
+  color: white;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  padding: 0.1rem 0.5rem;
   margin-left: 0.5rem;
-  font-size: 0.875rem;
-  user-select: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

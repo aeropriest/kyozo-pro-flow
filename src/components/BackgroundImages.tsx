@@ -39,6 +39,16 @@ const BackgroundImages = () => {
         />
       </div>
       
+      <div className={styles.middleTriangle}>
+        <Image 
+          src="/middle-triangle.png" 
+          alt="Triangle icon" 
+          width={340} 
+          height={340} 
+          style={{ objectFit: 'contain' }} 
+          priority
+        />
+      </div>
       {/* Toolkit Circle Component */}
       <div className={styles.toolkitCircleComponent}>
         <div className={styles.circleComponentRing4}></div>

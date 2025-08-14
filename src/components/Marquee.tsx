@@ -2,28 +2,20 @@
 
 import React, { useMemo } from 'react';
 import styles from './Marquee.module.scss';
-import { colors } from '../lib/colors.generated';
 import { FaCircleCheck } from "react-icons/fa6";
 
-// Marquee row colors using centralized accent colors from color system
-const marqueeRowColors = {
-  music: colors.accentBlue,        // Blue accent for music
-  artMovements: colors.accentPurple, // Purple accent for art movements
-  crafts: colors.accentOrange,     // Orange accent for crafts
-  fashion: colors.borderAccent,    // Pink accent for fashion (using borderAccent which is pink)
-  performance: colors.accentTeal,  // Teal accent for performance
-};
+// Category types for the marquee
+type CategoryType = 'music' | 'artMovements' | 'crafts' | 'fashion' | 'performance';
 
 interface Item {
   text: string;
-  color?: string;
 }
 
 interface RowProps {
   items: Item[];
   direction: 'left' | 'right';
   speed?: number;
-  category: keyof typeof marqueeRowColors;
+  category: CategoryType;
 }
 
 const Row: React.FC<RowProps> = ({ 
@@ -32,8 +24,6 @@ const Row: React.FC<RowProps> = ({
   speed = 10, 
   category 
 }) => {
-  const rowColor = marqueeRowColors[category];
-  
   // Create enough duplicates to fill the screen width
   const repeatedItems = useMemo(() => {
     // Create 4 sets of items to ensure the row is never empty
@@ -49,15 +39,14 @@ const Row: React.FC<RowProps> = ({
       <div 
         className={`${styles.row} ${direction === 'right' ? styles.toRight : styles.toLeft}`}
         style={{ 
-          '--scroll-duration': `${speed}s`,
-          '--row-color': rowColor
+          '--scroll-duration': `${speed}s`
         } as React.CSSProperties}
       >
         {/* First set of repeated items */}
         {repeatedItems.map((item, index) => (
           <div 
             key={`item-${index}`} 
-            className={styles.item}
+            className={`${styles.item} ${styles[category]}`}
           >
             <FaCircleCheck size={24}/> <span>{item.text}</span>
           </div>
@@ -69,7 +58,7 @@ const Row: React.FC<RowProps> = ({
 
 interface MarqueeProps {
   categories: {
-    category: keyof typeof marqueeRowColors;
+    category: CategoryType;
     items: Item[];
   }[];
 }
@@ -82,8 +71,7 @@ const Marquee: React.FC<MarqueeProps> = ({ categories }) => {
           key={`row-${index}`}
           items={row.items}
           direction={index % 2 === 0 ? 'left' : 'right'}
-          // speed={60 + (index * 5)} // Reduced speed (higher number = slower animation)
-          speed={80}
+          speed={80} // Slower animation for better readability
           category={row.category}
         />
       ))}

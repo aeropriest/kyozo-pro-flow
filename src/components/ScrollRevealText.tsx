@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, CSSProperties } from 'react';
+import styles from './ScrollRevealText.module.scss';
 
 interface ScrollRevealTextProps {
   text: string;
@@ -64,27 +65,15 @@ const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
     
     return () => window.removeEventListener('scroll', handleScroll);
   }, [revealSpeed]);
-  
+
   return (
     <div 
       ref={containerRef}
-      style={{
-        marginTop: '4rem',
-        minHeight: '80vh',
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '2rem'
-      }}
+      className={styles.scrollRevealContainer}
     >
-      <h1 style={{
+      <h1 className={styles.scrollRevealText} style={{
         fontSize: fontSize,
-        fontWeight: fontWeight,
-        textAlign: 'center',
-        maxWidth: '1200px',
-        padding: '0 2rem',
-        margin: 0
+        fontWeight: fontWeight
       }}>
         {words.map((word, wordIndex) => {
           // Calculate the starting letter index for this word in the overall text
@@ -93,7 +82,7 @@ const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
             .reduce((acc, w) => acc + w.length, 0) + wordIndex;
           
           return (
-            <span key={wordIndex} style={{ display: 'inline-block', marginRight: '1rem' }}>
+            <span key={wordIndex} className={styles.word}>
               {word.split('').map((letter, letterIndex) => {
                 // Calculate the overall index of this letter in the entire text
                 const overallLetterIndex = previousWordsLetterCount + letterIndex;
@@ -105,16 +94,10 @@ const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
                 // Determine if this letter should be revealed based on scroll progress
                 const isRevealed = scrollProgress >= letterThreshold;
                 
-                const letterStyle: CSSProperties = {
-                  display: 'inline-block',
-                  color: isRevealed ? 'var(--foreground)' : 'rgba(128, 128, 128, 0.6)',
-                  transition: 'color 0.2s ease',
-                };
-                
                 return (
                   <span
                     key={`${wordIndex}-${letterIndex}`}
-                    style={letterStyle}
+                    className={`${styles.letter} ${isRevealed ? styles.revealed : ''}`}
                   >
                     {letter}
                   </span>

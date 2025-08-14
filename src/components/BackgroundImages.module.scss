@@ -47,6 +47,13 @@
   }
 }
 
+.middleTriangle {
+  position: absolute;
+//   right: -15rem;
+  top: 200vh; /* 200vh down as requested */
+  z-index: -1;
+}
+
 @keyframes slideInRight {
   from {
     opacity: 0;
@@ -76,8 +83,8 @@ $ring-four-color: #B59962;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 445vh; // Position between sliding cards and toolkit - top half in cards, bottom half in toolkit
-  left: -22rem;
+  top: 360vh; // Adjusted position for this layout
+  left: -25rem;
   z-index: -5; // Behind other content
   pointer-events: none;
   
@@ -136,7 +143,7 @@ $ring-four-color: #B59962;
 /* Toolkit Background SVG - positioned like other background images */
 .toolkitBackgroundSvg {
   position: absolute;
-  top: 530vh; // Position further down the page for Creative Lab section
+  top: 70vh; // Adjusted position for this layout
   right: 0;
   width: 200px;
   height: 200px;

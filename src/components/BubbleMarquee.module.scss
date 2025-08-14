@@ -1,9 +1,8 @@
-@use '../styles/colors' as *;
-@use 'sass:map';
+@use '../styles/themes/theme-variables' as *;
 
 .bubbleMarqueeContainer {
   width: 100%;
-  display: block; /* Changed from flex to block to avoid any flex gaps */
+  display: block;
   overflow: hidden;
   padding-top: 8rem;
 }
@@ -12,7 +11,7 @@
   width: 100%;
   overflow: hidden;
   position: relative;
-  height: 11.2rem;
+  height: 9rem; /* Reduced by 10% from 11.2rem */
   margin: 0;
   padding: 0;
 }
@@ -28,45 +27,37 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4rem 7rem;
+  padding: 2.9rem 7rem; /* Reduced padding to fit within row height */
   border-radius: 6rem;
   font-weight: 400;
-  font-size: 2.5rem; /* Reset font size for bubble text */
+  font-size: 2.5rem;
   background-color: transparent;
-  border: 1.5px solid var(--row-color);
-  color: var(--row-color); /* Use row color for text */
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  border: 1.5px solid; /* Border color will be set inline via style prop */
+  transition: all 0.3s ease;
   cursor: default;
+  margin-right: 0; /* Removed margin to make bubbles touch */
   margin-top: 0;
   margin-bottom: 0;
+  color: var(--text-color); /* Using theme text color */
   
   /* Check icon color */
   svg {
-    color: var(--row-color);
+    color: inherit;
   }
   
   &:hover {
-    background-color: var(--row-color);
-    
-    @include themify($themes) {
-      color: themed('page-bg');
-    }
-    
-    /* Check icon color on hover */
-    svg {
-      @include themify($themes) {
-        color: themed('page-bg');
-      }
-    }
+    background-color: var(--hover-bg, currentColor);
+    color: var(--background-color);
+    transform: translateY(-2px);
   }
 }
 
 .toLeft {
-  animation: scroll-left var(--scroll-duration, 30s) linear infinite;
+  animation: scroll-left var(--scroll-duration, 10s) linear infinite;
 }
 
 .toRight {
-  animation: scroll-right var(--scroll-duration, 30s) linear infinite;
+  animation: scroll-right var(--scroll-duration, 5s) linear infinite;
 }
 
 @keyframes scroll-left {
@@ -74,13 +65,13 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
 }
 
 @keyframes scroll-right {
   0% {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
   100% {
     transform: translateX(0);
@@ -91,18 +82,24 @@
 @media (max-width: 768px) {
   .bubbleRowContainer {
     line-height: 0 !important;
-    // height: 3.5rem;
+    height: 6.3rem; /* Reduced by 10% from 7rem */
   }
   
   .bubble {
-    // padding: 0.5rem 1.25rem;
-    font-size: 0.9rem;
+    padding: 2rem 3.5rem;
+    font-size: 1.5rem;
+    margin-right: 0; /* Removed margin to make bubbles touch */
   }
 }
 
 @media (max-width: 480px) {
+  .bubbleRowContainer {
+    height: 4.5rem; /* Reduced by 10% from 5rem */
+  }
+  
   .bubble {
-    // padding: 0.4rem 1rem;
-    font-size: 0.8rem;
+    padding: 1.5rem 2.5rem;
+    font-size: 1.2rem;
+    margin-right: 0; /* Removed margin to make bubbles touch */
   }
 }

@@ -2,15 +2,20 @@
 
 import React, { useMemo } from 'react';
 import styles from './BubbleMarquee.module.scss';
-import { colors } from '../lib/colors.generated';
 
-// Bubble row colors using centralized accent colors from color system
+// Define the bubble row colors based on the image
 const bubbleRowColors = {
-  music: colors.accentBlue,        // Blue accent for music
-  artMovements: colors.accentPurple, // Purple accent for art movements
-  crafts: colors.accentOrange,     // Orange accent for crafts
-  fashion: colors.borderAccent,    // Pink accent for fashion (using borderAccent which is pink)
-  performance: colors.accentTeal,  // Teal accent for performance
+  music: '#3b82f6',        // Blue accent for music
+  artMovements: '#8b5cf6', // Purple accent for art movements
+  crafts: '#f97316',       // Orange accent for crafts
+  fashion: '#ec4899',      // Pink accent for fashion
+  performance: '#14b8a6',  // Teal accent for performance
+  techno: '#3b82f6',       // Blue accent for techno
+  futurism: '#8b5cf6',     // Purple accent for futurism
+  classicism: '#8b5cf6',   // Purple accent for classicism
+  jewelry: '#f97316',      // Orange accent for jewelry
+  vintage: '#ec4899',      // Pink accent for vintage
+  minimal: '#14b8a6',      // Teal accent for minimal
 };
 
 interface BubbleItem {
@@ -28,16 +33,17 @@ interface BubbleRowProps {
 const BubbleRow: React.FC<BubbleRowProps> = ({ 
   items, 
   direction, 
-  speed = 10, 
+  speed = 5, 
   category 
 }) => {
   const rowColor = bubbleRowColors[category];
   
   // Create enough duplicates to fill the screen width
   const repeatedItems = useMemo(() => {
-    // Create 4 sets of items to ensure the row is never empty
+    // Create 8 sets of items to ensure the row is never empty
+    // This ensures there's always content visible regardless of screen size
     const repeated = [];
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 8; i++) {
       repeated.push(...items);
     }
     return repeated;
@@ -49,7 +55,6 @@ const BubbleRow: React.FC<BubbleRowProps> = ({
         className={`${styles.bubbleRow} ${direction === 'right' ? styles.toRight : styles.toLeft}`}
         style={{ 
           '--scroll-duration': `${speed}s`,
-          '--row-color': rowColor
         } as React.CSSProperties}
       >
         {/* First set of repeated items */}
@@ -57,7 +62,11 @@ const BubbleRow: React.FC<BubbleRowProps> = ({
           <div 
             key={`item-${index}`} 
             className={styles.bubble}
-            style={{ borderColor: rowColor }}
+            style={{ 
+              borderColor: rowColor,
+              '--hover-bg': rowColor
+              // Not setting color here to use theme text color from CSS
+            } as React.CSSProperties}
           >
             {item.text}
           </div>
@@ -68,7 +77,11 @@ const BubbleRow: React.FC<BubbleRowProps> = ({
           <div 
             key={`item-dup-${index}`} 
             className={styles.bubble}
-            style={{ borderColor: rowColor }}
+            style={{ 
+              borderColor: rowColor,
+              '--hover-bg': rowColor
+              // Not setting color here to use theme text color from CSS
+            } as React.CSSProperties}
             aria-hidden="true"
           >
             {item.text}
@@ -94,8 +107,7 @@ const BubbleMarquee: React.FC<BubbleMarqueeProps> = ({ categories }) => {
           key={`row-${index}`}
           items={row.items}
           direction={index % 2 === 0 ? 'left' : 'right'}
-          // speed={60 + (index * 5)} // Reduced speed (higher number = slower animation)
-          speed={80}
+          speed={80} // Slower animation for better readability
           category={row.category}
         />
       ))}

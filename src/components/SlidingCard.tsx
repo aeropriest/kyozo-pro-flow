@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './SlideCardStyle.module.scss';
 
-interface NewSlidingCardProps {
+interface SlidingCardProps {
   title: string;
   subtitle: string;
   text: string;
@@ -11,7 +11,7 @@ interface NewSlidingCardProps {
   className?: string;
 }
 
-const NewSlidingCard: React.FC<NewSlidingCardProps> = ({ 
+const SlidingCard: React.FC<SlidingCardProps> = ({ 
   title, 
   subtitle, 
   text, 
@@ -38,6 +38,7 @@ const NewSlidingCard: React.FC<NewSlidingCardProps> = ({
       return () => card.removeEventListener('mousemove', handleMouseMove);
     }
   }, []);
+  
   // Clone the content and pass mouse position if it's ParallaxGallery
   const enhancedContent = React.isValidElement(content) && 
     content.type && 
@@ -68,4 +69,4 @@ const NewSlidingCard: React.FC<NewSlidingCardProps> = ({
   );
 };
 
-export default NewSlidingCard;
+export default SlidingCard;

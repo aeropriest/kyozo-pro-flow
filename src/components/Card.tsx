@@ -1,22 +1,20 @@
 "use client";
 
 import React from 'react';
+import styles from './SlidingCards.module.scss';
 
 interface CardProps {
   title: string;
-  className?: string;
-  children?: React.ReactNode;
-  variant?: 'blue' | 'green' | 'purple' | 'rose';
+  text: string;
+  color: 'blue' | 'green' | 'purple' | 'rose';
 }
 
-const Card: React.FC<CardProps> = ({ title, className = '', children, variant }) => {
-  const cardClass = variant ? `card card--${variant}` : 'card';
-  
+const Card: React.FC<CardProps> = ({ title, text, color }) => {
   return (
-    <div className={`${cardClass} ${className}`}>
-      <div className="card__content">
-        <h2 className="card__title">{title}</h2>
-        {children}
+    <div className={`${styles.card} ${styles[color]}`}>
+      <div className={styles.cardContent}>
+        <h2 className={styles.cardTitle}>{title}</h2>
+        <p className={styles.cardText}>{text}</p>
       </div>
     </div>
   );

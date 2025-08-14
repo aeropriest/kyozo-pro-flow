@@ -1,11 +1,7 @@
-@use '../styles/colors' as *;
-@use 'sass:map';
-
 .slidingCardsContainer {
   position: relative;
   width: 100%;
-  // background-color: red;
-  z-index: 1; /* Lowest z-index in the stack */
+  z-index: 1;
 }
 
 .stickyContainer {
@@ -42,7 +38,7 @@
   border-radius: 1rem;
   
   &.blue {
-    background: linear-gradient(135deg, map.get($colors-primary, 'accent-blue') 0%, #4a5af8 100%);
+    background: linear-gradient(135deg, #3b82f6 0%, #4a5af8 100%);
   }
   
   &.green {
@@ -50,7 +46,7 @@
   }
   
   &.purple {
-    background: linear-gradient(135deg, map.get($colors-primary, 'accent-pink') 0%, #8b5cf6 100%);
+    background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
   }
   
   &.rose {
@@ -68,10 +64,7 @@
   font-weight: 700;
   margin-bottom: 1rem;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  
-  @include themify($themes) {
-    color: themed('text');
-  }
+  color: var(--text-color);
   
   @media (min-width: 768px) {
     font-size: 4.5rem;
@@ -81,10 +74,7 @@
 .cardText {
   font-size: 1.25rem;
   margin-bottom: 2rem;
-  
-  @include themify($themes) {
-    color: themed('text');
-  }
+  color: var(--text-color);
   
   @media (min-width: 768px) {
     font-size: 1.5rem;

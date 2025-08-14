@@ -18,7 +18,6 @@ const BottomText: React.FC<BottomTextProps> = ({
   fontWeight = 700
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const words = text.split(' ');
   
   useEffect(() => {
     setIsLoaded(true);
@@ -33,7 +32,8 @@ const BottomText: React.FC<BottomTextProps> = ({
           <Image 
             src="/bottom-left.png" 
             alt="Left decoration" 
-            fill 
+            width={200}
+            height={200}
             className={isLoaded ? styles.imageLoaded : styles.imageLoading}
             style={{
               objectFit: 'contain',
@@ -47,7 +47,8 @@ const BottomText: React.FC<BottomTextProps> = ({
           <Image 
             src="/bottom-right.png" 
             alt="Right decoration" 
-            fill 
+            width={200}
+            height={200}
             className={isLoaded ? styles.imageLoaded : styles.imageLoading}
             style={{
               objectFit: 'contain',
@@ -70,7 +71,11 @@ const BottomText: React.FC<BottomTextProps> = ({
       
       {/* Button */}
       <div className={`${styles.buttonContainer} ${isLoaded ? styles.loaded : styles.loading}`}>
-        <Button variant="primary" href="#">
+        <Button 
+          variant="accent-border" 
+          size="large" 
+          href="#"
+        >
           Join the waitlist
         </Button>
       </div>

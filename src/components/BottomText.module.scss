@@ -1,5 +1,3 @@
-@use '../styles/colors' as *;
-
 .container {
   min-height: 80vh;
   width: 100%;
@@ -10,10 +8,8 @@
   padding: 2rem;
   position: relative;
   overflow: hidden;
-  
-  @include themify($themes) {
-    background-color: themed('page-bg');
-  }
+  // background-color: var(--background-color);
+  padding-bottom: 6rem;
 }
 
 .shapesContainer {
@@ -68,10 +64,7 @@
   text-align: center;
   font-size: 0.875rem;
   z-index: 2;
-  
-  @include themify($themes) {
-    color: themed('text');
-  }
+  color: var(--text-color);
   
   &.loaded {
     opacity: 1;
@@ -91,4 +84,26 @@
 
 .imageLoading {
   opacity: 0;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .leftShape, .rightShape {
+    width: 25%;
+    height: 15vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .leftShape, .rightShape {
+    width: 30%;
+    height: 12vh;
+  }
+  
+  .copyright {
+    font-size: 0.75rem;
+  }
 }

@@ -1,0 +1,55 @@
+@use '../styles/themes/theme-variables' as *;
+
+.scrollRevealContainer {
+  margin-top: 4rem;
+  min-height: 80vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.scrollRevealText {
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  max-width: 1200px;
+  padding: 0 2rem;
+  margin: 0 auto;
+  color: var(--heading-color);
+  
+  @media (max-width: 768px) {
+    font-size: 4rem !important;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 3rem !important;
+  }
+}
+
+.word {
+  display: inline-block;
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.letter {
+  display: inline-block;
+  color: rgba(128, 128, 128, 0.6);
+  transition: color 0.2s ease;
+  
+  &.revealed {
+    color: var(--text-color);
+  }
+}
+
+// Apply gradient text effect
+.scrollRevealText {
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

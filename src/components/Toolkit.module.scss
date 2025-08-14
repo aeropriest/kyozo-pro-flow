@@ -1,7 +1,4 @@
-@use '../styles/colors' as *;
-@use 'sass:map';
-
-
+@use '../styles/themes/theme-variables' as *;
 
 .socialMediaSection {
   position: relative;
@@ -10,83 +7,97 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 8rem 1rem;
+  padding: 4rem 1rem;
   text-align: center;
-  overflow: visible; // Allow circles to overflow and be visible
-  z-index: auto; // Let normal stacking context apply
-  // background-color: #8b5cf6;
+  overflow: visible;
+  z-index: auto;
+  // background-color: var(--background-color);
+  
+  // Add decorative circles
+  &::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e66465, #9198e5);
+    opacity: 0.3;
+    z-index: -1;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 5%;
+    right: 15%;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #66e6b4, #9198e5);
+    opacity: 0.3;
+    z-index: -1;
+  }
 }
 
-
-
-
-
 .socialMediaTitle {
-  font-size: 1rem;
+  font-size: 6rem;
   font-weight: 700;
-  line-height: 1.25 !important;
-  
-  @include themify($themes) {
-    color: themed('text');
-  }
+  line-height: 1.1 !important;
+  color: var(--text-color);
+  margin-bottom: 1rem;
 
-  @media (min-width: 640px) {
-    font-size: 6rem;
-  }
-  @media (min-width: 1024px) {
-    font-size: 8rem;
+  @media (max-width: 640px) {
+    font-size: 3rem;
   }
 }
 
 .socialMediaBubble {
-  margin-top: 2.5rem;
-  padding: 1.25rem 3rem;
-  background-color: backgrounds('glass');
+  margin-top: 1rem;
+  padding: 0.75rem 3rem;
+  background-color: var(--card-bg);
   border-radius: 9999px;
   box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
-  border: 1px solid borders('default');
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: inline-block;
 }
 
 .socialMediaText {
-  font-size: 1.875rem;
+  font-size: 2.5rem;
   font-weight: 700;
   letter-spacing: 0.025em;
-  
-  @include themify($themes) {
-    color: themed('text');
-  }
+  color: var(--text-color);
 
-  @media (min-width: 640px) {
-    font-size: 2.25rem;
-  }
-  @media (min-width: 1024px) {
-    font-size: 3rem;
+  @media (max-width: 640px) {
+    font-size: 1.5rem;
   }
 }
 
 .creativeLabSection {
   position: relative;
-  width: 100vw;      // full viewport width
-  max-width: none;   // remove max-width constraint
-  margin: 0;         // remove auto centering margin
+  width: 100%;
+  max-width: none;
+  margin: 0;
   padding: 6rem 1.5rem;
-
-
+  overflow: hidden;
+  // background-color: var(--background-color);
 
   @media (min-width: 640px) {
     padding: 6rem 2rem;
   }
 }
 
-
 .gridContainer {
   display: grid;
   grid-template-columns: 1fr;
   gap: 3rem 4rem;
-  align-items: end;  // align items to the bottom
+  align-items: end;
   justify-content: flex-end;
-  position: relative; // needed for absolute background image
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
   
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
@@ -104,61 +115,41 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;  // push content to bottom
+  justify-content: flex-end;
   height: 100%;
 
   .decorativeShape {
-    background-color: green;
     position: absolute;
     top: 50%;
-    left: 250%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    height: 400px;
+    right: -50px;
+    transform: translateY(-50%);
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
     background: conic-gradient(
       from 90deg at 50% 50%,
-      #3b82f6 0%,
-      #8b5cf6 50%,
-      #3b82f6 100%
+      #ff9a9e 0%,
+      #fad0c4 25%,
+      #fbc2eb 50%,
+      #a6c1ee 75%,
+      #ff9a9e 100%
     );
-    filter: blur(100px);
-    opacity: 0.15;
+    filter: blur(40px);
+    opacity: 0.3;
     z-index: -1;
     pointer-events: none;
   }
 }
 
 .creativeLabTitle {
-  font-size: 3rem;
+  font-size: 4.5rem;
   font-weight: 900;
-  line-height: 1.25 !important;
-  
-  @include themify($themes) {
-    color: themed('text');
-  }
+  line-height: 1.1 !important;
+  color: var(--text-color);
+  margin: 0;
 
-  @media (min-width: 768px) {
-    font-size: 3.75rem;
-  }
-  @media (min-width: 1024px) {
-    font-size: 4.5rem;
-  }
-}
-
-.sectionNumberLeft {
-  position: absolute;
-  bottom: -2rem;
-  right: 50%;
-  transform: translateX(50%);
-  color: rgba(255, 255, 255, 0.1);
-  font-family: monospace;
-  font-size: 1.5rem;
-  user-select: none;
-
-  @media (min-width: 768px) {
-    right: 25%;
-    transform: translateX(0);
+  @media (max-width: 768px) {
+    font-size: 3rem;
   }
 }
 
@@ -166,34 +157,25 @@
   font-size: 1rem;
   line-height: 1.625;
   max-width: 28rem;
-  
-  @include themify($themes) {
-    color: themed('text');
-  }
+  color: var(--text-color);
+  margin-bottom: 2rem;
 }
 
 .ctaLink {
-  margin-top: 2rem;
-  color: map.get($colors-primary, 'dark-text-color');
+  margin-top: 1rem;
+  color: #3b82f6;
   font-weight: 600;
   font-size: 1rem;
   display: inline-flex;
   align-items: center;
   align-self: flex-start;
-}
-
-.sectionNumberRight {
-  position: absolute;
-  bottom: -2rem;
-  right: 50%;
-  transform: translateX(50%);
-  color: rgba(255, 255, 255, 0.1);
-  font-family: monospace;
-  font-size: 1.5rem;
-  user-select: none;
-
-  @media (min-width: 768px) {
-    right: 0;
-    transform: translateX(0);
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+  
+  svg {
+    margin-left: 0.5rem;
   }
 }

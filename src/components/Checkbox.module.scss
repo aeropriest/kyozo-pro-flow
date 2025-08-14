@@ -1,15 +1,15 @@
-@use '../styles/colors' as *;
-@use 'sass:map';
-
-.checkboxWrapper {
-  margin-bottom: 1rem;
-}
+@use '../styles/themes/theme-variables' as *;
 
 .checkboxContainer {
   display: flex;
   align-items: center;
+  position: relative;
+  padding-left: 30px;
   cursor: pointer;
+  font-size: 0.9rem;
   user-select: none;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
 }
 
 .checkboxInput {
@@ -18,20 +18,34 @@
   cursor: pointer;
   height: 0;
   width: 0;
+  
+  &:checked ~ .checkmark {
+    background-color: var(--accent-pink);
+    border-color: var(--accent-pink);
+    
+    &:after {
+      display: block;
+    }
+  }
+  
+  &:focus ~ .checkmark {
+    box-shadow: 0 0 0 2px rgba(var(--accent-pink-rgb), 0.2);
+  }
 }
 
 .checkmark {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 20px;
   width: 20px;
-  min-width: 20px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: transparent;
+  border: 2px solid var(--border-color);
   border-radius: 4px;
   transition: all 0.2s ease;
   
-  &::after {
-    content: '';
+  &:after {
+    content: "";
     position: absolute;
     display: none;
     left: 6px;
@@ -44,31 +58,10 @@
   }
 }
 
-.checkboxInput:checked ~ .checkmark {
-  background-color: map.get($colors-primary, 'accent-pink');
-  border-color: map.get($colors-primary, 'accent-pink');
-  
-  &::after {
-    display: block;
-  }
+.checkboxContainer:hover .checkmark {
+  border-color: var(--accent-pink);
 }
 
-.checkboxInput:focus ~ .checkmark {
-  box-shadow: 0 0 0 2px rgba(map.get($colors-primary, 'accent-pink'), 0.4);
-}
-
-.checkboxLabel {
-  margin-left: 0.75rem;
-  font-size: 0.875rem;
-  color: map.get($colors-primary, 'dark-text-color');
-}
-
-.checkboxInput:disabled ~ .checkmark {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.checkboxInput:disabled ~ .checkboxLabel {
-  opacity: 0.5;
-  cursor: not-allowed;
+.label {
+  margin-left: 0.5rem;
 }

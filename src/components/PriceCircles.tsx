@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './PriceCircles.module.scss';
 
-const NUM_CIRCLES = 5;
+const NUM_CIRCLES = 6;
 const SPEED = 0.25;
 
 interface PriceCirclesProps {
@@ -73,7 +73,7 @@ const PriceCircles: React.FC<PriceCirclesProps> = ({ children }) => {
         ))}
       </div>
       {/* Content container for children */}
-      <div className="relative z-10 w-full h-full">
+      <div className={styles.contentContainer}>
         {children}
       </div>
     </div>

@@ -22,7 +22,7 @@ const PricingSection = () => {
       </div>
       
       {/* Content overlay */}
-      <div className={styles.content}>        
+      <div className={styles.content}>
         {/* Pricing cards */}
         <div className={styles.pricingGrid}>
           {pricingData.map((data) => (
@@ -34,7 +34,7 @@ const PricingSection = () => {
             </div>
           ))}
         </div>
-        <Button variant="outline-only" href="#">Join the waitlist</Button>
+        <Button variant="accent-border" href="#">Join the waitlist</Button>
       </div>
     </section>
   );

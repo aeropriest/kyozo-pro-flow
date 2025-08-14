@@ -20,7 +20,6 @@ const Hero: React.FC<HeroProps> = ({
     <div className={styles.heroContainer}>
       <div className={`${styles.gradient} ${styles.topLeft}`}></div>
       <div className={`${styles.gradient} ${styles.topRight}`}></div>
-      <div className={`${styles.gradient} ${styles.bottomRight}`}></div>
       <div className={styles.topAnimationContainer}>
         <svg
           width="100%"

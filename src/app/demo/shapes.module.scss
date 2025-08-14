@@ -1,203 +1,52 @@
-// Shapes module with custom styles
+/* Shapes module for animated shapes and gradients */
 
-.shapesContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
-
-.shapeItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.shapeName {
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.shapeDemo {
-  height: 100px;
-  width: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
-  &:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-}
-
-// Simple shape classes without mixins
-.circle {
-  width: 100px;
-  height: 100px;
+.gradientCircle {
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-  background-color: #e91e63;
+  background: conic-gradient(
+    from 0deg,
+    #7b3b78,
+    #2b4b8f,
+    #e78b76,
+    #7b3b78
+  );
+  filter: blur(2px);
+  opacity: 0.8;
 }
 
-.square {
-  width: 100px;
-  height: 100px;
-  background-color: #4169e1;
-}
-
-.rectangle {
-  width: 120px;
-  height: 80px;
-  background-color: #ffbf00;
-}
-
-.roundedRectangle {
-  width: 120px;
-  height: 80px;
-  border-radius: 10px;
-  background-color: #b19cd9;
-}
-
-// Advanced shapes
-.diamond {
-  width: 70px;
-  height: 70px;
-  background-color: #e91e63;
-  transform: rotate(45deg);
-}
-
-.hexagon {
-  width: 100px;
-  height: 86.6px; // height = width * sin(60°)
-  background-color: #4169e1;
-  clip-path: polygon(0% 50%, 25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%);
-}
-
-.pill {
-  width: 120px;
-  height: 60px;
-  background-color: #b19cd9;
-  border-radius: 30px;
-}
-
-// Gradient styles
-.linearGradient {
-  width: 120px;
-  height: 80px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #e91e63 0%, #b19cd9 100%);
-}
-
-.radialGradient {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #ffbf00, #e91e63);
-}
-
-.animatedGradient {
-  width: 120px;
-  height: 80px;
-  border-radius: 10px;
-  background: linear-gradient(270deg, #4169e1, #b19cd9, #e91e63, #4169e1);
-  background-size: 400% 400%;
-  animation: gradient-animation 15s ease infinite;
-}
-
-@keyframes gradient-animation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-// Circular gradient shapes based on provided images
-.circleGradient1 {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: radial-gradient(circle at center, #ffbf00 0%, #ffb6c1 30%, #b19cd9 70%, #8a2be2 100%);
-}
-
-.circleGradient2 {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: radial-gradient(circle at center, #5fb4ff 20%, #b19cd9 50%, #ffbf00 100%);
-}
-
-.circleGradient3 {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: radial-gradient(circle at center, #86efac 0%, #5fb4ff 40%, #d8b4fe 100%);
-  box-shadow: 0 0 20px rgba(134, 239, 172, 0.3);
-  // This matches the gradient-aurora mixin from _colors.scss
-}
-
-.auroraGradient {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: radial-gradient(circle at center, #86efac 0%, #5fb4ff 40%, #d8b4fe 100%);
-  box-shadow: 0 0 20px rgba(134, 239, 172, 0.3);
-}
-
-.phoneBackgroundGradient {
-  width: 1000px;
-  height: 1000px;
-  border-radius: 50%;
-  background-color: transparent;
+.pulsingRing {
   position: relative;
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
   
-  // Animated expanding ring
-  &::after {
+  &::before {
     content: '';
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 200%;
-    height: 200%;
+    width: 100%;
+    height: 100%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
     background: transparent;
-    background-image: 
-      conic-gradient(
-        from 0deg,
-        #7b3b78,
-        #2b4b8f,
-        #e78b76,
-        #7b3b78
-      );
-    -webkit-mask: 
-      radial-gradient(circle at center, 
-        transparent 10%, 
-        transparent 22%, 
-        rgba(0, 0, 0, 0.1) 24%,
-        rgba(0, 0, 0, 0.4) 26%,
-        rgba(0, 0, 0, 0.7) 28%, 
-        rgba(0, 0, 0, 0.7) 32%,
-        rgba(0, 0, 0, 0.4) 34%,
-        rgba(0, 0, 0, 0.1) 36%,
-        transparent 38%
-      );
-    mask: 
-      radial-gradient(circle at center, 
-        transparent 0%, 
-        transparent 22%, 
-        rgba(0, 0, 0, 0.1) 24%,
-        rgba(0, 0, 0, 0.4) 26%,
-        rgba(0, 0, 0, 0.7) 28%, 
-        rgba(0, 0, 0, 0.7) 32%,
-        rgba(0, 0, 0, 0.4) 34%,
-        rgba(0, 0, 0, 0.1) 36%,
-        transparent 38%
-      );
-    filter: blur(5px);
-    animation: expandRing 1s infinite; /* Animation speed doubled */
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    animation: pulse 2s infinite;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    width: 50%;
+    height: 50%;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    width: 150%;
+    height: 150%;
+    opacity: 0;
   }
 }

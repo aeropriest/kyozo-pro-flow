@@ -1,3 +1,4 @@
+'use client';
 import React, { useMemo, useEffect } from 'react';
 import styles from './VideoWall.module.scss';
 
@@ -78,6 +79,7 @@ interface RowData {
 }
 
 const VideoWall: React.FC = () => {
+  // Create initial rows with proper distribution of videos
   const initialRows = useMemo<RowData[]>(() =>
     Array.from({ length: ROW_COUNT }, (_, i) => {
       const firstVideoIndex = (i * 2) % VIDEO_SOURCES.length;
@@ -90,10 +92,31 @@ const VideoWall: React.FC = () => {
       };
     }), []);
 
+  // Double the rows to ensure seamless looping
+  // This creates a continuous flow when the animation repeats
   const doubledRows = [...initialRows, ...initialRows];
 
+  // Add a small delay to video loading to prevent overwhelming the browser
+  useEffect(() => {
+    // Let the component mount first
+    const timer = setTimeout(() => {
+      // Find all video elements and preload them
+      const videos = document.querySelectorAll('.videoWall video');
+      videos.forEach((video, index) => {
+        // Stagger video loading slightly
+        setTimeout(() => {
+          if (video instanceof HTMLVideoElement) {
+            video.load();
+          }
+        }, index * 100);
+      });
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className={styles.videoWallContainer}>
+    <div className={`${styles.videoWallContainer} videoWall`}>
       <div className={styles.scrollViewport}>
         <div className={styles.scrollWrapper}>
           {doubledRows.map((row, index) => (

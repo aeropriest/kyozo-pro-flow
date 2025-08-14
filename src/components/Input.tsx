@@ -1,68 +1,33 @@
 'use client';
-import React, { forwardRef, ChangeEvent, ForwardedRef } from 'react';
+
+import React, { ChangeEvent, InputHTMLAttributes } from 'react';
 import styles from './Input.module.scss';
 
-interface InputProps {
-  type?: string;
-  placeholder?: string;
-  value?: string | number;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  name?: string;
-  id?: string;
-  required?: boolean;
-  disabled?: boolean;
-  className?: string;
+interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   label?: string;
   error?: string;
-  [key: string]: any; // For any additional props
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(({
-  type = 'text',
-  placeholder = '',
-  value,
-  onChange,
-  name,
-  id,
-  required = false,
-  disabled = false,
+const Input: React.FC<InputProps> = ({
+  label,
+  error,
   className = '',
-  label = '',
-  error = '',
+  onChange,
   ...props
-}, ref) => {
-  const inputId = id || name;
-  
+}) => {
   return (
-    <div className={`${styles.inputWrapper} ${className}`}>
-      {label && (
-        <label htmlFor={inputId} className={styles.label}>
-          {label}
-          {required && <span className={styles.required}>*</span>}
-        </label>
-      )}
-      
-      <div className={styles.inputContainer}>
-        <input
-          ref={ref}
-          type={type}
-          id={inputId}
-          name={name}
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          required={required}
-          disabled={disabled}
-          className={`${styles.input} ${error ? styles.hasError : ''}`}
-          {...props}
-        />
-      </div>
-      
-      {error && <p className={styles.errorMessage}>{error}</p>}
+    <div className={`${styles.inputContainer} ${className}`}>
+      {label && <label className={styles.label}>{label}</label>}
+      <input
+        className={`${styles.input} ${error ? styles.inputError : ''}`}
+        onChange={onChange}
+        {...props}
+      />
+      {error && <div className={styles.errorMessage}>{error}</div>}
     </div>
   );
-});
-
-Input.displayName = 'Input';
+};
 
 export default Input;

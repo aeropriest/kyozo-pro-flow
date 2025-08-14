@@ -1,5 +1,4 @@
-@use 'sass:map';
-@use '../styles/_colors.scss' as *;
+@use '../styles/themes/theme-variables' as *;
 
 .parallax-gallery {
   position: absolute; /* Position absolutely to fill the entire parent */
@@ -14,8 +13,8 @@
 
 .parallax-gallery__background {
   height: 100%;
-  background: map.get($colors-primary, 'lighter-background-color'); // Use color variable
-  color: map.get($colors-primary, 'dark-text-color');
+  background: var(--card-bg); // Use theme variable
+  color: var(--text-color);
 }
 
 .parallax-gallery__viewport {
@@ -54,8 +53,8 @@
 .parallax-image__container {
   overflow: hidden;
   border-radius: 1rem;
-  background: map.get($colors-primary, 'light-gray'); // Use color variable
-  box-shadow: 0 10px 25px rgba(map.get($colors-primary, 'background-color'), 0.3);
+  background: var(--card-bg); // Use theme variable
+  box-shadow: var(--card-shadow);
   
   @media (min-width: 768px) {
     border-radius: 1.25rem;
@@ -69,10 +68,8 @@
   object-fit: cover;
   user-select: none;
   -webkit-user-drag: none;
-  -khtml-user-drag: none;
   -moz-user-drag: none;
   -o-user-drag: none;
-  user-drag: none;
   filter: brightness(1.1) contrast(1.1); // Enhance image appearance
   
   @media (min-width: 768px) {
@@ -83,4 +80,3 @@
     height: 40vh;
   }
 }
-  

@@ -2,8 +2,48 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './Dialog.module.scss';
-import FormVideo from './FormVideo';
-import { Input, Button, Checkbox } from '@/components/ui';
+import { Button } from '@/components/ui';
+import Image from 'next/image';
+import DialogCard from './DialogCard';
+
+const cards = [
+  {
+    title: "Set Your Avatar",
+    subtitle: "Give your profile a personal touch.",
+    image: "/Parallax3.jpg",
+    component: 'AvatarStep',
+  },
+  {
+    title: "Create Your Community",
+    subtitle: "Tell us about your community.",
+    image: "/Parallax4.jpg",
+    component: 'CommunityDetailsStep',
+  },
+  {
+    title: "Community Settings",
+    subtitle: "Customize your community's rules and appearance.",
+    image: "/Parallax5.jpg",
+    component: 'CommunitySettingsStep',
+  },
+  {
+    title: "Add Community Members",
+    subtitle: "Let's grow your community together.",
+    image: "/Parallax1.jpg",
+    component: 'AddMembersStep',
+  },
+  {
+    title: "Member Management",
+    subtitle: "Review and manage your members.",
+    image: "/Parallax2.jpg",
+    component: 'MemberManagementStep',
+  },
+  {
+    title: "Onboarding Complete!",
+    subtitle: "You're all set. Welcome to the dashboard!",
+    image: "/Parallax3.jpg",
+    component: 'DashboardStep',
+  },
+];
 
 interface Tab {
   label: string;
@@ -145,190 +185,30 @@ const Dialog: React.FC<DialogProps> = ({
 
   if (!isOpen && !isClosing) return null;
 
-  return (
+  return(    
     <div className={styles.overlay}>
-      <div 
-        ref={dialogRef}
-        className={`${styles.dialog} ${className} ${isClosing ? styles.closing : ''}`}
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Left curtain panel */}
-        <div className={`${styles.dialogLeft} ${isClosing ? styles.closingLeft : ''}`}>
-          <div className={styles.header}>
-            <div>
-              <p className={styles.stepIndicator}>Step {step} of {totalSteps}</p>
-              {title && <h2 className={styles.title}>{title}</h2>}
-              {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
-            </div>
-          </div>
-
-          <div className={styles.dialogContent}>
-            <div className={styles.leftContent}>
-              {showTabs && tabs.length > 0 && (
-                <div className={styles.tabs}>
-                  {tabs.map((tab, index) => (
-                    <button
-                      key={index}
-                      className={`${styles.tab} ${index === activeTab ? styles.activeTab : ''}`}
-                      onClick={() => onTabChange(index)}
-                    >
-                      {tab.label}
-                      {tab.count !== undefined && (
-                        <span className={styles.tabCount}>{tab.count}</span>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              )}
-              
-              <div className={styles.content}>
-                {children ? (
-                  children
-                ) : (
-                  <div className={styles.authForm}>
-                    {/* Form state management */}
-                    <div className={styles.tabButtons}>
-                      <button 
-                        className={`${styles.tabButton} ${currentTab === 0 ? styles.activeTabButton : ''}`} 
-                        onClick={() => handleTabChange(0)}
-                      >
-                        Sign In
-                      </button>
-                      <button 
-                        className={`${styles.tabButton} ${currentTab === 1 ? styles.activeTabButton : ''}`} 
-                        onClick={() => handleTabChange(1)}
-                      >
-                        Sign Up
-                      </button>
-                    </div>
-                    
-                    {currentTab === 0 ? (
-                      /* Sign In Form */
-                      <form onSubmit={handleSignIn}>
-                        <div className={styles.formGroup}>
-                          <Input 
-                            type="email" 
-                            name="email"
-                            placeholder="Email address" 
-                            value={signInForm.email}
-                            onChange={handleSignInChange} 
-                            className={styles.roundedInput}
-                          />
-                        </div>
-                        <div className={styles.formGroup}>
-                          <Input 
-                            type="password" 
-                            name="password"
-                            placeholder="Password" 
-                            value={signInForm.password}
-                            onChange={handleSignInChange} 
-                            className={styles.roundedInput}
-                          />
-                        </div>
-                        <div className={styles.forgotPassword}>
-                          <a href="#">Forgot password?</a>
-                        </div>
-                        <div className={styles.buttonRow}>
-                          <div className={styles.buttonCol}>
-                            <Button variant="solid" fullWidth type="submit">
-                              Sign In
-                            </Button>
-                          </div>
-                          <div className={styles.buttonCol}>
-                            <Button variant="outline-only" fullWidth className={styles.googleButton}>
-                              <img src="/google-icon.svg" alt="Google" className={styles.googleIcon} />
-                              <span className={styles.googleText}>Sign in with Google</span>
-                            </Button>
-                          </div>
-                        </div>
-                        <div className={styles.termsContainer}>
-                          <Checkbox
-                            id="terms"
-                            name="terms"
-                            label="I agree to the Terms & Conditions"
-                            checked={termsAccepted}
-                            onChange={(e) => setTermsAccepted(e.target.checked)}
-                          />
-                        </div>
-                      </form>
-                    ) : (
-                      /* Sign Up Form */
-                      <form onSubmit={handleSignUp}>
-                        <div className={styles.formGroup}>
-                          <Input 
-                            type="text" 
-                            name="fullName"
-                            placeholder="Full name" 
-                            value={signUpForm.fullName}
-                            onChange={handleSignUpChange} 
-                            className={styles.roundedInput}
-                          />
-                        </div>
-                        <div className={styles.formGroup}>
-                          <Input 
-                            type="email" 
-                            name="email"
-                            placeholder="Email address" 
-                            value={signUpForm.email}
-                            onChange={handleSignUpChange} 
-                            className={styles.roundedInput}
-                          />
-                        </div>
-                        <div className={styles.formGroup}>
-                          <Input 
-                            type="password" 
-                            name="password"
-                            placeholder="Create password" 
-                            value={signUpForm.password}
-                            onChange={handleSignUpChange} 
-                            className={styles.roundedInput}
-                          />
-                        </div>
-                        <div className={styles.buttonRow}>
-                          <div className={styles.buttonCol}>
-                            <Button variant="solid" fullWidth type="submit">
-                              Create Account
-                            </Button>
-                          </div>
-                          <div className={styles.buttonCol}>
-                            <Button variant="outline-only" fullWidth className={styles.googleButton}>
-                              <img src="/google-icon.svg" alt="Google" className={styles.googleIcon} />
-                              <span className={styles.googleText}>Sign up with Google</span>
-                            </Button>
-                          </div>
-                        </div>
-                        <div className={styles.termsContainer}>
-                          <Checkbox
-                            name="terms"
-                            label="I agree to the Terms & Conditions"
-                            checked={termsAccepted}
-                            onChange={(e) => setTermsAccepted(e.target.checked)}
-                          />
-                        </div>
-                      </form>
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Right curtain panel */}
-        <div className={`${styles.dialogRight} ${isClosing ? styles.closingRight : ''}`}>
-          <button className={styles.closeButton} onClick={handleClose}>
-            <span className={styles.closeIcon}>×</span>
-          </button>
-
-          <div className={styles.dialogContent}>  
-            <div className={styles.rightContent}>
-              <FormVideo />
-            </div>
-          </div>
-        </div>
+    <div 
+      ref={dialogRef}
+      className={`${styles.dialog} ${className} ${isClosing ? styles.closing : ''}`}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className={styles.dialogContent}>
+           
+        {cards.map((page, index) => (
+          <DialogCard
+            key={index}
+            subtitle={page.subtitle}
+            title={page.title}
+            text={`Step ${index + 1} of ${cards.length}: ${page.component}`}
+            button={<Button variant="outline-only" size="medium" href="#">Continue</Button>}
+            content={<Image src={page.image} alt={page.title} width={800} height={800} />}
+          />
+        ))}
+      
       </div>
     </div>
-  );
+    </div>
+)
 };
 
 export default Dialog;

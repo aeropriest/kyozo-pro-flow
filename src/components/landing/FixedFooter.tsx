@@ -1,12 +1,9 @@
 'use client';
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import Image from 'next/image';
-import Button from './Button';
-import DialogX from './DialogX';
-import Dialog from './Dialog';
-import Input from './Input';
-import Checkbox from './Checkbox';
+import {Button as ButtonUI} from "@/components/ui";
 import styles from './FixedFooter.module.scss';
+import Dialog from '../Dialog';
 
 interface FormData {
   firstName: string;
@@ -80,14 +77,14 @@ const FixedFooter: React.FC<FixedFooterProps> = ({ className = '' }) => {
             height={30} 
             className={styles.buttonLogo}
           />
-          <Button 
-            variant="accent-fill" 
+          <ButtonUI 
+            variant="solid" 
             onClick={openDialog}
             className={styles.joinButton}
             size="small"
           >
             Join
-          </Button>
+          </ButtonUI>
         </div>
       </div>
       

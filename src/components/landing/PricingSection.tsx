@@ -2,10 +2,10 @@
 
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { pricingData } from '../data/pricingData';
+import { pricingData } from '../../data/pricingData';
 import PricingCard from './PricingCard';
 import styles from './PricingSection.module.scss';
-import Button from './Button';
+import {Button as ButtonUI} from "@/components/ui";
 
 // Dynamically import PriceCircles with SSR disabled to avoid hydration issues
 const PriceCircles = dynamic(() => import('./PriceCircles'), {
@@ -34,7 +34,7 @@ const PricingSection = () => {
             </div>
           ))}
         </div>
-        <Button variant="accent-border" href="#">Join the waitlist</Button>
+        <ButtonUI variant="outline-only" href="#">Join the waitlist</ButtonUI>
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Toolkit.module.scss';
-import ArrowIcon from './icons/ArrowIcon';
+import ArrowIcon from '../icons/ArrowIcon';
 
 interface ToolkitProps {
   description?: string;

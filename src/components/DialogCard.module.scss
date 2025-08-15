@@ -1,10 +1,9 @@
 @use '../styles/themes/_theme-variables' as *;
 
 .cardContainer {
-  // width: calc(100% - 4rem); /* Account for 5rem left and 5rem right margins */
-  // height: calc(100vh - 8rem); /* Account for top and bottom margins */
-  // margin-left: 2rem;
-  // margin-top: 4rem;
+  width: 100%; /* Take full width of parent */
+  height: 100%; /* Take full height of parent */
+  margin: 0; /* Remove all margins */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -34,12 +33,11 @@
 .cardContent {
   display: flex;
   flex-direction: row;
-  gap: 40px;
-  align-items: flex-end;
+  gap: 0; /* Remove gap to allow right content to take full space */
+  align-items: stretch; /* Stretch items to fill container */
   justify-content: space-between;
-  margin-top: auto;
   height: 100%;
-  padding-top: 40px; /* Add padding to the top of card content */
+  padding: 0; /* Remove padding to allow full coverage */
   
   @media (max-width: 768px) {
     flex-direction: column-reverse;
@@ -47,7 +45,7 @@
 }
 
 .leftContent {
-  width: 500px;
+  width: 50%;
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -56,6 +54,7 @@
   padding-top: 40px; /* Increased top padding */
   padding-left: 40px; /* Increased left padding */
   justify-content: flex-start;
+  align-items: flex-start; /* Ensure content is top-left aligned */
   height: 100%;
   
   @media (max-width: 768px) {
@@ -68,12 +67,18 @@
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Align items to the top */
+  align-items: stretch; /* Make content stretch to fill the container */
   position: relative;
   overflow: visible;
-  padding-top: 40px; /* Match the top padding of left content */
-  /* Removed top: -8rem to fix alignment */
+  padding: 0; /* Remove padding to allow full coverage */
   height: 100%;
+  
+  /* Ensure content takes up full height and width */
+  > * {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .categoryLabel {

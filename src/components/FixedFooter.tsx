@@ -95,9 +95,8 @@ const FixedFooter: React.FC<FixedFooterProps> = ({ className = '' }) => {
       <Dialog 
         isOpen={isDialogOpen} 
         onClose={closeDialog}
-        title="Join Kyozo"
-        subtitle="Join Kyozo"
-        children={<div>Join Kyozo</div>}
+        title="Sign Up to begin"
+        subtitle=""
       />
     </footer>
   );

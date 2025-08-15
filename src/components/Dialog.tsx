@@ -3,6 +3,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './Dialog.module.scss';
 import FormVideo from './FormVideo';
+import Input from './Input';
+import Button from './Button';
+import Checkbox from './Checkbox';
 
 interface Tab {
   label: string;
@@ -14,25 +17,29 @@ interface DialogProps {
   onClose: () => void;
   title?: string;
   subtitle?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
   showTabs?: boolean;
   tabs?: Tab[];
   activeTab?: number;
   onTabChange?: (index: number) => void;
+  step?: number;
+  totalSteps?: number;
 }
 
 const Dialog: React.FC<DialogProps> = ({
   isOpen,
   onClose,
-  title,
-  subtitle,
+  title = "Create Your Account",
+  subtitle = "Sign up with your email or connect with Google.",
   children,
   className = '',
   showTabs = false,
   tabs = [],
   activeTab = 0,
-  onTabChange = () => {}
+  onTabChange = () => {},
+  step = 1,
+  totalSteps = 6
 }) => {
   const dialogRef = useRef<HTMLDivElement>(null);
   const [isClosing, setIsClosing] = useState(false);
@@ -107,8 +114,9 @@ const Dialog: React.FC<DialogProps> = ({
         <div className={`${styles.dialogLeft} ${isClosing ? styles.closingLeft : ''}`}>
           <div className={styles.header}>
             <div>
-              {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+              <p className={styles.stepIndicator}>Step {step} of {totalSteps}</p>
               {title && <h2 className={styles.title}>{title}</h2>}
+              {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
             </div>
           </div>
 
@@ -132,7 +140,124 @@ const Dialog: React.FC<DialogProps> = ({
               )}
               
               <div className={styles.content}>
-                {children}
+                {children ? (
+                  children
+                ) : (
+                  <div className={styles.authForm}>
+                    {/* Form state management */}
+                    <div className={styles.tabButtons}>
+                      <button 
+                        className={`${styles.tabButton} ${activeTab === 0 ? styles.activeTabButton : ''}`} 
+                        onClick={() => onTabChange(0)}
+                      >
+                        Sign In
+                      </button>
+                      <button 
+                        className={`${styles.tabButton} ${activeTab === 1 ? styles.activeTabButton : ''}`} 
+                        onClick={() => onTabChange(1)}
+                      >
+                        Sign Up
+                      </button>
+                    </div>
+                    
+                    {activeTab === 0 ? (
+                      /* Sign In Form */
+                      <>
+                        <div className={styles.formGroup}>
+                          <Input 
+                            type="email" 
+                            placeholder="Email address" 
+                            onChange={(e) => console.log(e.target.value)} 
+                            className={styles.roundedInput}
+                          />
+                        </div>
+                        <div className={styles.formGroup}>
+                          <Input 
+                            type="password" 
+                            placeholder="Password" 
+                            onChange={(e) => console.log(e.target.value)} 
+                            className={styles.roundedInput}
+                          />
+                        </div>
+                        <div className={styles.forgotPassword}>
+                          <a href="#">Forgot password?</a>
+                        </div>
+                        <div className={styles.formGroup}>
+                          <Button variant="accent-fill" fullWidth type="submit">
+                            Sign In
+                          </Button>
+                        </div>
+                        <div className={styles.divider}>
+                          <span>OR</span>
+                        </div>
+                        <div className={styles.formGroup}>
+                          <Button variant="outline" fullWidth className={styles.googleButton}>
+                            <img src="/google-icon.svg" alt="Google" className={styles.googleIcon} />
+                            <span className={styles.googleText}>Sign in with Google</span>
+                          </Button>
+                        </div>
+                        <div className={styles.termsContainer}>
+                          <Checkbox
+                            name="terms"
+                            label="I agree to the Terms & Conditions"
+                            checked={false}
+                            onChange={(e) => console.log(e.target.checked)}
+                          />
+                        </div>
+                      </>
+                    ) : (
+                      /* Sign Up Form */
+                      <>
+                        <div className={styles.formGroup}>
+                          <Input 
+                            type="text" 
+                            placeholder="Full name" 
+                            onChange={(e) => console.log(e.target.value)} 
+                            className={styles.roundedInput}
+                          />
+                        </div>
+                        <div className={styles.formGroup}>
+                          <Input 
+                            type="email" 
+                            placeholder="Email address" 
+                            onChange={(e) => console.log(e.target.value)} 
+                            className={styles.roundedInput}
+                          />
+                        </div>
+                        <div className={styles.formGroup}>
+                          <Input 
+                            type="password" 
+                            placeholder="Create password" 
+                            onChange={(e) => console.log(e.target.value)} 
+                            className={styles.roundedInput}
+                          />
+                        </div>
+                        <div className={styles.formGroup}>
+                          <Button variant="accent-fill" fullWidth type="submit">
+                            Create Account
+                          </Button>
+                        </div>
+                        <div className={styles.divider}>
+                          <span>OR</span>
+                        </div>
+                        <div className={styles.formGroup}>
+                          <Button variant="outline" fullWidth className={styles.googleButton}>
+                            <img src="/google-icon.svg" alt="Google" className={styles.googleIcon} />
+                            <span className={styles.googleText}>Sign up with Google</span>
+                          </Button>
+                        </div>
+                        <div className={styles.termsContainer}>
+                          <Checkbox
+                            name="terms"
+                            label="I agree to the Terms & Conditions"
+                            checked={false}
+                            onChange={(e) => console.log(e.target.checked)}
+                          />
+                        </div>
+                      </>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -140,11 +265,9 @@ const Dialog: React.FC<DialogProps> = ({
         
         {/* Right curtain panel */}
         <div className={`${styles.dialogRight} ${isClosing ? styles.closingRight : ''}`}>
-          <div className={styles.header}>
-            <button className={styles.closeButton} onClick={handleClose}>
-              <span className={styles.closeIcon}>×</span>
-            </button>
-          </div>
+          <button className={styles.closeButton} onClick={handleClose}>
+            <span className={styles.closeIcon}>×</span>
+          </button>
 
           <div className={styles.dialogContent}>  
             <div className={styles.rightContent}>

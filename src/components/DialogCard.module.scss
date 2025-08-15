@@ -50,16 +50,14 @@
   flex-direction: column;
   text-align: left;
   gap: 10px;
-  padding: 30px 30px 30px 30px;
-  padding-top: 40px; /* Increased top padding */
-  padding-left: 40px; /* Increased left padding */
+  padding: 40px; /* Consistent padding */
   justify-content: flex-start;
   align-items: flex-start; /* Ensure content is top-left aligned */
   height: 100%;
   
   @media (max-width: 768px) {
     width: 100%;
-    padding: 0 20px;
+    padding: 20px;
   }
 }
 

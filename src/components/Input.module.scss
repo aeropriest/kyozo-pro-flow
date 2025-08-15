@@ -29,7 +29,7 @@
     right: -2px;
     bottom: -2px;
     background: transparent;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     border-radius: 9999px; // Fully rounded
     opacity: 0;
     transition: opacity 0.2s ease;
@@ -44,7 +44,7 @@
 .input {
   position: relative;
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.85rem 1.25rem;
   font-size: 1rem;
   background-color: rgba(255, 255, 255, 0.05);
   color: var(--text-color);

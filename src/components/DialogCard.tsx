@@ -9,6 +9,9 @@ interface SlidingCardProps {
   button: React.ReactNode;
   content: React.ReactNode;
   className?: string;
+  customComponent?: React.ReactNode;
+  currentStep?: number;
+  totalSteps?: number;
 }
 
 const DialogCard: React.FC<SlidingCardProps> = ({ 
@@ -17,7 +20,10 @@ const DialogCard: React.FC<SlidingCardProps> = ({
   text, 
   button, 
   content, 
-  className = '' 
+  className = '',
+  customComponent,
+  currentStep = 1,
+  totalSteps = 6
 }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const cardRef = useRef<HTMLDivElement>(null);
@@ -52,14 +58,23 @@ const DialogCard: React.FC<SlidingCardProps> = ({
     <div ref={cardRef} className={`${styles.cardContainer} ${className}`}>
       <div className={styles.cardContent}>
         <div className={styles.leftContent}>
-          <p className={styles.categoryLabel}>{subtitle}</p>
-          <h2 className={styles.cardTitle}>{title}</h2>
-          <p className={styles.cardDescription}>
-            {text}
-          </p>
-          <div>
-            {button}
+          <div className={styles.stepIndicator}>
+            Step {currentStep} of {totalSteps}
           </div>
+          {customComponent ? (
+            customComponent
+          ) : (
+            <>
+              <p className={styles.categoryLabel}>{subtitle}</p>
+              <h2 className={styles.cardTitle}>{title}</h2>
+              <p className={styles.cardDescription}>
+                {text}
+              </p>
+              <div>
+                {button}
+              </div>
+            </>
+          )}
         </div>
         <div className={styles.rightContent}>
           {enhancedContent}

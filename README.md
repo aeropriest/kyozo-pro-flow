@@ -34,3 +34,47 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+ {
+      title: "Create Your Account",
+      subtitle: "Sign up with your email or connect with Google.",
+      image: "/Parallax2.jpg",
+      component: 'SignupStep',
+    },
+    {
+      title: "Set Your Avatar",
+      subtitle: "Give your profile a personal touch.",
+      image: "/Parallax3.jpg",
+      component: 'AvatarStep',
+    },
+    {
+      title: "Create Your Community",
+      subtitle: "Tell us about your community.",
+      image: "/Parallax4.jpg",
+      component: 'CommunityDetailsStep',
+    },
+    {
+      title: "Community Settings",
+      subtitle: "Customize your community's rules and appearance.",
+      image: "/Parallax5.jpg",
+      component: 'CommunitySettingsStep',
+    },
+    {
+      title: "Add Community Members",
+      subtitle: "Let's grow your community together.",
+      image: "/Parallax1.jpg",
+      component: 'AddMembersStep',
+    },
+    {
+      title: "Member Management",
+      subtitle: "Review and manage your members.",
+      image: "/Parallax2.jpg",
+      component: 'MemberManagementStep',
+    },
+    {
+      title: "Onboarding Complete!",
+      subtitle: "You're all set. Welcome to the dashboard!",
+      image: "/Parallax3.jpg",
+      component: 'DashboardStep',
+    },

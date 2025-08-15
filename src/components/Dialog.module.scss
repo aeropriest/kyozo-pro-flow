@@ -64,8 +64,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  transition: transform 0.8s ease-in-out, scale 0.8s ease-in-out;
+  transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
   transform-origin: center center;
+  will-change: transform, scale;
 }
 
 .navigationButtons {
@@ -77,11 +78,11 @@
 
 /* Animation classes */
 .animating.slideNext .cardWrapper {
-  transition: transform 0.8s ease-in-out, scale 0.8s ease-in-out;
+  transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .animating.slidePrev .cardWrapper {
-  transition: transform 0.8s ease-in-out, scale 0.8s ease-in-out;
+  transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 @keyframes openCurtain {

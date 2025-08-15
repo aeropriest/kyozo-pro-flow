@@ -29,7 +29,7 @@
     right: -2px;
     bottom: -2px;
     background: transparent;
-    border: 2px solid transparent;
+    border: 0.5px solid transparent;
     border-radius: 9999px; // Fully rounded
     opacity: 0;
     transition: opacity 0.2s ease;
@@ -48,18 +48,29 @@
   font-size: 1rem;
   background-color: var(--input-bg);
   color: var(--text-color);
-  border: 1px solid var(--border-color);
+  border: 0.5px solid var(--border-color);
   border-radius: 9999px; // Fully rounded
   transition: all 0.2s ease;
   z-index: 1;
+  box-sizing: border-box;
   
   &:focus {
     outline: none;
-    border-color: transparent;
-    background-color: rgba(255, 255, 255, 0.08);
+    border: 0.5px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    background: transparent;
     
-    & + .inputContainer::before {
-      opacity: 1;
+    &::before {
+      content: '';
+      position: absolute;
+      top: -0.5px;
+      right: -0.5px;
+      bottom: -0.5px;
+      left: -0.5px;
+      z-index: -1;
+      border-radius: inherit;
+      background: linear-gradient(to right, var(--accent-pink), var(--text-secondary));
     }
   }
   
@@ -69,6 +80,8 @@
   
   &::placeholder {
     color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 100;
   }
   
   &:disabled {

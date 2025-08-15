@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './Dialog.module.scss';
 import FormVideo from './FormVideo';
-import { Input, Button, Checkbox } from '@/components/ui'
+import { Input, Button, Checkbox } from '@/components/ui';
 
 interface Tab {
   label: string;
@@ -228,19 +228,18 @@ const Dialog: React.FC<DialogProps> = ({
                         <div className={styles.forgotPassword}>
                           <a href="#">Forgot password?</a>
                         </div>
-                        <div className={styles.formGroup}>
-                          <Button variant="accent-fill" fullWidth type="submit">
-                            Sign In
-                          </Button>
-                        </div>
-                        <div className={styles.divider}>
-                          <span>OR</span>
-                        </div>
-                        <div className={styles.formGroup}>
-                          <Button variant="outline-only" fullWidth className={styles.googleButton}>
-                            <img src="/google-icon.svg" alt="Google" className={styles.googleIcon} />
-                            <span className={styles.googleText}>Sign in with Google</span>
-                          </Button>
+                        <div className={styles.buttonRow}>
+                          <div className={styles.buttonCol}>
+                            <Button variant="solid" fullWidth type="submit">
+                              Sign In
+                            </Button>
+                          </div>
+                          <div className={styles.buttonCol}>
+                            <Button variant="outline-only" fullWidth className={styles.googleButton}>
+                              <img src="/google-icon.svg" alt="Google" className={styles.googleIcon} />
+                              <span className={styles.googleText}>Sign in with Google</span>
+                            </Button>
+                          </div>
                         </div>
                         <div className={styles.termsContainer}>
                           <Checkbox
@@ -284,19 +283,18 @@ const Dialog: React.FC<DialogProps> = ({
                             className={styles.roundedInput}
                           />
                         </div>
-                        <div className={styles.formGroup}>
-                          <Button variant="accent-fill" fullWidth type="submit">
-                            Create Account
-                          </Button>
-                        </div>
-                        <div className={styles.divider}>
-                          <span>OR</span>
-                        </div>
-                        <div className={styles.formGroup}>
-                          <Button variant="outline-only" fullWidth className={styles.googleButton}>
-                            <img src="/google-icon.svg" alt="Google" className={styles.googleIcon} />
-                            <span className={styles.googleText}>Sign up with Google</span>
-                          </Button>
+                        <div className={styles.buttonRow}>
+                          <div className={styles.buttonCol}>
+                            <Button variant="solid" fullWidth type="submit">
+                              Create Account
+                            </Button>
+                          </div>
+                          <div className={styles.buttonCol}>
+                            <Button variant="outline-only" fullWidth className={styles.googleButton}>
+                              <img src="/google-icon.svg" alt="Google" className={styles.googleIcon} />
+                              <span className={styles.googleText}>Sign up with Google</span>
+                            </Button>
+                          </div>
                         </div>
                         <div className={styles.termsContainer}>
                           <Checkbox

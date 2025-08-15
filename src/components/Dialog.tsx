@@ -243,6 +243,7 @@ const Dialog: React.FC<DialogProps> = ({
                         </div>
                         <div className={styles.termsContainer}>
                           <Checkbox
+                            id="terms"
                             name="terms"
                             label="I agree to the Terms & Conditions"
                             checked={termsAccepted}

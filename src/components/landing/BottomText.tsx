@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Button from './Button';
+import {Button as ButtonUI} from "@/components/ui";
 import ZoomText from './ZoomText';
 import styles from './BottomText.module.scss';
 
@@ -71,13 +71,13 @@ const BottomText: React.FC<BottomTextProps> = ({
       
       {/* Button */}
       <div className={`${styles.buttonContainer} ${isLoaded ? styles.loaded : styles.loading}`}>
-        <Button 
-          variant="accent-border" 
+        <ButtonUI  
+          variant="outline-only"
           size="large" 
           href="#"
         >
           Join the waitlist
-        </Button>
+        </ButtonUI>
       </div>
       
       {/* Copyright */}

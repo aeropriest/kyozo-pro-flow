@@ -1,8 +1,8 @@
 'use client';
 import React from 'react';
 import styles from './FeatureCard.module.scss';
-import Button from './Button';
 import Image from 'next/image';
+import {Button as ButtonUI} from "@/components/ui";
 
 const FeatureCard = () => {
   return (
@@ -17,7 +17,7 @@ const FeatureCard = () => {
             Connect with visionary creators and forward-thinking communities.
           </p>
           <div>
-          <Button variant="accent-border" size="medium" href="#">Join the waitlist</Button>
+          <ButtonUI variant="outline-only" size="medium" href="#">Join the waitlist</ButtonUI>
           </div>
         </div>
         

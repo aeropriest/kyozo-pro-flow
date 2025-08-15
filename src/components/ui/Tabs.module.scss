@@ -1,0 +1,37 @@
+@use '../../styles/themes/_theme-variables' as *;
+
+.tabsContainer {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.5rem;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 9999px; // Fully rounded
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 9999px; // Fully rounded
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--accent-pink);
+  }
+}
+
+.activeTab {
+  background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+  color: var(--text-color);
+}

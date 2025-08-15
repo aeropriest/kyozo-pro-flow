@@ -1,0 +1,62 @@
+.titleContainer {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  color: var(--heading-color, #ffffff);
+}
+
+.small .title {
+  font-size: 1.5rem;
+}
+
+.medium .title {
+  font-size: 2.5rem;
+}
+
+.large .title {
+  font-size: 4rem;
+}
+
+.word {
+  display: inline-block;
+  margin: 0 0.25rem;
+  white-space: nowrap;
+}
+
+.wordSpace {
+  display: inline-block;
+  width: 0.3rem;
+}
+
+.letter {
+  display: inline-block;
+  transition: color 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+  opacity: 0.3;
+  transform: translateY(15px);
+  color: var(--text-secondary, #a0a0a0);
+
+  &.loaded {
+    opacity: 1;
+    transform: translateY(0);
+    color: var(--heading-color, #ffffff);
+  }
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary, #a0a0a0);
+  margin-top: 0.5rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
+  
+  &.loaded {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

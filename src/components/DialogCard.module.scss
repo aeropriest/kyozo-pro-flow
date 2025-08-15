@@ -54,6 +54,7 @@
   justify-content: flex-start;
   align-items: flex-start; /* Ensure content is top-left aligned */
   height: 100%;
+  position: relative;
   
   @media (max-width: 768px) {
     width: 100%;
@@ -91,17 +92,19 @@
 }
 
 .cardTitle {
-  font-size: 4.8rem;
+  font-size: 2rem;
   font-weight: 700;
   margin: 0;
-  -webkit-background-clip: text;
-  background-clip: text;
-  line-height: 1.0;
-  color: var(--heading-color);
-  
-  @media (max-width: 768px) {
-    font-size: 3.5rem;
-  }
+  color: var(--text-primary);
+}
+
+.stepIndicator {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
 .cardDescription {

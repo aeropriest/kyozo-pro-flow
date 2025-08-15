@@ -5,8 +5,16 @@ import styles from './Dialog.module.scss';
 import { Button } from '@/components/ui';
 import Image from 'next/image';
 import DialogCard from './DialogCard';
+import SignInForm from './SignInForm';
 
 const cards = [
+  {
+    title: "Sign In / Sign Up",
+    subtitle: "Welcome to Kyozo Pro",
+    image: "/form-right.mp4",
+    component: 'SignInStep',
+    customComponent: null
+  },
   {
     title: "Set Your Avatar",
     subtitle: "Give your profile a personal touch.",
@@ -18,30 +26,35 @@ const cards = [
     subtitle: "Tell us about your community.",
     image: "/Parallax4.jpg",
     component: 'CommunityDetailsStep',
+    customComponent: null,
   },
   {
     title: "Community Settings",
     subtitle: "Customize your community's rules and appearance.",
     image: "/Parallax5.jpg",
     component: 'CommunitySettingsStep',
+    customComponent: null,
   },
   {
     title: "Add Community Members",
     subtitle: "Let's grow your community together.",
     image: "/Parallax1.jpg",
     component: 'AddMembersStep',
+    customComponent: null,
   },
   {
     title: "Member Management",
     subtitle: "Review and manage your members.",
     image: "/Parallax2.jpg",
     component: 'MemberManagementStep',
+    customComponent: null,
   },
   {
     title: "Onboarding Complete!",
     subtitle: "You're all set. Welcome to the dashboard!",
     image: "/Parallax3.jpg",
     component: 'DashboardStep',
+    customComponent: null,
   },
 ];
 
@@ -233,30 +246,49 @@ const Dialog: React.FC<DialogProps> = ({
                   }}
                 >
                   <DialogCard
-                    subtitle={page.subtitle}
-                    title={page.title}
-                    text={`Step ${index + 1} of ${cards.length}: ${page.component}`}
+                    key={index}
+                    title={page.title || ''}
+                    subtitle={page.subtitle || ''}
+                    text=""
+                    currentStep={index + 1}
+                    totalSteps={cards.length}
                     button={
-                      <div className={styles.navigationButtons}>
-                        {currentCardIndex > 0 && (
+                      <>
+                        {index > 0 && (
                           <Button
-                            variant="outline-only"
-                            size="medium"
-                            onClick={handlePrevCard}
+                            variant="outline"
+                            size="small"
+                            onClick={() => handlePrevCard()}
+                            className={styles.backButton}
                           >
                             Back
                           </Button>
                         )}
                         <Button
-                          variant="outline-only"
-                          size="medium"
-                          onClick={currentCardIndex < cards.length - 1 ? handleNextCard : onClose}
+                          variant="primary"
+                          size="small"
+                          onClick={() => index === cards.length - 1 ? onClose() : handleNextCard()}
                         >
-                          {currentCardIndex < cards.length - 1 ? 'Continue' : 'Finish'}
+                          {index === cards.length - 1 ? 'Finish' : 'Next'}
                         </Button>
-                      </div>
+                      </>
                     }
-                    content={<Image src={page.image} alt={page.title} width={800} height={800} />}
+                    customComponent={
+                      index === 0 ? (
+                        <SignInForm 
+                          onNext={handleNextCard} 
+                          currentStep={index + 1} 
+                          totalSteps={cards.length}
+                        />
+                      ) : page.customComponent
+                    }
+                    content={
+                      index === 0 ? (
+                        <VideoPlayer />
+                      ) : (
+                        <Image src={page.image} alt={page.title} width={800} height={800} />
+                      )
+                    }
                   />
                 </div>
               );
@@ -266,6 +298,51 @@ const Dialog: React.FC<DialogProps> = ({
           {children}
         </div>
       </div>
+    </div>
+  );
+};
+
+// VideoPlayer component to handle video playback
+const VideoPlayer = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // Try to play the video when component mounts
+    const playVideo = async () => {
+      try {
+        if (videoRef.current) {
+          await videoRef.current.play();
+          console.log('Video playing successfully');
+        }
+      } catch (error) {
+        console.error('Error playing video:', error);
+      }
+    };
+
+    playVideo();
+  }, []);
+
+  return (
+    <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+      <video 
+        ref={videoRef}
+        autoPlay
+        loop
+        muted
+        playsInline
+        controls={false}
+        style={{ 
+          width: '100%', 
+          height: '100%', 
+          objectFit: 'cover',
+          position: 'absolute',
+          top: 0,
+          left: 0
+        }}
+      >
+        <source src="/form-right.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
     </div>
   );
 };

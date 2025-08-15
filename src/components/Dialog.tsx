@@ -79,6 +79,11 @@ const Dialog: React.FC<DialogProps> = ({
   step = 1,
   totalSteps = 6
 }) => {
+  // State for card navigation
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [slideDirection, setSlideDirection] = useState<'next' | 'prev'>('next');
+  
   // Form state management
   const [signInForm, setSignInForm] = useState({
     email: '',
@@ -123,6 +128,30 @@ const Dialog: React.FC<DialogProps> = ({
     setCurrentTab(index);
     onTabChange(index);
   };
+  
+  // Handle card navigation
+  const handleNextCard = () => {
+    if (currentCardIndex < cards.length - 1 && !isAnimating) {
+      setSlideDirection('next');
+      setIsAnimating(true);
+      setTimeout(() => {
+        setCurrentCardIndex(prev => prev + 1);
+        setIsAnimating(false);
+      }, 500); // Match animation duration
+    }
+  };
+  
+  const handlePrevCard = () => {
+    if (currentCardIndex > 0 && !isAnimating) {
+      setSlideDirection('prev');
+      setIsAnimating(true);
+      setTimeout(() => {
+        setCurrentCardIndex(prev => prev - 1);
+        setIsAnimating(false);
+      }, 500); // Match animation duration
+    }
+  };
+  
   const dialogRef = useRef<HTMLDivElement>(null);
   const [isClosing, setIsClosing] = useState(false);
   
@@ -193,18 +222,42 @@ const Dialog: React.FC<DialogProps> = ({
       onClick={(e) => e.stopPropagation()}
     >
       <div className={styles.dialogContent}>
-           
-        {cards.map((page, index) => (
-          <DialogCard
-            key={index}
-            subtitle={page.subtitle}
-            title={page.title}
-            text={`Step ${index + 1} of ${cards.length}: ${page.component}`}
-            button={<Button variant="outline-only" size="medium" href="#">Continue</Button>}
-            content={<Image src={page.image} alt={page.title} width={800} height={800} />}
-          />
-        ))}
-      
+        <div className={`${styles.cardsContainer} ${isAnimating ? styles.animating : ''} ${slideDirection === 'next' ? styles.slideNext : styles.slidePrev}`}>
+          {cards.map((page, index) => (
+            <div 
+              key={index} 
+              className={`${styles.cardWrapper} ${index === currentCardIndex ? styles.active : ''}`}
+              style={{ transform: `translateX(${(index - currentCardIndex) * 100}%)` }}
+            >
+              <DialogCard
+                subtitle={page.subtitle}
+                title={page.title}
+                text={`Step ${index + 1} of ${cards.length}: ${page.component}`}
+                button={
+                  <div className={styles.navigationButtons}>
+                    {currentCardIndex > 0 && (
+                      <Button 
+                        variant="outline-only" 
+                        size="medium" 
+                        onClick={handlePrevCard}
+                      >
+                        Back
+                      </Button>
+                    )}
+                    <Button 
+                      variant="outline-only" 
+                      size="medium" 
+                      onClick={currentCardIndex < cards.length - 1 ? handleNextCard : onClose}
+                    >
+                      {currentCardIndex < cards.length - 1 ? 'Continue' : 'Finish'}
+                    </Button>
+                  </div>
+                }
+                content={<Image src={page.image} alt={page.title} width={800} height={800} />}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
     </div>

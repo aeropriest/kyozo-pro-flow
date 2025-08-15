@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { PricingCardData } from '../types';
+import { PricingCardData } from '../../types';
 import styles from './PricingCard.module.scss';
 import { FaCircleCheck } from "react-icons/fa6";
 

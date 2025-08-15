@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 import { ThemeProvider } from "@/context/ThemeContext";
-import FixedFooter from "@/components/FixedFooter";
+import FixedFooter from "@/components/landing/FixedFooter";
 
 export default function RootLayout({
   children,

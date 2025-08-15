@@ -1,0 +1,73 @@
+@use '../../styles/themes/_theme-variables' as *;
+
+.checkboxWrapper {
+  margin-bottom: 1rem;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkboxInput {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: relative;
+  height: 20px;
+  width: 20px;
+  min-width: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+}
+
+.checkboxInput:checked ~ .checkmark {
+  background-color: var(--accent-pink);
+  border-color: var(--accent-pink);
+  
+  &::after {
+    display: block;
+  }
+}
+
+.checkboxInput:focus ~ .checkmark {
+  box-shadow: 0 0 0 2px rgba(var(--accent-pink-rgb), 0.4);
+}
+
+.checkboxLabel {
+  margin-left: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--text-color);
+}
+
+.checkboxInput:disabled ~ .checkmark {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.checkboxInput:disabled ~ .checkboxLabel {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

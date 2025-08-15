@@ -41,6 +41,50 @@ const Dialog: React.FC<DialogProps> = ({
   step = 1,
   totalSteps = 6
 }) => {
+  // Form state management
+  const [signInForm, setSignInForm] = useState({
+    email: '',
+    password: ''
+  });
+  
+  const [signUpForm, setSignUpForm] = useState({
+    fullName: '',
+    email: '',
+    password: ''
+  });
+  
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [currentTab, setCurrentTab] = useState(activeTab);
+  
+  // Handle form input changes
+  const handleSignInChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setSignInForm(prev => ({ ...prev, [name]: value }));
+  };
+  
+  const handleSignUpChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setSignUpForm(prev => ({ ...prev, [name]: value }));
+  };
+  
+  // Handle form submissions
+  const handleSignIn = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Sign In:', signInForm, 'Terms accepted:', termsAccepted);
+    // Add actual sign in logic here
+  };
+  
+  const handleSignUp = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Sign Up:', signUpForm, 'Terms accepted:', termsAccepted);
+    // Add actual sign up logic here
+  };
+  
+  // Handle tab changes
+  const handleTabChange = (index: number) => {
+    setCurrentTab(index);
+    onTabChange(index);
+  };
   const dialogRef = useRef<HTMLDivElement>(null);
   const [isClosing, setIsClosing] = useState(false);
   
@@ -147,35 +191,39 @@ const Dialog: React.FC<DialogProps> = ({
                     {/* Form state management */}
                     <div className={styles.tabButtons}>
                       <button 
-                        className={`${styles.tabButton} ${activeTab === 0 ? styles.activeTabButton : ''}`} 
-                        onClick={() => onTabChange(0)}
+                        className={`${styles.tabButton} ${currentTab === 0 ? styles.activeTabButton : ''}`} 
+                        onClick={() => handleTabChange(0)}
                       >
                         Sign In
                       </button>
                       <button 
-                        className={`${styles.tabButton} ${activeTab === 1 ? styles.activeTabButton : ''}`} 
-                        onClick={() => onTabChange(1)}
+                        className={`${styles.tabButton} ${currentTab === 1 ? styles.activeTabButton : ''}`} 
+                        onClick={() => handleTabChange(1)}
                       >
                         Sign Up
                       </button>
                     </div>
                     
-                    {activeTab === 0 ? (
+                    {currentTab === 0 ? (
                       /* Sign In Form */
-                      <>
+                      <form onSubmit={handleSignIn}>
                         <div className={styles.formGroup}>
                           <Input 
                             type="email" 
+                            name="email"
                             placeholder="Email address" 
-                            onChange={(e) => console.log(e.target.value)} 
+                            value={signInForm.email}
+                            onChange={handleSignInChange} 
                             className={styles.roundedInput}
                           />
                         </div>
                         <div className={styles.formGroup}>
                           <Input 
                             type="password" 
+                            name="password"
                             placeholder="Password" 
-                            onChange={(e) => console.log(e.target.value)} 
+                            value={signInForm.password}
+                            onChange={handleSignInChange} 
                             className={styles.roundedInput}
                           />
                         </div>
@@ -200,35 +248,41 @@ const Dialog: React.FC<DialogProps> = ({
                           <Checkbox
                             name="terms"
                             label="I agree to the Terms & Conditions"
-                            checked={false}
-                            onChange={(e) => console.log(e.target.checked)}
+                            checked={termsAccepted}
+                            onChange={(e) => setTermsAccepted(e.target.checked)}
                           />
                         </div>
-                      </>
+                      </form>
                     ) : (
                       /* Sign Up Form */
-                      <>
+                      <form onSubmit={handleSignUp}>
                         <div className={styles.formGroup}>
                           <Input 
                             type="text" 
+                            name="fullName"
                             placeholder="Full name" 
-                            onChange={(e) => console.log(e.target.value)} 
+                            value={signUpForm.fullName}
+                            onChange={handleSignUpChange} 
                             className={styles.roundedInput}
                           />
                         </div>
                         <div className={styles.formGroup}>
                           <Input 
                             type="email" 
+                            name="email"
                             placeholder="Email address" 
-                            onChange={(e) => console.log(e.target.value)} 
+                            value={signUpForm.email}
+                            onChange={handleSignUpChange} 
                             className={styles.roundedInput}
                           />
                         </div>
                         <div className={styles.formGroup}>
                           <Input 
                             type="password" 
+                            name="password"
                             placeholder="Create password" 
-                            onChange={(e) => console.log(e.target.value)} 
+                            value={signUpForm.password}
+                            onChange={handleSignUpChange} 
                             className={styles.roundedInput}
                           />
                         </div>
@@ -250,11 +304,11 @@ const Dialog: React.FC<DialogProps> = ({
                           <Checkbox
                             name="terms"
                             label="I agree to the Terms & Conditions"
-                            checked={false}
-                            onChange={(e) => console.log(e.target.checked)}
+                            checked={termsAccepted}
+                            onChange={(e) => setTermsAccepted(e.target.checked)}
                           />
                         </div>
-                      </>
+                      </form>
                     )}
                   </div>
                 )}

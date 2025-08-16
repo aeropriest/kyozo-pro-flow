@@ -6,6 +6,14 @@ import { Button } from '@/components/ui';
 import Image from 'next/image';
 import DialogCard from './DialogCard';
 import SignInForm from './SignInForm';
+import {
+  AvatarStep,
+  CommunityDetailsStep,
+  CommunitySettingsStep,
+  AddMembersStep,
+  MemberManagementStep,
+  DashboardStep
+} from './forms';
 
 const cards = [
   {
@@ -20,6 +28,7 @@ const cards = [
     subtitle: "Give your profile a personal touch.",
     image: "/Parallax3.jpg",
     component: 'AvatarStep',
+    customComponent: null
   },
   {
     title: "Create Your Community",
@@ -252,13 +261,74 @@ const Dialog: React.FC<DialogProps> = ({
                       </>
                     }
                     customComponent={
-                      index === 0 ? (
-                        <SignInForm 
-                          onNext={handleNextCard} 
-                          currentStep={index + 1} 
-                          totalSteps={cards.length}
-                        />
-                      ) : page.customComponent
+                      (() => {
+                        switch(index) {
+                          case 0:
+                            return (
+                              <SignInForm 
+                                onNext={handleNextCard} 
+                                currentStep={index + 1} 
+                                totalSteps={cards.length}
+                              />
+                            );
+                          case 1:
+                            return (
+                              <AvatarStep 
+                                onNext={handleNextCard}
+                                onPrev={handlePrevCard}
+                                currentStep={index + 1}
+                                totalSteps={cards.length}
+                              />
+                            );
+                          case 2:
+                            return (
+                              <CommunityDetailsStep 
+                                onNext={handleNextCard}
+                                onPrev={handlePrevCard}
+                                currentStep={index + 1}
+                                totalSteps={cards.length}
+                              />
+                            );
+                          case 3:
+                            return (
+                              <CommunitySettingsStep 
+                                onNext={handleNextCard}
+                                onPrev={handlePrevCard}
+                                currentStep={index + 1}
+                                totalSteps={cards.length}
+                              />
+                            );
+                          case 4:
+                            return (
+                              <AddMembersStep 
+                                onNext={handleNextCard}
+                                onPrev={handlePrevCard}
+                                currentStep={index + 1}
+                                totalSteps={cards.length}
+                              />
+                            );
+                          case 5:
+                            return (
+                              <MemberManagementStep 
+                                onNext={handleNextCard}
+                                onPrev={handlePrevCard}
+                                currentStep={index + 1}
+                                totalSteps={cards.length}
+                              />
+                            );
+                          case 6:
+                            return (
+                              <DashboardStep 
+                                onNext={onClose}
+                                onPrev={handlePrevCard}
+                                currentStep={index + 1}
+                                totalSteps={cards.length}
+                              />
+                            );
+                          default:
+                            return page.customComponent;
+                        }
+                      })()
                     }
                     content={
                       index === 0 ? (

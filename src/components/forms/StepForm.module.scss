@@ -1,0 +1,111 @@
+@use '../../styles/themes/_theme-variables' as *;
+
+.formContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  position: relative;
+}
+
+.categoryLabel {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.cardTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--heading-color);
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+}
+
+.formControls {
+  width: 100%;
+  max-width: 450px;
+  background-color: var(--card-bg);
+  border-radius: 30px;
+  box-shadow: var(--card-shadow);
+  align-self: flex-start;
+}
+
+.formContent {
+  padding: 1.5rem;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.actionRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  
+  > * {
+    flex: 1;
+    max-width: calc(50% - 5px);
+  }
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--text-secondary);
+  border-radius: 4px;
+  margin-right: 10px;
+  position: relative;
+  cursor: pointer;
+  
+  &:checked {
+    background-color: var(--accent-pink);
+    border-color: var(--accent-pink);
+    
+    &::after {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 12px;
+    }
+  }
+}
+
+.checkboxLabel {
+  font-size: 14px;
+  color: var(--text-secondary);
+  
+  a {
+    color: var(--accent-pink);
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

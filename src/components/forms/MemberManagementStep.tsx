@@ -7,13 +7,15 @@ interface MemberManagementStepProps {
   onPrev?: () => void;
   currentStep: number;
   totalSteps: number;
+  description?: string;
 }
 
 const MemberManagementStep: React.FC<MemberManagementStepProps> = ({
   onNext,
   onPrev,
   currentStep,
-  totalSteps
+  totalSteps,
+  description
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterOption, setFilterOption] = useState('');
@@ -28,6 +30,7 @@ const MemberManagementStep: React.FC<MemberManagementStepProps> = ({
     <div className={styles.formContainer}>
       <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
       <h2 className={styles.cardTitle}>Member Management</h2>
+      {description && <p className={styles.cardDescription}>{description}</p>}
       
       <div className={styles.formControls}>
         <div className={styles.formContent}>

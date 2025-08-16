@@ -21,6 +21,8 @@ const bubbleRowColors = {
 interface BubbleItem {
   text: string;
   color?: string;
+  spaceBefore?: 'none' | 'small' | 'medium';
+  spaceAfter?: 'none' | 'small' | 'medium';
 }
 
 interface BubbleRowProps {
@@ -38,16 +40,21 @@ const BubbleRow: React.FC<BubbleRowProps> = ({
 }) => {
   const rowColor = bubbleRowColors[category];
   
+  // Use items directly since we now have multiple items per row
+  const enhancedItems = useMemo(() => {
+    // No need for special handling since we have multiple items per row
+    return items;
+  }, [items]);
+  
   // Create enough duplicates to fill the screen width
   const repeatedItems = useMemo(() => {
-    // Create 8 sets of items to ensure the row is never empty
-    // This ensures there's always content visible regardless of screen size
+    // Create enough sets of items to ensure the row is never empty
     const repeated = [];
-    for (let i = 0; i < 8; i++) {
-      repeated.push(...items);
+    for (let i = 0; i < 10; i++) {
+      repeated.push(...enhancedItems);
     }
     return repeated;
-  }, [items]);
+  }, [enhancedItems]);
   
   return (
     <div className={styles.bubbleRowContainer}>
@@ -57,36 +64,24 @@ const BubbleRow: React.FC<BubbleRowProps> = ({
           '--scroll-duration': `${speed}s`,
         } as React.CSSProperties}
       >
-        {/* First set of repeated items */}
-        {repeatedItems.map((item, index) => (
-          <div 
-            key={`item-${index}`} 
-            className={styles.bubble}
-            style={{ 
-              borderColor: rowColor,
-              '--hover-bg': rowColor
-              // Not setting color here to use theme text color from CSS
-            } as React.CSSProperties}
-          >
-            {item.text}
-          </div>
-        ))}
-        
-        {/* Second set for seamless looping */}
-        {repeatedItems.map((item, index) => (
-          <div 
-            key={`item-dup-${index}`} 
-            className={styles.bubble}
-            style={{ 
-              borderColor: rowColor,
-              '--hover-bg': rowColor
-              // Not setting color here to use theme text color from CSS
-            } as React.CSSProperties}
-            aria-hidden="true"
-          >
-            {item.text}
-          </div>
-        ))}
+        {repeatedItems.map((item, index) => {
+          // No additional spacing needed since bubbles now touch each other
+          const spacingStyle: React.CSSProperties = {};
+          
+          return (
+            <div 
+              key={`item-${index}`} 
+              className={styles.bubble}
+              style={{ 
+                borderColor: rowColor,
+                '--hover-bg': rowColor,
+                ...spacingStyle
+              } as React.CSSProperties}
+            >
+              {item.text}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -107,7 +102,7 @@ const BubbleMarquee: React.FC<BubbleMarqueeProps> = ({ categories }) => {
           key={`row-${index}`}
           items={row.items}
           direction={index % 2 === 0 ? 'left' : 'right'}
-          speed={80} // Slower animation for better readability
+          speed={60} // Moderate speed for smooth animation
           category={row.category}
         />
       ))}

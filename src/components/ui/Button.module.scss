@@ -2,7 +2,7 @@
 
 .button {
   display: inline-block;
-  font-weight: 600;
+  font-weight: 100; /* Thinner font weight to match landing page */
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -15,6 +15,8 @@
   border-radius: 9999px; // Fully rounded
   transition: all 0.2s ease-in-out;
   text-decoration: none;
+  letter-spacing: 0.03em; /* Increased letter spacing for thinner appearance */
+  font-family: var(--font-family-thin, var(--font-family)); /* Use thin font family */
   
   &:focus {
     outline: none;
@@ -47,13 +49,14 @@
 // Style variants
 .primary {
   background: var(--accent-pink);
-  color: var(--text-color);
+  color: white; /* Always white text for better contrast */
   border: none;
   
   &:hover, &:focus {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background: var(--button-bg-hover);
+    background: var(--accent-pink); /* Keep pink background on hover */
+    opacity: 0.9; /* Slightly reduce opacity for hover effect */
   }
   
   &:active {
@@ -68,8 +71,9 @@
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
   
   &:hover, &:focus {
-    border-color: var(--accent-purple);
-    box-shadow: 0 0 0 4px rgba(var(--accent-purple-rgb), 0.3);
+    background-color: var(--accent-pink);
+    border-color: var(--accent-pink);
+    color: white;
     transform: translateY(-2px);
   }
   
@@ -83,9 +87,10 @@
   color: var(--text-color);
   border: 0.5px solid var(--accent-pink);
   
-  &:hover, &:focus {
+  &:hover, &:hover {
     background-color: var(--accent-pink);
     border-color: var(--accent-pink);
+    color: white;
   }
   
   &:active {
@@ -95,11 +100,12 @@
 
 .solid {
   background-color: var(--accent-pink);
-  color: var(--text-color);
+  color: white; /* Always white text for better contrast */
   border: none;
   
   &:hover, &:focus {
-    background-color: var(--button-bg-hover);
+    background-color: var(--accent-pink);
+    opacity: 0.9; /* Slightly reduce opacity for hover effect */
   }
   
   &:active {

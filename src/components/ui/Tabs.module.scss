@@ -1,6 +1,7 @@
 @use '../../styles/themes/_theme-variables' as *;
 
 .tabsContainer {
+  font-size: 2rem;
   display: flex;
   overflow-x: auto;
   padding: 0.5rem;

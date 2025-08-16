@@ -7,13 +7,15 @@ interface CommunitySettingsStepProps {
   onPrev?: () => void;
   currentStep: number;
   totalSteps: number;
+  description?: string;
 }
 
 const CommunitySettingsStep: React.FC<CommunitySettingsStepProps> = ({
   onNext,
   onPrev,
   currentStep,
-  totalSteps
+  totalSteps,
+  description
 }) => {
   const [privacySetting, setPrivacySetting] = useState('');
   const [themeColor, setThemeColor] = useState('');
@@ -28,6 +30,7 @@ const CommunitySettingsStep: React.FC<CommunitySettingsStepProps> = ({
     <div className={styles.formContainer}>
       <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
       <h2 className={styles.cardTitle}>Community Settings</h2>
+      {description && <p className={styles.cardDescription}>{description}</p>}
       
       <div className={styles.formControls}>
         <div className={styles.formContent}>

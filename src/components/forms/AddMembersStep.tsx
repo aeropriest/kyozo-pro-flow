@@ -7,13 +7,15 @@ interface AddMembersStepProps {
   onPrev?: () => void;
   currentStep: number;
   totalSteps: number;
+  description?: string;
 }
 
 const AddMembersStep: React.FC<AddMembersStepProps> = ({
   onNext,
   onPrev,
   currentStep,
-  totalSteps
+  totalSteps,
+  description 
 }) => {
   const [memberEmail, setMemberEmail] = useState('');
   const [memberRole, setMemberRole] = useState('');
@@ -28,6 +30,7 @@ const AddMembersStep: React.FC<AddMembersStepProps> = ({
     <div className={styles.formContainer}>
       <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
       <h2 className={styles.cardTitle}>Add Community Members</h2>
+      {description && <p className={styles.cardDescription}>{description}</p>}
       
       <div className={styles.formControls}>
         <div className={styles.formContent}>

@@ -60,31 +60,57 @@ export default function Home() {
             {
               category: 'music',
               items: [
-                { text: 'Music' },
+                { text: 'Rock' },
+                { text: 'Jazz' },
+                { text: 'R&B' },
+                { text: 'Trance' },
+                { text: 'Techno' },
+                { text: 'Hip Hop' },
+                { text: 'Classical' },
               ]
             },
             {
               category: 'classicism',
               items: [
+                { text: 'Expressionism' },
+                { text: 'Futurism' },
                 { text: 'Classicism' },
+                { text: 'Cubism' },
+                { text: 'Surrealism' },
+                { text: 'Dadaism' },
               ]
             },
             {
               category: 'jewelry',
               items: [
+                { text: 'Wood Burning' },
+                { text: 'Candle-making' },
+                { text: 'Crochet' },
                 { text: 'Jewelry' },
+                { text: 'Pottery' },
+                { text: 'Weaving' },
               ]
             },
             {
               category: 'vintage',
               items: [
+                { text: 'Chic' },
+                { text: 'Grunge' },
                 { text: 'Vintage' },
+                { text: 'Boho' },
+                { text: 'Preppy' },
+                { text: 'Streetwear' },
               ]
             },
             {
               category: 'minimal',
               items: [
-                { text: 'Minimal' },
+                { text: 'Stand-ups' },
+                { text: 'Musical' },
+                { text: 'Digital' },
+                { text: 'Theatre' },
+                { text: 'Dance' },
+                { text: 'Opera' },
               ]
             }
           ]}

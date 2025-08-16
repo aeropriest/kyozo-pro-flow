@@ -41,7 +41,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ className = '' }) => {
             name="email"
             label="Email"
             type="email"
-            placeholder="Enter your email"
+            placeholder="Your Email"
             value={email}
             onChange={handleInputChange}
             required
@@ -54,7 +54,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ className = '' }) => {
             name="password"
             label="Password"
             type="password"
-            placeholder="Enter your password"
+            placeholder="Password"
             value={password}
             onChange={handleInputChange}
             required

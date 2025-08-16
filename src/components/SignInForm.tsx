@@ -12,6 +12,7 @@ interface SignInFormProps {
   onNext?: () => void;
   currentStep?: number;
   totalSteps?: number;
+  description?: string;
 }
 
 const SignInForm: React.FC<SignInFormProps> = ({
@@ -21,6 +22,7 @@ const SignInForm: React.FC<SignInFormProps> = ({
   onNext,
   currentStep = 1,
   totalSteps = 6,
+  description,
 }) => {
   const [activeTab, setActiveTab] = useState<'signin' | 'signup'>('signin');
   const [signInForm, setSignInForm] = useState({ email: '', password: '' });
@@ -70,6 +72,7 @@ const SignInForm: React.FC<SignInFormProps> = ({
     <div className={styles.formContainer}>
       <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
       <h2 className={styles.cardTitle}>Welcome to Kyozo</h2>
+      {description && <p className={styles.cardDescription}>{description}</p>}
       
       {/* <AnimatedTitle 
         text="Welcome to Kyozo" 
@@ -95,7 +98,7 @@ const SignInForm: React.FC<SignInFormProps> = ({
                   name="email"
                   value={signInForm.email}
                   onChange={handleSignInChange}
-                  placeholder="Enter your email"
+                  placeholder="Your Email"
                   required
                 />
               </div>
@@ -106,7 +109,7 @@ const SignInForm: React.FC<SignInFormProps> = ({
                   name="password"
                   value={signInForm.password}
                   onChange={handleSignInChange}
-                  placeholder="Enter your password"
+                  placeholder="Password"
                   required
                 />
               </div>
@@ -134,7 +137,7 @@ const SignInForm: React.FC<SignInFormProps> = ({
                   name="fullName"
                   value={signUpForm.fullName}
                   onChange={handleSignUpChange}
-                  placeholder="Enter your name"
+                  placeholder="Your Name"
                   required
                 />
               </div>
@@ -145,7 +148,7 @@ const SignInForm: React.FC<SignInFormProps> = ({
                   name="email"
                   value={signUpForm.email}
                   onChange={handleSignUpChange}
-                  placeholder="Enter your email"
+                  placeholder="Your Email"
                   required
                 />
               </div>

@@ -21,21 +21,22 @@
   position: absolute;
   white-space: nowrap;
   will-change: transform;
+  width: max-content;
 }
 
 .bubble {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2.9rem 7rem; /* Reduced padding to fit within row height */
+  padding: 2.5rem 4rem; /* Reduced padding for tighter bubbles */
   border-radius: 6rem;
   font-weight: 400;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   background-color: transparent;
   border: 1.5px solid; /* Border color will be set inline via style prop */
   transition: all 0.3s ease;
   cursor: default;
-  margin-right: 0; /* Removed margin to make bubbles touch */
+  margin-right: -1px; /* Negative margin to make bubbles overlap slightly */
   margin-top: 0;
   margin-bottom: 0;
   color: var(--text-color); /* Using theme text color */
@@ -65,13 +66,13 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
 
 @keyframes scroll-right {
   0% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
   100% {
     transform: translateX(0);

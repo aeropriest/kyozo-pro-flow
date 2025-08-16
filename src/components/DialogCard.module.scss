@@ -56,6 +56,14 @@
   height: 100%;
   position: relative;
   
+  /* Ensure all form elements are left-aligned */
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
   @media (max-width: 768px) {
     width: 100%;
     padding: 20px;
@@ -108,15 +116,42 @@
 }
 
 .cardDescription {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  color: white; /* White text as requested */
+  font-weight: 100; /* Thinner font weight */
+  font-family: var(--font-family-thin, var(--font-family)); /* Use thin font family */
+  letter-spacing: 0.02em; /* Slight letter spacing for elegance */
+  
+  @media (max-width: 768px) {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+.cardText {
   font-size: 1.2rem;
   line-height: 1.6;
   margin: 0;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   color: var(--text-color);
   
   @media (max-width: 768px) {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
+}
+
+.buttonContainer {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start; /* Left-align buttons */
+  width: 100%;
 }

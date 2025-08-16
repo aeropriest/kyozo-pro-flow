@@ -6,6 +6,7 @@ interface SlidingCardProps {
   title: string;
   subtitle: string;
   text: string;
+  description?: string; // Added description field
   button: React.ReactNode;
   content: React.ReactNode;
   className?: string;
@@ -18,6 +19,7 @@ const DialogCard: React.FC<SlidingCardProps> = ({
   title, 
   subtitle, 
   text, 
+  description = '', // Added description with default empty string
   button, 
   content, 
   className = '',
@@ -69,10 +71,15 @@ const DialogCard: React.FC<SlidingCardProps> = ({
             <>
               <p className={styles.categoryLabel}>{subtitle}</p>
               <h2 className={styles.cardTitle}>{title}</h2>
-              <p className={styles.cardDescription}>
+              {description && (
+                <p className={styles.cardDescription}>
+                  {description}
+                </p>
+              )}
+              <p className={styles.cardText}>
                 {text}
               </p>
-              <div>
+              <div className={styles.buttonContainer}>
                 {button}
               </div>
             </>

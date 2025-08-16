@@ -168,39 +168,11 @@ const Dialog: React.FC<DialogProps> = ({
     }, 600);
   };
 
-  // Close dialog when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dialogRef.current && !dialogRef.current.contains(event.target as Node)) {
-        handleClose();
-      }
-    };
+  // Modal dialog - no longer closes when clicking outside
+  // We've removed the click outside handler to make it truly modal
 
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isOpen]);
-
-  // Close dialog on escape key
-  useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        handleClose();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-    };
-  }, [isOpen]);
+  // Modal dialog - no longer closes on escape key
+  // We've removed the escape key handler to make it truly modal
 
   // Prevent body scrolling when dialog is open
   useEffect(() => {
@@ -223,6 +195,12 @@ const Dialog: React.FC<DialogProps> = ({
         className={`${styles.dialog} ${className} ${isClosing ? styles.closing : ''}`}
         onClick={(e) => e.stopPropagation()}
       >
+        <button className={styles.closeButton} onClick={handleClose}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
         <div className={styles.dialogContent}>
           <div className={`${styles.cardsContainer} ${isAnimating ? styles.animating : ''} ${slideDirection === 'next' ? styles.slideNext : styles.slidePrev}`}>
             {cards.map((page, index) => {

@@ -37,6 +37,13 @@
   font-size: 1.125rem;
 }
 
+// Full width variant
+.fullWidth {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 // Style variants
 .primary {
   background: var(--accent-pink);

@@ -3,23 +3,23 @@
 .tabsContainer {
   display: flex;
   overflow-x: auto;
-  padding: 0.5rem;
+  padding: 0.6rem; /* 20% taller */
   width: 100%;
   background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 9999px; // Fully rounded
+  border-radius: 20px; /* Less rounded */
 }
 
 .tab {
   background: transparent;
   border: none;
   color: var(--text-color);
-  padding: 0.5rem 1rem;
-  border-radius: 9999px; // Fully rounded
+  padding: 0.6rem 1rem; /* 20% taller */
+  border-radius: 20px; /* Less rounded */
   cursor: pointer;
   font-weight: 500;
   transition: all 0.2s ease;
   white-space: nowrap;
-  flex: 1; // Make tabs take equal width
+  flex: 1; /* Make tabs take equal width */
   
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Button, Input, Checkbox, Tabs, AnimatedTitle } from '@/components/ui';
 import styles from './SignInForm.module.scss';
+import ButtonUI from './ui/Button';
 
 interface SignInFormProps {
   onSignIn?: (data: { email: string; password: string }) => void;
@@ -72,13 +73,12 @@ const SignInForm: React.FC<SignInFormProps> = ({
         Step {currentStep} of {totalSteps}
       </div>
       
-      <div className={styles.formHeader}>
-        <AnimatedTitle 
-          text="Sign In / Sign Up" 
-          subtitle="Welcome to Kyozo Pro" 
-          size="medium" 
-        />
-      </div>
+      <AnimatedTitle 
+        text="Welcome to Kyozo" 
+        subtitle="Sign in to continue your journey" 
+        size="medium" 
+        className={styles.animatedTitle}
+      />
       
       <Tabs
         tabs={['Sign In', 'Sign Up']}
@@ -116,22 +116,14 @@ const SignInForm: React.FC<SignInFormProps> = ({
               <a href="#">Forgot password?</a>
             </div>
             <div className={styles.actionRow}>
-              <Button type="submit" variant="primary" size="medium" className={styles.submitButton}>
-                Sign In
-              </Button>
-              <div className={styles.orDivider}>
-                <span>OR</span>
-              </div>
-              <Button
-                type="button"
-                variant="outline"
-                size="medium"
-                className={styles.googleButton}
+              <ButtonUI variant="outline-only" size="large" href="#">Join the waitlist</ButtonUI>
+              <ButtonUI 
+                variant="outline-only" 
+                size="large" 
                 onClick={handleGoogleSignIn}
               >
-                <span className={styles.googleIcon}>G</span>
-                Continue with Google
-              </Button>
+                Sign In with Google
+              </ButtonUI>
             </div>
           </form>
         ) : (
@@ -183,22 +175,27 @@ const SignInForm: React.FC<SignInFormProps> = ({
               />
             </div>
             <div className={styles.actionRow}>
-              <Button type="submit" variant="primary" size="medium" className={styles.submitButton}>
+              <ButtonUI 
+                variant="outline-only" 
+                size="large" 
+                onClick={() => {
+                  if (signUpForm.terms) {
+                    const event = new Event('submit') as unknown as React.FormEvent;
+                    handleSignUp(event);
+                  } else {
+                    alert('Please accept the terms and conditions');
+                  }
+                }}
+              >
                 Sign Up
-              </Button>
-              <div className={styles.orDivider}>
-                <span>OR</span>
-              </div>
-              <Button
-                type="button"
-                variant="outline"
-                size="medium"
-                className={styles.googleButton}
+              </ButtonUI>
+              <ButtonUI
+                variant="outline-only"
+                size="large"
                 onClick={handleGoogleSignIn}
               >
-                <span className={styles.googleIcon}>G</span>
-                Continue with Google
-              </Button>
+                Sign Up with Google
+              </ButtonUI>
             </div>
           </form>
         )}

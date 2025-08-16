@@ -1,15 +1,13 @@
 @use '../styles/themes/_theme-variables' as *;
 
 .formContainer {
-  width: 100%;
+  width: 50%; /* Make form half width */
   height: 100%;
   display: flex;
   flex-direction: column;
   padding: 20px;
   overflow-y: auto;
   position: relative;
-  max-width: 480px;
-  margin: 0 auto;
 }
 
 .stepIndicator {
@@ -21,29 +19,16 @@
   font-weight: 500;
 }
 
-.formHeader {
-  text-align: center;
+.animatedTitle {
   margin-bottom: 24px;
   padding-top: 20px;
-}
-
-.title {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: var(--text-primary);
-}
-
-.subtitle {
-  font-size: 16px;
-  color: var(--text-secondary);
-  margin-bottom: 0;
 }
 
 .tabs {
   display: flex;
   margin-bottom: 20px;
   border-bottom: 1px solid var(--border-color);
+  width: 100%; /* Make tabs full width */
 }
 
 .tab {
@@ -55,6 +40,8 @@
   color: var(--text-secondary);
   cursor: pointer;
   position: relative;
+  flex: 1; /* Make each tab take equal width */
+  text-align: center;
   
   &.active {
     color: var(--text-primary);
@@ -96,7 +83,7 @@
     width: 100%;
     padding: 12px 16px;
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 9999px; /* Fully rounded */
     background-color: var(--input-bg);
     color: var(--text-primary);
     font-size: 16px;

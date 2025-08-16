@@ -58,9 +58,11 @@ const DialogCard: React.FC<SlidingCardProps> = ({
     <div ref={cardRef} className={`${styles.cardContainer} ${className}`}>
       <div className={styles.cardContent}>
         <div className={styles.leftContent}>
-          <div className={styles.stepIndicator}>
-            Step {currentStep} of {totalSteps}
-          </div>
+          {!customComponent && (
+            <div className={styles.stepIndicator}>
+              Step {currentStep} of {totalSteps}
+            </div>
+          )}
           {customComponent ? (
             customComponent
           ) : (

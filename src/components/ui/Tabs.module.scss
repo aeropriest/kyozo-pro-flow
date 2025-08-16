@@ -2,7 +2,6 @@
 
 .tabsContainer {
   display: flex;
-  gap: 0.5rem;
   overflow-x: auto;
   padding: 0.5rem;
   width: 100%;
@@ -20,6 +19,7 @@
   font-weight: 500;
   transition: all 0.2s ease;
   white-space: nowrap;
+  flex: 1; // Make tabs take equal width
   
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);

@@ -5,7 +5,6 @@
   align-items: center;
   justify-content: center;
   margin-right: 10px;
-  background-color: red;
 }
 
 .checkboxContainer {
@@ -24,40 +23,41 @@
   width: 0;
 }
 
-.checkmark {
+.checkbox {
   position: relative;
   height: 20px;
   width: 20px;
   min-width: 20px;
   background-color: transparent;
-  border: 1px solid var(--accent-pink);
-  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px; // Rounded square instead of fully rounded
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
-  &::after {
-    content: '';
-    position: absolute;
-    display: none;
-    left: 7px;
-    top: 3px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
+  /* No after pseudo-element, we'll use the CheckIcon SVG instead */
+  
+  .checkIcon {
+    display: none; /* Hide by default */
+    width: 14px;
+    height: 14px;
   }
 }
 
-.checkboxInput:checked ~ .checkmark {
-  background-color: var(--accent-pink);
+.checkboxInput:checked ~ .checkbox {
+  background-color: var(--accent-pink); // Use flat pink color
   border-color: var(--accent-pink);
   
-  &::after {
+  .checkIcon {
     display: block;
+    color: var(--text-color); // White text on pink background
+    width: 14px;
+    height: 14px;
   }
 }
 
-.checkboxInput:focus ~ .checkmark {
+.checkboxInput:focus ~ .checkbox {
   box-shadow: 0 0 0 2px rgba(var(--accent-pink-rgb), 0.4);
 }
 

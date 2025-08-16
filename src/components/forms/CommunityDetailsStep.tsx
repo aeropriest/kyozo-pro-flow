@@ -7,13 +7,15 @@ interface CommunityDetailsStepProps {
   onPrev?: () => void;
   currentStep: number;
   totalSteps: number;
+  description?: string;
 }
 
 const CommunityDetailsStep: React.FC<CommunityDetailsStepProps> = ({
   onNext,
   onPrev,
   currentStep,
-  totalSteps
+  totalSteps,
+  description
 }) => {
   const [communityName, setCommunityName] = useState('');
   const [communityDescription, setCommunityDescription] = useState('');
@@ -28,7 +30,8 @@ const CommunityDetailsStep: React.FC<CommunityDetailsStepProps> = ({
     <div className={styles.formContainer}>
       <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
       <h2 className={styles.cardTitle}>Create Your Community</h2>
-      
+      {description && <p className={styles.cardDescription}>{description}</p>}
+        
       <div className={styles.formControls}>
         <div className={styles.formContent}>
           <form onSubmit={handleSubmit}>

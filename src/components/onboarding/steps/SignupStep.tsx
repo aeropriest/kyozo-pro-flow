@@ -17,7 +17,7 @@ const SignupStep: React.FC = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
+            placeholder="Your Email"
           />
         </div>
         <div className={styles.formGroup}>

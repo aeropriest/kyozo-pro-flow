@@ -7,13 +7,15 @@ interface DashboardStepProps {
   onPrev?: () => void;
   currentStep: number;
   totalSteps: number;
+  description?: string;
 }
 
 const DashboardStep: React.FC<DashboardStepProps> = ({
   onNext,
   onPrev,
   currentStep,
-  totalSteps
+  totalSteps,
+  description
 }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,6 +35,7 @@ const DashboardStep: React.FC<DashboardStepProps> = ({
               <p>Congratulations! You have successfully completed the onboarding process.</p>
               <p>Your community is now set up and ready to go. Click the button below to access your dashboard.</p>
             </div>
+            {description && <p className={styles.cardDescription}>{description}</p>}
             
             <div className={styles.actionRow}>
               <Button 

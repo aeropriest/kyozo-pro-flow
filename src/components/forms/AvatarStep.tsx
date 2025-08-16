@@ -7,27 +7,57 @@ interface AvatarStepProps {
   onPrev?: () => void;
   currentStep: number;
   totalSteps: number;
+  description?: string;
 }
 
 const AvatarStep: React.FC<AvatarStepProps> = ({
   onNext,
   onPrev,
   currentStep,
-  totalSteps
+  totalSteps,
+  description
 }) => {
   const [avatarName, setAvatarName] = useState('');
   const [avatarBio, setAvatarBio] = useState('');
+  const [nameError, setNameError] = useState('');
+  const [bioError, setBioError] = useState('');
+
+  const validateForm = () => {
+    let isValid = true;
+    
+    // Reset errors
+    setNameError('');
+    setBioError('');
+    
+    // Validate display name
+    if (!avatarName.trim()) {
+      setNameError('Please fill out this field');
+      isValid = false;
+    }
+    
+    // Validate bio
+    if (!avatarBio.trim()) {
+      setBioError('Please fill out this field');
+      isValid = false;
+    }
+    
+    return isValid;
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Avatar data:', { avatarName, avatarBio });
-    onNext?.();
+    
+    if (validateForm()) {
+      console.log('Avatar data:', { avatarName, avatarBio });
+      onNext?.();
+    }
   };
 
   return (
     <div className={styles.formContainer}>
       <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
       <h2 className={styles.cardTitle}>Set Your Avatar</h2>
+      {description && <p className={styles.cardDescription}>{description}</p>}
       
       <div className={styles.formControls}>
         <div className={styles.formContent}>
@@ -38,8 +68,12 @@ const AvatarStep: React.FC<AvatarStepProps> = ({
                 id="avatarName"
                 name="avatarName"
                 value={avatarName}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAvatarName(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setAvatarName(e.target.value);
+                  if (nameError) setNameError('');
+                }}
                 placeholder="Display Name"
+                error={nameError}
                 required
               />
             </div>
@@ -49,8 +83,12 @@ const AvatarStep: React.FC<AvatarStepProps> = ({
                 id="avatarBio"
                 name="avatarBio"
                 value={avatarBio}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAvatarBio(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setAvatarBio(e.target.value);
+                  if (bioError) setBioError('');
+                }}
                 placeholder="Short Bio"
+                error={bioError}
                 required
               />
             </div>

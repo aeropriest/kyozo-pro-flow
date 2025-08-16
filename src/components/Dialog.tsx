@@ -19,20 +19,23 @@ const cards = [
   {
     title: "Sign In / Sign Up",
     subtitle: "Welcome to Kyozo Pro",
+    description: "Create an account or sign in to access your community dashboard and settings.",
     image: "/form-right.mp4",
     component: 'SignInStep',
     customComponent: null
   },
   {
-    title: "Set Your Avatar",
-    subtitle: "Give your profile a personal touch.",
-    image: "/Parallax3.jpg",
+    title: "Avatar Setup",
+    subtitle: "Choose your profile picture.",
+    description: "Select or upload an image that represents you. This will be visible to other members of your community.",
+    image: "/Parallax4.jpg",
     component: 'AvatarStep',
-    customComponent: null
+    customComponent: null,
   },
   {
     title: "Create Your Community",
     subtitle: "Tell us about your community.",
+    description: "Provide details about your community's purpose, goals, and target audience to help us customize your experience.",
     image: "/Parallax4.jpg",
     component: 'CommunityDetailsStep',
     customComponent: null,
@@ -40,6 +43,7 @@ const cards = [
   {
     title: "Community Settings",
     subtitle: "Customize your community's rules and appearance.",
+    description: "Set up guidelines, privacy options, and visual elements to create a unique identity for your community.",
     image: "/Parallax5.jpg",
     component: 'CommunitySettingsStep',
     customComponent: null,
@@ -47,6 +51,7 @@ const cards = [
   {
     title: "Add Community Members",
     subtitle: "Let's grow your community together.",
+    description: "Invite friends, colleagues, or interested individuals to join your community and participate in discussions.",
     image: "/Parallax1.jpg",
     component: 'AddMembersStep',
     customComponent: null,
@@ -54,6 +59,7 @@ const cards = [
   {
     title: "Member Management",
     subtitle: "Review and manage your members.",
+    description: "Assign roles, set permissions, and organize your community members to create an effective structure.",
     image: "/Parallax2.jpg",
     component: 'MemberManagementStep',
     customComponent: null,
@@ -61,6 +67,7 @@ const cards = [
   {
     title: "Onboarding Complete!",
     subtitle: "You're all set. Welcome to the dashboard!",
+    description: "Congratulations on setting up your community! You now have access to all the tools and features to manage your community effectively.",
     image: "/Parallax3.jpg",
     component: 'DashboardStep',
     customComponent: null,
@@ -101,10 +108,8 @@ const Dialog: React.FC<DialogProps> = ({
   step = 1,
   totalSteps = 6,
 }) => {
-  // State for card navigation
+  // State for card navigation - simplified without animations
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [slideDirection, setSlideDirection] = useState<'next' | 'prev'>('next');
 
   // Form state management
   const [signInForm, setSignInForm] = useState({ email: '', password: '' });
@@ -142,26 +147,16 @@ const Dialog: React.FC<DialogProps> = ({
     onTabChange(index);
   };
 
-  // Handle card navigation
+  // Handle card navigation - simplified without animations
   const handleNextCard = () => {
-    if (currentCardIndex < cards.length - 1 && !isAnimating) {
-      setSlideDirection('next');
-      setIsAnimating(true);
-      setTimeout(() => {
-        setCurrentCardIndex(prev => prev + 1);
-        setIsAnimating(false);
-      }, 800);
+    if (currentCardIndex < cards.length - 1) {
+      setCurrentCardIndex(prev => prev + 1);
     }
   };
 
   const handlePrevCard = () => {
-    if (currentCardIndex > 0 && !isAnimating) {
-      setSlideDirection('prev');
-      setIsAnimating(true);
-      setTimeout(() => {
-        setCurrentCardIndex(prev => prev - 1);
-        setIsAnimating(false);
-      }, 800);
+    if (currentCardIndex > 0) {
+      setCurrentCardIndex(prev => prev - 1);
     }
   };
 
@@ -211,24 +206,24 @@ const Dialog: React.FC<DialogProps> = ({
           </svg>
         </button>
         <div className={styles.dialogContent}>
-          <div className={`${styles.cardsContainer} ${isAnimating ? styles.animating : ''} ${slideDirection === 'next' ? styles.slideNext : styles.slidePrev}`}>
+          <div className={styles.cardsContainer}>
             {cards.map((page, index) => {
-              // Calculate scale based on card position and animation direction
-              let scale = 1;
-              let zIndex = cards.length - Math.abs(index - currentCardIndex);
-
-              if (slideDirection === 'next' && index === currentCardIndex - 1) {
-                scale = isAnimating ? 0.85 : 1;
-              } else if (slideDirection === 'prev' && index === currentCardIndex + 1) {
-                scale = isAnimating ? 0.85 : 1;
-              }
-
+              // Simple display logic without animations
+              const isActive = index === currentCardIndex;
+              const zIndex = cards.length - Math.abs(index - currentCardIndex);
+              
+              // Only show the active card
+              if (!isActive) return null;
+              
+              // Position the card
+              const translateX = '0%';
+              
               return (
                 <div
                   key={index}
-                  className={`${styles.cardWrapper} ${index === currentCardIndex ? styles.active : ''}`}
+                  className={`${styles.cardWrapper} ${styles.active}`}
                   style={{
-                    transform: `translateX(${(index - currentCardIndex) * 100}%) scale(${scale})`,
+                    transform: `translateX(${translateX})`,
                     zIndex: zIndex,
                   }}
                 >
@@ -236,6 +231,7 @@ const Dialog: React.FC<DialogProps> = ({
                     key={index}
                     title={page.title || ''}
                     subtitle={page.subtitle || ''}
+                    description={page.description || ''}
                     text=""
                     currentStep={index + 1}
                     totalSteps={cards.length}
@@ -269,6 +265,7 @@ const Dialog: React.FC<DialogProps> = ({
                                 onNext={handleNextCard} 
                                 currentStep={index + 1} 
                                 totalSteps={cards.length}
+                                description={cards[index].description}
                               />
                             );
                           case 1:
@@ -278,6 +275,7 @@ const Dialog: React.FC<DialogProps> = ({
                                 onPrev={handlePrevCard}
                                 currentStep={index + 1}
                                 totalSteps={cards.length}
+                                description={cards[index].description}
                               />
                             );
                           case 2:
@@ -287,6 +285,7 @@ const Dialog: React.FC<DialogProps> = ({
                                 onPrev={handlePrevCard}
                                 currentStep={index + 1}
                                 totalSteps={cards.length}
+                                description={cards[index].description}
                               />
                             );
                           case 3:
@@ -296,6 +295,7 @@ const Dialog: React.FC<DialogProps> = ({
                                 onPrev={handlePrevCard}
                                 currentStep={index + 1}
                                 totalSteps={cards.length}
+                                description={cards[index].description}
                               />
                             );
                           case 4:
@@ -305,6 +305,7 @@ const Dialog: React.FC<DialogProps> = ({
                                 onPrev={handlePrevCard}
                                 currentStep={index + 1}
                                 totalSteps={cards.length}
+                                description={cards[index].description}
                               />
                             );
                           case 5:
@@ -314,6 +315,7 @@ const Dialog: React.FC<DialogProps> = ({
                                 onPrev={handlePrevCard}
                                 currentStep={index + 1}
                                 totalSteps={cards.length}
+                                description={cards[index].description}
                               />
                             );
                           case 6:
@@ -323,6 +325,7 @@ const Dialog: React.FC<DialogProps> = ({
                                 onPrev={handlePrevCard}
                                 currentStep={index + 1}
                                 totalSteps={cards.length}
+                                description={cards[index].description}
                               />
                             );
                           default:

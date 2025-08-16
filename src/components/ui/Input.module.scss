@@ -30,14 +30,14 @@
     left: -0.5px;
     right: -0.5px;
     bottom: -0.5px;
-    background: transparent;
     border-radius: 9999px; /* Fully rounded */
     opacity: 0;
     transition: opacity 0.2s ease;
     z-index: 0;
-    background-image: linear-gradient(90deg, var(--accent-pink), var(--accent-blue));
+    border: 0.5px solid transparent;
+    background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(90deg, var(--accent-pink), var(--accent-blue));
     background-origin: border-box;
-    background-clip: border-box;
+    background-clip: padding-box, border-box;
   }
 }
 

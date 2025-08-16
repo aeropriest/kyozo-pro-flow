@@ -9,6 +9,7 @@ interface ButtonProps {
   onClick?: () => void;
   href?: string;
   className?: string;
+  fullWidth?: boolean; // Add fullWidth prop
   [key: string]: any; // For any additional props
 }
 
@@ -19,9 +20,10 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   href,
   className = '',
+  fullWidth = false,
   ...props 
 }) => {
-  const buttonClasses = `${styles.button} ${styles[variant]} ${styles[size]} ${className}`;
+  const buttonClasses = `${styles.button} ${styles[variant]} ${styles[size]} ${fullWidth ? styles.fullWidth : ''} ${className}`;
   
   if (href) {
     return (

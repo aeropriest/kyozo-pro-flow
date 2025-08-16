@@ -26,7 +26,6 @@ const SignInForm: React.FC<SignInFormProps> = ({
   const [signInForm, setSignInForm] = useState({ email: '', password: '' });
   const [signUpForm, setSignUpForm] = useState({ fullName: '', email: '', password: '', terms: false });
 
-
   // Handle form input changes
   const handleSignInChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -69,136 +68,139 @@ const SignInForm: React.FC<SignInFormProps> = ({
 
   return (
     <div className={styles.formContainer}>
-      <div className={styles.stepIndicator}>
-        Step {currentStep} of {totalSteps}
-      </div>
+      <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
+      <h2 className={styles.cardTitle}>Welcome to Kyozo</h2>
       
-      <AnimatedTitle 
+      {/* <AnimatedTitle 
         text="Welcome to Kyozo" 
         subtitle="Sign in to continue your journey" 
         size="medium" 
         className={styles.animatedTitle}
-      />
-      
-      <Tabs
-        tabs={['Sign In', 'Sign Up']}
-        activeTab={activeTab === 'signin' ? 0 : 1}
-        onTabChange={(index) => setActiveTab(index === 0 ? 'signin' : 'signup')}
-        className={styles.tabs}
-      />
+      /> */}
+      <div className={styles.formControls}>
+        <Tabs
+          tabs={['Sign In', 'Sign Up']}
+          activeTab={activeTab === 'signin' ? 0 : 1}
+          onTabChange={(index) => setActiveTab(index === 0 ? 'signin' : 'signup')}
+          className={styles.tabs}
+        />
 
-      <div className={styles.formContent}>
-        {activeTab === 'signin' ? (
-          <form onSubmit={handleSignIn}>
-            <div className={styles.formGroup}>
-              <Input
-                type="email"
-                id="email"
-                name="email"
-                value={signInForm.email}
-                onChange={handleSignInChange}
-                placeholder="Enter your email"
-                required
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <Input
-                type="password"
-                id="password"
-                name="password"
-                value={signInForm.password}
-                onChange={handleSignInChange}
-                placeholder="Enter your password"
-                required
-              />
-            </div>
-            <div className={styles.forgotPassword}>
-              <a href="#">Forgot password?</a>
-            </div>
-            <div className={styles.actionRow}>
-              <ButtonUI variant="outline-only" size="large" href="#">Join the waitlist</ButtonUI>
-              <ButtonUI 
-                variant="outline-only" 
-                size="large" 
-                onClick={handleGoogleSignIn}
-              >
-                Sign In with Google
-              </ButtonUI>
-            </div>
-          </form>
-        ) : (
-          <form onSubmit={handleSignUp}>
-            <div className={styles.formGroup}>
-              <Input
-                type="text"
-                id="name"
-                name="fullName"
-                value={signUpForm.fullName}
-                onChange={handleSignUpChange}
-                placeholder="Enter your name"
-                required
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <Input
-                type="email"
-                id="signUpEmail"
-                name="email"
-                value={signUpForm.email}
-                onChange={handleSignUpChange}
-                placeholder="Enter your email"
-                required
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <Input
-                type="password"
-                id="signUpPassword"
-                name="password"
-                value={signUpForm.password}
-                onChange={handleSignUpChange}
-                placeholder="Create a password"
-                required
-              />
-            </div>
-            <div className={styles.termsCheckbox}>
-              <Checkbox
-                id="terms"
-                name="terms"
-                checked={signUpForm.terms}
-                onChange={handleTermsChange}
-                label={
-                  <span>
-                    I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
-                  </span>
-                }
-              />
-            </div>
-            <div className={styles.actionRow}>
-              <ButtonUI 
-                variant="outline-only" 
-                size="large" 
-                onClick={() => {
-                  if (signUpForm.terms) {
-                    const event = new Event('submit') as unknown as React.FormEvent;
-                    handleSignUp(event);
-                  } else {
-                    alert('Please accept the terms and conditions');
+        <div className={styles.formContent}>
+          {activeTab === 'signin' ? (
+            <form onSubmit={handleSignIn}>
+              <div className={styles.formGroup}>
+                <Input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={signInForm.email}
+                  onChange={handleSignInChange}
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <Input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={signInForm.password}
+                  onChange={handleSignInChange}
+                  placeholder="Enter your password"
+                  required
+                />
+              </div>
+              <div className={styles.forgotPassword}>
+                <a href="#">Forgot password?</a>
+              </div>
+              <div className={styles.actionRow}>
+                <ButtonUI variant="outline-only" size="medium" href="#" fullWidth>Sign In</ButtonUI>
+                <ButtonUI 
+                  variant="outline-only" 
+                  size="medium" 
+                  onClick={handleGoogleSignIn}
+                  fullWidth
+                >
+                  Sign In with Google
+                </ButtonUI>
+              </div>
+            </form>
+          ) : (
+            <form onSubmit={handleSignUp}>
+              <div className={styles.formGroup}>
+                <Input
+                  type="text"
+                  id="name"
+                  name="fullName"
+                  value={signUpForm.fullName}
+                  onChange={handleSignUpChange}
+                  placeholder="Enter your name"
+                  required
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <Input
+                  type="email"
+                  id="signUpEmail"
+                  name="email"
+                  value={signUpForm.email}
+                  onChange={handleSignUpChange}
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <Input
+                  type="password"
+                  id="signUpPassword"
+                  name="password"
+                  value={signUpForm.password}
+                  onChange={handleSignUpChange}
+                  placeholder="Create a password"
+                  required
+                />
+              </div>
+              <div className={styles.termsCheckbox}>
+                <Checkbox
+                  id="terms"
+                  name="terms"
+                  checked={signUpForm.terms}
+                  onChange={handleTermsChange}
+                  label={
+                    <span>
+                      I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                    </span>
                   }
-                }}
-              >
-                Sign Up
-              </ButtonUI>
-              <ButtonUI
-                variant="outline-only"
-                size="large"
-                onClick={handleGoogleSignIn}
-              >
-                Sign Up with Google
-              </ButtonUI>
-            </div>
-          </form>
-        )}
+                />
+              </div>
+              <div className={styles.actionRow}>
+                <ButtonUI 
+                  variant="outline-only" 
+                  size="medium" 
+                  fullWidth
+                  onClick={() => {
+                    if (signUpForm.terms) {
+                      const event = new Event('submit') as unknown as React.FormEvent;
+                      handleSignUp(event);
+                    } else {
+                      alert('Please accept the terms and conditions');
+                    }
+                  }}
+                >
+                  Sign Up
+                </ButtonUI>
+                <ButtonUI
+                  variant="outline-only"
+                  size="medium"
+                  fullWidth
+                  onClick={handleGoogleSignIn}
+                >
+                  Sign Up with Google
+                </ButtonUI>
+              </div>
+            </form>
+          )}
+        </div>
       </div>
     </div>
   );

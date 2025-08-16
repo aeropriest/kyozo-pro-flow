@@ -26,9 +26,9 @@
   transform-origin: center center;
   
   // Add subtle shadow for depth when cards overlap
-  &:not(:first-child) {
-    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.1);
-  }
+  // &:not(:first-child) {
+  //   box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.1);
+  // }
 }
 
 .card {

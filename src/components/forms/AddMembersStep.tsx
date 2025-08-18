@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
 import styles from './StepForm.module.scss';
 import { Button, Input } from '@/components/ui';
+import GenericStepWrapper from '../onboarding/GenericStepWrapper';
+import { onboardingSteps } from '../onboarding/onboardingSteps';
 
 interface AddMembersStepProps {
   onNext?: () => void;
   onPrev?: () => void;
   currentStep: number;
   totalSteps: number;
-  description?: string;
 }
 
 const AddMembersStep: React.FC<AddMembersStepProps> = ({
   onNext,
   onPrev,
   currentStep,
-  totalSteps,
-  description 
+  totalSteps
 }) => {
   const [memberEmail, setMemberEmail] = useState('');
   const [memberRole, setMemberRole] = useState('');
+  
+  // Find the step data from onboardingSteps
+  const stepData = onboardingSteps.find(step => step.component === 'AddMembersStep');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,14 +30,14 @@ const AddMembersStep: React.FC<AddMembersStepProps> = ({
   };
 
   return (
-    <div className={styles.formContainer}>
-      <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
-      <h2 className={styles.cardTitle}>Add Community Members</h2>
-      {description && <p className={styles.cardDescription}>{description}</p>}
-      
-      <div className={styles.formControls}>
-        <div className={styles.formContent}>
-          <form onSubmit={handleSubmit}>
+    <GenericStepWrapper
+      step={stepData!}
+      currentStep={currentStep}
+      totalSteps={totalSteps}
+      onNext={onNext}
+      onPrev={onPrev}
+    >
+      <form onSubmit={handleSubmit}>
             <div className={styles.formGroup}>
               <Input
                 type="email"
@@ -76,10 +79,8 @@ const AddMembersStep: React.FC<AddMembersStepProps> = ({
                 Next
               </Button>
             </div>
-          </form>
-        </div>
-      </div>
-    </div>
+      </form>
+    </GenericStepWrapper>
   );
 };
 

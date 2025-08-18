@@ -139,7 +139,14 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ isOpen, onClose }) 
               className={`${styles.cardContainer} ${styles[direction]} ${isAnimating ? styles.animating : ''}`}
               style={{ backgroundImage: `url(${step.image})` }}
             >
-              {StepComponent && <StepComponent />}
+              {StepComponent && (
+                <StepComponent 
+                  onNext={handleNext}
+                  onPrev={handleBack}
+                  currentStep={currentStep + 1}
+                  totalSteps={onboardingSteps.length}
+                />
+              )}
             </div>
           </div>
         </div>

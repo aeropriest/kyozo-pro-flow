@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import styles from './StepForm.module.scss';
 import { Button, Input } from '@/components/ui';
+import GenericStepWrapper from '../onboarding/GenericStepWrapper';
+import { onboardingSteps } from '../onboarding/onboardingSteps';
 
 interface AvatarStepProps {
   onNext?: () => void;
   onPrev?: () => void;
   currentStep: number;
   totalSteps: number;
-  description?: string;
 }
 
 const AvatarStep: React.FC<AvatarStepProps> = ({
   onNext,
   onPrev,
   currentStep,
-  totalSteps,
-  description
+  totalSteps
 }) => {
+  // Find the step data from onboardingSteps
+  const stepData = onboardingSteps.find(step => step.component === 'AvatarStep');
   const [avatarName, setAvatarName] = useState('');
   const [avatarBio, setAvatarBio] = useState('');
   const [nameError, setNameError] = useState('');
@@ -54,14 +56,14 @@ const AvatarStep: React.FC<AvatarStepProps> = ({
   };
 
   return (
-    <div className={styles.formContainer}>
-      <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
-      <h2 className={styles.cardTitle}>Set Your Avatar</h2>
-      {description && <p className={styles.cardDescription}>{description}</p>}
-      
-      <div className={styles.formControls}>
-        <div className={styles.formContent}>
-          <form onSubmit={handleSubmit}>
+    <GenericStepWrapper
+      step={stepData!}
+      currentStep={currentStep}
+      totalSteps={totalSteps}
+      onNext={onNext}
+      onPrev={onPrev}
+    >
+      <form onSubmit={handleSubmit}>
             <div className={styles.formGroup}>
               <Input
                 type="text"
@@ -111,10 +113,8 @@ const AvatarStep: React.FC<AvatarStepProps> = ({
                 Next
               </Button>
             </div>
-          </form>
-        </div>
-      </div>
-    </div>
+      </form>
+    </GenericStepWrapper>
   );
 };
 

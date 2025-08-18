@@ -94,6 +94,7 @@ const FixedFooter: React.FC<FixedFooterProps> = ({ className = '' }) => {
         onClose={closeDialog}
         title="Sign Up to begin"
         subtitle=""
+        useWizard={true}
       />
     </footer>
   );

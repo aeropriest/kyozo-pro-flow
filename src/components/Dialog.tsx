@@ -4,7 +4,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from './Dialog.module.scss';
 import FormVideo from './FormVideo';
 import { Input, Checkbox } from '@/components/ui';
-import  {Button as ButtonUI} from "@/components/ui";
+import { Button as ButtonUI } from "@/components/ui";
+import { Wizard } from './Wizard';
+import { WizardStep, WizardData } from '../types/wizard';
+import { SignInStep, PersonalInfoStep, PreferencesStep, CompletionStep } from './DialogWizardSteps';
 
 interface Tab {
   label: string;
@@ -24,6 +27,7 @@ interface DialogProps {
   onTabChange?: (index: number) => void;
   step?: number;
   totalSteps?: number;
+  useWizard?: boolean;
 }
 
 const Dialog: React.FC<DialogProps> = ({
@@ -38,7 +42,8 @@ const Dialog: React.FC<DialogProps> = ({
   activeTab = 0,
   onTabChange = () => {},
   step = 1,
-  totalSteps = 6
+  totalSteps = 6,
+  useWizard = false
 }) => {
   // Form state management
   const [signInForm, setSignInForm] = useState({
@@ -54,6 +59,45 @@ const Dialog: React.FC<DialogProps> = ({
   
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [currentTab, setCurrentTab] = useState(activeTab);
+  
+  // Always use wizard by default for all flows
+  const shouldUseWizard = true;
+  
+  // Wizard configuration
+  const wizardSteps: WizardStep[] = [
+    {
+      title: "Sign In",
+      subtitle: "Welcome back",
+      description: "Sign in with your email and password to access your account.",
+      component: SignInStep
+    },
+    {
+      title: "Personal Information",
+      subtitle: "Tell us about yourself",
+      description: "Please provide your personal information to complete your profile.",
+      component: PersonalInfoStep
+    },
+    {
+      title: "Preferences",
+      subtitle: "Communication preferences",
+      description: "Choose how you'd like to receive updates and notifications from us.",
+      component: PreferencesStep
+    },
+    {
+      title: "All Set!",
+      subtitle: "Registration complete",
+      description: "Your account has been created successfully. You can now access all features.",
+      component: CompletionStep
+    }
+  ];
+  
+  const handleWizardComplete = (data: WizardData) => {
+    console.log('Wizard completed with data:', data);
+    // Process the completed wizard data
+    setTimeout(() => {
+      onClose();
+    }, 500);
+  };
   
   // Handle form input changes
   const handleSignInChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -144,14 +188,22 @@ const Dialog: React.FC<DialogProps> = ({
     };
   }, [isOpen]);
 
+  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    console.log('Overlay clicked, preventing propagation');
+  };
+
   if (!isOpen && !isClosing) return null;
 
   return (
-    <div className={styles.overlay}>
+    <div className={styles.overlay} onClick={handleOverlayClick}>
       <div 
         ref={dialogRef}
         className={`${styles.dialog} ${className} ${isClosing ? styles.closing : ''}`}
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e) => {
+          e.stopPropagation();
+          console.log('Dialog clicked, preventing propagation');
+        }}
       >
         {/* Left curtain panel */}
         <div className={`${styles.dialogLeft} ${isClosing ? styles.closingLeft : ''}`}>
@@ -182,9 +234,31 @@ const Dialog: React.FC<DialogProps> = ({
                 </div>
               )}
               
-              <div className={styles.content}>
+              <div className={styles.content} onClick={(e) => e.stopPropagation()}>
                 {children ? (
                   children
+                ) : shouldUseWizard ? (
+                  <div 
+                    className={styles.wizardWrapper} 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      console.log('Wizard wrapper clicked, preventing propagation');
+                    }}
+                  >
+                    <Wizard 
+                      steps={wizardSteps} 
+                      onComplete={handleWizardComplete}
+                      className={styles.wizardContainer}
+                      initialData={{
+                        email: '',
+                        password: '',
+                        termsAccepted: false,
+                        fullName: '',
+                        phone: '',
+                        preferences: []
+                      }}
+                    />
+                  </div>
                 ) : (
                   <div className={styles.authForm}>
                     {/* Form state management */}

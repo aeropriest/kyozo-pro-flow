@@ -6,73 +6,15 @@ import { Button } from '@/components/ui';
 import Image from 'next/image';
 import DialogCard from './DialogCard';
 import SignInForm from './SignInForm';
-import {
-  AvatarStep,
-  CommunityDetailsStep,
-  CommunitySettingsStep,
-  AddMembersStep,
-  MemberManagementStep,
-  DashboardStep
-} from './forms';
-
-const cards = [
-  {
-    title: "Sign In / Sign Up",
-    subtitle: "Welcome to Kyozo Pro",
-    description: "Create an account or sign in to access your community dashboard and settings.",
-    image: "/form-right.mp4",
-    component: 'SignInStep',
-    customComponent: null
-  },
-  {
-    title: "Avatar Setup",
-    subtitle: "Choose your profile picture.",
-    description: "Select or upload an image that represents you. This will be visible to other members of your community.",
-    image: "/Parallax4.jpg",
-    component: 'AvatarStep',
-    customComponent: null,
-  },
-  {
-    title: "Create Your Community",
-    subtitle: "Tell us about your community.",
-    description: "Provide details about your community's purpose, goals, and target audience to help us customize your experience.",
-    image: "/Parallax4.jpg",
-    component: 'CommunityDetailsStep',
-    customComponent: null,
-  },
-  {
-    title: "Community Settings",
-    subtitle: "Customize your community's rules and appearance.",
-    description: "Set up guidelines, privacy options, and visual elements to create a unique identity for your community.",
-    image: "/Parallax5.jpg",
-    component: 'CommunitySettingsStep',
-    customComponent: null,
-  },
-  {
-    title: "Add Community Members",
-    subtitle: "Let's grow your community together.",
-    description: "Invite friends, colleagues, or interested individuals to join your community and participate in discussions.",
-    image: "/Parallax1.jpg",
-    component: 'AddMembersStep',
-    customComponent: null,
-  },
-  {
-    title: "Member Management",
-    subtitle: "Review and manage your members.",
-    description: "Assign roles, set permissions, and organize your community members to create an effective structure.",
-    image: "/Parallax2.jpg",
-    component: 'MemberManagementStep',
-    customComponent: null,
-  },
-  {
-    title: "Onboarding Complete!",
-    subtitle: "You're all set. Welcome to the dashboard!",
-    description: "Congratulations on setting up your community! You now have access to all the tools and features to manage your community effectively.",
-    image: "/Parallax3.jpg",
-    component: 'DashboardStep',
-    customComponent: null,
-  },
-];
+import ProfileForm from './ProfileForm';
+// Import form components individually
+import AvatarStep from './forms/AvatarStep';
+import CommunityDetailsStep from './forms/CommunityDetailsStep';
+import CommunitySettingsStep from './forms/CommunitySettingsStep';
+import AddMembersStep from './forms/AddMembersStep';
+import MemberManagementStep from './forms/MemberManagementStep';
+import DashboardStep from './forms/DashboardStep';
+import { cards } from './wizardData';
 
 interface Tab {
   label: string;
@@ -269,7 +211,7 @@ const Dialog: React.FC<DialogProps> = ({
                             );
                           case 1:
                             return (
-                              <AvatarStep 
+                              <ProfileForm 
                                 onNext={handleNextCard}
                                 onPrev={handlePrevCard}
                                 currentStep={index + 1}

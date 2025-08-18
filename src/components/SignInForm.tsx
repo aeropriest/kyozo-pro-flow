@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Button, Input, Checkbox, Tabs, AnimatedTitle } from '@/components/ui';
 import styles from './SignInForm.module.scss';
 import ButtonUI from './ui/Button';
+import { cards } from './wizardData';
 
 interface SignInFormProps {
   onSignIn?: (data: { email: string; password: string }) => void;
@@ -24,41 +25,118 @@ const SignInForm: React.FC<SignInFormProps> = ({
   totalSteps = 6,
   description,
 }) => {
+  // Get the step data from the cards array
+  const stepData = cards[0]; // SignInForm is the first card (index 0)
   const [activeTab, setActiveTab] = useState<'signin' | 'signup'>('signin');
   const [signInForm, setSignInForm] = useState({ email: '', password: '' });
   const [signUpForm, setSignUpForm] = useState({ fullName: '', email: '', password: '', terms: false });
+  
+  // Error states for form validation
+  const [signInErrors, setSignInErrors] = useState({ email: '', password: '' });
+  const [signUpErrors, setSignUpErrors] = useState({ fullName: '', email: '', password: '', terms: '' });
 
   // Handle form input changes
   const handleSignInChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setSignInForm(prev => ({ ...prev, [name]: value }));
+    // Clear error when user types
+    if (signInErrors[name as keyof typeof signInErrors]) {
+      setSignInErrors(prev => ({ ...prev, [name]: '' }));
+    }
   };
 
   const handleSignUpChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setSignUpForm(prev => ({ ...prev, [name]: value }));
+    // Clear error when user types
+    if (signUpErrors[name as keyof typeof signUpErrors]) {
+      setSignUpErrors(prev => ({ ...prev, [name]: '' }));
+    }
   };
 
   const handleTermsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSignUpForm(prev => ({ ...prev, terms: e.target.checked }));
+    // Clear terms error when user checks the box
+    if (signUpErrors.terms) {
+      setSignUpErrors(prev => ({ ...prev, terms: '' }));
+    }
+  };
+
+  // Validate sign in form
+  const validateSignInForm = () => {
+    const errors = { email: '', password: '' };
+    let isValid = true;
+
+    if (!signInForm.email) {
+      errors.email = 'Email is required';
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(signInForm.email)) {
+      errors.email = 'Invalid email format';
+      isValid = false;
+    }
+
+    if (!signInForm.password) {
+      errors.password = 'Password is required';
+      isValid = false;
+    }
+
+    setSignInErrors(errors);
+    return isValid;
   };
 
   // Handle form submissions
   const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Sign In:', signInForm);
-    onSignIn?.(signInForm);
-    onNext?.(); // Go to next step after sign in
+    
+    if (validateSignInForm()) {
+      console.log('Sign In:', signInForm);
+      onSignIn?.(signInForm);
+      onNext?.(); // Go to next step after sign in
+    }
+  };
+
+  // Validate sign up form
+  const validateSignUpForm = () => {
+    const errors = { fullName: '', email: '', password: '', terms: '' };
+    let isValid = true;
+
+    if (!signUpForm.fullName) {
+      errors.fullName = 'Name is required';
+      isValid = false;
+    }
+
+    if (!signUpForm.email) {
+      errors.email = 'Email is required';
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(signUpForm.email)) {
+      errors.email = 'Invalid email format';
+      isValid = false;
+    }
+
+    if (!signUpForm.password) {
+      errors.password = 'Password is required';
+      isValid = false;
+    } else if (signUpForm.password.length < 6) {
+      errors.password = 'Password must be at least 6 characters';
+      isValid = false;
+    }
+
+    if (!signUpForm.terms) {
+      errors.terms = 'You must accept the terms';
+      isValid = false;
+    }
+
+    setSignUpErrors(errors);
+    return isValid;
   };
 
   const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Sign Up:', signUpForm);
-    if (signUpForm.terms) {
+    
+    if (validateSignUpForm()) {
+      console.log('Sign Up:', signUpForm);
       onSignUp?.(signUpForm);
       onNext?.(); // Go to next step after sign up
-    } else {
-      alert('Please accept the terms and conditions');
     }
   };
 
@@ -71,8 +149,8 @@ const SignInForm: React.FC<SignInFormProps> = ({
   return (
     <div className={styles.formContainer}>
       <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
-      <h2 className={styles.cardTitle}>Welcome to Kyozo</h2>
-      {description && <p className={styles.cardDescription}>{description}</p>}
+      <h2 className={styles.cardTitle}>{stepData.title}</h2>
+      <p className={styles.cardDescription}>{stepData.description}</p>
       
       {/* <AnimatedTitle 
         text="Welcome to Kyozo" 
@@ -99,6 +177,7 @@ const SignInForm: React.FC<SignInFormProps> = ({
                   value={signInForm.email}
                   onChange={handleSignInChange}
                   placeholder="Your Email"
+                  error={signInErrors.email}
                   required
                 />
               </div>
@@ -110,6 +189,7 @@ const SignInForm: React.FC<SignInFormProps> = ({
                   value={signInForm.password}
                   onChange={handleSignInChange}
                   placeholder="Password"
+                  error={signInErrors.password}
                   required
                 />
               </div>
@@ -138,6 +218,7 @@ const SignInForm: React.FC<SignInFormProps> = ({
                   value={signUpForm.fullName}
                   onChange={handleSignUpChange}
                   placeholder="Your Name"
+                  error={signUpErrors.fullName}
                   required
                 />
               </div>
@@ -149,6 +230,7 @@ const SignInForm: React.FC<SignInFormProps> = ({
                   value={signUpForm.email}
                   onChange={handleSignUpChange}
                   placeholder="Your Email"
+                  error={signUpErrors.email}
                   required
                 />
               </div>
@@ -160,6 +242,7 @@ const SignInForm: React.FC<SignInFormProps> = ({
                   value={signUpForm.password}
                   onChange={handleSignUpChange}
                   placeholder="Create a password"
+                  error={signUpErrors.password}
                   required
                 />
               </div>
@@ -175,6 +258,9 @@ const SignInForm: React.FC<SignInFormProps> = ({
                     </span>
                   }
                 />
+                {signUpErrors.terms && (
+                  <div className={styles.errorMessage}>{signUpErrors.terms}</div>
+                )}
               </div>
               <div className={styles.actionRow}>
                 <ButtonUI 
@@ -186,7 +272,7 @@ const SignInForm: React.FC<SignInFormProps> = ({
                       const event = new Event('submit') as unknown as React.FormEvent;
                       handleSignUp(event);
                     } else {
-                      alert('Please accept the terms and conditions');
+                      validateSignUpForm(); // Show validation errors
                     }
                   }}
                 >

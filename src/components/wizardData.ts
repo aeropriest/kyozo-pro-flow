@@ -18,34 +18,34 @@ export const cards: WizardStep[] = [
     component: 'SignInStep',
     customComponent: null
   },
-  {
-    title: "Its About You",
-    description: "Add your details and select a profile image that represents you. This will be visible to other members of your community.",
-    image: "/Parallax4.jpg",
-    component: 'ProfileForm',
-    customComponent: null,
-  },
-  {
-    title: "Create Your Community",
-    description: "Provide details about your community and customize its settings, including privacy options and theme colors.",
-    image: "/Parallax5.jpg",
-    component: 'CommunityDetailsStep',
-    customComponent: null,
-  },
-  {
-    title: "Add Members",
-    description: "Invite members to your community by email, CSV import, or Eventbrite integration.",
-    image: "/Parallax6.jpg",
-    component: 'AddMembersStep',
-    customComponent: null,
-  },
-  {
-    title: "Ready to Launch",
-    description: "Review your community setup and make any final adjustments before launching.",
-    image: "/Parallax1.jpg",
-    component: 'DashboardStep',
-    customComponent: null,
-  }
+//   {
+//     title: "Its About You",
+//     description: "Add your details and select a profile image that represents you. This will be visible to other members of your community.",
+//     image: "/Parallax4.jpg",
+//     component: 'ProfileForm',
+//     customComponent: null,
+//   },
+//   {
+//     title: "Create Your Community",
+//     description: "Provide details about your community and customize its settings, including privacy options and theme colors.",
+//     image: "/Parallax5.jpg",
+//     component: 'CommunityDetailsStep',
+//     customComponent: null,
+//   },
+//   {
+//     title: "Add Members",
+//     description: "Invite members to your community by email, CSV import, or Eventbrite integration.",
+//     image: "/Parallax6.jpg",
+//     component: 'AddMembersStep',
+//     customComponent: null,
+//   },
+//   {
+//     title: "Ready to Launch",
+//     description: "Review your community setup and make any final adjustments before launching.",
+//     image: "/Parallax1.jpg",
+//     component: 'DashboardStep',
+//     customComponent: null,
+//   }
 ];
 
 // Export the same data as onboardingSteps for backward compatibility

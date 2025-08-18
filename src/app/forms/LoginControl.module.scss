@@ -1,0 +1,17 @@
+@use '../../styles/themes/_theme-variables' as *;
+
+.loginContainer {
+  width: 100%;
+}
+
+.animatedTitle {
+  margin-bottom: 24px;
+  padding-top: 20px;
+}
+
+.formContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  width: 100%;
+}

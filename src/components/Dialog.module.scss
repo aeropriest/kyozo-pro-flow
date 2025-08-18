@@ -131,3 +131,76 @@
     opacity: 0;
   }
 }
+
+/* Step indicator styles */
+.stepIndicator {
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  z-index: 10;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+/* Compact form fields with reduced gap */
+.compactFormFields {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  
+  :global(.formGroup) {
+    margin-bottom: 12px; /* Reduced gap between form fields */
+  }
+}
+
+/* Bottom aligned buttons */
+.bottomAlignedButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: auto; /* Push to bottom */
+}
+
+/* Button row styling */
+.buttonRow {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  width: 60%;
+  margin-top: auto; /* Push to bottom */
+  position: absolute; /* Position at the bottom */
+  // bottom: -20px; /* Distance from bottom */
+  // left: 0;
+  // right: 0;
+  // padding: 0 20px; /* Add padding on sides */
+}
+
+/* Auth toggle styling */
+.authToggle {
+  margin-top: 16px;
+  text-align: start;
+  
+  p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+  
+  button {
+    background: none;
+    border: none;
+    color: var(--accent-pink);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    font-size: 0.9rem;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

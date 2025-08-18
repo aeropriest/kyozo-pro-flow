@@ -1,0 +1,129 @@
+@use '../../styles/themes/_theme-variables' as *;
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  height: 100%;
+  min-height: 400px; /* Ensure enough height for all sections */
+}
+
+.categoryLabel {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0;
+    margin-top: 40px; /* Add top margin to create space */
+    color: var(--text-color);
+    opacity: 0.7;
+    background-color: red;
+  }
+  
+  .cardTitle {
+    font-size: 4.8rem;
+    font-weight: 700;
+    margin: 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    line-height: 1.0;
+    color: var(--heading-color);
+    
+    @media (max-width: 768px) {
+      font-size: 3.5rem;
+    }
+  }
+  
+  .cardDescription {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin: 0;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    color: var(--text-color);
+    
+    @media (max-width: 768px) {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+  }
+
+.formTitle {
+    font-size: 4.8rem;
+    font-weight: 700;
+    margin: 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    line-height: 1.0;
+    color: var(--heading-color);
+    padding-top: 20px;
+    width: 100%;
+    
+    // @media (max-width: 768px) {
+    //   font-size: 3.5rem;
+    // }
+}
+
+.formDescription {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin: 0;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    color: var(--text-color);
+    
+    @media (max-width: 768px) {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+}
+
+.formControls {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 100%; /* expand so buttons stick at the bottom */
+}
+
+.formFields {
+  display: flex;
+  flex-direction: column;
+  gap: 7px; /* Exactly 7px gap between form elements as requested */
+  flex: 1; /* push buttons down */
+  width: 100%;
+}
+
+/* Section layout styles */
+.topSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: red; /* Red background as requested */
+}
+
+.middleSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  flex: 1;
+}
+
+.bottomSection {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-bottom: 10px; /* 10px from bottom as requested */
+  background-color: green; /* Green background as requested */
+}
+
+.actionRow {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}

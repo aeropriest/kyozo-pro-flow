@@ -42,22 +42,26 @@
 
 // Standard form section mixin
 @mixin form-section {
-  margin-bottom: 20px;
-  width: 100%;
+  // margin-bottom: 20px;
+  // width: 100%;
 }
 
 // Standard form title spacing
 @mixin form-title-spacing {
-  padding-bottom: 18px;
-  margin-bottom: 18px;
+  // padding-bottom: 18px;
+  // margin-bottom: 18px;
 }
 
 // Standard form controls container
 @mixin form-controls {
-  width: 100%;
-  max-width: 450px;
-  background-color: var(--card-bg);
-  border-radius: 30px;
-  box-shadow: var(--card-shadow);
-  align-self: flex-start;
+  // width: 100%;
+  // max-width: 450px;
+  // background-color: var(--card-bg);
+  // border-radius: 30px;
+  // align-self: flex-start;
+  // background-color: blue;
+  // display: flex;
+  // flex-direction: column;
+  // gap: -100px;  
+
 }

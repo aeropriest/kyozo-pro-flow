@@ -1,13 +1,8 @@
 @use '../styles/themes/_theme-variables' as *;
+@use '../styles/_form-mixins' as form;
 
 .formContainer {
-  width: 100%; /* make form full width of parent */
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  position: relative;
-  box-sizing: border-box;
+  @include form.form-container;
 }
 
 .categoryLabel {
@@ -38,13 +33,9 @@
 }
 
 .formControls {
-  width: 100%;
-  max-width: 450px; /* Set a max-width for better control */
-  background-color: var(--card-bg);
-  border-radius: 30px;
+  @include form.form-controls;
   /* Border removed as requested */
   // box-shadow: var(--card-shadow);
-  align-self: flex-start; /* Left align with title */
 }
 
 .stepIndicator {
@@ -112,9 +103,7 @@
 }
 
 .formGroup {
-  margin-bottom: 20px;
-  width: 100%;
-  box-sizing: border-box;
+  @include form.form-group;
 }
 
 .forgotPassword {
@@ -159,18 +148,7 @@
 }
 
 .actionRow {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  width: 100%;
-  box-sizing: border-box;
-  
-  > * {
-    flex: 1; /* Each button takes half the width */
-    max-width: calc(50% - 5px); /* Ensure buttons don't exceed half width minus gap */
-  }
+  @include form.action-row;
 }
 
 .submitButton {

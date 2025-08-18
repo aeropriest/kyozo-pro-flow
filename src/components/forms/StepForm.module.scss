@@ -1,12 +1,15 @@
 @use '../../styles/themes/_theme-variables' as *;
+@use '../../styles/_form-mixins' as form;
 
 .formContainer {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  position: relative;
+  @include form.form-container;
+  
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .cardDescription {
@@ -56,35 +59,11 @@
 }
 
 .formGroup {
-  margin-bottom: 20px;
-  width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  
-  input {
-    width: 100%;
-    max-width: 400px;
-  }
+  @include form.form-group;
 }
 
 .actionRow {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  width: 100%;
-  max-width: 400px;
-  box-sizing: border-box;
-  justify-content: flex-start;
-  
-  > * {
-    flex: 1;
-    max-width: calc(50% - 5px);
-  }
+  @include form.action-row;
 }
 
 .checkboxContainer {
@@ -104,8 +83,9 @@
 }
 
 .formSection {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   width: 100%;
+  max-width: 450px; /* Standardize max-width */
 }
 
 .sectionTitle {

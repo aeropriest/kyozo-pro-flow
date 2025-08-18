@@ -79,7 +79,8 @@ const CommunitySettingsStep: React.FC<CommunitySettingsStepProps> = ({
       onPrev={onPrev}
     >
       <form onSubmit={handleSubmit}>
-            <div className={styles.formGroup}>
+        <div className={styles.formSection}>
+          <div className={styles.formGroup}>
               <Input
                 type="text"
                 id="privacySetting"
@@ -103,8 +104,9 @@ const CommunitySettingsStep: React.FC<CommunitySettingsStepProps> = ({
                 required
               />
             </div>
+        </div>
             
-            <div className={styles.actionRow}>
+        <div className={styles.actionRow}>
               <Button 
                 variant="outline-only" 
                 size="medium" 

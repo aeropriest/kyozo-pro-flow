@@ -10,9 +10,9 @@ export const cards = [
     customComponent: null
   },
   {
-    title: "Avatar Setup",
-    subtitle: "Choose your profile picture.",
-    description: "Select or upload an image that represents you. This will be visible to other members of your community.",
+    title: "Your Profile",
+    subtitle: "Little bit about you.",
+    description: "Add a display name and a bio to help other members get to know you.",
     image: "/Parallax4.jpg",
     component: 'ProfileForm',
     customComponent: null,

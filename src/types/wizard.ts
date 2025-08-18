@@ -4,11 +4,17 @@ export interface WizardData {
   [key: string]: any;
 }
 
+export interface WizardMedia {
+  type: 'image' | 'video';
+  url: string;
+}
+
 export interface WizardStep {
   title: string;
   subtitle: string;
   description: string;
   image?: string;
+  media?: WizardMedia;
   component: React.FC<StepProps>;
 }
 

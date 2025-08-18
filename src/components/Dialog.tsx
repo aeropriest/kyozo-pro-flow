@@ -69,25 +69,41 @@ const Dialog: React.FC<DialogProps> = ({
       title: "Sign In",
       subtitle: "Welcome back",
       description: "Sign in with your email and password to access your account.",
-      component: SignInStep
+      component: SignInStep,
+      media: {
+        type: 'image',
+        url: '/images/wizard/sign-in.jpg'
+      }
     },
     {
       title: "Personal Information",
       subtitle: "Tell us about yourself",
       description: "Please provide your personal information to complete your profile.",
-      component: PersonalInfoStep
+      component: PersonalInfoStep,
+      media: {
+        type: 'image',
+        url: '/images/wizard/personal-info.jpg'
+      }
     },
     {
       title: "Preferences",
       subtitle: "Communication preferences",
       description: "Choose how you'd like to receive updates and notifications from us.",
-      component: PreferencesStep
+      component: PreferencesStep,
+      media: {
+        type: 'video',
+        url: '/videos/wizard/preferences.mp4'
+      }
     },
     {
       title: "All Set!",
       subtitle: "Registration complete",
       description: "Your account has been created successfully. You can now access all features.",
-      component: CompletionStep
+      component: CompletionStep,
+      media: {
+        type: 'image',
+        url: '/images/wizard/completion.jpg'
+      }
     }
   ];
   

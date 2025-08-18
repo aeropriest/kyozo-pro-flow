@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
-import { StepProps } from '../types/wizard';
+import { StepProps, WizardStep } from '../types/wizard';
 import { useFormValidation, validateField } from '../hooks/useFormValidation';
 import { Input, Checkbox } from '@/components/ui';
 

@@ -125,12 +125,14 @@ const Wizard: React.FC<WizardProps> = ({
             console.log('Content panel clicked, preventing propagation');
           }}
         >
-          {/* Progress Bar */}
+          {/* Progress Indicator */}
           <div className={styles.progressContainer}>
-            <div 
-              className={styles.progressBar}
-              style={{ width: `${progressPercentage}%` }}
-            ></div>
+            {steps.map((_, index) => (
+              <div 
+                key={index}
+                className={`${styles.progressBar} ${index === currentStepIndex ? styles.active : ''}`}
+              />
+            ))}
           </div>
 
           <div className={styles.contentWrapper}>
@@ -159,7 +161,8 @@ const Wizard: React.FC<WizardProps> = ({
               disabled={currentStepIndex === 0}
               className={`${styles.backButton} ${currentStepIndex === 0 ? styles.disabled : ''}`}
             >
-              Back
+              <span>&#8592;</span>
+              <span>Back</span>
             </button>
             <button
               type="button"
@@ -167,45 +170,52 @@ const Wizard: React.FC<WizardProps> = ({
                 e.preventDefault();
                 e.stopPropagation();
                 console.log('Direct Next button click handler');
-                
-                // Force direct step change for testing
-                if (isStepValid) {
-                  console.log('Step is valid, directly calling nextStep');
-                  if (currentStepIndex < steps.length - 1) {
-                    console.log('Directly changing to next step');
-                    changeStep(currentStepIndex + 1);
-                  } else if (onComplete) {
-                    console.log('Directly completing wizard');
-                    onComplete(formData);
-                  }
-                } else {
-                  console.log('Step is invalid, marking as attempted');
-                  setAttemptedStep(currentStepIndex);
-                }
+                handleNext(e);
               }}
               className={styles.nextButton}
-              style={{ 
-                position: 'relative', 
-                zIndex: 1000,
-                pointerEvents: 'auto',
-                cursor: 'pointer'
-              }}
             >
-              {isLastStep ? 'Complete' : 'Next'}
+              <span>{isLastStep ? 'Complete' : 'Next'}</span>
+              <span>&#8594;</span>
             </button>
           </div>
         </div>
 
-        {/* Right Panel - Optional Image */}
-        {currentStep.image && (
-          <div className={styles.imagePanel}>
-            <img
-              src={currentStep.image}
-              alt={currentStep.title}
-              className={`${styles.stepImage} ${animationClass}`}
-            />
+        {/* Right Panel - Media (Image or Video) */}
+        <div className={styles.rightPanel}>
+          <div className={`${styles.mediaContainer} ${animationClass}`}>
+            {currentStep.media?.type === 'video' && currentStep.media.url ? (
+              <video 
+                className={styles.stepVideo} 
+                autoPlay 
+                loop 
+                muted
+                playsInline
+              >
+                <source src={currentStep.media.url} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            ) : currentStep.media?.type === 'image' && currentStep.media.url ? (
+              <img
+                src={currentStep.media.url}
+                alt={currentStep.title || 'Step illustration'}
+                className={styles.stepImage}
+              />
+            ) : currentStep.image ? (
+              <img
+                src={currentStep.image}
+                alt={currentStep.title || 'Step illustration'}
+                className={styles.stepImage}
+              />
+            ) : (
+              <div 
+                className={styles.mediaContainer}
+                style={{ 
+                  backgroundImage: 'linear-gradient(45deg, #4a4af4, #7b68ee)',
+                }}
+              />
+            )}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

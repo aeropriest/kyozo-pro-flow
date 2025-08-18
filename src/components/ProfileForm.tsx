@@ -123,9 +123,8 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
   return (
     <div className={styles.formContainer}>
       <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
-      <h2 className={styles.cardTitle}>{stepData.title}</h2>
-      <p className={styles.cardDescription}>{stepData.description}</p>
-      
+      <h2 className={styles.cardTitle}>Its About You</h2>
+      <p className={styles.cardDescription}>Add your details and select a profile image that represents you. This will be visible to other members of your community.</p>      
       <form onSubmit={handleSubmit}>
         <div className={styles.formSection}>
           <div className={styles.formGroup}>

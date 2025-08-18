@@ -20,13 +20,54 @@ const CommunityDetailsStep: React.FC<CommunityDetailsStepProps> = ({
   const [communityName, setCommunityName] = useState('');
   const [communityDescription, setCommunityDescription] = useState('');
   
+  // Error states
+  const [nameError, setNameError] = useState('');
+  const [descriptionError, setDescriptionError] = useState('');
+  
   // Find the step data from onboardingSteps
   const stepData = onboardingSteps.find(step => step.component === 'CommunityDetailsStep');
 
+  // Handle input changes with error clearing
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCommunityName(e.target.value);
+    if (nameError) setNameError('');
+  };
+
+  const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCommunityDescription(e.target.value);
+    if (descriptionError) setDescriptionError('');
+  };
+
+  // Validate form
+  const validateForm = () => {
+    let isValid = true;
+    
+    // Reset errors
+    setNameError('');
+    setDescriptionError('');
+    
+    // Validate community name
+    if (!communityName.trim()) {
+      setNameError('Community name is required');
+      isValid = false;
+    }
+    
+    // Validate community description
+    if (!communityDescription.trim()) {
+      setDescriptionError('Community description is required');
+      isValid = false;
+    }
+    
+    return isValid;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Community details:', { communityName, communityDescription });
-    onNext?.();
+    
+    if (validateForm()) {
+      console.log('Community details:', { communityName, communityDescription });
+      onNext?.();
+    }
   };
 
   return (
@@ -44,8 +85,9 @@ const CommunityDetailsStep: React.FC<CommunityDetailsStepProps> = ({
             id="communityName"
             name="communityName"
             value={communityName}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCommunityName(e.target.value)}
+            onChange={handleNameChange}
             placeholder="Community Name"
+            error={nameError}
             required
           />
         </div>
@@ -55,8 +97,9 @@ const CommunityDetailsStep: React.FC<CommunityDetailsStepProps> = ({
             id="communityDescription"
             name="communityDescription"
             value={communityDescription}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCommunityDescription(e.target.value)}
+            onChange={handleDescriptionChange}
             placeholder="Community Description"
+            error={descriptionError}
             required
           />
         </div>

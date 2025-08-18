@@ -32,13 +32,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
   ...props
 }, ref) => {
   const inputId = id || name;
-  const [isFocused, setIsFocused] = React.useState(false);
+  const hasError = !!error;
   const hasValue = value !== undefined && value !== '';
-  const showFloatingLabel = isFocused || hasValue;
+  const [isFocused, setIsFocused] = React.useState(false);
   
   return (
     <div className={`${styles.inputWrapper} ${className}`}>
-      <div className={`${styles.inputContainer} ${error ? styles.hasError : ''}`}>
+      <div className={`${styles.formField} ${hasError ? styles.hasError : ''}`}>
         <input
           ref={ref}
           type={type}
@@ -46,24 +46,22 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
           name={name}
           value={value}
           onChange={onChange}
-          placeholder={error ? error : (showFloatingLabel ? '' : placeholder)}
-          required={required}
+          className={styles.formInput}
+          placeholder=" "
+          required={false} // Disable HTML5 validation
           disabled={disabled}
-          className={`${styles.input} ${error ? styles.hasError : ''}`}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           {...props}
         />
         
-        {(label || placeholder) && (
-          <label 
-            htmlFor={inputId} 
-            className={`${styles.floatingLabel} ${showFloatingLabel ? styles.active : styles.hidden}`}
-          >
-            {label || placeholder}
-            {required && <span className={styles.required}>*</span>}
-          </label>
-        )}
+        <label 
+          htmlFor={inputId} 
+          className={styles.formLabel}
+        >
+          {hasError ? error : (label || placeholder)}
+          {required && !hasError && <span className={styles.required}>*</span>}
+        </label>
       </div>
     </div>
   );

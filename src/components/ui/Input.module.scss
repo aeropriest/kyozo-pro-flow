@@ -5,82 +5,37 @@
   width: 100%;
 }
 
-.label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--dark-text-color);
-}
-
 .required {
   color: var(--accent-pink);
   margin-left: 0.25rem;
 }
 
-.inputContainer {
+/* Form field with floating label */
+.formField {
   position: relative;
   width: 100%;
-  box-sizing: border-box;
-  margin-bottom: 1.5rem;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: -0.5px;
-    left: -0.5px;
-    right: -0.5px;
-    bottom: -0.5px;
-    border-radius: 9999px; /* Fully rounded */
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    z-index: 0;
-    border: 0.5px solid transparent;
-    background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(90deg, var(--accent-pink), var(--accent-blue));
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-  }
-  
-  &.hasError::before {
-    opacity: 1;
-    background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(90deg, var(--accent-pink), var(--accent-pink));
-  }
+  margin-bottom: 1rem;
 }
 
-.input {
-  position: relative;
+.formInput {
   width: 100%;
   padding: 0.75rem 1rem;
+  padding-top: 1.25rem;
   font-size: 1rem;
   background-color: rgba(255, 255, 255, 0.05);
   color: var(--text-color);
-  box-sizing: border-box;
-  max-width: 100%;
-  border: 0.5px solid rgba(255, 255, 255, 0.1); /* 0.5px border in normal state */
-  border-radius: 9999px; /* Fully rounded */
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
   transition: all 0.2s ease;
-  z-index: 1;
+  outline: none;
   
   &:focus {
-    outline: none;
-    // border-color: transparent;
-    // background-image: linear-gradient(#181818, #181818), 
-    // linear-gradient(90deg, var(--accent-pink), var(--accent-blue));
-
-    & + .inputContainer::before {
-      opacity: 1;
-    }
-  }
-  
-  &:focus-visible {
-    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 1px var(--accent-blue);
   }
   
   &::placeholder {
-    color: rgba(255, 255, 255, 0.4); /* Lighter color for better thin appearance */
-    font-weight: 100; /* Thinner font weight for placeholder text */
-    font-family: var(--font-family-light, var(--font-family)); /* Use light font family if available */
-    letter-spacing: 0.03em; /* Slightly increase letter spacing */
+    color: transparent;
   }
   
   &:disabled {
@@ -89,58 +44,27 @@
   }
 }
 
-// Focus state with gradient border
-.inputContainer:focus-within::before {
-  opacity: 1;
-}
-
-// Error state
-.hasError {
-  border-color: var(--accent-pink) !important;
-  
-  &:focus {
-    border-color: var(--accent-pink) !important;
-  }
-  
-  &::placeholder {
-    color: var(--accent-pink);
-    opacity: 0.8;
-    font-style: italic;
-  }
-}
-
-.floatingLabel {
+.formLabel {
   position: absolute;
   left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.5);
+  top: 0.5rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
   pointer-events: none;
   transition: all 0.2s ease;
-  font-weight: 300;
   z-index: 2;
-  
-  &.active {
-    top: -0.175rem;
-    left: 1rem;
-    font-size: 0.75rem;
-    background-color: var(--card-bg);
-    padding: 0 0.25rem;
-    color: var(--text-color);
-    z-index: 2;
-  }
-  
-  &.hidden {
-    opacity: 0;
-    visibility: hidden;
-  }
 }
 
-.errorMessage {
-  color: var(--accent-pink);
-  font-size: 0.75rem;
-  margin-top: 0.25rem;
-  margin-left: 0.5rem;
+/* Error state styling */
+.hasError {
+  .formInput {
+    border-color: var(--accent-pink);
+    box-shadow: 0 0 0 1px var(--accent-pink);
+  }
+  
+  .formLabel {
+    color: var(--accent-pink);
+    font-weight: 500;
+  }
 }
 

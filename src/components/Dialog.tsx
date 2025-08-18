@@ -265,7 +265,6 @@ const Dialog: React.FC<DialogProps> = ({
                                 onNext={handleNextCard} 
                                 currentStep={index + 1} 
                                 totalSteps={cards.length}
-                                description={cards[index].description}
                               />
                             );
                           case 1:
@@ -275,7 +274,6 @@ const Dialog: React.FC<DialogProps> = ({
                                 onPrev={handlePrevCard}
                                 currentStep={index + 1}
                                 totalSteps={cards.length}
-                                description={cards[index].description}
                               />
                             );
                           case 2:
@@ -285,7 +283,6 @@ const Dialog: React.FC<DialogProps> = ({
                                 onPrev={handlePrevCard}
                                 currentStep={index + 1}
                                 totalSteps={cards.length}
-                                description={cards[index].description}
                               />
                             );
                           case 3:
@@ -295,7 +292,6 @@ const Dialog: React.FC<DialogProps> = ({
                                 onPrev={handlePrevCard}
                                 currentStep={index + 1}
                                 totalSteps={cards.length}
-                                description={cards[index].description}
                               />
                             );
                           case 4:
@@ -305,7 +301,6 @@ const Dialog: React.FC<DialogProps> = ({
                                 onPrev={handlePrevCard}
                                 currentStep={index + 1}
                                 totalSteps={cards.length}
-                                description={cards[index].description}
                               />
                             );
                           case 5:
@@ -315,7 +310,6 @@ const Dialog: React.FC<DialogProps> = ({
                                 onPrev={handlePrevCard}
                                 currentStep={index + 1}
                                 totalSteps={cards.length}
-                                description={cards[index].description}
                               />
                             );
                           case 6:
@@ -325,7 +319,6 @@ const Dialog: React.FC<DialogProps> = ({
                                 onPrev={handlePrevCard}
                                 currentStep={index + 1}
                                 totalSteps={cards.length}
-                                description={cards[index].description}
                               />
                             );
                           default:

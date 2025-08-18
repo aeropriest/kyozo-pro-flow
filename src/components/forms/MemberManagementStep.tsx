@@ -20,13 +20,54 @@ const MemberManagementStep: React.FC<MemberManagementStepProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [filterOption, setFilterOption] = useState('');
   
+  // Error states
+  const [searchError, setSearchError] = useState('');
+  const [filterError, setFilterError] = useState('');
+  
   // Find the step data from onboardingSteps
   const stepData = onboardingSteps.find(step => step.component === 'MemberManagementStep');
 
+  // Handle input changes with error clearing
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    if (searchError) setSearchError('');
+  };
+
+  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilterOption(e.target.value);
+    if (filterError) setFilterError('');
+  };
+
+  // Validate form
+  const validateForm = () => {
+    let isValid = true;
+    
+    // Reset errors
+    setSearchError('');
+    setFilterError('');
+    
+    // Validate search query
+    if (!searchQuery.trim()) {
+      setSearchError('Search query is required');
+      isValid = false;
+    }
+    
+    // Validate filter option
+    if (!filterOption.trim()) {
+      setFilterError('Filter option is required');
+      isValid = false;
+    }
+    
+    return isValid;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Member management:', { searchQuery, filterOption });
-    onNext?.();
+    
+    if (validateForm()) {
+      console.log('Member management:', { searchQuery, filterOption });
+      onNext?.();
+    }
   };
 
   return (
@@ -44,8 +85,9 @@ const MemberManagementStep: React.FC<MemberManagementStepProps> = ({
                 id="searchQuery"
                 name="searchQuery"
                 value={searchQuery}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
+                onChange={handleSearchChange}
                 placeholder="Search Members"
+                error={searchError}
                 required
               />
             </div>
@@ -55,8 +97,9 @@ const MemberManagementStep: React.FC<MemberManagementStepProps> = ({
                 id="filterOption"
                 name="filterOption"
                 value={filterOption}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterOption(e.target.value)}
+                onChange={handleFilterChange}
                 placeholder="Filter By Role"
+                error={filterError}
                 required
               />
             </div>

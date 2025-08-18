@@ -1,22 +1,24 @@
 import React from 'react';
 import styles from './StepForm.module.scss';
 import { Button } from '@/components/ui';
+import GenericStepWrapper from '../onboarding/GenericStepWrapper';
+import { onboardingSteps } from '../onboarding/onboardingSteps';
 
 interface DashboardStepProps {
   onNext?: () => void;
   onPrev?: () => void;
   currentStep: number;
   totalSteps: number;
-  description?: string;
 }
 
 const DashboardStep: React.FC<DashboardStepProps> = ({
   onNext,
   onPrev,
   currentStep,
-  totalSteps,
-  description
+  totalSteps
 }) => {
+  // Find the step data from onboardingSteps
+  const stepData = onboardingSteps.find(step => step.component === 'DashboardStep');
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Onboarding complete!');
@@ -24,18 +26,19 @@ const DashboardStep: React.FC<DashboardStepProps> = ({
   };
 
   return (
-    <div className={styles.formContainer}>
-      <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
-      <h2 className={styles.cardTitle}>Onboarding Complete!</h2>
-      
-      <div className={styles.formControls}>
-        <div className={styles.formContent}>
-          <form onSubmit={handleSubmit}>
+    <GenericStepWrapper
+      step={stepData!}
+      currentStep={currentStep}
+      totalSteps={totalSteps}
+      onNext={onNext}
+      onPrev={onPrev}
+    >
+      <form onSubmit={handleSubmit}>
             <div className={styles.formGroup}>
               <p>Congratulations! You have successfully completed the onboarding process.</p>
               <p>Your community is now set up and ready to go. Click the button below to access your dashboard.</p>
             </div>
-            {description && <p className={styles.cardDescription}>{description}</p>}
+
             
             <div className={styles.actionRow}>
               <Button 
@@ -55,10 +58,8 @@ const DashboardStep: React.FC<DashboardStepProps> = ({
                 Go to Dashboard
               </Button>
             </div>
-          </form>
-        </div>
-      </div>
-    </div>
+      </form>
+    </GenericStepWrapper>
   );
 };
 

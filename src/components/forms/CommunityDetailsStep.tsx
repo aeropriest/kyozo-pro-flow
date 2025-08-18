@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import styles from './StepForm.module.scss';
-import { Button, Input, Toggle } from '@/components/ui';
-import GenericStepWrapper from '../onboarding/GenericStepWrapper';
-import { onboardingSteps } from '../onboarding/onboardingSteps';
+import styles from './CustomForm.module.scss';
+import { Input, Toggle } from '@/components/ui';
+import CustomForm, { FormField } from './CustomForm';
+import { cards } from '../wizardData';
 
 interface CommunityDetailsStepProps {
   onNext?: () => void;
@@ -27,8 +27,8 @@ const CommunityDetailsStep: React.FC<CommunityDetailsStepProps> = ({
   const [descriptionError, setDescriptionError] = useState('');
   const [colorError, setColorError] = useState('');
   
-  // Find the step data from onboardingSteps
-  const stepData = onboardingSteps.find(step => step.component === 'CommunityDetailsStep');
+  // Find the step data from cards
+  const stepIndex = cards.findIndex(step => step.component === 'CommunityDetailsStep');
 
   // Available theme colors
   const themeColors = [
@@ -73,11 +73,17 @@ const CommunityDetailsStep: React.FC<CommunityDetailsStepProps> = ({
     if (!communityName.trim()) {
       setNameError('Community name is required');
       isValid = false;
+    } else if (communityName.length < 3) {
+      setNameError('Community name must be at least 3 characters');
+      isValid = false;
     }
     
     // Validate community description
     if (!communityDescription.trim()) {
       setDescriptionError('Community description is required');
+      isValid = false;
+    } else if (communityDescription.length < 10) {
+      setDescriptionError('Please provide a more detailed description (at least 10 characters)');
       isValid = false;
     }
     
@@ -87,6 +93,13 @@ const CommunityDetailsStep: React.FC<CommunityDetailsStepProps> = ({
       isValid = false;
     }
     
+    // Force re-render to show errors if validation fails
+    if (!isValid) {
+      setNameError(nameError => nameError ? nameError : '');
+      setDescriptionError(descError => descError ? descError : '');
+      setColorError(colorErr => colorErr ? colorErr : '');
+    }
+    
     return isValid;
   };
 
@@ -94,27 +107,29 @@ const CommunityDetailsStep: React.FC<CommunityDetailsStepProps> = ({
     e.preventDefault();
     
     if (validateForm()) {
-      console.log('Community details:', { 
-        communityName, 
+      console.log('Community details submitted:', {
+        communityName,
         communityDescription,
-        isPublic,
-        themeColor: selectedColor
+        isPrivate: !isPublic,
+        selectedColor
       });
-      onNext?.();
+      
+      // Don't call onNext here, CustomForm will handle it
     }
   };
 
   return (
-    <GenericStepWrapper
-      step={stepData!}
+    <CustomForm
+      stepIndex={stepIndex}
       currentStep={currentStep}
       totalSteps={totalSteps}
       onNext={onNext}
       onPrev={onPrev}
+      onSubmit={handleSubmit}
     >
-      <form onSubmit={handleSubmit}>
         <div className={styles.formSection}>
-          <div className={styles.formGroup}>
+          <h3 className={styles.sectionTitle}>Community Information</h3>
+          <FormField>
             <Input
               type="text"
               id="communityName"
@@ -125,8 +140,8 @@ const CommunityDetailsStep: React.FC<CommunityDetailsStepProps> = ({
               error={nameError}
               required
             />
-          </div>
-          <div className={styles.formGroup}>
+          </FormField>
+          <FormField>
             <Input
               type="text"
               id="communityDescription"
@@ -137,7 +152,7 @@ const CommunityDetailsStep: React.FC<CommunityDetailsStepProps> = ({
               error={descriptionError}
               required
             />
-          </div>
+          </FormField>
         </div>
         
         <div className={styles.formSection}>
@@ -174,30 +189,7 @@ const CommunityDetailsStep: React.FC<CommunityDetailsStepProps> = ({
             {colorError && <div className={styles.errorMessage}>{colorError}</div>}
           </div>
         </div>
-        
-        <div className={styles.actionRow}>
-          <Button 
-            variant="outline-only" 
-            size="medium" 
-            onClick={onPrev}
-            fullWidth
-          >
-            Back
-          </Button>
-          <Button 
-            variant="outline-only" 
-            size="medium" 
-            onClick={() => {
-              const event = new Event('submit') as unknown as React.FormEvent;
-              handleSubmit(event);
-            }}
-            fullWidth
-          >
-            Next
-          </Button>
-        </div>
-      </form>
-    </GenericStepWrapper>
+    </CustomForm>
   );
 };
 

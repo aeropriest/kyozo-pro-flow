@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import styles from './StepForm.module.scss';
-import { Button, Input } from '@/components/ui';
+import styles from './CustomForm.module.scss';
+import { Input } from '@/components/ui';
+import CustomForm from './CustomForm';
 
 interface BaseStepFormProps {
   onNext?: () => void;
@@ -62,62 +63,42 @@ const BaseStepForm: React.FC<BaseStepFormProps> = ({
   };
 
   return (
-    <div className={styles.formContainer}>
-      <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
-      <h2 className={styles.cardTitle}>{title}</h2>
-      
-      <div className={styles.formControls}>
-        <div className={styles.formContent}>
-          <form onSubmit={handleSubmit}>
-            <div className={styles.formGroup}>
-              <Input
-                type="text"
-                id="field1"
-                name="field1"
-                value={formData.field1}
-                onChange={handleInputChange}
-                placeholder="Enter information"
-                error={formErrors.field1}
-                required
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <Input
-                type="text"
-                id="field2"
-                name="field2"
-                value={formData.field2}
-                onChange={handleInputChange}
-                placeholder="Enter more information"
-                error={formErrors.field2}
-                required
-              />
-            </div>
-            
-            <div className={styles.actionRow}>
-              {currentStep > 1 && (
-                <Button 
-                  variant="outline-only" 
-                  size="medium" 
-                  onClick={onPrev}
-                  fullWidth
-                >
-                  Back
-                </Button>
-              )}
-              <Button 
-                variant="outline-only" 
-                size="medium" 
-                type="submit"
-                fullWidth
-              >
-                Next
-              </Button>
-            </div>
-          </form>
-        </div>
+    <CustomForm
+      title={title}
+      description={subtitle}
+      currentStep={currentStep}
+      totalSteps={totalSteps}
+      onNext={onNext}
+      onPrev={onPrev}
+      onSubmit={handleSubmit}
+      stepIndex={0} // This is a placeholder, should be replaced with actual step index
+    >
+      <div className={styles.formGroup}>
+        <Input
+          type="text"
+          id="field1"
+          name="field1"
+          value={formData.field1}
+          onChange={handleInputChange}
+          placeholder="Enter information"
+          error={formErrors.field1}
+          required
+        />
       </div>
-    </div>
+      <div className={styles.formGroup}>
+        <Input
+          type="text"
+          id="field2"
+          name="field2"
+          value={formData.field2}
+          onChange={handleInputChange}
+          placeholder="Enter more information"
+          error={formErrors.field2}
+          required
+        />
+      </div>
+      {/* Action buttons are handled by CustomForm */}
+    </CustomForm>
   );
 };
 

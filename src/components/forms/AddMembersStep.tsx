@@ -1,8 +1,8 @@
 import React, { useState, useRef, ChangeEvent } from 'react';
-import styles from './StepForm.module.scss';
+import styles from './CustomForm.module.scss';
 import { Button, Input } from '@/components/ui';
-import GenericStepWrapper from '../onboarding/GenericStepWrapper';
-import { onboardingSteps } from '../onboarding/onboardingSteps';
+import CustomForm, { FormField } from './CustomForm';
+import { cards } from '../wizardData';
 
 interface AddMembersStepProps {
   onNext?: () => void;
@@ -36,8 +36,8 @@ const AddMembersStep: React.FC<AddMembersStepProps> = ({
   // Refs
   const fileInputRef = useRef<HTMLInputElement>(null);
   
-  // Find the step data from onboardingSteps
-  const stepData = onboardingSteps.find(step => step.component === 'AddMembersStep');
+  // Find the step data from cards
+  const stepIndex = cards.findIndex(step => step.component === 'AddMembersStep');
 
   // Handle input changes with error clearing
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -190,6 +190,12 @@ const AddMembersStep: React.FC<AddMembersStepProps> = ({
       isValid = false;
     }
     
+    // Force re-render to show errors if validation fails
+    if (!isValid) {
+      setEmailError(emailError => emailError ? emailError : '');
+      setRoleError(roleError => roleError ? roleError : '');
+    }
+    
     return isValid;
   };
 
@@ -202,155 +208,133 @@ const AddMembersStep: React.FC<AddMembersStepProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (validateForm()) {
-      console.log('Members:', members);
-      onNext?.();
-    } else {
-      setImportError('Please add at least one member before proceeding');
+    if (members.length === 0) {
+      setImportError('Please add at least one member');
+      return;
     }
+    
+    console.log('Members submitted:', members);
+    // Don't call onNext here, CustomForm will handle it
   };
 
   return (
-    <GenericStepWrapper
-      step={stepData!}
+    <CustomForm
+      stepIndex={stepIndex}
       currentStep={currentStep}
       totalSteps={totalSteps}
       onNext={onNext}
       onPrev={onPrev}
+      onSubmit={handleSubmit}
     >
-      <form onSubmit={handleSubmit}>
-        <div className={styles.formSection}>
-          <h3 className={styles.sectionTitle}>Import Members</h3>
-          
-          <div className={styles.importOptions}>
-            <Button 
-              variant="outline-only" 
-              size="medium" 
-              onClick={handleCSVImport}
-              fullWidth
-            >
-              Import from CSV
-            </Button>
-            <Button 
-              variant="outline-only" 
-              size="medium" 
-              onClick={handleEventbriteImport}
-              fullWidth
-            >
-              Import from Eventbrite
-            </Button>
-            <input 
-              type="file" 
-              ref={fileInputRef} 
-              onChange={handleFileChange} 
-              accept=".csv"
-              style={{ display: 'none' }} 
-            />
-          </div>
-          
-          {importError && <div className={styles.errorMessage}>{importError}</div>}
-        </div>
+      <div className={styles.formSection}>
+        <h3 className={styles.sectionTitle}>Import Members</h3>
         
-        <div className={styles.formSection}>
-          <h3 className={styles.sectionTitle}>Add Member Manually</h3>
-          
-          <div className={styles.formGroup}>
-            <Input
-              type="email"
-              id="memberEmail"
-              name="memberEmail"
-              value={memberEmail}
-              onChange={handleEmailChange}
-              placeholder="Member Email"
-              error={emailError}
-            />
-          </div>
-          
-          <div className={styles.formGroup}>
-            <Input
-              type="text"
-              id="memberName"
-              name="memberName"
-              value={memberName}
-              onChange={handleNameChange}
-              placeholder="Member Name (Optional)"
-            />
-          </div>
-          
-          <div className={styles.formGroup}>
-            <Input
-              type="text"
-              id="memberRole"
-              name="memberRole"
-              value={memberRole}
-              onChange={handleRoleChange}
-              placeholder="Member Role"
-              error={roleError}
-            />
-          </div>
-          
+        <div className={styles.importOptions}>
           <Button 
             variant="outline-only" 
             size="medium" 
-            onClick={handleAddMember}
-            fullWidth={false}
-            className={styles.addButton}
+            onClick={handleCSVImport}
+            fullWidth
           >
-            Add Member
+            Import from CSV
           </Button>
+          <Button 
+            variant="outline-only" 
+            size="medium" 
+            onClick={handleEventbriteImport}
+            fullWidth
+          >
+            Import from Eventbrite
+          </Button>
+          <input 
+            type="file" 
+            ref={fileInputRef} 
+            onChange={handleFileChange} 
+            accept=".csv"
+            style={{ display: 'none' }} 
+          />
         </div>
         
-        {members.length > 0 && (
-          <div className={styles.formSection}>
-            <h3 className={styles.sectionTitle}>Added Members ({members.length})</h3>
-            
-            <div className={styles.membersList}>
-              {members.map((member, index) => (
-                <div key={index} className={styles.memberItem}>
-                  <div className={styles.memberInfo}>
-                    <div className={styles.memberEmail}>{member.email}</div>
-                    <div className={styles.memberDetails}>
-                      {member.name && <span>{member.name} • </span>}
-                      <span>{member.role}</span>
-                    </div>
+        {importError && <div className={styles.errorMessage}>{importError}</div>}
+      </div>
+      
+      <div className={styles.formSection}>
+        <h3 className={styles.sectionTitle}>Add Member Manually</h3>
+        
+        <FormField>
+          <Input
+            type="email"
+            id="memberEmail"
+            name="memberEmail"
+            value={memberEmail}
+            onChange={handleEmailChange}
+            placeholder="Member Email"
+            error={emailError}
+          />
+        </FormField>
+        
+        <FormField>
+          <Input
+            type="text"
+            id="memberName"
+            name="memberName"
+            value={memberName}
+            onChange={handleNameChange}
+            placeholder="Member Name (Optional)"
+          />
+        </FormField>
+        
+        <FormField>
+          <Input
+            type="text"
+            id="memberRole"
+            name="memberRole"
+            value={memberRole}
+            onChange={handleRoleChange}
+            placeholder="Member Role"
+            error={roleError}
+          />
+        </FormField>
+        
+        <Button 
+          variant="outline-only" 
+          size="medium" 
+          onClick={handleAddMember}
+          fullWidth={false}
+          className={styles.addButton}
+        >
+          Add Member
+        </Button>
+      </div>
+      
+      {members.length > 0 && (
+        <div className={styles.formSection}>
+          <h3 className={styles.sectionTitle}>Added Members ({members.length})</h3>
+          
+          <div className={styles.membersList}>
+            {members.map((member, index) => (
+              <div key={index} className={styles.memberItem}>
+                <div className={styles.memberInfo}>
+                  <div className={styles.memberEmail}>{member.email}</div>
+                  <div className={styles.memberDetails}>
+                    {member.name && <span>{member.name} • </span>}
+                    <span>{member.role}</span>
                   </div>
-                  <button 
-                    type="button"
-                    className={styles.removeButton}
-                    onClick={() => handleRemoveMember(index)}
-                    aria-label="Remove member"
-                  >
-                    ×
-                  </button>
                 </div>
-              ))}
-            </div>
+                <button 
+                  type="button"
+                  className={styles.removeButton}
+                  onClick={() => handleRemoveMember(index)}
+                  aria-label="Remove member"
+                >
+                  ×
+                </button>
+              </div>
+            ))}
           </div>
-        )}
-        
-        <div className={styles.actionRow}>
-          <Button 
-            variant="outline-only" 
-            size="medium" 
-            onClick={onPrev}
-            fullWidth
-          >
-            Back
-          </Button>
-          <Button 
-            variant="outline-only" 
-            size="medium" 
-            onClick={() => {
-              const event = new Event('submit') as unknown as React.FormEvent;
-              handleSubmit(event);
-            }}
-            fullWidth
-          >
-            Next
-          </Button>
         </div>
-      </form>
-    </GenericStepWrapper>
+      )}
+    </CustomForm>
   );
 };
 

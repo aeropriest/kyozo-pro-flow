@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import styles from './StepForm.module.scss';
-import { Button, Input } from '@/components/ui';
-import GenericStepWrapper from '../onboarding/GenericStepWrapper';
-import { onboardingSteps } from '../onboarding/onboardingSteps';
+import styles from './CustomForm.module.scss';
+import { Input } from '@/components/ui';
+import CustomForm, { FormField } from './CustomForm';
+import { cards } from '../wizardData';
 
 interface AvatarStepProps {
   onNext?: () => void;
@@ -17,8 +17,8 @@ const AvatarStep: React.FC<AvatarStepProps> = ({
   currentStep,
   totalSteps
 }) => {
-  // Find the step data from onboardingSteps
-  const stepData = onboardingSteps.find(step => step.component === 'AvatarStep');
+  // Find the step data from cards
+  const stepIndex = cards.findIndex(step => step.component === 'AvatarStep');
   const [avatarName, setAvatarName] = useState('');
   const [avatarBio, setAvatarBio] = useState('');
   const [nameError, setNameError] = useState('');
@@ -56,65 +56,45 @@ const AvatarStep: React.FC<AvatarStepProps> = ({
   };
 
   return (
-    <GenericStepWrapper
-      step={stepData!}
+    <CustomForm
+      stepIndex={stepIndex}
       currentStep={currentStep}
       totalSteps={totalSteps}
       onNext={onNext}
       onPrev={onPrev}
+      onSubmit={handleSubmit}
     >
-      <form onSubmit={handleSubmit}>
-            <div className={styles.formGroup}>
-              <Input
-                type="text"
-                id="avatarName"
-                name="avatarName"
-                value={avatarName}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setAvatarName(e.target.value);
-                  if (nameError) setNameError('');
-                }}
-                placeholder="Display Name"
-                error={nameError}
-                required
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <Input
-                type="text"
-                id="avatarBio"
-                name="avatarBio"
-                value={avatarBio}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setAvatarBio(e.target.value);
-                  if (bioError) setBioError('');
-                }}
-                placeholder="Short Bio"
-                error={bioError}
-                required
-              />
-            </div>
-            
-            <div className={styles.actionRow}>
-              <Button 
-                variant="outline-only" 
-                size="medium" 
-                onClick={onPrev}
-                fullWidth
-              >
-                Back
-              </Button>
-              <Button 
-                variant="outline-only" 
-                size="medium" 
-                type="submit"
-                fullWidth
-              >
-                Next
-              </Button>
-            </div>
-      </form>
-    </GenericStepWrapper>
+      <FormField>
+        <Input
+          type="text"
+          id="avatarName"
+          name="avatarName"
+          value={avatarName}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setAvatarName(e.target.value);
+            if (nameError) setNameError('');
+          }}
+          placeholder="Display Name"
+          error={nameError}
+          required
+        />
+      </FormField>
+      <FormField>
+        <Input
+          type="text"
+          id="avatarBio"
+          name="avatarBio"
+          value={avatarBio}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setAvatarBio(e.target.value);
+            if (bioError) setBioError('');
+          }}
+          placeholder="Short Bio"
+          error={bioError}
+          required
+        />
+      </FormField>
+    </CustomForm>
   );
 };
 

@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import styles from './StepForm.module.scss';
-import { Button } from '@/components/ui';
-import GenericStepWrapper from '../onboarding/GenericStepWrapper';
-import { onboardingSteps } from '../onboarding/onboardingSteps';
+import React from 'react';
+import styles from './CustomForm.module.scss';
+import CustomForm from './CustomForm';
+import { cards } from '../wizardData';
 
 interface DashboardStepProps {
   onNext?: () => void;
@@ -17,8 +16,8 @@ const DashboardStep: React.FC<DashboardStepProps> = ({
   currentStep,
   totalSteps
 }) => {
-  // Find the step data from onboardingSteps
-  const stepData = onboardingSteps.find(step => step.component === 'DashboardStep');
+  // Find the step data from cards
+  const stepIndex = cards.findIndex(step => step.component === 'DashboardStep');
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,62 +26,40 @@ const DashboardStep: React.FC<DashboardStepProps> = ({
   };
 
   return (
-    <GenericStepWrapper
-      step={stepData!}
+    <CustomForm
+      stepIndex={stepIndex}
       currentStep={currentStep}
       totalSteps={totalSteps}
       onNext={onNext}
       onPrev={onPrev}
+      onSubmit={handleSubmit}
+      submitButtonText="Go to Dashboard"
     >
-      <form onSubmit={handleSubmit}>
-        <div className={styles.formSection}>
-          <div className={styles.formGroup}>
-            <p>Congratulations! You have successfully completed the onboarding process.</p>
-            <p>Your community is now set up and ready to go. Click the button below to access your dashboard.</p>
-          </div>
-          
-          <div className={styles.dashboardSummary}>
-            <h3 className={styles.sectionTitle}>Community Setup Complete</h3>
-            <ul className={styles.setupSummary}>
-              <li className={styles.summaryItem}>
-                <span className={styles.checkIcon}>✓</span>
-                <span>Profile created</span>
-              </li>
-              <li className={styles.summaryItem}>
-                <span className={styles.checkIcon}>✓</span>
-                <span>Community details configured</span>
-              </li>
-              <li className={styles.summaryItem}>
-                <span className={styles.checkIcon}>✓</span>
-                <span>Members added</span>
-              </li>
-            </ul>
-          </div>
+      <div className={styles.formSection}>
+        <div className={styles.formGroup}>
+          <p>Congratulations! You have successfully completed the onboarding process.</p>
+          <p>Your community is now set up and ready to go. Click the button below to access your dashboard.</p>
         </div>
         
-        <div className={styles.actionRow}>
-          <Button 
-            variant="outline-only" 
-            size="medium" 
-            onClick={onPrev}
-            fullWidth
-          >
-            Back
-          </Button>
-          <Button 
-            variant="outline-only" 
-            size="medium" 
-            onClick={() => {
-              const event = new Event('submit') as unknown as React.FormEvent;
-              handleSubmit(event);
-            }}
-            fullWidth
-          >
-            Go to Dashboard
-          </Button>
+        <div className={styles.dashboardSummary}>
+          <h3 className={styles.sectionTitle}>Community Setup Complete</h3>
+          <ul className={styles.setupSummary}>
+            <li className={styles.summaryItem}>
+              <span className={styles.checkIcon}>✓</span>
+              <span>Profile created</span>
+            </li>
+            <li className={styles.summaryItem}>
+              <span className={styles.checkIcon}>✓</span>
+              <span>Community details configured</span>
+            </li>
+            <li className={styles.summaryItem}>
+              <span className={styles.checkIcon}>✓</span>
+              <span>Members added</span>
+            </li>
+          </ul>
         </div>
-      </form>
-    </GenericStepWrapper>
+      </div>
+    </CustomForm>
   );
 };
 

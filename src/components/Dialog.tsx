@@ -5,8 +5,8 @@ import styles from './Dialog.module.scss';
 import { Button } from '@/components/ui';
 import Image from 'next/image';
 import DialogCard from './DialogCard';
-import SignInForm from './SignInForm';
-import ProfileForm from './ProfileForm';
+import SignInForm from './forms/SignInForm';
+import ProfileForm from './forms/ProfileForm';
 // Import form components individually
 import AvatarStep from './forms/AvatarStep';
 import CommunityDetailsStep from './forms/CommunityDetailsStep';

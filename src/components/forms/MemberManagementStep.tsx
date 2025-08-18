@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import styles from './StepForm.module.scss';
-import { Button, Input } from '@/components/ui';
-import GenericStepWrapper from '../onboarding/GenericStepWrapper';
-import { onboardingSteps } from '../onboarding/onboardingSteps';
+import styles from './CustomForm.module.scss';
+import { Input } from '@/components/ui';
+import CustomForm from './CustomForm';
+import { cards } from '../wizardData';
 
 interface MemberManagementStepProps {
   onNext?: () => void;
@@ -24,8 +24,8 @@ const MemberManagementStep: React.FC<MemberManagementStepProps> = ({
   const [searchError, setSearchError] = useState('');
   const [filterError, setFilterError] = useState('');
   
-  // Find the step data from onboardingSteps
-  const stepData = onboardingSteps.find(step => step.component === 'MemberManagementStep');
+  // Find the step data from cards
+  const stepIndex = cards.findIndex(step => step.component === 'MemberManagementStep');
 
   // Handle input changes with error clearing
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,14 +71,14 @@ const MemberManagementStep: React.FC<MemberManagementStepProps> = ({
   };
 
   return (
-    <GenericStepWrapper
-      step={stepData!}
+    <CustomForm
+      stepIndex={stepIndex}
       currentStep={currentStep}
       totalSteps={totalSteps}
       onNext={onNext}
       onPrev={onPrev}
+      onSubmit={handleSubmit}
     >
-      <form onSubmit={handleSubmit}>
             <div className={styles.formGroup}>
               <Input
                 type="text"
@@ -103,27 +103,7 @@ const MemberManagementStep: React.FC<MemberManagementStepProps> = ({
                 required
               />
             </div>
-            
-            <div className={styles.actionRow}>
-              <Button 
-                variant="outline-only" 
-                size="medium" 
-                onClick={onPrev}
-                fullWidth
-              >
-                Back
-              </Button>
-              <Button 
-                variant="outline-only" 
-                size="medium" 
-                type="submit"
-                fullWidth
-              >
-                Next
-              </Button>
-            </div>
-      </form>
-    </GenericStepWrapper>
+    </CustomForm>
   );
 };
 

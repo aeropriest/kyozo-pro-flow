@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Button, Input, Checkbox, Tabs, AnimatedTitle } from '@/components/ui';
-import styles from './SignInForm.module.scss';
-import ButtonUI from './ui/Button';
-import { cards } from './wizardData';
+import { Input, Checkbox, Tabs, Button } from '@/components/ui';
+import styles from './CustomForm.module.scss';
+import { cards } from '../wizardData';
+import CustomForm, { FormField } from './CustomForm';
 
 interface SignInFormProps {
   onSignIn?: (data: { email: string; password: string }) => void;
@@ -34,6 +34,7 @@ const SignInForm: React.FC<SignInFormProps> = ({
   // Error states for form validation
   const [signInErrors, setSignInErrors] = useState({ email: '', password: '' });
   const [signUpErrors, setSignUpErrors] = useState({ fullName: '', email: '', password: '', terms: '' });
+  const [formError, setFormError] = useState<string>('');
 
   // Handle form input changes
   const handleSignInChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,11 +68,11 @@ const SignInForm: React.FC<SignInFormProps> = ({
     const errors = { email: '', password: '' };
     let isValid = true;
 
-    if (!signInForm.email) {
-      errors.email = 'Valid Email is required';
+    if (!signInForm.email.trim()) {
+      errors.email = 'Email is required';
       isValid = false;
     } else if (!/\S+@\S+\.\S+/.test(signInForm.email)) {
-      errors.email = 'Invalid email format';
+      errors.email = 'Email is invalid';
       isValid = false;
     }
 
@@ -82,17 +83,6 @@ const SignInForm: React.FC<SignInFormProps> = ({
 
     setSignInErrors(errors);
     return isValid;
-  };
-
-  // Handle form submissions
-  const handleSignIn = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (validateSignInForm()) {
-      console.log('Sign In:', signInForm);
-      onSignIn?.(signInForm);
-      onNext?.(); // Go to next step after sign in
-    }
   };
 
   // Validate sign up form
@@ -109,7 +99,7 @@ const SignInForm: React.FC<SignInFormProps> = ({
       errors.email = 'Email is required';
       isValid = false;
     } else if (!/\S+@\S+\.\S+/.test(signUpForm.email)) {
-      errors.email = 'Invalid email format';
+      errors.email = 'Email is invalid';
       isValid = false;
     }
 
@@ -130,13 +120,57 @@ const SignInForm: React.FC<SignInFormProps> = ({
     return isValid;
   };
 
-  const handleSignUp = (e: React.FormEvent) => {
+  // Handle sign in submission
+  const handleSignInSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setFormError('');
+    
+    if (validateSignInForm()) {
+      try {
+        if (onSignIn) {
+          onSignIn(signInForm);
+        } else if (onNext) {
+          onNext(); // Go to next step if no specific sign in handler
+        }
+      } catch (error) {
+        setFormError('An error occurred during sign in. Please try again.');
+      }
+    } else {
+      // Force re-render to show errors
+      setSignInErrors({...signInErrors});
+      
+      // Scroll to the first error
+      const firstErrorElement = document.querySelector(`.${styles.errorMessage}`);
+      if (firstErrorElement) {
+        firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  };
+
+  // Handle sign up submission
+  const handleSignUpSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormError('');
     
     if (validateSignUpForm()) {
-      console.log('Sign Up:', signUpForm);
-      onSignUp?.(signUpForm);
-      onNext?.(); // Go to next step after sign up
+      try {
+        if (onSignUp) {
+          onSignUp(signUpForm);
+        } else if (onNext) {
+          onNext(); // Go to next step if no specific sign up handler
+        }
+      } catch (error) {
+        setFormError('An error occurred during sign up. Please try again.');
+      }
+    } else {
+      // Force re-render to show errors
+      setSignUpErrors({...signUpErrors});
+      
+      // Scroll to the first error
+      const firstErrorElement = document.querySelector(`.${styles.errorMessage}`);
+      if (firstErrorElement) {
+        firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     }
   };
 
@@ -147,17 +181,13 @@ const SignInForm: React.FC<SignInFormProps> = ({
   };
 
   return (
-    <div className={styles.formContainer}>
-      <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
-      <h2 className={styles.cardTitle}>{stepData.title}</h2>
-      <p className={styles.cardDescription}>{stepData.description}</p>
-      
-      {/* <AnimatedTitle 
-        text="Welcome to Kyozo" 
-        subtitle="Sign in to continue your journey" 
-        size="medium" 
-        className={styles.animatedTitle}
-      /> */}
+    <CustomForm
+      stepIndex={0} // SignInForm is the first card (index 0)
+      currentStep={currentStep}
+      totalSteps={totalSteps}
+      onSubmit={activeTab === 'signin' ? handleSignInSubmit : handleSignUpSubmit}
+      formError={formError}
+    >
       <div className={styles.formControls}>
         <Tabs
           tabs={['Sign In', 'Sign Up']}
@@ -168,8 +198,8 @@ const SignInForm: React.FC<SignInFormProps> = ({
 
         <div className={styles.formContent}>
           {activeTab === 'signin' ? (
-            <form onSubmit={handleSignIn}>
-              <div className={styles.formGroup}>
+            <form onSubmit={handleSignInSubmit}>
+              <FormField>
                 <Input
                   type="email"
                   id="email"
@@ -180,8 +210,8 @@ const SignInForm: React.FC<SignInFormProps> = ({
                   error={signInErrors.email}
                   required
                 />
-              </div>
-              <div className={styles.formGroup}>
+              </FormField>
+              <FormField>
                 <Input
                   type="password"
                   id="password"
@@ -192,35 +222,32 @@ const SignInForm: React.FC<SignInFormProps> = ({
                   error={signInErrors.password}
                   required
                 />
-              </div>
+              </FormField>
               <div className={styles.forgotPassword}>
                 <a href="#">Forgot password?</a>
               </div>
               <div className={styles.actionRow}>
-                <ButtonUI 
+                <Button 
                   variant="outline-only" 
                   size="medium" 
-                  onClick={() => {
-                    const event = new Event('submit') as unknown as React.FormEvent;
-                    handleSignIn(event);
-                  }} 
+                  type="submit"
                   fullWidth
                 >
                   Sign In
-                </ButtonUI>
-                <ButtonUI 
+                </Button>
+                <Button 
                   variant="outline-only" 
                   size="medium" 
                   onClick={handleGoogleSignIn}
                   fullWidth
                 >
                   Sign In with Google
-                </ButtonUI>
+                </Button>
               </div>
             </form>
           ) : (
-            <form onSubmit={handleSignUp}>
-              <div className={styles.formGroup}>
+            <form onSubmit={handleSignUpSubmit}>
+              <FormField>
                 <Input
                   type="text"
                   id="name"
@@ -231,8 +258,8 @@ const SignInForm: React.FC<SignInFormProps> = ({
                   error={signUpErrors.fullName}
                   required
                 />
-              </div>
-              <div className={styles.formGroup}>
+              </FormField>
+              <FormField>
                 <Input
                   type="email"
                   id="signUpEmail"
@@ -243,8 +270,8 @@ const SignInForm: React.FC<SignInFormProps> = ({
                   error={signUpErrors.email}
                   required
                 />
-              </div>
-              <div className={styles.formGroup}>
+              </FormField>
+              <FormField>
                 <Input
                   type="password"
                   id="signUpPassword"
@@ -255,7 +282,7 @@ const SignInForm: React.FC<SignInFormProps> = ({
                   error={signUpErrors.password}
                   required
                 />
-              </div>
+              </FormField>
               <div className={styles.termsCheckbox}>
                 <Checkbox
                   id="terms"
@@ -273,35 +300,28 @@ const SignInForm: React.FC<SignInFormProps> = ({
                 )}
               </div>
               <div className={styles.actionRow}>
-                <ButtonUI 
+                <Button 
                   variant="outline-only" 
                   size="medium" 
+                  type="submit"
                   fullWidth
-                  onClick={() => {
-                    if (signUpForm.terms) {
-                      const event = new Event('submit') as unknown as React.FormEvent;
-                      handleSignUp(event);
-                    } else {
-                      validateSignUpForm(); // Show validation errors
-                    }
-                  }}
                 >
                   Sign Up
-                </ButtonUI>
-                <ButtonUI
+                </Button>
+                <Button
                   variant="outline-only"
                   size="medium"
                   fullWidth
                   onClick={handleGoogleSignIn}
                 >
                   Sign Up with Google
-                </ButtonUI>
+                </Button>
               </div>
             </form>
           )}
         </div>
       </div>
-    </div>
+    </CustomForm>
   );
 };
 

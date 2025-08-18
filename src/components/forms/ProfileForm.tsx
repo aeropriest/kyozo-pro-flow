@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Button, Input } from '@/components/ui';
-import styles from './ProfileForm.module.scss';
-import { cards } from './wizardData';
+import { Input } from '@/components/ui';
+import styles from './CustomForm.module.scss';
+import CustomForm, { FormField } from './CustomForm';
 import Image from 'next/image';
-import ButtonUI from './ui/Button';
+import { cards } from '../wizardData';
 
 interface ProfileFormProps {
   onNext?: () => void;
@@ -84,6 +84,9 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
       });
       onNext?.(); // Go to next step
     } else {
+      // Force re-render to show errors
+      setProfileErrors({...profileErrors});
+      
       // Scroll to the first error
       const firstErrorElement = document.querySelector(`.${styles.errorMessage}`);
       if (firstErrorElement) {
@@ -121,13 +124,16 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
   };
 
   return (
-    <div className={styles.formContainer}>
-      <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
-      <h2 className={styles.cardTitle}>Its About You</h2>
-      <p className={styles.cardDescription}>Add your details and select a profile image that represents you. This will be visible to other members of your community.</p>      
-      <form onSubmit={handleSubmit}>
+    <CustomForm
+      stepIndex={1} // ProfileForm is the second card (index 1)
+      currentStep={currentStep}
+      totalSteps={totalSteps}
+      onNext={onNext}
+      onPrev={onPrev}
+      onSubmit={handleSubmit}
+    >
         <div className={styles.formSection}>
-          <div className={styles.formGroup}>
+          <FormField>
             <Input
               type="text"
               id="displayName"
@@ -138,8 +144,8 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
               error={profileErrors.displayName}
               required
             />
-          </div>
-          <div className={styles.formGroup}>
+          </FormField>
+          <FormField>
             <Input
               type="text"
               id="bio"
@@ -150,7 +156,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
               error={profileErrors.bio}
               required
             />
-          </div>
+          </FormField>
         </div>
         
         <div className={styles.formSection}>
@@ -193,26 +199,8 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
           )}
         </div>
         
-        <div className={styles.actionRow}>
-          <ButtonUI 
-            variant="outline-only" 
-            size="medium" 
-            onClick={onPrev}
-            fullWidth
-          >
-            Back
-          </ButtonUI>
-          <ButtonUI 
-            variant="outline-only" 
-            size="medium" 
-            type="submit"
-            fullWidth
-          >
-            Next
-          </ButtonUI>
-        </div>
-      </form>
-    </div>
+        {/* Action buttons are handled by CustomForm */}
+    </CustomForm>
   );
 };
 

@@ -330,7 +330,8 @@
   border: none;
   padding: 10px 0;
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: var(--font-weight-thin);
+  font-family: var(--font-primary);
   color: var(--text-color);
   opacity: 0.7;
   cursor: pointer;
@@ -344,7 +345,7 @@
 
 .activeTabButton {
   opacity: 1;
-  font-weight: 600;
+  font-weight: var(--font-weight-light);
   
   &::after {
     content: '';
@@ -386,6 +387,8 @@
 .roundedInput input {
   padding: 12px 20px !important;
   font-size: 1rem !important;
+  font-weight: var(--font-weight-thin) !important;
+  font-family: var(--font-primary) !important;
 }
 
 
@@ -440,7 +443,8 @@
 
 .googleText {
   color: var(--text-color);
-  font-weight: 500;
+  font-weight: var(--font-weight-thin);
+  font-family: var(--font-primary);
 }
 
 .termsContainer {

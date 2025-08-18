@@ -2,7 +2,7 @@
 
 .button {
   display: inline-block;
-  font-weight: 600;
+  font-weight: var(--font-weight-thin);
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;

@@ -3,7 +3,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './Dialog.module.scss';
 import FormVideo from './FormVideo';
-import { Input, Button, Checkbox } from '@/components/ui';
+import { Input, Checkbox } from '@/components/ui';
+import  {Button as ButtonUI} from "@/components/ui";
 
 interface Tab {
   label: string;
@@ -230,15 +231,10 @@ const Dialog: React.FC<DialogProps> = ({
                         </div>
                         <div className={styles.buttonRow}>
                           <div className={styles.buttonCol}>
-                            <Button variant="solid" fullWidth type="submit">
-                              Sign In
-                            </Button>
+                            <ButtonUI variant="outline-only" size="medium" href="#">Sign In</ButtonUI>
                           </div>
                           <div className={styles.buttonCol}>
-                            <Button variant="outline-only" fullWidth className={styles.googleButton}>
-                              <img src="/google-icon.svg" alt="Google" className={styles.googleIcon} />
-                              <span className={styles.googleText}>Sign in with Google</span>
-                            </Button>
+                            <ButtonUI variant="outline-only" size="medium" href="#">Sign In</ButtonUI>
                           </div>
                         </div>
                         <div className={styles.termsContainer}>
@@ -286,24 +282,21 @@ const Dialog: React.FC<DialogProps> = ({
                         </div>
                         <div className={styles.buttonRow}>
                           <div className={styles.buttonCol}>
-                            <Button variant="solid" fullWidth type="submit">
-                              Create Account
-                            </Button>
+                            <ButtonUI variant="outline-only" size="medium" type="submit">Create Account</ButtonUI>
                           </div>
                           <div className={styles.buttonCol}>
-                            <Button variant="outline-only" fullWidth className={styles.googleButton}>
+                            <ButtonUI variant="outline-only" size="medium" href="#">
                               <img src="/google-icon.svg" alt="Google" className={styles.googleIcon} />
                               <span className={styles.googleText}>Sign up with Google</span>
-                            </Button>
+                            </ButtonUI>
                           </div>
                         </div>
                         <div className={styles.termsContainer}>
                           <Checkbox
-                            name="terms"
-                            label="I agree to the Terms & Conditions"
-                            checked={termsAccepted}
-                            onChange={(e) => setTermsAccepted(e.target.checked)}
-                          />
+                                name="terms"
+                                label="I agree to the Terms & Conditions"
+                                checked={termsAccepted}
+                                onChange={(e) => setTermsAccepted(e.target.checked)} id={''}                          />
                         </div>
                       </form>
                     )}

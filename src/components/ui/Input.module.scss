@@ -1,112 +1,97 @@
-@use '../../styles/themes/_theme-variables' as *;
-
+// Input.module.scss
 .inputWrapper {
-  margin-bottom: 1rem;
-  width: 100%;
-}
-
-.label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-color);
-}
-
-.required {
-  color: var(--accent-pink);
-  margin-left: 0.25rem;
-}
-
-.inputContainer {
   position: relative;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: transparent;
-    border: 0.5px solid transparent;
-    border-radius: 9999px; // Fully rounded
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    z-index: 0;
-    background-image: linear-gradient(var(--background-color), var(--background-color)), 
-                    linear-gradient(90deg, var(--accent-pink), var(--accent-blue));
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-primary);
+}
+
+.gradientBorder {
+  position: relative;
+  padding: 0.5px;
+  border-radius: 9999px;
+  background-color: var(--border-color);
+  transition: all 0.3s;
+
+  &.error {
+    background-color: var(--error-color);
   }
+
+  &.focused {
+    background: var(--accent-pink);
+    border: 0.5px solid var(--accent-pink);
+  }
+}
+
+.innerContainer {
+  position: relative;
+  background-color: var(--input-bg);
+  border-radius: 9999px;
 }
 
 .input {
-  position: relative;
+  display: block;
   width: 100%;
   padding: 0.75rem 1rem;
-  font-size: 1rem;
-  background-color: var(--input-bg);
   color: var(--text-color);
+  background-color: var(--input-bg);
   border: 0.5px solid var(--border-color);
-  border-radius: 9999px; // Fully rounded
-  transition: all 0.2s ease;
-  z-index: 1;
-  box-sizing: border-box;
-  
+  border-radius: 9999px;
+  appearance: none;
+  transition: all 0.3s;
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-regular);
+
   &:focus {
     outline: none;
-    border: 0.5px solid transparent;
-    background-clip: padding-box;
-    position: relative;
-    background: transparent;
-    
-    &::before {
-      content: '';
-      position: absolute;
-      top: -0.5px;
-      right: -0.5px;
-      bottom: -0.5px;
-      left: -0.5px;
-      z-index: -1;
-      border-radius: inherit;
-      background: linear-gradient(to right, var(--accent-pink), var(--text-secondary));
-    }
+    border-color: transparent;
   }
-  
-  &:focus-visible {
-    outline: none;
-  }
-  
-  &::placeholder {
-    color: var(--text-secondary);
-    font-size: 1rem;
-    font-weight: 100;
-  }
-  
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-}
 
-// Focus state with gradient border
-.inputContainer:focus-within::before {
-  opacity: 1;
-}
-
-// Error state
-.hasError {
-  border-color: var(--error-color);
-  
-  &:focus {
+  &.error {
     border-color: var(--error-color);
   }
 }
 
+.textarea {
+  @extend .input;
+  min-height: 120px;
+}
+
+.label {
+  position: absolute;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  transition: 0.3s;
+  transform-origin: 0;
+  background-color: var(--input-bg);
+  padding: 0 0.5rem;
+  z-index: 10;
+  left: 0.25rem;
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-medium);
+
+  &.focused {
+    color: var(--accent-purple);
+  }
+
+  &.error {
+    color: var(--error-color);
+  }
+
+  &.active {
+    transform: translateY(-1rem) scale(0.75);
+    top: 0.5rem;
+  }
+
+  &.inactive {
+    transform: translateY(-50%) scale(1);
+    top: 50%;
+  }
+}
+
 .errorMessage {
-  color: var(--error-color);
+  margin-top: 0.5rem;
   font-size: 0.75rem;
-  margin-top: 0.25rem;
-  margin-left: 0.5rem;
+  color: var(--error-color);
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-regular);
 }

@@ -1,68 +1,101 @@
-'use client';
-import React, { forwardRef, ChangeEvent, ForwardedRef } from 'react';
+import React, { useState } from 'react';
+import type { ChangeEvent } from 'react';
 import styles from './Input.module.scss';
 
 interface InputProps {
-  type?: string;
-  placeholder?: string;
-  value?: string | number;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  name?: string;
-  id?: string;
-  required?: boolean;
-  disabled?: boolean;
-  className?: string;
-  label?: string;
+  id: string;
+  label: string;
+  type?: 'text' | 'email' | 'password' | 'textarea';
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   error?: string;
-  [key: string]: any; // For any additional props
+  required?: boolean;
+  className?: string;
+  placeholder?: string;
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(({
+const Input: React.FC<InputProps> = ({
+  id,
+  label,
   type = 'text',
-  placeholder = '',
   value,
   onChange,
-  name,
-  id,
+  error,
   required = false,
-  disabled = false,
   className = '',
-  label = '',
-  error = '',
-  ...props
-}, ref) => {
-  const inputId = id || name;
+  placeholder = ' '
+}) => {
+  const [isFocused, setIsFocused] = useState(false);
+  const isTextarea = type === 'textarea';
+  const hasError = !!error;
+  const hasValue = value.trim() !== '';
   
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = () => setIsFocused(false);
+
+  // Label should be active if input is focused OR has value
+  const isLabelActive = isFocused || hasValue;
+  
+  // Create class names using composition instead of string concatenation
+  const gradientBorderClasses = [
+    styles.gradientBorder,
+    hasError ? styles.error : '',
+    isFocused ? styles.focused : ''
+  ].filter(Boolean).join(' ');
+
+  const inputClasses = [
+    isTextarea ? styles.textarea : styles.input,
+    hasError ? styles.error : ''
+  ].filter(Boolean).join(' ');
+
+  const labelClasses = [
+    styles.label,
+    isLabelActive ? styles.active : styles.inactive,
+    hasError ? styles.error : '',
+    isFocused ? styles.focused : ''
+  ].filter(Boolean).join(' ');
+
   return (
     <div className={`${styles.inputWrapper} ${className}`}>
-      {label && (
-        <label htmlFor={inputId} className={styles.label}>
-          {label}
-          {required && <span className={styles.required}>*</span>}
-        </label>
-      )}
-      
-      <div className={styles.inputContainer}>
-        <input
-          ref={ref}
-          type={type}
-          id={inputId}
-          name={name}
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          required={required}
-          disabled={disabled}
-          className={`${styles.input} ${error ? styles.hasError : ''}`}
-          {...props}
-        />
+      <div className={gradientBorderClasses}>
+        <div className={styles.innerContainer}>
+          {isTextarea ? (
+            <textarea
+              id={id}
+              name={id}
+              className={inputClasses}
+              placeholder={placeholder}
+              value={value}
+              onChange={onChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              required={required}
+            />
+          ) : (
+            <input
+              id={id}
+              name={id}
+              type={type}
+              className={inputClasses}
+              placeholder={placeholder}
+              value={value}
+              onChange={onChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              required={required}
+            />
+          )}
+          <label 
+            htmlFor={id} 
+            className={labelClasses}
+          >
+            {label}
+          </label>
+        </div>
       </div>
-      
-      {error && <p className={styles.errorMessage}>{error}</p>}
+      {hasError && <p className={styles.errorMessage}>{error}</p>}
     </div>
   );
-});
-
-Input.displayName = 'Input';
+};
 
 export default Input;

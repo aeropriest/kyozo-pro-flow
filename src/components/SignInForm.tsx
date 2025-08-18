@@ -68,7 +68,7 @@ const SignInForm: React.FC<SignInFormProps> = ({
     let isValid = true;
 
     if (!signInForm.email) {
-      errors.email = 'Email is required';
+      errors.email = 'Valid Email is required';
       isValid = false;
     } else if (!/\S+@\S+\.\S+/.test(signInForm.email)) {
       errors.email = 'Invalid email format';
@@ -197,7 +197,19 @@ const SignInForm: React.FC<SignInFormProps> = ({
                 <a href="#">Forgot password?</a>
               </div>
               <div className={styles.actionRow}>
-                <ButtonUI variant="outline-only" size="medium" href="#" fullWidth>Sign In</ButtonUI>
+                <ButtonUI 
+                  variant="outline-only" 
+                  size="medium" 
+                  onClick={() => {
+                    const event = new Event('submit') as unknown as React.FormEvent;
+                    handleSignIn(event);
+                  }} 
+                  fullWidth
+                >
+                  Sign In
+                </ButtonUI>
+              </div>
+              <div className={styles.actionRow}>
                 <ButtonUI 
                   variant="outline-only" 
                   size="medium" 

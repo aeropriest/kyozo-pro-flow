@@ -176,7 +176,27 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                 <ButtonUI 
                   variant="outline-only" 
                   size="medium" 
-                  onClick={() => setActiveTab('avatar')}
+                  onClick={() => {
+                    // Validate profile fields before proceeding to avatar tab
+                    const errors = { displayName: '', bio: '', avatar: '' };
+                    let isValid = true;
+
+                    if (!profileForm.displayName.trim()) {
+                      errors.displayName = 'Display name is required';
+                      isValid = false;
+                    }
+
+                    if (!profileForm.bio.trim()) {
+                      errors.bio = 'Bio is required';
+                      isValid = false;
+                    }
+
+                    setProfileErrors(errors);
+                    
+                    if (isValid) {
+                      setActiveTab('avatar');
+                    }
+                  }}
                   fullWidth
                 >
                   Next

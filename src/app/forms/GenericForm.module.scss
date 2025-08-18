@@ -1,13 +1,16 @@
 @use '../../styles/themes/_theme-variables' as *;
 
 .formContainer {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  max-width: 450px;
-  height: 100%;
-  min-height: 400px; /* Ensure enough height for all sections */
+    display: flex;
+    flex-direction: column;
+    position: relative; // allow absolute children    
+//   width: 100%;
+//   height: 100%;
+// //   max-width: 450px;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-start;
+//   background-color: red;
 }
 
 .categoryLabel {
@@ -90,40 +93,16 @@
 .formFields {
   display: flex;
   flex-direction: column;
-  gap: 7px; /* Exactly 7px gap between form elements as requested */
+  gap: 1px;
   flex: 1; /* push buttons down */
   width: 100%;
 }
-
-/* Section layout styles */
-.topSection {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background-color: red; /* Red background as requested */
-}
-
-.middleSection {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-  flex: 1;
-}
-
-.bottomSection {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding-bottom: 10px; /* 10px from bottom as requested */
-  background-color: green; /* Green background as requested */
-}
-
 .actionRow {
-  display: flex;
-  gap: 10px;
-  width: 100%;
-}
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }

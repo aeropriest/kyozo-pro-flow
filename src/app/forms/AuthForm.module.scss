@@ -7,11 +7,13 @@
   display: flex;
   flex-direction: column;
   gap: 0px;
+  padding-top: 12px;
+  padding-left: 12px;
 }
 
 .formGroup {
   width: 100%;
-  margin-bottom: 10px; /* Reduced gap between inputs */
+  margin-bottom: 7px; /* Gap between inputs set to 7px */
   
   // /* Make inputs 20% smaller */
   // :global(input) {
@@ -34,7 +36,7 @@
   flex-direction: row;
   align-items: center;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 9px; /* Set to 9px from bottom edge */
   width: 100%;
   max-width: 450px;
   box-sizing: border-box;

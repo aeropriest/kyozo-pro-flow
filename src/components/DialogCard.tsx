@@ -69,18 +69,34 @@ const DialogCard: React.FC<SlidingCardProps> = ({
             customComponent
           ) : (
             <>
-              <p className={styles.categoryLabel}>{subtitle}</p>
-              <h2 className={styles.cardTitle}>{title}</h2>
-              {description && (
-                <p className={styles.cardDescription}>
-                  {description}
-                </p>
-              )}
-              <p className={styles.cardText}>
-                {text}
-              </p>
-              <div className={styles.buttonContainer}>
-                {button}
+              {/* Top section: Title, subtitle, counter - top aligned with red background */}
+              <div className={styles.topSection}>
+                <div className={styles.stepIndicator}>
+                  Step {currentStep} of {totalSteps}
+                </div>
+                <p className={styles.categoryLabel}>{subtitle}</p>
+                <h2 className={styles.cardTitle}>{title}</h2>
+                {description && (
+                  <p className={styles.cardDescription}>
+                    {description}
+                  </p>
+                )}
+              </div>
+              
+              {/* Middle section: Form content with 7px gap */}
+              <div className={styles.middleSection}>
+                <div className={styles.formFields}>
+                  <p className={styles.cardText}>
+                    {text}
+                  </p>
+                </div>
+              </div>
+              
+              {/* Bottom section: Action buttons - bottom aligned with green background */}
+              <div className={styles.bottomSection}>
+                <div className={styles.buttonContainer}>
+                  {button}
+                </div>
               </div>
             </>
           )}

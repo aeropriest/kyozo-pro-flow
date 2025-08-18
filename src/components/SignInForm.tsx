@@ -208,8 +208,6 @@ const SignInForm: React.FC<SignInFormProps> = ({
                 >
                   Sign In
                 </ButtonUI>
-              </div>
-              <div className={styles.actionRow}>
                 <ButtonUI 
                   variant="outline-only" 
                   size="medium" 

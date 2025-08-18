@@ -5,3 +5,4 @@ export { default as Input } from './Input';
 export { default as Tab } from './Tab';
 export { default as Tabs } from './Tabs';
 export { default as AnimatedTitle } from './AnimatedTitle';
+export { default as Toggle } from './Toggle';

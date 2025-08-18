@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './StepForm.module.scss';
 import { Button } from '@/components/ui';
 import GenericStepWrapper from '../onboarding/GenericStepWrapper';
@@ -19,6 +19,7 @@ const DashboardStep: React.FC<DashboardStepProps> = ({
 }) => {
   // Find the step data from onboardingSteps
   const stepData = onboardingSteps.find(step => step.component === 'DashboardStep');
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Onboarding complete!');
@@ -34,30 +35,52 @@ const DashboardStep: React.FC<DashboardStepProps> = ({
       onPrev={onPrev}
     >
       <form onSubmit={handleSubmit}>
-            <div className={styles.formGroup}>
-              <p>Congratulations! You have successfully completed the onboarding process.</p>
-              <p>Your community is now set up and ready to go. Click the button below to access your dashboard.</p>
-            </div>
-
-            
-            <div className={styles.actionRow}>
-              <Button 
-                variant="outline-only" 
-                size="medium" 
-                onClick={onPrev}
-                fullWidth
-              >
-                Back
-              </Button>
-              <Button 
-                variant="outline-only" 
-                size="medium" 
-                type="submit"
-                fullWidth
-              >
-                Go to Dashboard
-              </Button>
-            </div>
+        <div className={styles.formSection}>
+          <div className={styles.formGroup}>
+            <p>Congratulations! You have successfully completed the onboarding process.</p>
+            <p>Your community is now set up and ready to go. Click the button below to access your dashboard.</p>
+          </div>
+          
+          <div className={styles.dashboardSummary}>
+            <h3 className={styles.sectionTitle}>Community Setup Complete</h3>
+            <ul className={styles.setupSummary}>
+              <li className={styles.summaryItem}>
+                <span className={styles.checkIcon}>✓</span>
+                <span>Profile created</span>
+              </li>
+              <li className={styles.summaryItem}>
+                <span className={styles.checkIcon}>✓</span>
+                <span>Community details configured</span>
+              </li>
+              <li className={styles.summaryItem}>
+                <span className={styles.checkIcon}>✓</span>
+                <span>Members added</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <div className={styles.actionRow}>
+          <Button 
+            variant="outline-only" 
+            size="medium" 
+            onClick={onPrev}
+            fullWidth
+          >
+            Back
+          </Button>
+          <Button 
+            variant="outline-only" 
+            size="medium" 
+            onClick={() => {
+              const event = new Event('submit') as unknown as React.FormEvent;
+              handleSubmit(event);
+            }}
+            fullWidth
+          >
+            Go to Dashboard
+          </Button>
+        </div>
       </form>
     </GenericStepWrapper>
   );

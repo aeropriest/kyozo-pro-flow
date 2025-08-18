@@ -12,7 +12,6 @@ import AvatarStep from './forms/AvatarStep';
 import CommunityDetailsStep from './forms/CommunityDetailsStep';
 import CommunitySettingsStep from './forms/CommunitySettingsStep';
 import AddMembersStep from './forms/AddMembersStep';
-import MemberManagementStep from './forms/MemberManagementStep';
 import DashboardStep from './forms/DashboardStep';
 import { cards } from './wizardData';
 
@@ -171,7 +170,7 @@ const Dialog: React.FC<DialogProps> = ({
                 >
                   <DialogCard
                     key={index}
-                    title={page.title || ''}
+                    title={page.subtitle || ''}
                     subtitle={page.subtitle || ''}
                     description={page.description || ''}
                     text=""
@@ -247,15 +246,6 @@ const Dialog: React.FC<DialogProps> = ({
                             );
                           case 5:
                             return (
-                              <MemberManagementStep 
-                                onNext={handleNextCard}
-                                onPrev={handlePrevCard}
-                                currentStep={index + 1}
-                                totalSteps={cards.length}
-                              />
-                            );
-                          case 6:
-                            return (
                               <DashboardStep 
                                 onNext={onClose}
                                 onPrev={handlePrevCard}
@@ -272,7 +262,7 @@ const Dialog: React.FC<DialogProps> = ({
                       index === 0 ? (
                         <VideoPlayer />
                       ) : (
-                        <Image src={page.image} alt={page.title} width={800} height={800} />
+                        <Image src={page.image} alt={page.subtitle} width={800} height={800} />
                       )
                     }
                   />

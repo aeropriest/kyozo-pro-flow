@@ -120,7 +120,7 @@
   line-height: 1.6;
   margin: 0;
   padding-top: 15px;
-  padding-bottom: 15px;
+  padding-bottom: 18px; /* Standardized to 18px */
   color: white; /* White text as requested */
   font-weight: 100; /* Thinner font weight */
   font-family: var(--font-family-thin, var(--font-family)); /* Use thin font family */
@@ -128,7 +128,7 @@
   
   @media (max-width: 768px) {
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 18px; /* Standardized to 18px */
   }
 }
 

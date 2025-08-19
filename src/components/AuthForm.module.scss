@@ -1,21 +1,52 @@
 @use '../styles/themes/_theme-variables' as *;
 
-.formContainer {
+.authContainer {
   width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
+.topSection {
+  margin-top: -1rem;
+  border-radius: 8px;
+  text-align: left;
+  display: flex;
+  // margin-top:
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  // background-color: blue;
+}
+
+.middleSection {
+  // background-color: #22c55e;
+  // margin-top: 20px;
+  border-radius: 8px;
+  text-align: left;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.bottomSection {
+  margin-top: 20px;
+  border-radius: 8px;
+  // box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  height: 110px;
+  // gap: 20px;
+  display: flex;
+  align-items: self-start;
+  box-sizing: border-box;
+}
 .categoryLabel {
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin: 0;
-  // margin-top: 40px; /* Add top margin to create space */
-  padding-bottom: 10px;
-  color: var(--text-color);
-  opacity: 0.7;
+  font-size: 1rem;
+  color: white;
+  margin-bottom: -0.5rem;
+  text-align: left;
 }
 
 .cardTitle {
@@ -31,17 +62,27 @@
   @media (max-width: 768px) {
     font-size: 3.5rem;
   }
-  background-color: red;
+  // background-color: red;
+}
+
+.middleSection1 {
+  // background-color: #22c55e;
+  margin: 20px 0 100px 20px;
+  margin-right: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  flex: 1;
+  overflow-y: auto;
+  text-align: left;
+  width: calc(100% - 40px);
+  box-sizing: border-box;
 }
 
 .formControls {
   width: 100%;
   max-width: 450px;
-  border-radius: 30px;
-  align-self: flex-start;
   display: flex;
   flex-direction: column;
-  // background-color: red;
 }
 
 .stepIndicator {
@@ -62,7 +103,7 @@
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid var(--border-color);
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   width: 100%;
   box-sizing: border-box;
   /* Make tabs full width */
@@ -110,7 +151,7 @@
 
 .formGroup {
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: -0.75rem;
 }
 
 .forgotPassword {
@@ -154,17 +195,28 @@
   }
 }
 
+.bottomSection1 {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
 .actionRow {
   display: flex;
-  margin-top: auto; 
   flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
+  align-items: flex-start;
+  gap: 16px;
   width: 100%;
   max-width: 450px;
   box-sizing: border-box;
   justify-content: flex-start;
+  margin: 0;
   
   > * {
     flex: 1;

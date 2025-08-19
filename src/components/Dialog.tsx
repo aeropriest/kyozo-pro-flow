@@ -5,7 +5,7 @@ import styles from './Dialog.module.scss';
 import { Button } from '@/components/ui';
 import Image from 'next/image';
 import DialogCard from './DialogCard';
-import SignInForm from './SignInForm';
+import AuthForm from './AuthForm';
 import ProfileForm from './ProfileForm';
 // Import form components individually
 import AvatarStep from './forms/AvatarStep';
@@ -202,7 +202,7 @@ const Dialog: React.FC<DialogProps> = ({
                         switch(index) {
                           case 0:
                             return (
-                              <SignInForm 
+                              <AuthForm 
                                 onNext={handleNextCard} 
                                 currentStep={index + 1} 
                                 totalSteps={cards.length}

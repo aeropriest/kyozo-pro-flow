@@ -11,6 +11,7 @@ interface AvatarFormProps {
   onSignUp?: (data: { fullName: string; email: string; password: string }) => void;
   onGoogleSignIn?: () => void;
   onNext?: () => void;
+  onPrev?: () => void;
   currentStep?: number;
   totalSteps?: number;
   description?: string;
@@ -21,6 +22,7 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
   onSignUp,
   onGoogleSignIn,
   onNext,
+  onPrev,
   currentStep = 1,
   totalSteps = 6,
   description,
@@ -104,8 +106,7 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
   };
 
   const handleBack = () => {
-    // Navigate to previous step or close dialog
-    console.log('Back button clicked');
+    onPrev?.();
   };
 
   const handleNext = () => {

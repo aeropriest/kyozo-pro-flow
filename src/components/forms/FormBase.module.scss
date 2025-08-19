@@ -93,10 +93,15 @@
 
 // Common form elements
 .categoryLabel {
-  font-size: 1rem;
-  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0;
   margin-bottom: -0.5rem;
   text-align: left;
+  color: var(--text-color);
+  opacity: 0.7;
 }
 
 .cardTitle {
@@ -133,6 +138,21 @@
 .animatedTitle {
   margin-bottom: 24px;
   padding-top: 20px;
+  
+  // Ensure subtitle uses theme-aware text color
+  .subtitle {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin: 0;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+    @media (max-width: 768px) {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+  }
 }
 
 .formContent {
@@ -204,7 +224,6 @@
   
   > * {
     flex: 1;
-    max-width: calc(33.33% - 11px);
   }
 }
 
@@ -293,7 +312,7 @@
   display: block;
   font-size: 14px;
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--text-color);
   margin-bottom: 12px;
 }
 
@@ -417,8 +436,8 @@
   padding: 16px 12px;
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.05);
-  color: var(--text-primary);
+  background-color: var(--input-background);
+  color: var(--text-color);
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: center;
@@ -428,7 +447,7 @@
   
   &:hover {
     border-color: var(--accent-pink);
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--card-bg);
   }
   
   &.selected {
@@ -455,8 +474,8 @@
   padding: 12px 16px;
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.05);
-  color: var(--text-primary);
+  background-color: var(--input-background);
+  color: var(--text-color);
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: center;
@@ -464,7 +483,7 @@
   
   &:hover {
     border-color: var(--accent-pink);
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--card-bg);
   }
   
   &.selected {
@@ -496,7 +515,7 @@
 .toggleText {
   font-size: 14px;
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--text-color);
 }
 
 .privacyDescription {
@@ -523,15 +542,15 @@
   padding: 12px 16px;
   border: 2px dashed var(--border-color);
   border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.05);
-  color: var(--text-primary);
+  background-color: var(--input-background);
+  color: var(--text-color);
   cursor: pointer;
   transition: all 0.2s ease;
   font-size: 14px;
   
   &:hover {
     border-color: var(--accent-pink);
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--card-bg);
   }
   
   span {
@@ -549,7 +568,7 @@
 .summaryTitle {
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--text-color);
   margin-bottom: 24px;
   text-align: center;
 }
@@ -581,7 +600,7 @@
     display: block;
     font-size: 14px;
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--text-color);
     margin-bottom: 4px;
   }
   
@@ -615,7 +634,7 @@
   
   li {
     font-size: 14px;
-    color: var(--text-primary);
+    color: var(--text-color);
     margin-bottom: 8px;
     padding-left: 20px;
     position: relative;
@@ -643,7 +662,7 @@
   
   p {
     font-size: 14px;
-    color: var(--text-primary);
+    color: var(--text-color);
     margin: 0;
     line-height: 1.5;
   }

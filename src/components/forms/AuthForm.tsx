@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button, Input, Checkbox, Tabs, AnimatedTitle } from '@/components/ui';
-import styles from './AuthForm.module.scss';
+import styles from './FormBase.module.scss';
 import ButtonUI from '../ui/Button';
 import { cards } from '../wizardData';
 
@@ -149,7 +149,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
   };
 
   return (
-    <div className={styles.authContainer}>
+    <div className={styles.formContainer}>
       <div className={styles.topSection}>
         <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
         <AnimatedTitle

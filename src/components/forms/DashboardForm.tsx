@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { AnimatedTitle } from '@/components/ui';
-import styles from './DashboardForm.module.scss';
+import styles from './FormBase.module.scss';
 import ButtonUI from '../ui/Button';
 import { cards } from '../wizardData';
 
@@ -38,7 +38,7 @@ const DashboardForm: React.FC<DashboardFormProps> = ({
   };
 
   return (
-    <div className={styles.DashboardContainer}>
+    <div className={styles.formContainer}>
       <div className={styles.topSection}>
         <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
         <AnimatedTitle

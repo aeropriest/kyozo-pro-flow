@@ -129,7 +129,7 @@ const CommunityDetailsForm: React.FC<CommunityDetailsFormProps> = ({
                     setCommunityDescription(e.target.value);
                     if (descriptionError) setDescriptionError('');
                   }}
-                  placeholder="Describe your community's purpose and goals..."
+                  placeholder="Community Description"
                   error={descriptionError}
                   rows={3}
                   required

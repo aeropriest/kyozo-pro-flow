@@ -48,8 +48,10 @@ const Dialog: React.FC<DialogProps> = ({
   step = 1,
   totalSteps = 6,
 }) => {
-  // State for card navigation - simplified without animations
+  // State for card navigation with horizontal sliding animations
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [transitionDirection, setTransitionDirection] = useState<'next' | 'prev' | null>(null);
 
   // Form state management
   const [signInForm, setSignInForm] = useState({ email: '', password: '' });
@@ -87,16 +89,30 @@ const Dialog: React.FC<DialogProps> = ({
     onTabChange(index);
   };
 
-  // Handle card navigation - simplified without animations
+  // Handle card navigation with horizontal sliding animations
   const handleNextCard = () => {
-    if (currentCardIndex < cards.length - 1) {
+    if (currentCardIndex < cards.length - 1 && !isTransitioning) {
+      setIsTransitioning(true);
+      setTransitionDirection('next');
       setCurrentCardIndex(prev => prev + 1);
+      // End transition after animation completes
+      setTimeout(() => {
+        setIsTransitioning(false);
+        setTransitionDirection(null);
+      }, 400);
     }
   };
 
   const handlePrevCard = () => {
-    if (currentCardIndex > 0) {
+    if (currentCardIndex > 0 && !isTransitioning) {
+      setIsTransitioning(true);
+      setTransitionDirection('prev');
       setCurrentCardIndex(prev => prev - 1);
+      // End transition after animation completes
+      setTimeout(() => {
+        setIsTransitioning(false);
+        setTransitionDirection(null);
+      }, 400);
     }
   };
 
@@ -148,117 +164,129 @@ const Dialog: React.FC<DialogProps> = ({
         <div className={styles.dialogContent}>
           <div className={styles.cardsContainer}>
             {cards.map((page, index) => {
-              // Simple display logic without animations
-              const isActive = index === currentCardIndex;
-              const zIndex = cards.length - Math.abs(index - currentCardIndex);
+              // Only render the current card
+              if (index !== currentCardIndex) return null;
               
-              // Only show the active card
-              if (!isActive) return null;
+              // Determine position for sliding animation
+              let transform = 'translateX(0%)';
               
-              // Position the card
-              const translateX = '0%';
+              if (isTransitioning && transitionDirection === 'next') {
+                // Start from right and slide to center
+                transform = 'translateX(0%)';
+              } else if (isTransitioning && transitionDirection === 'prev') {
+                // Start from left and slide to center
+                transform = 'translateX(0%)';
+              }
               
               return (
                 <div
-                  key={index}
-                  className={`${styles.cardWrapper} ${styles.active}`}
+                  key={`card-${index}-${isTransitioning ? transitionDirection : 'static'}`}
+                  className={`${styles.cardWrapper} ${!isTransitioning ? styles.active : styles.transitioning} ${
+                    isTransitioning && transitionDirection === 'next' ? styles.slideInFromRight : ''
+                  } ${
+                    isTransitioning && transitionDirection === 'prev' ? styles.slideInFromLeft : ''
+                  }`}
                   style={{
-                    transform: `translateX(${translateX})`,
-                    zIndex: zIndex,
+                    transform,
+                    zIndex: 1,
                   }}
                 >
                   <DialogCard
-                    key={index}
-                    title={page.subtitle || ''}
-                    subtitle={page.subtitle || ''}
+                    title={page.title || ''}
+                    subtitle={page.title || ''}
                     description={page.description || ''}
                     text=""
                     currentStep={index + 1}
                     totalSteps={cards.length}
                     button={
-                      <>
-                        {index > 0 && (
+                      index === currentCardIndex ? (
+                        <>
+                          {index > 0 && (
+                            <Button
+                              variant="outline"
+                              size="small"
+                              onClick={() => handlePrevCard()}
+                              className={styles.backButton}
+                            >
+                              Back
+                            </Button>
+                          )}
                           <Button
-                            variant="outline"
+                            variant="primary"
                             size="small"
-                            onClick={() => handlePrevCard()}
-                            className={styles.backButton}
+                            onClick={() => index === cards.length - 1 ? onClose() : handleNextCard()}
                           >
-                            Back
+                            {index === cards.length - 1 ? 'Finish' : 'Next'}
                           </Button>
-                        )}
-                        <Button
-                          variant="primary"
-                          size="small"
-                          onClick={() => index === cards.length - 1 ? onClose() : handleNextCard()}
-                        >
-                          {index === cards.length - 1 ? 'Finish' : 'Next'}
-                        </Button>
-                      </>
+                        </>
+                      ) : <></>
                     }
                     customComponent={
-                      (() => {
-                        switch(index) {
-                          case 0:
-                            return (
-                              <AuthForm 
-                                onNext={handleNextCard} 
-                                currentStep={index + 1} 
-                                totalSteps={cards.length}
-                              />
-                            );
-                          case 1:
-                            return (
-                              <AvatarForm 
-                                onNext={handleNextCard}
-                                onPrev={handlePrevCard}
-                                currentStep={index + 1}
-                                totalSteps={cards.length}
-                              />
-                            );
-                          case 2:
-                            return (
-                              <CommunityDetailsForm 
-                                onNext={handleNextCard}
-                                onPrev={handlePrevCard}
-                                currentStep={index + 1}
-                                totalSteps={cards.length}
-                              />
-                            );
-                          case 3:
-                            return (
-                              <AddMembersForm 
-                                onNext={handleNextCard}
-                                onPrev={handlePrevCard}
-                                currentStep={index + 1}
-                                totalSteps={cards.length}
-                              />
-                            );
-                          case 4:
-                            return (
-                              <DashboardForm 
-                                onNext={onClose}
-                                onPrev={handlePrevCard}
-                                currentStep={index + 1}
-                                totalSteps={cards.length}
-                              />
-                            );
-                          default:
-                            return page.customComponent;
-                        }
-                      })()
+                      index === currentCardIndex ? (
+                        (() => {
+                          switch(index) {
+                            case 0:
+                              return (
+                                <AuthForm 
+                                  onNext={handleNextCard} 
+                                  currentStep={index + 1} 
+                                  totalSteps={cards.length}
+                                />
+                              );
+                            case 1:
+                              return (
+                                <AvatarForm 
+                                  onNext={handleNextCard}
+                                  onPrev={handlePrevCard}
+                                  currentStep={index + 1}
+                                  totalSteps={cards.length}
+                                />
+                              );
+                            case 2:
+                              return (
+                                <CommunityDetailsForm 
+                                  onNext={handleNextCard}
+                                  onPrev={handlePrevCard}
+                                  currentStep={index + 1}
+                                  totalSteps={cards.length}
+                                />
+                              );
+                            case 3:
+                              return (
+                                <AddMembersForm 
+                                  onNext={handleNextCard}
+                                  onPrev={handlePrevCard}
+                                  currentStep={index + 1}
+                                  totalSteps={cards.length}
+                                />
+                              );
+                            case 4:
+                              return (
+                                <DashboardForm 
+                                  onNext={onClose}
+                                  onPrev={handlePrevCard}
+                                  currentStep={index + 1}
+                                  totalSteps={cards.length}
+                                />
+                              );
+                            default:
+                              return page.customComponent;
+                          }
+                        })()
+                      ) : null
                     }
                     content={
                       index === 0 ? (
                         <VideoPlayer />
                       ) : (
-                        <Image src={page.image} alt={page.subtitle} width={800} height={800} />
+                        <Image src={page.image} alt={page.title} width={800} height={800} />
                       )
                     }
                   />
                 </div>
               );
             })}
+              
           </div>
           {/* Add children if you want other content inside dialog */}
           {children}

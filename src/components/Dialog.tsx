@@ -217,42 +217,42 @@ const Dialog: React.FC<DialogProps> = ({
                                 totalSteps={cards.length}
                               />
                             );
-                          // case 2:
-                          //   return (
-                          //     <CommunityDetailsStep 
-                          //       onNext={handleNextCard}
-                          //       onPrev={handlePrevCard}
-                          //       currentStep={index + 1}
-                          //       totalSteps={cards.length}
-                          //     />
-                          //   );
-                          // case 3:
-                          //   return (
-                          //     <CommunitySettingsStep 
-                          //       onNext={handleNextCard}
-                          //       onPrev={handlePrevCard}
-                          //       currentStep={index + 1}
-                          //       totalSteps={cards.length}
-                          //     />
-                          //   );
-                          // case 4:
-                          //   return (
-                          //     <AddMembersStep 
-                          //       onNext={handleNextCard}
-                          //       onPrev={handlePrevCard}
-                          //       currentStep={index + 1}
-                          //       totalSteps={cards.length}
-                          //     />
-                          //   );
-                          // case 5:
-                          //   return (
-                          //     <DashboardStep 
-                          //       onNext={onClose}
-                          //       onPrev={handlePrevCard}
-                          //       currentStep={index + 1}
-                          //       totalSteps={cards.length}
-                          //     />
-                          //   );
+                          case 2:
+                            return (
+                              <CommunityDetailsStep 
+                                onNext={handleNextCard}
+                                onPrev={handlePrevCard}
+                                currentStep={index + 1}
+                                totalSteps={cards.length}
+                              />
+                            );
+                          case 3:
+                            return (
+                              <CommunitySettingsStep 
+                                onNext={handleNextCard}
+                                onPrev={handlePrevCard}
+                                currentStep={index + 1}
+                                totalSteps={cards.length}
+                              />
+                            );
+                          case 4:
+                            return (
+                              <AddMembersStep 
+                                onNext={handleNextCard}
+                                onPrev={handlePrevCard}
+                                currentStep={index + 1}
+                                totalSteps={cards.length}
+                              />
+                            );
+                          case 5:
+                            return (
+                              <DashboardStep 
+                                onNext={onClose}
+                                onPrev={handlePrevCard}
+                                currentStep={index + 1}
+                                totalSteps={cards.length}
+                              />
+                            );
                           default:
                             return page.customComponent;
                         }

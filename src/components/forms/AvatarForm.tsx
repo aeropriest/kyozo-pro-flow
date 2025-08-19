@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Button, Input, Checkbox, Tabs, AnimatedTitle } from '@/components/ui';
+import { Button, Input, Checkbox, Tabs, AnimatedTitle, TextArea } from '@/components/ui';
 import styles from './AvatarForm.module.scss';
 import ButtonUI from '../ui/Button';
 import { cards } from '../wizardData';
@@ -153,7 +153,7 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
               />
             </div>
             <div className={styles.formGroup}>
-              <textarea
+              <TextArea
                 id="avatarBio"
                 name="avatarBio"
                 value={avatarBio}
@@ -162,11 +162,10 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
                   if (bioError) setBioError('');
                 }}
                 placeholder="Tell us about yourself..."
-                className={`${styles.bioTextarea} ${bioError ? styles.error : ''}`}
+                error={bioError}
                 rows={3}
                 required
               />
-              {bioError && <span className={styles.errorText}>{bioError}</span>}
             </div>
             
             {/* Avatar Selection */}

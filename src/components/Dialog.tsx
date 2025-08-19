@@ -211,7 +211,7 @@ const Dialog: React.FC<DialogProps> = ({
                             return (
                               <AvatarForm 
                                 onNext={handleNextCard}
-                                // onPrev={handlePrevCard}
+                                onPrev={handlePrevCard}
                                 currentStep={index + 1}
                                 totalSteps={cards.length}
                               />

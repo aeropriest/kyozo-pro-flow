@@ -3,6 +3,8 @@
 .inputWrapper {
   margin-bottom: 1rem;
   width: 100%;
+  margin-top: 8px;
+  padding: 0 2px 0 2px;
 }
 
 .label {
@@ -52,11 +54,11 @@
   width: 100%;
   padding: 0.75rem 1rem;
   font-size: 1rem;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--input-background);
   color: var(--text-color);
   box-sizing: border-box;
   max-width: 450px; /* Standardize max-width at input level */
-  border: 0.5px solid rgba(255, 255, 255, 0.1); /* 0.5px border in normal state */
+  border: 0.5px solid var(--text-secondary); /* Theme-aware border */
   border-radius: 9999px; /* Fully rounded */
   transition: all 0.2s ease;
   z-index: 1;
@@ -64,6 +66,7 @@
   &:focus {
     outline: none;
     border-color: transparent; /* Hide the input border on focus */
+    color: var(--text-color); /* Ensure text color is visible on focus */
     
     & + .inputContainer::before {
       opacity: 1;
@@ -75,8 +78,9 @@
   }
   
   &::placeholder {
-    color: rgba(255, 255, 255, 0.4); /* Lighter color for better thin appearance */
+    color: var(--text-tertiary); /* Theme-aware placeholder color */
     font-weight: 100; /* Thinner font weight for placeholder text */
+    font-size: 0.75rem;
     font-family: var(--font-family-light, var(--font-family)); /* Use light font family if available */
     letter-spacing: 0.03em; /* Slightly increase letter spacing */
   }
@@ -113,7 +117,7 @@
   top: 50%;
   transform: translateY(-50%);
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-secondary);
   pointer-events: none;
   transition: all 0.2s ease;
   font-weight: 300;
@@ -121,10 +125,10 @@
   
   &.active {
     top: -0.175rem;
-    left: 1rem;
+    left: 0.75rem;
     font-size: 0.75rem;
     background-color: var(--card-bg);
-    padding: 0 0.25rem;
+    padding: 0 0.5rem;
     color: var(--text-color);
     z-index: 2;
   }

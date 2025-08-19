@@ -75,20 +75,12 @@ const DashboardForm: React.FC<DashboardFormProps> = ({
             Back
           </ButtonUI>
           <ButtonUI 
-            variant="outline-only" 
-            size="medium" 
-            onClick={handleSkip}
-            fullWidth
-          >
-            Skip
-          </ButtonUI>
-          <ButtonUI 
             variant="primary" 
             size="medium" 
             onClick={handleFinish}
             fullWidth
           >
-            Launch Community
+            Launch
           </ButtonUI>
         </div>
       </div>

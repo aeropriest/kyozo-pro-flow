@@ -104,49 +104,26 @@ const AddMembersForm: React.FC<AddMembersFormProps> = ({
             <form noValidate>
               {/* Invite Method Selection */}
               <div className={styles.formGroup}>
-                <label className={styles.sectionLabel}>How would you like to invite members?</label>
                 <div className={styles.methodSelection}>
-                  <div
-                    className={`${styles.methodOption} ${inviteMethod === 'email' ? styles.selected : ''}`}
-                    onClick={() => setInviteMethod('email')}
+                <div
+                    className={`${styles.methodOption} ${inviteMethod === 'eventbrite' ? styles.selected : ''}`}
+                    onClick={() => setInviteMethod('eventbrite')}
                   >
-                    <div className={styles.methodIcon}>📧</div>
-                    <span>Email Addresses</span>
-                  </div>
-                  <div
+                    <div className={styles.methodIcon}>🎫</div>
+                    <span>Eventbrite</span>
+                  </div>                  <div
                     className={`${styles.methodOption} ${inviteMethod === 'csv' ? styles.selected : ''}`}
                     onClick={() => setInviteMethod('csv')}
                   >
                     <div className={styles.methodIcon}>📄</div>
                     <span>CSV Import</span>
                   </div>
-                  <div
-                    className={`${styles.methodOption} ${inviteMethod === 'eventbrite' ? styles.selected : ''}`}
-                    onClick={() => setInviteMethod('eventbrite')}
-                  >
-                    <div className={styles.methodIcon}>🎫</div>
-                    <span>Eventbrite</span>
-                  </div>
+
                 </div>
               </div>
 
               {/* Email Method */}
-              {inviteMethod === 'email' && (
-                <div className={styles.formGroup}>
-                  <TextArea
-                    id="emailList"
-                    name="emailList"
-                    value={emailList}
-                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-                      setEmailList(e.target.value);
-                      if (emailError) setEmailError('');
-                    }}
-                    placeholder="Enter email addresses separated by commas or new lines..."
-                    error={emailError}
-                    rows={4}
-                  />
-                </div>
-              )}
+              
 
               {/* CSV Method */}
               {inviteMethod === 'csv' && (
@@ -170,7 +147,6 @@ const AddMembersForm: React.FC<AddMembersFormProps> = ({
                   </div>
                 </div>
               )}
-
               {/* Eventbrite Method */}
               {inviteMethod === 'eventbrite' && (
                 <div className={styles.formGroup}>

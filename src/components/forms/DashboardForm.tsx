@@ -51,53 +51,16 @@ const DashboardForm: React.FC<DashboardFormProps> = ({
 
       {/* Middle Section: Summary and final steps */}
       <div className={styles.middleSection}>
-        <div className={styles.formControls}>
-          <div className={styles.formContent}>
-            <div className={styles.summarySection}>
-              <h3 className={styles.summaryTitle}>🎉 Your Community is Ready!</h3>
-              
-              <div className={styles.featureList}>
-                <div className={styles.featureItem}>
-                  <div className={styles.featureIcon}>✅</div>
-                  <div className={styles.featureText}>
-                    <strong>Profile Created</strong>
-                    <p>Your profile and avatar are set up</p>
-                  </div>
-                </div>
-                
-                <div className={styles.featureItem}>
-                  <div className={styles.featureIcon}>✅</div>
-                  <div className={styles.featureText}>
-                    <strong>Community Configured</strong>
-                    <p>Community details and settings are ready</p>
-                  </div>
-                </div>
-                
-                <div className={styles.featureItem}>
-                  <div className={styles.featureIcon}>✅</div>
-                  <div className={styles.featureText}>
-                    <strong>Members Ready</strong>
-                    <p>Member invitations are prepared</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className={styles.nextSteps}>
-                <h4 className={styles.nextStepsTitle}>What's Next?</h4>
-                <ul className={styles.stepsList}>
-                  <li>Access your community dashboard</li>
-                  <li>Customize your community theme</li>
-                  <li>Start engaging with your members</li>
-                  <li>Create your first posts and events</li>
-                </ul>
-              </div>
-
-              <div className={styles.launchMessage}>
-                <p>Click "Launch Community" to access your dashboard and start building your community!</p>
-              </div>
-            </div>
-          </div>
-        </div>
+          <h3 className={styles.summaryTitle}>🎉 Your Community is Ready!</h3>
+          <div className={styles.nextSteps}>
+            <h4 className={styles.nextStepsTitle}>What's Next?</h4>
+            <ul className={styles.stepsList}>
+              <li>Access your community dashboard</li>
+              <li>Customize your community theme</li>
+              <li>Start engaging with your members</li>
+              <li>Create your first posts and events</li>
+            </ul>
+          </div>            
       </div>
 
       {/* Bottom Section: Action buttons */}

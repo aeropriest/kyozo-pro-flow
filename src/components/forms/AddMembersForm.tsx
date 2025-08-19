@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button, Input, TextArea, AnimatedTitle } from '@/components/ui';
-import styles from './AddMembersForm.module.scss';
+import styles from './FormBase.module.scss';
 import ButtonUI from '../ui/Button';
 import { cards } from '../wizardData';
 
@@ -86,7 +86,7 @@ const AddMembersForm: React.FC<AddMembersFormProps> = ({
   };
 
   return (
-    <div className={styles.MembersContainer}>
+    <div className={styles.formContainer}>
       <div className={styles.topSection}>
         <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
         <AnimatedTitle

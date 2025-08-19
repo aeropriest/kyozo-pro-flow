@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button, Input, Checkbox, Tabs, AnimatedTitle, TextArea } from '@/components/ui';
-import styles from './AvatarForm.module.scss';
+import styles from './FormBase.module.scss';
 import ButtonUI from '../ui/Button';
 import { cards } from '../wizardData';
 
@@ -120,7 +120,7 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
   };
 
   return (
-    <div className={styles.AvatarContainer}>
+    <div className={styles.formContainer}>
       <div className={styles.topSection}>
         <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
         <AnimatedTitle

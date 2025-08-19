@@ -1,0 +1,176 @@
+@use '../../styles/themes/_theme-variables' as *;
+
+.MembersContainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topSection {
+  margin-top: -1rem;
+  border-radius: 8px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.middleSection {
+  border-radius: 8px;
+  text-align: left;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.bottomSection {
+  margin-top: 20px;
+  border-radius: 8px;
+  text-align: left;
+  height: 110px;
+  display: flex;
+  align-items: self-start;
+  box-sizing: border-box;
+}
+
+.categoryLabel {
+  font-size: 1rem;
+  color: white;
+  margin-bottom: -0.5rem;
+  text-align: left;
+}
+
+.formControls {
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+}
+
+.animatedTitle {
+  margin-bottom: 24px;
+  padding-top: 20px;
+}
+
+.formContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.formGroup {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.actionRow {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+  max-width: 450px;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  margin: 0;
+  
+  > * {
+    flex: 1;
+    max-width: calc(33.33% - 11px);
+  }
+}
+
+// Method selection styles
+.sectionLabel {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.methodSelection {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.methodOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  font-size: 14px;
+  min-width: 120px;
+  flex: 1;
+  
+  &:hover {
+    border-color: var(--accent-pink);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  &.selected {
+    border-color: var(--accent-pink);
+    background-color: rgba(236, 72, 153, 0.1);
+    color: var(--accent-pink);
+  }
+}
+
+.methodIcon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+// File upload styles
+.fileUpload {
+  width: 100%;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.uploadLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  border: 2px dashed var(--border-color);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  
+  &:hover {
+    border-color: var(--accent-pink);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.errorText {
+  color: var(--accent-pink);
+  font-size: 0.75rem;
+  margin-top: 8px;
+  display: block;
+}

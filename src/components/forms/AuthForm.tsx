@@ -136,14 +136,16 @@ const AuthForm: React.FC<AuthFormProps> = ({
     if (validateSignUpForm()) {
       console.log('Sign Up:', signUpForm);
       onSignUp?.(signUpForm);
-      onNext?.(); // Go to next step after sign up
     }
   };
 
   const handleGoogleSignIn = () => {
-    console.log('Google Sign In');
+    console.log('Google Sign In clicked');
     onGoogleSignIn?.();
-    onNext?.(); // Go to next step after Google sign in
+  };
+
+  const handleSkip = () => {
+    onNext?.();
   };
 
   return (
@@ -272,6 +274,14 @@ const AuthForm: React.FC<AuthFormProps> = ({
             fullWidth
           >
             {activeTab === 'signin' ? 'Sign In' : 'Sign Up'}
+          </ButtonUI>
+          <ButtonUI 
+            variant="outline-only" 
+            size="medium" 
+            onClick={handleSkip}
+            fullWidth
+          >
+            Skip
           </ButtonUI>
           <ButtonUI 
             variant="outline-only" 

@@ -9,10 +9,9 @@ import AuthForm from './forms/AuthForm';
 import ProfileForm from './ProfileForm';
 // Import form components individually
 import AvatarForm from './forms/AvatarForm';
-// import CommunityDetailsStep from './forms-old/CommunityDetailsStep';
-// import CommunitySettingsStep from './forms-old/CommunitySettingsStep';
-// import AddMembersStep from './forms-old/AddMembersStep';
-// import DashboardStep from './forms-old/DashboardStep';
+import CommunityDetailsForm from './forms/CommunityDetailsForm';
+import AddMembersForm from './forms/AddMembersForm';
+import DashboardForm from './forms/DashboardForm';
 import { cards } from './wizardData';
 
 interface Tab {
@@ -219,7 +218,7 @@ const Dialog: React.FC<DialogProps> = ({
                             );
                           case 2:
                             return (
-                              <CommunityDetailsStep 
+                              <CommunityDetailsForm 
                                 onNext={handleNextCard}
                                 onPrev={handlePrevCard}
                                 currentStep={index + 1}
@@ -228,7 +227,7 @@ const Dialog: React.FC<DialogProps> = ({
                             );
                           case 3:
                             return (
-                              <CommunitySettingsStep 
+                              <AddMembersForm 
                                 onNext={handleNextCard}
                                 onPrev={handlePrevCard}
                                 currentStep={index + 1}
@@ -237,16 +236,7 @@ const Dialog: React.FC<DialogProps> = ({
                             );
                           case 4:
                             return (
-                              <AddMembersStep 
-                                onNext={handleNextCard}
-                                onPrev={handlePrevCard}
-                                currentStep={index + 1}
-                                totalSteps={cards.length}
-                              />
-                            );
-                          case 5:
-                            return (
-                              <DashboardStep 
+                              <DashboardForm 
                                 onNext={onClose}
                                 onPrev={handlePrevCard}
                                 currentStep={index + 1}

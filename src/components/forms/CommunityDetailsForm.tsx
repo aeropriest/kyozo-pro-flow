@@ -137,7 +137,7 @@ const CommunityDetailsForm: React.FC<CommunityDetailsFormProps> = ({
               </div>
 
               {/* Community Type Selection */}
-              <div className={styles.formGroup}>
+              {/* <div className={styles.formGroup}>
                 <label className={styles.sectionLabel}>Community Type</label>
                 <div className={styles.typeSelection}>
                   {communityTypes.map((type, index) => (
@@ -154,7 +154,7 @@ const CommunityDetailsForm: React.FC<CommunityDetailsFormProps> = ({
                   ))}
                 </div>
                 {typeError && <span className={styles.errorText}>{typeError}</span>}
-              </div>
+              </div> */}
 
               {/* Privacy Setting */}
               <div className={styles.formGroup}>

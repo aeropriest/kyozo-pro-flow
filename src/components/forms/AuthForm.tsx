@@ -141,10 +141,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
 
   const handleGoogleSignIn = () => {
     console.log('Google Sign In clicked');
-    onGoogleSignIn?.();
-  };
-
-  const handleSkip = () => {
+    // onGoogleSignIn?.();
     onNext?.();
   };
 
@@ -274,14 +271,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
             fullWidth
           >
             {activeTab === 'signin' ? 'Sign In' : 'Sign Up'}
-          </ButtonUI>
-          <ButtonUI 
-            variant="outline-only" 
-            size="medium" 
-            onClick={handleSkip}
-            fullWidth
-          >
-            Skip
           </ButtonUI>
           <ButtonUI 
             variant="outline-only" 

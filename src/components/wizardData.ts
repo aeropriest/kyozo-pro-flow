@@ -35,7 +35,7 @@ export const cards: WizardStep[] = [
   {
     title: "Add Members",
     description: "Invite members to your community by email, CSV import, or Eventbrite integration.",
-    image: "/Parallax6.jpg",
+    image: "/Parallax2.jpg",
     component: 'AddMembersStep',
     customComponent: null,
   },

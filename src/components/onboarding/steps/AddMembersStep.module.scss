@@ -1,0 +1,276 @@
+@use '../../../styles/themes/_theme-variables' as *;
+
+.membersContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.formFields {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 80px; /* Space for fixed buttons */
+}
+
+.methodTabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.methodTab {
+  flex: 1;
+  padding: 8px 16px;
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.2));
+  border-radius: 8px;
+  background: var(--button-bg, rgba(255, 255, 255, 0.05));
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: var(--button-hover-bg, rgba(255, 255, 255, 0.1));
+    color: var(--text-primary);
+  }
+  
+  &.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+  }
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.formGroup {
+  width: 100%;
+  margin-bottom: 7px;
+}
+
+.textareaWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.textareaLabel {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-color);
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 80px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 100;
+    letter-spacing: 0.03em;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: transparent;
+    box-shadow: 0 0 0 0.5px var(--primary-color);
+  }
+  
+  &.hasError {
+    border-color: var(--accent-pink);
+    
+    &::placeholder {
+      color: var(--accent-pink);
+      opacity: 0.8;
+      font-style: italic;
+    }
+  }
+}
+
+.helpText {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  margin-left: 4px;
+}
+
+.errorMessage {
+  color: var(--accent-pink);
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  margin-left: 0.5rem;
+}
+
+.csvSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dropZone {
+  border: 2px dashed var(--border-color, rgba(255, 255, 255, 0.2));
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  background: var(--card-bg, rgba(255, 255, 255, 0.02));
+  transition: all 0.2s ease;
+  
+  &:hover {
+    border-color: var(--primary-color);
+    background: var(--button-hover-bg, rgba(255, 255, 255, 0.05));
+  }
+}
+
+.uploadIcon {
+  width: 48px;
+  height: 48px;
+  color: var(--text-secondary);
+  margin: 0 auto 8px;
+}
+
+.dropText {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.browseButton {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  text-decoration: none;
+  margin-left: 4px;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.checkboxGroup {
+  display: flex;
+  align-items: center;
+}
+
+.eventbriteSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.connectCard {
+  padding: 16px;
+  background: var(--card-bg, rgba(255, 255, 255, 0.05));
+  border-radius: 12px;
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.2));
+}
+
+.connectText {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  margin: 0 0 16px 0;
+}
+
+.eventbriteButton {
+  width: 100%;
+  background: #f05537;
+  color: white;
+  font-weight: 500;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  
+  &:hover {
+    background: #d9472d;
+  }
+}
+
+.selectLabel {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-color);
+  font-size: 1rem;
+  cursor: pointer;
+  
+  &:focus {
+    outline: none;
+    border-color: transparent;
+    box-shadow: 0 0 0 0.5px var(--primary-color);
+  }
+  
+  option {
+    background: var(--card-bg);
+    color: var(--text-color);
+  }
+}
+
+.membersSummary {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color, rgba(255, 255, 255, 0.2));
+}
+
+.summaryContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.memberCount {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.count {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.previewButton {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}

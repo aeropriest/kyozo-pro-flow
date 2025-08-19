@@ -161,8 +161,10 @@
 
 // Bottom Section - Fixed action buttons
 .bottomSection {
-  padding: 20px 40px 40px 40px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  position: absolute;
+  bottom: 10px;
+  left: 40px;
+  right: 40px;
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -170,12 +172,18 @@
   justify-content: flex-start;
   
   @media (max-width: 768px) {
-    padding: 20px;
+    left: 20px;
+    right: 20px;
   }
 }
 
 .navButton {
   min-width: 120px;
+}
+
+.authButton {
+  flex: 1;
+  max-width: calc(50% - 5px);
 }
 
 .rightPanel {

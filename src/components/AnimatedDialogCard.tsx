@@ -104,12 +104,12 @@ const AnimatedDialogCard: React.FC<AnimatedDialogCardProps> = ({
             )}
           </div>
           
-          {/* Bottom Section: Fixed action buttons - only show for non-auth steps */}
+          {/* Bottom Section: Fixed action buttons - only for non-auth steps */}
           {currentStep !== 1 && (
             <div className={styles.bottomSection}>
               {currentStep > 1 && (
                 <Button 
-                  variant="outline"
+                  variant="outline-only"
                   onClick={handlePrev}
                   disabled={isAnimating}
                   className={styles.navButton}
@@ -119,7 +119,7 @@ const AnimatedDialogCard: React.FC<AnimatedDialogCardProps> = ({
               )}
               
               <Button 
-                variant="primary"
+                variant="outline-only"
                 onClick={currentStep === totalSteps ? onClose : handleNext}
                 disabled={isAnimating}
                 className={styles.navButton}

@@ -5,14 +5,14 @@ import styles from './Dialog.module.scss';
 import { Button } from '@/components/ui';
 import Image from 'next/image';
 import DialogCard from './DialogCard';
-import AuthForm from './AuthForm';
+import AuthForm from './forms/AuthForm';
 import ProfileForm from './ProfileForm';
 // Import form components individually
-import AvatarStep from './forms/AvatarStep';
-import CommunityDetailsStep from './forms/CommunityDetailsStep';
-import CommunitySettingsStep from './forms/CommunitySettingsStep';
-import AddMembersStep from './forms/AddMembersStep';
-import DashboardStep from './forms/DashboardStep';
+import AvatarForm from './forms/AvatarForm';
+// import CommunityDetailsStep from './forms-old/CommunityDetailsStep';
+// import CommunitySettingsStep from './forms-old/CommunitySettingsStep';
+// import AddMembersStep from './forms-old/AddMembersStep';
+// import DashboardStep from './forms-old/DashboardStep';
 import { cards } from './wizardData';
 
 interface Tab {
@@ -210,49 +210,49 @@ const Dialog: React.FC<DialogProps> = ({
                             );
                           case 1:
                             return (
-                              <ProfileForm 
+                              <AvatarForm 
                                 onNext={handleNextCard}
-                                onPrev={handlePrevCard}
+                                // onPrev={handlePrevCard}
                                 currentStep={index + 1}
                                 totalSteps={cards.length}
                               />
                             );
-                          case 2:
-                            return (
-                              <CommunityDetailsStep 
-                                onNext={handleNextCard}
-                                onPrev={handlePrevCard}
-                                currentStep={index + 1}
-                                totalSteps={cards.length}
-                              />
-                            );
-                          case 3:
-                            return (
-                              <CommunitySettingsStep 
-                                onNext={handleNextCard}
-                                onPrev={handlePrevCard}
-                                currentStep={index + 1}
-                                totalSteps={cards.length}
-                              />
-                            );
-                          case 4:
-                            return (
-                              <AddMembersStep 
-                                onNext={handleNextCard}
-                                onPrev={handlePrevCard}
-                                currentStep={index + 1}
-                                totalSteps={cards.length}
-                              />
-                            );
-                          case 5:
-                            return (
-                              <DashboardStep 
-                                onNext={onClose}
-                                onPrev={handlePrevCard}
-                                currentStep={index + 1}
-                                totalSteps={cards.length}
-                              />
-                            );
+                          // case 2:
+                          //   return (
+                          //     <CommunityDetailsStep 
+                          //       onNext={handleNextCard}
+                          //       onPrev={handlePrevCard}
+                          //       currentStep={index + 1}
+                          //       totalSteps={cards.length}
+                          //     />
+                          //   );
+                          // case 3:
+                          //   return (
+                          //     <CommunitySettingsStep 
+                          //       onNext={handleNextCard}
+                          //       onPrev={handlePrevCard}
+                          //       currentStep={index + 1}
+                          //       totalSteps={cards.length}
+                          //     />
+                          //   );
+                          // case 4:
+                          //   return (
+                          //     <AddMembersStep 
+                          //       onNext={handleNextCard}
+                          //       onPrev={handlePrevCard}
+                          //       currentStep={index + 1}
+                          //       totalSteps={cards.length}
+                          //     />
+                          //   );
+                          // case 5:
+                          //   return (
+                          //     <DashboardStep 
+                          //       onNext={onClose}
+                          //       onPrev={handlePrevCard}
+                          //       currentStep={index + 1}
+                          //       totalSteps={cards.length}
+                          //     />
+                          //   );
                           default:
                             return page.customComponent;
                         }

@@ -2,11 +2,11 @@
 
 import React, { useState } from 'react';
 import { Button, Input, Checkbox, Tabs, AnimatedTitle } from '@/components/ui';
-import styles from './AuthForm.module.scss';
-import ButtonUI from './ui/Button';
-import { cards } from './wizardData';
+import styles from './AvatarForm.module.scss';
+import ButtonUI from '../ui/Button';
+import { cards } from '../wizardData';
 
-interface AuthFormProps {
+interface AvatarFormProps {
   onSignIn?: (data: { email: string; password: string }) => void;
   onSignUp?: (data: { fullName: string; email: string; password: string }) => void;
   onGoogleSignIn?: () => void;
@@ -16,7 +16,7 @@ interface AuthFormProps {
   description?: string;
 }
 
-const AuthForm: React.FC<AuthFormProps> = ({
+const AvatarForm: React.FC<AvatarFormProps> = ({
   onSignIn,
   onSignUp,
   onGoogleSignIn,
@@ -26,7 +26,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
   description,
 }) => {
   // Get the step data from the cards array
-  const stepData = cards[0]; // AuthForm is the first card (index 0)
+  const stepData = cards[1]; // AvatarForm is the first card (index 0)
   const [activeTab, setActiveTab] = useState<'signin' | 'signup'>('signin');
   const [signInForm, setSignInForm] = useState({ email: '', password: '' });
   const [signUpForm, setSignUpForm] = useState({ fullName: '', email: '', password: '', terms: false });
@@ -147,7 +147,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
   };
 
   return (
-    <div className={styles.authContainer}>
+    <div className={styles.AvatarContainer}>
       <div className={styles.topSection}>
         <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
         <AnimatedTitle
@@ -161,13 +161,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
       {/* Middle Section: Form controls */}
       <div className={styles.middleSection}>
         <div className={styles.formControls}>
-          <Tabs
-            tabs={['Sign In', 'Sign Up']}
-            activeTab={activeTab === 'signin' ? 0 : 1}
-            onTabChange={(index) => setActiveTab(index === 0 ? 'signin' : 'signup')}
-            className={styles.tabs}
-          />
-
           <div className={styles.formContent}>
             {activeTab === 'signin' ? (
               <form onSubmit={handleSignIn} noValidate>
@@ -271,7 +264,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
             }} 
             fullWidth
           >
-            {activeTab === 'signin' ? 'Sign In' : 'Sign Up'}
+            Back
           </ButtonUI>
           <ButtonUI 
             variant="outline-only" 
@@ -279,7 +272,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
             onClick={handleGoogleSignIn}
             fullWidth
           >
-            {activeTab === 'signin' ? 'Sign In with Google' : 'Sign Up with Google'}
+            Next
           </ButtonUI>
         </div>
       </div>
@@ -287,4 +280,4 @@ const AuthForm: React.FC<AuthFormProps> = ({
   );
 };
 
-export default AuthForm;
+export default AvatarForm;

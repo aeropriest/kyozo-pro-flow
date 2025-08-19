@@ -1,0 +1,259 @@
+@use '../styles/themes/_theme-variables' as *;
+
+.card {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  overflow: hidden;
+  z-index: 3;
+  isolation: isolate;
+  border-radius: 30px;
+  backdrop-filter: blur(10px);
+  background-color: var(--card-bg);
+  border: 0.5px solid var(--text-secondary);
+  box-shadow: var(--card-shadow);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+  }
+}
+
+.stepIndicator {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  z-index: 10;
+
+  &:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  align-items: stretch;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0;
+  
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+  }
+}
+
+.leftPanel {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+// Header Section - Fixed at top
+.headerSection {
+  padding: 40px 40px 0 40px;
+  
+  @media (max-width: 768px) {
+    padding: 20px 20px 0 20px;
+  }
+}
+
+.categoryLabel {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.title {
+  font-size: 4.8rem;
+  font-weight: 700;
+  margin: 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  line-height: 1.0;
+  color: var(--heading-color);
+  margin-top: 20px;
+  
+  @media (max-width: 768px) {
+    font-size: 3.5rem;
+  }
+}
+
+.description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 0;
+  padding-top: 30px;
+  color: var(--text-color);
+  
+  @media (max-width: 768px) {
+    padding-top: 20px;
+  }
+}
+
+// Middle Section - Scrollable content
+.middleSection {
+  flex: 1;
+  overflow-y: auto;
+  padding: 30px 40px;
+  
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
+}
+
+// Bottom Section - Fixed action buttons
+.bottomSection {
+  padding: 20px 40px 40px 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
+}
+
+.navButton {
+  min-width: 120px;
+}
+
+.rightPanel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  position: relative;
+  overflow: visible;
+  padding: 0;
+  height: 100%;
+  
+  > * {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Animation classes */
+.slideOutLeft {
+  animation: slideOutLeft 0.3s forwards;
+}
+
+.slideOutRight {
+  animation: slideOutRight 0.3s forwards;
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .card {
+    height: 100%;
+    max-width: 100%;
+    border-radius: 0;
+  }
+  
+  .content {
+    flex-direction: column;
+  }
+  
+  .rightPanel {
+    width: 100%;
+    height: 300px;
+  }
+  
+  .leftPanel {
+    padding: 1.25rem;
+  }
+  
+  .title {
+    font-size: 1.75rem;
+  }
+}

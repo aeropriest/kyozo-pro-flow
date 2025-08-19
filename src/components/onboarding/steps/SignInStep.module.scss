@@ -1,0 +1,41 @@
+@use '../../../styles/themes/_theme-variables' as *;
+
+.loginContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.animatedTitle {
+  margin-bottom: 1rem;
+}
+
+.formContent {
+  width: 100%;
+}
+
+.authToggle {
+  text-align: center;
+  margin-top: 1rem;
+  
+  p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin: 0;
+  }
+}
+
+.toggleButton {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: var(--accent-color, #6366f1);
+  }
+}

@@ -1,18 +1,9 @@
 'use client';
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
-import {Button as ButtonUI} from "@/components/ui";
+import { Button as ButtonUI } from "@/components/ui";
 import styles from './FixedFooter.module.scss';
 import Dialog from '../Dialog';
-
-interface FormData {
-  firstName: string;
-  lastName: string;
-  phone: string;
-  email: string;
-  newsletter: boolean;
-  whatsapp: boolean;
-}
 
 interface FixedFooterProps {
   className?: string;
@@ -29,73 +20,34 @@ const FixedFooter: React.FC<FixedFooterProps> = ({ className = '' }) => {
     setIsDialogOpen(false);
   };
 
-  // Form state
-  const [formData, setFormData] = useState<FormData>({
-    firstName: '',
-    lastName: '',
-    phone: '',
-    email: '',
-    newsletter: true,
-    whatsapp: false
-  });
-
-  const [activeTab, setActiveTab] = useState(0);
-  const tabs = [
-    { label: 'Kyozo', count: 24 },
-    { label: 'KyozoPro', count: 12 }
-  ];
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-    setFormData(prev => ({ ...prev, [name]: checked }));
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    setIsDialogOpen(false);
-  };
-  
-  // Prevent backdrop click from closing dialog when clicking on form elements
-  const handleDialogClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-  };
-
   return (
-    <footer className={`${styles.fixedFooter} ${className}`}>
+    <div className={`${styles.fixedFooter} ${className}`}>
       <div className={styles.container}>
-        <div className={styles.logoButtonContainer}>
-          <Image 
-            src="/logo.png" 
-            alt="Kyozo Logo" 
-            width={100} 
-            height={30} 
-            className={styles.buttonLogo}
+        <div className={styles.logo}>
+          <Image
+            src="/logo.png"
+            alt="Kyozo Logo"
+            width={32}
+            height={32}
+            priority
           />
-          <ButtonUI 
-            variant="solid" 
-            onClick={openDialog}
-            className={styles.joinButton}
+          <span>Kyozo</span>
+        </div>
+        
+        <div className={styles.cta}>
+          <ButtonUI
+            variant="primary"
             size="small"
+            onClick={openDialog}
+            className={styles.ctaButton}
           >
-            Join
+            Get Started
           </ButtonUI>
         </div>
       </div>
-      
-      {/* DialogX component */}
-      <Dialog 
-        isOpen={isDialogOpen} 
-        onClose={closeDialog}
-        title="Sign Up to begin"
-        subtitle=""
-      />
-    </footer>
+
+      <Dialog isOpen={isDialogOpen} onClose={closeDialog} />
+    </div>
   );
 };
 

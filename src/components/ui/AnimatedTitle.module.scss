@@ -1,15 +1,17 @@
 .titleContainer {
   text-align: left;
-  margin-top: -25px;
+  margin-top: -15px;
   // margin-bottom: 1.5rem;
   // background-color: blue;
 }
 
 .title {
+  font-size: 4rem;
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 0.5rem;
-  color: var(--heading-color, #ffffff);
+  // color: var(--heading-color, #ffffff);
+  color: var(--text-color);
 }
 
 .small .title {

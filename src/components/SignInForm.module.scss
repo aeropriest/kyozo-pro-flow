@@ -1,8 +1,9 @@
 @use '../styles/themes/_theme-variables' as *;
-@use '../styles/_form-mixins' as form;
 
 .formContainer {
-  @include form.form-container;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .categoryLabel {
@@ -30,12 +31,17 @@
   @media (max-width: 768px) {
     font-size: 3.5rem;
   }
+  background-color: red;
 }
 
 .formControls {
-  @include form.form-controls;
-  /* Border removed as requested */
-  // box-shadow: var(--card-shadow);
+  width: 100%;
+  max-width: 450px;
+  border-radius: 30px;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  // background-color: red;
 }
 
 .stepIndicator {
@@ -103,7 +109,8 @@
 }
 
 .formGroup {
-  @include form.form-group;
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
 .forgotPassword {
@@ -148,7 +155,21 @@
 }
 
 .actionRow {
-  @include form.action-row;
+  display: flex;
+  margin-top: auto; 
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 450px;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  
+  > * {
+    flex: 1;
+    max-width: calc(50% - 5px);
+  }
 }
 
 .submitButton {

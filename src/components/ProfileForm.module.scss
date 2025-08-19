@@ -1,8 +1,10 @@
 @use '../styles/themes/_theme-variables' as *;
-@use '../styles/_form-mixins' as form;
 
 .formContainer {
-  @include form.form-container;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .categoryLabel {
@@ -53,7 +55,10 @@
 }
 
 .formSection {
-  @include form.form-section;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .sectionTitle {
@@ -209,7 +214,7 @@
 }
 
 .formGroup {
-  @include form.form-group;
+  width: 100%;
   margin-bottom: 18px;
 }
 
@@ -255,7 +260,21 @@
 }
 
 .actionRow {
-  @include form.action-row;
+  display: flex;
+  margin-top: auto; 
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 450px;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  
+  > * {
+    flex: 1;
+    max-width: calc(50% - 5px);
+  }
 }
 
 .submitButton {

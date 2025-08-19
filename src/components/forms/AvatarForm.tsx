@@ -27,123 +27,96 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
 }) => {
   // Get the step data from the cards array
   const stepData = cards[1]; // AvatarForm is the first card (index 0)
-  const [activeTab, setActiveTab] = useState<'signin' | 'signup'>('signin');
-  const [signInForm, setSignInForm] = useState({ email: '', password: '' });
-  const [signUpForm, setSignUpForm] = useState({ fullName: '', email: '', password: '', terms: false });
+
+  const [avatarName, setAvatarName] = useState('');
+  const [avatarBio, setAvatarBio] = useState('');
+  const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
+  const [customAvatar, setCustomAvatar] = useState<string | null>(null);
+  const [nameError, setNameError] = useState('');
+  const [bioError, setBioError] = useState('');
+  const [avatarError, setAvatarError] = useState('');
+
+  const validateForm = () => {
+    let isValid = true;
+    
+    // Reset errors
+    setNameError('');
+    setBioError('');
+    setAvatarError('');
+    
+    // Validate name
+    if (!avatarName.trim()) {
+      setNameError('Name is required');
+      isValid = false;
+    }
+    
+    // Validate bio
+    if (!avatarBio.trim()) {
+      setBioError('Bio is required');
+      isValid = false;
+    }
+    
+    // Validate avatar selection
+    if (!selectedAvatar && !customAvatar) {
+      setAvatarError('Please select an avatar');
+      isValid = false;
+    }
+    
+    return isValid;
+  };
   
-  // Error states for form validation
-  const [signInErrors, setSignInErrors] = useState({ email: '', password: '' });
-  const [signUpErrors, setSignUpErrors] = useState({ fullName: '', email: '', password: '', terms: '' });
-
-  // Handle form input changes
-  const handleSignInChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setSignInForm(prev => ({ ...prev, [name]: value }));
-    // Clear error when user types
-    if (signInErrors[name as keyof typeof signInErrors]) {
-      setSignInErrors(prev => ({ ...prev, [name]: '' }));
-    }
-  };
-
-  const handleSignUpChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setSignUpForm(prev => ({ ...prev, [name]: value }));
-    // Clear error when user types
-    if (signUpErrors[name as keyof typeof signUpErrors]) {
-      setSignUpErrors(prev => ({ ...prev, [name]: '' }));
-    }
-  };
-
-  const handleTermsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSignUpForm(prev => ({ ...prev, terms: e.target.checked }));
-    // Clear terms error when user checks the box
-    if (signUpErrors.terms) {
-      setSignUpErrors(prev => ({ ...prev, terms: '' }));
-    }
-  };
-
-  // Validate sign in form
-  const validateSignInForm = () => {
-    const errors = { email: '', password: '' };
-    let isValid = true;
-
-    if (!signInForm.email) {
-      errors.email = 'Valid Email is required';
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(signInForm.email)) {
-      errors.email = 'Invalid email format';
-      isValid = false;
-    }
-
-    if (!signInForm.password) {
-      errors.password = 'Password is required';
-      isValid = false;
-    }
-
-    setSignInErrors(errors);
-    return isValid;
-  };
-
-  // Handle form submissions
-  const handleSignIn = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (validateSignInForm()) {
-      console.log('Sign In:', signInForm);
-      onSignIn?.(signInForm);
-      onNext?.(); // Go to next step after sign in
+    if (validateForm()) {
+      console.log('Avatar data:', { 
+        avatarName, 
+        avatarBio, 
+        selectedAvatar: customAvatar || selectedAvatar 
+      });
+      onNext?.();
     }
   };
 
-  // Validate sign up form
-  const validateSignUpForm = () => {
-    const errors = { fullName: '', email: '', password: '', terms: '' };
-    let isValid = true;
-
-    if (!signUpForm.fullName) {
-      errors.fullName = 'Name is required';
-      isValid = false;
-    }
-
-    if (!signUpForm.email) {
-      errors.email = 'Email is required';
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(signUpForm.email)) {
-      errors.email = 'Invalid email format';
-      isValid = false;
-    }
-
-    if (!signUpForm.password) {
-      errors.password = 'Password is required';
-      isValid = false;
-    } else if (signUpForm.password.length < 6) {
-      errors.password = 'Password must be at least 6 characters';
-      isValid = false;
-    }
-
-    if (!signUpForm.terms) {
-      errors.terms = 'You must accept the terms';
-      isValid = false;
-    }
-
-    setSignUpErrors(errors);
-    return isValid;
+  const handleAvatarSelect = (avatar: string) => {
+    setSelectedAvatar(avatar);
+    setCustomAvatar(null);
+    if (avatarError) setAvatarError('');
   };
 
-  const handleSignUp = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (validateSignUpForm()) {
-      console.log('Sign Up:', signUpForm);
-      onSignUp?.(signUpForm);
-      onNext?.(); // Go to next step after sign up
+
+  const handleSkip = () => {
+    onNext?.();
+  };
+  
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const result = event.target?.result as string;
+        setCustomAvatar(result);
+        setSelectedAvatar(null);
+        if (avatarError) setAvatarError('');
+      };
+      reader.readAsDataURL(file);
     }
   };
 
-  const handleGoogleSignIn = () => {
-    console.log('Google Sign In');
-    onGoogleSignIn?.();
-    onNext?.(); // Go to next step after Google sign in
+  const handleBack = () => {
+    // Navigate to previous step or close dialog
+    console.log('Back button clicked');
+  };
+
+  const handleNext = () => {
+    if (validateForm()) {
+      console.log('Avatar data:', { 
+        avatarName, 
+        avatarBio, 
+        selectedAvatar: customAvatar || selectedAvatar 
+      });
+      onNext?.();
+    }
   };
 
   return (
@@ -162,92 +135,78 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
       <div className={styles.middleSection}>
         <div className={styles.formControls}>
           <div className={styles.formContent}>
-            {activeTab === 'signin' ? (
-              <form onSubmit={handleSignIn} noValidate>
+            
+              <form onSubmit={handleSubmit} noValidate>
                 <div className={styles.formGroup}>
-                  <Input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={signInForm.email}
-                    onChange={handleSignInChange}
-                    placeholder="Your Email"
-                    error={signInErrors.email}
-                    required
-                  />
+              <Input
+                type="text"
+                id="avatarName"
+                name="avatarName"
+                value={avatarName}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setAvatarName(e.target.value);
+                  if (nameError) setNameError('');
+                }}
+                placeholder="Display Name"
+                error={nameError}
+                required
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <textarea
+                id="avatarBio"
+                name="avatarBio"
+                value={avatarBio}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                  setAvatarBio(e.target.value);
+                  if (bioError) setBioError('');
+                }}
+                placeholder="Tell us about yourself..."
+                className={`${styles.bioTextarea} ${bioError ? styles.error : ''}`}
+                rows={3}
+                required
+              />
+              {bioError && <span className={styles.errorText}>{bioError}</span>}
+            </div>
+            
+            {/* Avatar Selection */}
+            <div className={styles.formGroup}>
+              <label className={styles.sectionLabel}>Choose Your Avatar</label>
+              <div className={styles.avatarSelection}>
+                {/* Predefined avatars */}
+                <div className={styles.avatarOptions}>
+                  {['./Parallax1.jpg', './Parallax2.jpg', './Parallax3.jpg','./Parallax4.jpg'].map((avatar, index) => (
+                    <div
+                      key={index}
+                      className={`${styles.avatarOption} ${selectedAvatar === avatar ? styles.selected : ''}`}
+                      onClick={() => handleAvatarSelect(avatar)}
+                    >
+                      <img src={avatar} alt={`Avatar ${index + 1}`} className={styles.avatarImage} />
+                    </div>
+                  ))}
+                  
+                  {/* Custom avatar upload */}
+                  <div className={`${styles.avatarOption} ${styles.uploadOption} ${customAvatar ? styles.selected : ''}`}>
+                    <input
+                      type="file"
+                      id="avatarUpload"
+                      accept="image/*"
+                      onChange={handleFileUpload}
+                      className={styles.hiddenInput}
+                    />
+                    <label htmlFor="avatarUpload" className={styles.uploadLabel}>
+                      {customAvatar ? (
+                        <img src={customAvatar} alt="Custom avatar" className={styles.avatarImage} />
+                      ) : (
+                        <div className={styles.plusIcon}>+</div>
+                      )}
+                    </label>
+                  </div>
                 </div>
-                <div className={styles.formGroup}>
-                  <Input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={signInForm.password}
-                    onChange={handleSignInChange}
-                    placeholder="Password"
-                    error={signInErrors.password}
-                    required
-                  />
-                </div>
-                <div className={styles.forgotPassword}>
-                  <a href="#">Forgot password?</a>
-                </div>
-              </form>
-            ) : (
-              <form onSubmit={handleSignUp} noValidate>
-                <div className={styles.formGroup}>
-                  <Input
-                    type="text"
-                    id="name"
-                    name="fullName"
-                    value={signUpForm.fullName}
-                    onChange={handleSignUpChange}
-                    placeholder="Your Name"
-                    error={signUpErrors.fullName}
-                    required
-                  />
-                </div>
-                <div className={styles.formGroup}>
-                  <Input
-                    type="email"
-                    id="signUpEmail"
-                    name="email"
-                    value={signUpForm.email}
-                    onChange={handleSignUpChange}
-                    placeholder="Your Email"
-                    error={signUpErrors.email}
-                    required
-                  />
-                </div>
-                <div className={styles.formGroup}>
-                  <Input
-                    type="password"
-                    id="signUpPassword"
-                    name="password"
-                    value={signUpForm.password}
-                    onChange={handleSignUpChange}
-                    placeholder="Create a password"
-                    error={signUpErrors.password}
-                    required
-                  />
-                </div>
-                <div className={styles.termsCheckbox}>
-                  <Checkbox
-                    id="terms"
-                    name="terms"
-                    checked={signUpForm.terms}
-                    onChange={handleTermsChange}
-                    label={
-                      <span>
-                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
-                      </span>
-                    }
-                  />
-                  {signUpErrors.terms && (
-                    <div className={styles.errorMessage}>{signUpErrors.terms}</div>
-                  )}
-                </div>
-              </form>
-            )}
+                {avatarError && <span className={styles.errorText}>{avatarError}</span>}
+              </div>
+            </div>                      
+              </form>            
           </div>
         </div>
       </div>
@@ -258,10 +217,7 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
           <ButtonUI 
             variant="outline-only" 
             size="medium" 
-            onClick={() => {
-              const event = new Event('submit') as unknown as React.FormEvent;
-              activeTab === 'signin' ? handleSignIn(event) : handleSignUp(event);
-            }} 
+            onClick={handleBack} 
             fullWidth
           >
             Back
@@ -269,7 +225,15 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
           <ButtonUI 
             variant="outline-only" 
             size="medium" 
-            onClick={handleGoogleSignIn}
+            onClick={handleSkip}
+            fullWidth
+          >
+            Skip
+          </ButtonUI>          
+          <ButtonUI 
+            variant="outline-only" 
+            size="medium" 
+            onClick={handleNext}
             fullWidth
           >
             Next

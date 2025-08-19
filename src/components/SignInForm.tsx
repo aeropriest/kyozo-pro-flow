@@ -149,15 +149,12 @@ const SignInForm: React.FC<SignInFormProps> = ({
   return (
     <div className={styles.formContainer}>
       <p className={styles.categoryLabel}>Step {currentStep} of {totalSteps}</p>
-      <h2 className={styles.cardTitle}>{stepData.title}</h2>
-      <p className={styles.cardDescription}>{stepData.description}</p>
-      
-      {/* <AnimatedTitle 
-        text="Welcome to Kyozo" 
-        subtitle="Sign in to continue your journey" 
-        size="medium" 
+      <AnimatedTitle
+        text={stepData.title}
+        subtitle={stepData.description}
+        size="medium"
         className={styles.animatedTitle}
-      /> */}
+      />      
       <div className={styles.formControls}>
         <Tabs
           tabs={['Sign In', 'Sign Up']}

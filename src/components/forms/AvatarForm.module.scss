@@ -22,6 +22,7 @@
 .middleSection {
   // background-color: #22c55e;
   // margin-top: 20px;
+  
   border-radius: 8px;
   text-align: left;
   flex: 1;
@@ -99,48 +100,6 @@
   padding-top: 20px;
 }
 
-.tabs {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--border-color);
-  margin-bottom: 10px;
-  width: 100%;
-  box-sizing: border-box;
-  /* Make tabs full width */
-}
-
-.tab {
-  padding: 10px 20px;
-  background: none;
-  border: none;
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  cursor: pointer;
-  position: relative;
-  flex: 1; /* Make each tab take equal width */
-  text-align: center;
-  box-sizing: border-box;
-  max-width: 50%; /* Ensure tab doesn't exceed half width */
-  
-  &.active {
-    color: var(--text-primary);
-    
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background-color: var(--primary-color);
-    }
-  }
-  
-  &:hover {
-    color: var(--text-primary);
-  }
-}
 
 .formContent {
   flex: 1;
@@ -151,7 +110,7 @@
 
 .formGroup {
   width: 100%;
-  margin-bottom: -0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .forgotPassword {
@@ -291,7 +250,7 @@
 
 // Avatar selection styles
 .sectionLabel {
-  margin-top: 2rem;
+  // margin-top: 1rem;
   display: block;
   font-size: 14px;
   font-weight: 500;

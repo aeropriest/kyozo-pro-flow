@@ -68,7 +68,7 @@ const SlidingCards: React.FC<SlidingCardsProps> = ({ children, className = '' })
       <div className={styles.stickyContainer}>
         {childrenArray.map((child, i) => {
           let transform = 'translateY(100%) scale(1)';
-          let zIndex = i; // Cards that come later should be on top when sliding over
+          const zIndex = i; // Cards that come later should be on top when sliding over
           let scale = 1;
           let translateY = 100;
 

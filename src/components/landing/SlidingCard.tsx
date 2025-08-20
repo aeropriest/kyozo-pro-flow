@@ -7,8 +7,9 @@ interface SlidingCardProps {
   subtitle: string;
   text: string;
   button: React.ReactNode;
-  content: React.ReactNode;
+  style?: React.CSSProperties;
   className?: string;
+  content?: React.ReactNode;
 }
 
 const SlidingCard: React.FC<SlidingCardProps> = ({ 
@@ -42,8 +43,8 @@ const SlidingCard: React.FC<SlidingCardProps> = ({
   // Clone the content and pass mouse position if it's ParallaxGallery
   const enhancedContent = React.isValidElement(content) && 
     content.type && 
-    (content.type as any).name === 'ParallaxGallery'
-    ? React.cloneElement(content as React.ReactElement<any>, {
+    (content.type as React.ComponentType).name === 'ParallaxGallery'
+    ? React.cloneElement(content as React.ReactElement<{externalMousePosition?: {x: number, y: number}}>, {
         externalMousePosition: mousePosition
       })
     : content;

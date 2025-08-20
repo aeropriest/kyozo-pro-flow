@@ -6,7 +6,6 @@ import { Button } from '@/components/ui';
 import Image from 'next/image';
 import DialogCard from './DialogCard';
 import AuthForm from './forms/AuthForm';
-import ProfileForm from './ProfileForm';
 // Import form components individually
 import AvatarForm from './forms/AvatarForm';
 import CommunityDetailsForm from './forms/CommunityDetailsForm';

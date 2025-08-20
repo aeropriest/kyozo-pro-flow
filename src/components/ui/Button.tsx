@@ -10,7 +10,7 @@ interface ButtonProps {
   href?: string;
   className?: string;
   fullWidth?: boolean; // Add fullWidth prop
-  [key: string]: any; // For any additional props
+  // Remove index signature to avoid type conflicts
 }
 
 const Button: React.FC<ButtonProps> = ({ 
@@ -21,7 +21,7 @@ const Button: React.FC<ButtonProps> = ({
   href,
   className = '',
   fullWidth = false,
-  ...props 
+  ...props
 }) => {
   const buttonClasses = `${styles.button} ${styles[variant]} ${styles[size]} ${fullWidth ? styles.fullWidth : ''} ${className}`;
   

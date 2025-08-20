@@ -11,7 +11,7 @@
   width: 100%;
   overflow: hidden;
   position: relative;
-  height: 9rem; /* Reduced by 10% from 11.2rem */
+  height: 10rem; /* Reduced by 10% from 11.2rem */
   margin: 0;
   padding: 0;
 }
@@ -28,10 +28,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2.5rem 4rem; /* Reduced padding for tighter bubbles */
+  padding: 3.1rem 8rem; /* Reduced padding for tighter bubbles */
   border-radius: 6rem;
   font-weight: 400;
-  font-size: 2.2rem;
+  font-size: 3rem;
   background-color: transparent;
   border: 1.5px solid; /* Border color will be set inline via style prop */
   transition: all 0.3s ease;

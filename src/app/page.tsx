@@ -13,7 +13,9 @@ export default function Home() {
       <Hero text="Discover Your Creative Universe" />
       <BackgroundImages />
       <FeatureCard />
-      {/* <ScrollRevealText text="Where creative minds converge" />       */}
+      <div className="my-80 bg-white" style={{ paddingLeft: '10%', paddingRight: '10%' }}>
+        <ScrollRevealText text="Where creative minds converge" />      
+      </div>
       <SlidingCards>
         <SlidingCard
           subtitle="INSIDER ACCESS"

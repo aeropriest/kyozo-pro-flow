@@ -66,6 +66,13 @@
   z-index: -1;
 }
 
+.middleCircle {
+  position: absolute;
+  right: -1rem;
+  top: 550vh; /* 200vh down as requested */
+  z-index: -1;
+}
+
 @keyframes slideInRight {
   from {
     opacity: 0;
@@ -87,6 +94,20 @@ $ring-two-color: #9D6469;
 $ring-three-color: #C098E5;
 $ring-four-color: #B59962;
 
+/* Toolkit Background SVG - positioned like other background images */
+.toolkitBackgroundSvg {
+  position: absolute;
+  top: 450vh; // Moved up significantly to appear earlier in the page
+  right: -25rem; // Adjusted left position to be more visible
+  width: 200px;
+  height: 200px;
+  background-image: url('/middle-right.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+  z-index: -5; // Behind other content
+}
+
 /* Toolkit Circle Component - positioned like other background images */
 .toolkitCircleComponent {
   position: absolute;
@@ -95,7 +116,7 @@ $ring-four-color: #B59962;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 430vh; // Moved up significantly to appear earlier in the page
+  top: 450vh; // Moved up significantly to appear earlier in the page
   left: -25rem; // Adjusted left position to be more visible
   z-index: -15; // Pushed further back to ensure it doesn't interfere with other content
   pointer-events: none;
@@ -152,19 +173,6 @@ $ring-four-color: #B59962;
   z-index: 1;
 }
 
-/* Toolkit Background SVG - positioned like other background images */
-.toolkitBackgroundSvg {
-  position: absolute;
-  top: 70vh; // Adjusted position for this layout
-  right: 0;
-  width: 200px;
-  height: 200px;
-  background-image: url('/bottom-right.svg');
-  background-repeat: no-repeat;
-  background-size: contain;
-  pointer-events: none;
-  z-index: -5; // Behind other content
-}
 
 /* Media queries for responsiveness */
 @media (max-width: 768px) {

@@ -10,7 +10,7 @@ interface ToolkitProps {
 
 // Main component for the Toolkit section
 const Toolkit: React.FC<ToolkitProps> = ({
-  description = `Explore a dynamic resources hub where creativity meets community. Here you'll find a curated collection of articles, videos and resources designed to inspire, inform and ignite your creative journey.`,
+  description = `Explore a dynamic resources hub where creativity meets community. Here you'll find a curated collection of articles, videos and resources designed to inspire, inform and ignite your creative journey. Explore a dynamic resources hub where creativity meets community. Here you'll find a curated collection of articles, videos and resources designed to inspire, inform and ignite your creative journey.`,
   ctaText = 'Check out CreativeLab',
   ctaUrl = '#',
 }) => {

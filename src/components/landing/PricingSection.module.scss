@@ -71,12 +71,17 @@
   .pricingGrid {
     display: flex;
     justify-content: center;
-    gap: 18rem; // gap-8
-    margin-left: -9rem; // Move cards 4rem to the left
+    align-items: center;
+    gap: 1rem;
+    width: 80%;
+    max-width: 80rem;
+    margin: 0 auto;
 
     .pricingCardWrapper {
       display: flex;
       justify-content: center;
+      flex: 1;
+      max-width: 35rem;
     }
   }
 

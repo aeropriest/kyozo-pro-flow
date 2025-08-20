@@ -36,7 +36,7 @@ export default function Home() {
           title="Grow your creative community"
           text="Are you a creative professional, community organizer, or small business owner working within the creative industries? We understand the challenges of nurturing and growing a dedicated audience, so we built KyozoPro, a comprehensive platform that enhances genuine connections and unlocks new opportunities."
           button={<ButtonUI variant="outline-only" size="medium" href="#">Join the waitlist</ButtonUI>}
-          content={<Image src="/card-3.png" alt="Phone" width={800} height={800} />}
+          content={<Image src="/card-3.png" alt="Phone" width={600} height={800} style={{objectFit: 'contain', maxHeight: '100%', maxWidth: '100%'}} />}
         />
       </SlidingCards>      
       <Toolkit />

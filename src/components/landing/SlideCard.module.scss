@@ -5,7 +5,7 @@
   height: calc(100vh - 8rem); /* Account for top and bottom margins */
   margin-left: 2rem;
   // margin-bottom: -12rem;
-  margin-top: 4rem;
+  // margin-top: 4rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -48,7 +48,8 @@
 }
 
 .leftContent {
-  width: 500px;
+  // width: 500px;
+  width: 45%;
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -66,30 +67,33 @@
 }
 
 .rightContent {
+  // background-color: red ;
+  margin-left: -8rem;
   flex: 1;
   display: flex;
+  width: 55%;
   justify-content: center;
   align-items: flex-start; /* Align items to the top */
   position: relative;
   overflow: visible;
-  padding-top: 40px; /* Match the top padding of left content */
+  // padding-top: 40px; /* Match the top padding of left content */
   /* Removed top: -8rem to fix alignment */
   height: 100%;
 }
 
 .categoryLabel {
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 200;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin: 0;
   margin-top: 40px; /* Add top margin to create space */
+  margin-bottom: 20px;
   color: var(--text-color);
   opacity: 0.7;
 }
 
 .cardTitle {
-  font-size: 4.8rem;
+  font-size: 4.4rem;
   font-weight: 700;
   margin: 0;
   -webkit-background-clip: text;
@@ -103,11 +107,12 @@
 }
 
 .cardDescription {
-  font-size: 1.2rem;
+  font-size: 0.875rem;
   line-height: 1.6;
   margin: 0;
   padding-top: 30px;
   padding-bottom: 30px;
+  width: 65%;
   color: var(--text-color);
   
   @media (max-width: 768px) {

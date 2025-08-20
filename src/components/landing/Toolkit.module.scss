@@ -17,20 +17,20 @@
 }
 
 .socialMediaTitle {
-  font-size: 6rem;
-  font-weight: 700;
+  font-size: 6.6rem; // Increased by 10% from 6rem
+  font-weight: 900; // Increased from 700 to make it bolder
   line-height: 1.1 !important;
   color: var(--text-color);
   margin-bottom: 1rem;
 
   @media (max-width: 640px) {
-    font-size: 3rem;
+    font-size: 3.3rem; // Increased by 10% from 3rem
   }
 }
 
 .socialMediaBubble {
   margin-top: 1rem;
-  padding: 1.5rem 3.5rem;
+  padding: 1.8rem 4.2rem; // Increased by 20% from 1.5rem 3.5rem
   background-color: var(--card-bg);
   border-radius: 9999px;
   box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);

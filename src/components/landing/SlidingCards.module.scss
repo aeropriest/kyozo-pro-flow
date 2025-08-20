@@ -2,8 +2,6 @@
   position: relative;
   width: 100%;
   z-index: 5; /* Increased z-index to ensure it's above background elements */
-  padding-top: 4rem; /* Add gap at the top of the sliding cards */
-  margin-top: 2rem; /* Add some space after the previous section */
 }
 
 .stickyContainer {

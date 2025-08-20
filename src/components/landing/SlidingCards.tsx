@@ -50,11 +50,11 @@ const SlidingCards: React.FC<SlidingCardsProps> = ({ children, className = '' })
   const activeCardIndex = Math.floor(cardProgress);
   const progressInSegment = cardProgress - activeCardIndex;
 
-  // Each card's animation happens over a portion of the scroll.
-  // We define the scroll height per card in vh units.
-  const scrollPerCard = 100; // vh
-  // The animation (translateY) occurs over the first 80% of that scroll distance.
-  const transitionDurationRatio = 0.8;
+  // Each card's animation happens over a consistent portion of the scroll.
+  // We define the scroll height per card in vh units for consistent spacing.
+  const scrollPerCard = 120; // vh - increased for more consistent spacing
+  // The animation (translateY) occurs over the full scroll distance for smoother transitions.
+  const transitionDurationRatio = 1.0; // Use full distance for consistent spacing
 
   return (
     <div
@@ -77,18 +77,16 @@ const SlidingCards: React.FC<SlidingCardsProps> = ({ children, className = '' })
             translateY = 0;
             scale = 1;
             
-            // Check if this card should be shrunk
+            // Apply consistent scaling for uniform spacing
             if (i < activeCardIndex) {
-              // Cards that have been passed by subsequent cards stay shrunk
-              scale = 0.85; // Keep them at 15% smaller
+              // Cards that have been passed by subsequent cards stay consistently shrunk
+              scale = 0.9; // Keep them at 10% smaller for consistent spacing
             } else if (i === activeCardIndex && activeCardIndex + 1 < numCards) {
-              // Current card starts shrinking when next card covers 70%
+              // Current card shrinks smoothly as next card approaches
               const nextCardProgress = Math.min(1, progressInSegment / transitionDurationRatio);
-              if (nextCardProgress >= 0.7) {
-                // Start shrinking after 70% coverage
-                const shrinkProgress = (nextCardProgress - 0.7) / 0.3; // 0 to 1 over remaining 30%
-                scale = 1 - (shrinkProgress * 0.15); // Shrink by up to 15%
-              }
+              // Start shrinking immediately for consistent spacing
+              const shrinkProgress = nextCardProgress; // 0 to 1 over full transition
+              scale = 1 - (shrinkProgress * 0.1); // Shrink by up to 10% consistently
             }
             
             transform = `translateY(${translateY}%) scale(${scale})`;

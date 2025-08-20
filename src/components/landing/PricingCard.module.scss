@@ -3,11 +3,11 @@
 // Gradient border wrapper
 .gradientBorder {
   position: relative;
-  width: 100%;
-  max-width: 28rem; // max-w-md
+  width: 70%;
+  max-width: 32rem; // Increased from 28rem for wider cards
   border-radius: 1.5rem; // rounded-3xl
-  padding: 1px; // p-px
-  background: radial-gradient(circle at top left, var(--from-color) 0%, var(--text-secondary) 35%);
+  padding: 1px; // Thin border as requested
+  background: linear-gradient(135deg, var(--from-color) 0%, var(--from-color) 30%, rgba(102, 102, 102, 0.8) 70%, rgba(102, 102, 102, 0.8) 100%);
 }
 
 .card {
@@ -17,7 +17,7 @@
   border-radius: 1.4375rem; // rounded-[23px]
   padding: 2rem; // p-8
   overflow: hidden;
-  height: 100%;
+  // height: 100%;
   
   @media (min-width: 768px) {
     padding: 2.5rem; // md:p-10
@@ -37,7 +37,7 @@
   height: 100%;
   width: 100%;
   opacity: 0.03;
-  color: var(--text-color);
+  color: var(--text-secondary);
 }
 
 // Card content
@@ -46,7 +46,7 @@
   z-index: 10;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  // gap: 1.5rem;
 }
 
 
@@ -59,7 +59,7 @@
 }
 
 .divider {
-  margin: 1.5rem 0; // my-6
+  margin: 1rem 0; // my-6
   height: 1px;
   background: linear-gradient(to right, transparent, var(--text-secondary), transparent);
 }
@@ -67,24 +67,27 @@
 .subtitle {
   color: var(--from-color);
   font-weight: 500; // font-medium
-  font-size: 0.875rem;
+  font-size: 0.75rem;
 }
 
 .price {
   margin-top: 0.5rem; // mt-2
-  font-size: 2.25rem; // text-4xl
+  font-size: 1.5rem; // text-4xl
   color: var(--heading-color);
   
   span {
-    font-weight: 300; // font-light
+    font-weight: 200; // font-light
   }
 }
 
 .featuresList {
-  margin-top: 2rem; // mt-8
+  // background-color: red;
+  // margin-top: 0.5rem; // mt-8
+  font-size: 0.8rem;
+  font-weight: 200;
   display: flex;
   flex-direction: column;
-  gap: 1rem; // space-y-4
+  gap: 0.5rem; // space-y-4
   list-style: none;
   padding: 0;
 }
@@ -111,8 +114,8 @@
 }
 
 .checkIcon {
-  width: 1.5rem; // w-6
-  height: 1.5rem; // h-6
+  width: 1rem; // w-6
+  height: 1rem; // h-6
   flex-shrink: 0;
-  color: var(--from-color);
+  color: var(--text-color);
 }

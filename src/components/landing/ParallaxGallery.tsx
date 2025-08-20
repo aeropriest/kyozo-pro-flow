@@ -105,30 +105,44 @@ const ParallaxGallery: React.FC<ParallaxGalleryProps> = ({ externalMousePosition
     setIsHovering(false);
   };
   
-  // Track the container's position in the viewport
-  const [containerPosition, setContainerPosition] = useState({ top: 0, left: 0, width: 0, height: 0 });
+  // Track scroll-based animation progress
+  const [scrollProgress, setScrollProgress] = useState(0);
   
   useEffect(() => {
-    const updateContainerPosition = () => {
+    const updateScrollProgress = () => {
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
-        setContainerPosition({
-          top: rect.top,
-          left: rect.left,
-          width: rect.width,
-          height: rect.height
-        });
+        const windowHeight = window.innerHeight;
+        
+        // Calculate how much of the element is visible
+        const elementTop = rect.top;
+        const elementHeight = rect.height;
+        
+        // Progress from 0 to 1 as element comes into view and moves through viewport
+        let progress = 0;
+        
+        if (elementTop < windowHeight && elementTop + elementHeight > 0) {
+          // Element is at least partially visible
+          const visibleTop = Math.max(0, windowHeight - elementTop);
+          const visibleBottom = Math.min(elementHeight, windowHeight - elementTop);
+          const visibleHeight = Math.max(0, visibleBottom);
+          
+          // Calculate progress based on how much is visible and position
+          progress = Math.min(visibleHeight / (windowHeight * 0.8), 1);
+        }
+        
+        setScrollProgress(progress);
       }
     };
     
-    // Update position initially and on resize/scroll
-    updateContainerPosition();
-    window.addEventListener('resize', updateContainerPosition);
-    window.addEventListener('scroll', updateContainerPosition);
+    // Update progress initially and on scroll/resize
+    updateScrollProgress();
+    window.addEventListener('scroll', updateScrollProgress);
+    window.addEventListener('resize', updateScrollProgress);
     
     return () => {
-      window.removeEventListener('resize', updateContainerPosition);
-      window.removeEventListener('scroll', updateContainerPosition);
+      window.removeEventListener('scroll', updateScrollProgress);
+      window.removeEventListener('resize', updateScrollProgress);
     };
   }, []);
 
@@ -143,17 +157,21 @@ const ParallaxGallery: React.FC<ParallaxGalleryProps> = ({ externalMousePosition
         <div className={styles['parallax-gallery__viewport']}>
           <div className={styles['parallax-gallery__relative']}>
             {IMAGES.map((image, index) => {
-              // Calculate progress based on mouse position and hover state
-              const progress = isHovering
-                ? Math.min(Math.abs(mousePosition.x * 0.5) + Math.abs(mousePosition.y * 0.5), 1) * 1.5
-                : Math.min(Math.abs(mousePosition.x * 0.3) + Math.abs(mousePosition.y * 0.3), 1);
+              // Use scroll progress as primary animation driver
+              // Add subtle mouse interaction when hovering
+              const baseProgress = scrollProgress;
+              const mouseInfluence = isHovering 
+                ? Math.min(Math.abs(mousePosition.x * 0.1) + Math.abs(mousePosition.y * 0.1), 0.2)
+                : 0;
+              
+              const finalProgress = Math.min(baseProgress + mouseInfluence, 1);
                 
               return (
                 <ParallaxImage
                   key={image.src}
                   image={image}
                   targetTransform={TARGET_TRANSFORMS[index]}
-                  progress={progress}
+                  progress={finalProgress}
                 />
               );
             })}

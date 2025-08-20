@@ -51,13 +51,13 @@
 }
 
 .creativeLabSection {
+  // background-color: purple;
   position: relative;
   width: 100%;
   max-width: none;
   margin: 0;
-  padding: 6rem 1.5rem;
+  padding: 16rem 1.5rem;
   overflow: hidden;
-  // background-color: var(--background-color);
 
   @media (min-width: 640px) {
     padding: 6rem 2rem;
@@ -65,13 +65,16 @@
 }
 
 .gridContainer {
+  // background-color: green;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem 4rem;
-  align-items: end;
-  justify-content: flex-end;
+  font-weight: light;
+  font-size: 1.8rem;
+  // gap: 3rem 4rem;
+  // align-items: end;
+  // justify-content: flex-end;
   position: relative;
-  max-width: 1200px;
+  // max-width: 1200px;
   margin: 0 auto;
   
   @media (min-width: 768px) {
@@ -102,6 +105,8 @@
   line-height: 1.1 !important;
   color: var(--text-color);
   margin: 0;
+  // background-color: red;
+  left: -10rem;
 
   @media (max-width: 768px) {
     font-size: 3rem;

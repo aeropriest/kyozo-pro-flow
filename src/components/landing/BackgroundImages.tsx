@@ -21,7 +21,7 @@ const BackgroundImages = () => {
   return (
     <div className={styles.backgroundContainer}>
       <div className={`${styles.gradient} ${styles.bottomRight}`}></div>
-      {/* <div ref={leftImageRef} className={styles.leftImage}>
+      <div ref={leftImageRef} className={styles.leftImage}>
         <Image 
           src="/left-top.png" 
           alt="Decorative background element" 
@@ -49,13 +49,23 @@ const BackgroundImages = () => {
           priority
         />
       </div>
+      <div className={styles.middleCircle}>
+        <Image 
+          src="/middle-circle.png" 
+          alt="Circle icon" 
+          width={200} 
+          height={200} 
+          style={{ objectFit: 'contain' }} 
+          priority
+        />
+      </div>
       <div className={styles.toolkitCircleComponent}>
         <div className={styles.circleComponentRing4}></div>
         <div className={styles.circleComponentRing3}></div>
         <div className={styles.circleComponentRing2}></div>
         <div className={styles.circleComponentRing1}></div>
       </div>    
-      <div className={styles.toolkitBackgroundSvg}></div> */}
+      <div className={styles.toolkitBackgroundSvg}></div>
     </div>
   );
 };

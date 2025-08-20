@@ -28,6 +28,7 @@ body {
   background-image: var(--background-image);
   background-color: var(--background-color);
   transition: background-image 0.5s ease-in-out, color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  overflow-x: hidden;
 }
 
 .container {

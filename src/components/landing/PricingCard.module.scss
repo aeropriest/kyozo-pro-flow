@@ -3,8 +3,8 @@
 // Gradient border wrapper
 .gradientBorder {
   position: relative;
-  width: 70%;
-  max-width: 32rem; // Increased from 28rem for wider cards
+  width: 84%; // 70% increased by 20%
+  max-width: 38.4rem; // 32rem increased by 20%
   border-radius: 1.5rem; // rounded-3xl
   padding: 1px; // Thin border as requested
   background: linear-gradient(135deg, var(--from-color) 0%, var(--from-color) 30%, rgba(102, 102, 102, 0.8) 70%, rgba(102, 102, 102, 0.8) 100%);
@@ -18,6 +18,7 @@
   padding: 2rem; // p-8
   overflow: hidden;
   // height: 100%;
+  height: 408px; // 340px increased by 20%
   
   @media (min-width: 768px) {
     padding: 2.5rem; // md:p-10
@@ -51,7 +52,7 @@
 
 
 .title {
-  font-size: 3rem; // text-5xl
+  font-size: 3.6rem; // 3rem increased by 20%
   font-weight: 500; // font-medium
   letter-spacing: -0.025em; // tracking-tight
   color: var(--heading-color);
@@ -67,12 +68,12 @@
 .subtitle {
   color: var(--from-color);
   font-weight: 500; // font-medium
-  font-size: 0.75rem;
+  font-size: 0.9rem; // 0.75rem increased by 20%
 }
 
 .price {
   margin-top: 0.5rem; // mt-2
-  font-size: 1.5rem; // text-4xl
+  font-size: 1.8rem; // 1.5rem increased by 20%
   color: var(--heading-color);
   
   span {
@@ -82,12 +83,12 @@
 
 .featuresList {
   // background-color: red;
-  // margin-top: 0.5rem; // mt-8
-  font-size: 0.8rem;
+  margin-top: -0.5rem; // mt-8
+  font-size: 0.96rem; // 0.8rem increased by 20%
   font-weight: 200;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem; // space-y-4
+  gap: 0.6rem; // 0.5rem increased by 20%
   list-style: none;
   padding: 0;
 }
@@ -108,14 +109,14 @@
   }
   
   span {
-    margin-left: 0.75rem; // ml-3
+    margin-left: 0.9rem; // 0.75rem increased by 20%
     color: var(--text-secondary);
   }
 }
 
 .checkIcon {
-  width: 1rem; // w-6
-  height: 1rem; // h-6
+  width: 1.2rem; // 1rem increased by 20%
+  height: 1.2rem; // 1rem increased by 20%
   flex-shrink: 0;
   color: var(--text-color);
 }

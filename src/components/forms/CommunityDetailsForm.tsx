@@ -24,6 +24,7 @@ const CommunityDetailsForm: React.FC<CommunityDetailsFormProps> = ({
   const [communityName, setCommunityName] = useState('');
   const [communityDescription, setCommunityDescription] = useState('');
   const [communityType, setCommunityType] = useState('');
+  const [communityColor, setCommunityColor] = useState('');
   const [isPrivate, setIsPrivate] = useState(false);
   const [nameError, setNameError] = useState('');
   const [descriptionError, setDescriptionError] = useState('');
@@ -36,6 +37,40 @@ const CommunityDetailsForm: React.FC<CommunityDetailsFormProps> = ({
     'Hobby Community',
     'Business Network',
     'Support Group'
+  ];
+
+  // Color options based on marquee colors
+  const colorOptions = [
+    {
+      name: 'Music Blue',
+      value: 'music',
+      color: 'rgb(0, 112, 243)',
+      gradient: 'linear-gradient(135deg, rgb(0, 112, 243) 0%, rgb(0, 90, 200) 100%)'
+    },
+    {
+      name: 'Art Purple',
+      value: 'artMovements',
+      color: 'rgb(138, 43, 226)',
+      gradient: 'linear-gradient(135deg, rgb(138, 43, 226) 0%, rgb(120, 30, 200) 100%)'
+    },
+    {
+      name: 'Craft Orange',
+      value: 'crafts',
+      color: 'rgb(255, 140, 0)',
+      gradient: 'linear-gradient(135deg, rgb(255, 140, 0) 0%, rgb(230, 120, 0) 100%)'
+    },
+    {
+      name: 'Fashion Pink',
+      value: 'fashion',
+      color: 'rgb(255, 105, 180)',
+      gradient: 'linear-gradient(135deg, rgb(255, 105, 180) 0%, rgb(230, 80, 160) 100%)'
+    },
+    {
+      name: 'Performance Teal',
+      value: 'performance',
+      color: 'rgb(64, 224, 208)',
+      gradient: 'linear-gradient(135deg, rgb(64, 224, 208) 0%, rgb(50, 200, 190) 100%)'
+    }
   ];
 
   const validateForm = () => {
@@ -73,6 +108,7 @@ const CommunityDetailsForm: React.FC<CommunityDetailsFormProps> = ({
         communityName, 
         communityDescription, 
         communityType,
+        communityColor,
         isPrivate 
       });
       onNext?.();
@@ -94,7 +130,7 @@ const CommunityDetailsForm: React.FC<CommunityDetailsFormProps> = ({
         <AnimatedTitle
           text={stepData.title}
           subtitle={stepData.description}
-          size="medium"
+          size="large"
           className={styles.animatedTitle}
         />
       </div>
@@ -134,6 +170,27 @@ const CommunityDetailsForm: React.FC<CommunityDetailsFormProps> = ({
                   rows={3}
                   required
                 />
+              </div>
+
+              {/* Community Color Selection */}
+              <div className={styles.formGroup}>
+                <label className={styles.sectionLabel}>Choose Your Community Color</label>
+                <div className={styles.colorSelection}>
+                  {colorOptions.map((colorOption, index) => (
+                    <div
+                      key={index}
+                      className={`${styles.colorOption} ${communityColor === colorOption.value ? styles.selected : ''}`}
+                      onClick={() => setCommunityColor(colorOption.value)}
+                      style={{
+                        background: colorOption.gradient,
+                        border: communityColor === colorOption.value ? `3px solid ${colorOption.color}` : '2px solid transparent'
+                      }}
+                      title={colorOption.name}
+                    >
+                      <div className={styles.colorName}>{colorOption.name}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Community Type Selection */}

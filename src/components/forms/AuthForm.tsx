@@ -152,7 +152,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
         <AnimatedTitle
           text={stepData.title}
           subtitle={stepData.description}
-          size="medium"
+          size="large"
           className={styles.animatedTitle}
         />
       </div>

@@ -23,6 +23,7 @@ export default function Home() {
           text="Experience the creative world through an insider's lens. Kyozo is an eco-system of creative communities - that gives you exclusive access to updates and insights from the creative luminaries driving cultural evolution."
           button={<ButtonUI variant="outline-only" size="medium" href="#">Join the waitlist</ButtonUI>}
           content={<VideoWall />}
+          backgroundColor="linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
         />
         <SlidingCard
           subtitle="COMMUNITY ACCESS"
@@ -30,6 +31,7 @@ export default function Home() {
           text="Join and interact with diverse communities, from niche artistic circles to industry-leading collectives. Engage with passionate individuals who share your creative interests."
           button={<ButtonUI variant="outline-only" size="medium" href="#">Join the waitlist</ButtonUI>}
           content={<ParallaxGallery />}
+          backgroundColor="linear-gradient(135deg, #f093fb 0%, #f5576c 100%)"
         />
         <SlidingCard
           subtitle="CREATOR TOOLS"
@@ -37,7 +39,8 @@ export default function Home() {
           text="Are you a creative professional, community organizer, or small business owner working within the creative industries? We understand the challenges of nurturing and growing a dedicated audience, so we built KyozoPro, a comprehensive platform that enhances genuine connections and unlocks new opportunities."
           button={<ButtonUI variant="outline-only" size="medium" href="#">Join the waitlist</ButtonUI>}
           content={<Image src="/card-3.png" alt="Phone" width={600} height={800} style={{objectFit: 'contain', maxHeight: '100%', maxWidth: '100%'}} />}
-        />
+          backgroundColor="linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"
+        />        
       </SlidingCards>      
       <Toolkit />
       <Marquee 

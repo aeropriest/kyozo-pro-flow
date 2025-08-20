@@ -44,7 +44,7 @@ const DashboardForm: React.FC<DashboardFormProps> = ({
         <AnimatedTitle
           text={stepData.title}
           subtitle={stepData.description}
-          size="medium"
+          size="large"
           className={styles.animatedTitle}
         />
       </div>

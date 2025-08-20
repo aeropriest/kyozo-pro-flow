@@ -35,7 +35,7 @@ interface BubbleRowProps {
 const BubbleRow: React.FC<BubbleRowProps> = ({ 
   items, 
   direction, 
-  speed = 5, 
+  speed = 10, 
   category 
 }) => {
   const rowColor = bubbleRowColors[category];
@@ -102,7 +102,7 @@ const BubbleMarquee: React.FC<BubbleMarqueeProps> = ({ categories }) => {
           key={`row-${index}`}
           items={row.items}
           direction={index % 2 === 0 ? 'left' : 'right'}
-          speed={60} // Moderate speed for smooth animation
+          speed={100} // Moderate speed for smooth animation
           category={row.category}
         />
       ))}

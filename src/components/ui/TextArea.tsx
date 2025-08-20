@@ -1,11 +1,11 @@
 'use client';
-import React, { forwardRef, ChangeEvent } from 'react';
+import React, { forwardRef } from 'react';
 import styles from './TextArea.module.scss';
 
 interface TextAreaProps {
   placeholder?: string;
   value?: string;
-  onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   name?: string;
   id?: string;
   required?: boolean;
@@ -14,7 +14,7 @@ interface TextAreaProps {
   label?: string;
   error?: string;
   rows?: number;
-  [key: string]: any; // For any additional props
+  // Remove index signature to avoid type conflicts
 }
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(({

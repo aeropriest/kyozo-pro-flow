@@ -53,9 +53,9 @@ const DashboardForm: React.FC<DashboardFormProps> = ({
       <div className={styles.middleSection}>
           <h3 className={styles.summaryTitle}>🎉 Your Community is Ready!</h3>
           <div className={styles.nextSteps}>
-            <h4 className={styles.nextStepsTitle}>What's Next?</h4>
+            <h4 className={styles.nextStepsTitle}>What&apos;s Next?</h4>
             <ul className={styles.stepsList}>
-              <li>Access your community dashboard</li>
+              <li>You&apos;re all set! Your community is ready to launch.</li>
               <li>Customize your community theme</li>
               <li>Start engaging with your members</li>
               <li>Create your first posts and events</li>

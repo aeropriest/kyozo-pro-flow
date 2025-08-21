@@ -1,10 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Input, Checkbox, Tabs, AnimatedTitle } from '@/components/ui';
 import styles from './FormBase.module.scss';
 import ButtonUI from '../ui/Button';
 import { cards } from '../wizardData';
+import { signInWithGoogle, signInWithEmail, signUpWithEmail } from '@/lib/auth';
+import { useAuth } from '@/hooks/useAuth';
 
 interface AuthFormProps {
   onSignIn?: (data: { email: string; password: string }) => void;
@@ -25,6 +27,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
   totalSteps = 6,
   description,
 }) => {
+  const { user } = useAuth();
   // Get the step data from the cards array
   const stepData = cards[0]; // AuthForm is the first card (index 0)
   const [activeTab, setActiveTab] = useState<'signin' | 'signup'>('signin');
@@ -34,6 +37,17 @@ const AuthForm: React.FC<AuthFormProps> = ({
   // Error states for form validation
   const [signInErrors, setSignInErrors] = useState({ email: '', password: '' });
   const [signUpErrors, setSignUpErrors] = useState({ fullName: '', email: '', password: '', terms: '' });
+  
+  // Loading and error states
+  const [isLoading, setIsLoading] = useState(false);
+  const [authError, setAuthError] = useState('');
+
+  // If user is already authenticated, proceed to next step
+  useEffect(() => {
+    if (user) {
+      onNext?.();
+    }
+  }, [user, onNext]);
 
   // Handle form input changes
   const handleSignInChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,13 +99,23 @@ const AuthForm: React.FC<AuthFormProps> = ({
   };
 
   // Handle form submissions
-  const handleSignIn = (e: React.FormEvent) => {
+  const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (validateSignInForm()) {
-      console.log('Sign In:', signInForm);
-      onSignIn?.(signInForm);
-      onNext?.(); // Go to next step after sign in
+      setIsLoading(true);
+      setAuthError('');
+      
+      try {
+        await signInWithEmail(signInForm.email, signInForm.password);
+        onSignIn?.(signInForm);
+        // onNext will be called automatically via useEffect when user state updates
+      } catch (error: any) {
+        console.error('Sign in error:', error);
+        setAuthError(error.message || 'Failed to sign in');
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -130,19 +154,52 @@ const AuthForm: React.FC<AuthFormProps> = ({
     return isValid;
   };
 
-  const handleSignUp = (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (validateSignUpForm()) {
-      console.log('Sign Up:', signUpForm);
-      onSignUp?.(signUpForm);
+      setIsLoading(true);
+      setAuthError('');
+      
+      try {
+        await signUpWithEmail(signUpForm.email, signUpForm.password, signUpForm.fullName);
+        onSignUp?.(signUpForm);
+        // onNext will be called automatically via useEffect when user state updates
+      } catch (error: any) {
+        console.error('Sign up error:', error);
+        setAuthError(error.message || 'Failed to sign up');
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
-  const handleGoogleSignIn = () => {
-    console.log('Google Sign In clicked');
-    // onGoogleSignIn?.();
-    onNext?.();
+  const handleGoogleSignIn = async () => {
+    setIsLoading(true);
+    setAuthError('');
+    
+    try {
+      await signInWithGoogle();
+      onGoogleSignIn?.();
+      // onNext will be called automatically via useEffect when user state updates
+    } catch (error: any) {
+      console.error('Google sign-in error:', error);
+      
+      // Handle specific Firebase auth errors
+      if (error.code === 'auth/popup-closed-by-user') {
+        // Don't show error for user-cancelled popup - this is expected behavior
+        console.log('User cancelled Google sign-in popup');
+      } else if (error.code === 'auth/popup-blocked') {
+        setAuthError('Popup was blocked by your browser. Please allow popups for this site and try again.');
+      } else if (error.code === 'auth/cancelled-popup-request') {
+        // Don't show error - user cancelled
+        console.log('User cancelled Google sign-in');
+      } else {
+        setAuthError(error.message || 'Failed to sign in with Google');
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -160,6 +217,12 @@ const AuthForm: React.FC<AuthFormProps> = ({
       {/* Middle Section: Form controls */}
       <div className={styles.middleSection}>
         <div className={styles.formControls}>
+          {authError && (
+            <div className={styles.errorMessage}>
+              {authError}
+            </div>
+          )}
+
           <Tabs
             tabs={['Sign In', 'Sign Up']}
             activeTab={activeTab === 'signin' ? 0 : 1}
@@ -179,6 +242,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
                     onChange={handleSignInChange}
                     placeholder="Your Email"
                     error={signInErrors.email}
+                    disabled={isLoading}
                     required
                   />
                 </div>
@@ -191,6 +255,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
                     onChange={handleSignInChange}
                     placeholder="Password"
                     error={signInErrors.password}
+                    disabled={isLoading}
                     required
                   />
                 </div>
@@ -209,6 +274,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
                     onChange={handleSignUpChange}
                     placeholder="Your Name"
                     error={signUpErrors.fullName}
+                    disabled={isLoading}
                     required
                   />
                 </div>
@@ -221,6 +287,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
                     onChange={handleSignUpChange}
                     placeholder="Your Email"
                     error={signUpErrors.email}
+                    disabled={isLoading}
                     required
                   />
                 </div>
@@ -233,6 +300,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
                     onChange={handleSignUpChange}
                     placeholder="Create a password"
                     error={signUpErrors.password}
+                    disabled={isLoading}
                     required
                   />
                 </div>
@@ -269,6 +337,8 @@ const AuthForm: React.FC<AuthFormProps> = ({
               activeTab === 'signin' ? handleSignIn(event) : handleSignUp(event);
             }} 
             fullWidth
+            disabled={isLoading}
+            loading={isLoading}
           >
             {activeTab === 'signin' ? 'Sign In' : 'Sign Up'}
           </ButtonUI>
@@ -277,8 +347,9 @@ const AuthForm: React.FC<AuthFormProps> = ({
             size="medium" 
             onClick={handleGoogleSignIn}
             fullWidth
+            disabled={isLoading}
           >
-            {activeTab === 'signin' ? 'Sign In with Google' : 'Sign Up with Google'}
+            {isLoading ? 'Signing in...' : (activeTab === 'signin' ? 'Sign In with Google' : 'Sign Up with Google')}
           </ButtonUI>
         </div>
       </div>

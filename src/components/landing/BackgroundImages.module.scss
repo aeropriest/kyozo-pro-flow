@@ -95,18 +95,18 @@ $ring-three-color: #C098E5;
 $ring-four-color: #B59962;
 
 /* Toolkit Background SVG - positioned like other background images */
-.toolkitBackgroundSvg {
-  position: absolute;
-  top: 450vh; // Moved up significantly to appear earlier in the page
-  right: -25rem; // Adjusted left position to be more visible
-  width: 200px;
-  height: 200px;
-  background-image: url('/middle-right.png');
-  background-repeat: no-repeat;
-  background-size: contain;
-  pointer-events: none;
-  z-index: -5; // Behind other content
-}
+// .toolkitBackgroundSvg {
+//   position: absolute;
+//   top: 450vh; // Moved up significantly to appear earlier in the page
+//   right: -25rem; // Adjusted left position to be more visible
+//   width: 200px;
+//   height: 200px;
+//   background-image: url('/middle-right.png');
+//   background-repeat: no-repeat;
+//   background-size: contain;
+//   pointer-events: none;
+//   z-index: -5; // Behind other content
+// }
 
 /* Toolkit Circle Component - positioned like other background images */
 .toolkitCircleComponent {

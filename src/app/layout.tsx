@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 };
 
 import { ThemeProvider } from "@/context/ThemeContext";
+import { AuthProvider } from "@/hooks/useAuth";
 import FixedFooter from "@/components/landing/FixedFooter";
 
 export default function RootLayout({
@@ -31,8 +32,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider>
-          {children}
-          <FixedFooter />
+          <AuthProvider>
+            {children}
+            <FixedFooter />
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -9,8 +9,9 @@ interface ButtonProps {
   onClick?: () => void;
   href?: string;
   className?: string;
-  fullWidth?: boolean; // Add fullWidth prop
-  // Remove index signature to avoid type conflicts
+  fullWidth?: boolean;
+  disabled?: boolean;
+  loading?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({ 
@@ -21,9 +22,11 @@ const Button: React.FC<ButtonProps> = ({
   href,
   className = '',
   fullWidth = false,
+  disabled = false,
+  loading = false,
   ...props
 }) => {
-  const buttonClasses = `${styles.button} ${styles[variant]} ${styles[size]} ${fullWidth ? styles.fullWidth : ''} ${className}`;
+  const buttonClasses = `${styles.button} ${styles[variant]} ${styles[size]} ${fullWidth ? styles.fullWidth : ''} ${disabled ? styles.disabled : ''} ${loading ? styles.loading : ''} ${className}`;
   
   if (href) {
     return (
@@ -32,7 +35,7 @@ const Button: React.FC<ButtonProps> = ({
         className={buttonClasses}
         {...props}
       >
-        {children}
+        {loading ? 'Loading...' : children}
       </a>
     );
   }
@@ -41,9 +44,10 @@ const Button: React.FC<ButtonProps> = ({
     <button 
       className={buttonClasses}
       onClick={onClick}
+      disabled={disabled || loading}
       {...props}
     >
-      {children}
+      {loading ? 'Loading...' : children}
     </button>
   );
 };

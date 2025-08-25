@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button, Input } from '@/components/ui';
 import styles from './EmailVerification.module.scss';
-import { sendVerificationEmail, completeEmailSignIn } from '@/lib/auth';
+import { sendVerificationEmail, verifyEmailCode } from '@/lib/auth';
 
 interface EmailVerificationProps {
   onSuccess: () => void;
@@ -18,12 +18,22 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
 }) => {
   const [email, setEmail] = useState(initialEmail);
   const [verificationCode, setVerificationCode] = useState(['', '', '', '', '', '']);
-  const [step, setStep] = useState<'email' | 'code'>('email');
+  const [step, setStep] = useState<'email' | 'code'>(initialEmail ? 'code' : 'email');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [resendTimer, setResendTimer] = useState(0);
   
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  // Auto-start with code step if email is provided
+  useEffect(() => {
+    if (initialEmail) {
+      setStep('code');
+      setResendTimer(60); // Start with resend cooldown
+    } else {
+      setStep('email'); // Only show email step if no email provided
+    }
+  }, [initialEmail]);
 
   // Timer for resend functionality
   useEffect(() => {
@@ -93,15 +103,9 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
     setError('');
 
     try {
-      // For demo purposes, we'll simulate the verification
-      // In a real implementation, you'd verify the code with your backend
-      if (codeToVerify === '813148' || codeToVerify.length === 6) {
-        // Simulate successful verification
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        onSuccess();
-      } else {
-        setError('Invalid verification code. Please try again.');
-      }
+      // Verify the code with the auth service
+      await verifyEmailCode(email, codeToVerify);
+      onSuccess();
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -222,10 +226,10 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
       <div className={styles.actions}>
         <Button
           variant="outline"
-          onClick={() => setStep('email')}
-          disabled={loading}
+          onClick={handleResendCode}
+          disabled={loading || resendTimer > 0}
         >
-          Change Email
+          {resendTimer > 0 ? `Resend in ${resendTimer}s` : 'Resend Email'}
         </Button>
         <Button
           variant="primary"

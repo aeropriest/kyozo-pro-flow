@@ -79,7 +79,6 @@ export const createUserProfile = async (user: User, additionalData?: any): Promi
       uid: user.uid,
       email: user.email || '',
       displayName: user.displayName || additionalData?.displayName || '',
-      photoURL: user.photoURL || additionalData?.photoURL,
       tenantId,
       communities: [],
       role: 'owner',
@@ -87,6 +86,11 @@ export const createUserProfile = async (user: User, additionalData?: any): Promi
       updatedAt: serverTimestamp(),
       ...additionalData,
     };
+
+    // Only include photoURL if it's not undefined
+    if (user.photoURL || additionalData?.photoURL) {
+      userProfile.photoURL = user.photoURL || additionalData?.photoURL;
+    }
 
     await setDoc(userRef, userProfile);
     return userProfile;
@@ -96,30 +100,83 @@ export const createUserProfile = async (user: User, additionalData?: any): Promi
     const updatedProfile = {
       ...existingProfile,
       displayName: user.displayName || existingProfile.displayName,
-      photoURL: user.photoURL || existingProfile.photoURL,
       updatedAt: serverTimestamp(),
       ...additionalData,
     };
+
+    // Only update photoURL if it's not undefined
+    if (user.photoURL || additionalData?.photoURL) {
+      updatedProfile.photoURL = user.photoURL || additionalData?.photoURL;
+    }
 
     await setDoc(userRef, updatedProfile, { merge: true });
     return updatedProfile;
   }
 };
 
-// Email authentication with verification link
+// Email authentication with 6-digit verification code
 export const sendVerificationEmail = async (email: string): Promise<void> => {
   try {
-    await sendSignInLinkToEmail(auth, email, actionCodeSettings);
-    // Store email in localStorage for verification
+    const response = await fetch('/api/send-verification', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to send verification email');
+    }
+
+    // Store email in localStorage for verification flow
     if (typeof window !== 'undefined') {
       window.localStorage.setItem('emailForSignIn', email);
     }
+    
   } catch (error: any) {
     throw new Error(error.message);
   }
 };
 
-// Complete email sign-in with verification link
+// Verify 6-digit code and complete email sign-in
+export const verifyEmailCode = async (email: string, code: string): Promise<UserCredential> => {
+  try {
+    // Verify code with backend API
+    const response = await fetch('/api/verify-code', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, code }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to verify code');
+    }
+    
+    // Create user with email/password (using code as temporary password)
+    const result = await createUserWithEmailAndPassword(auth, email, code + '_temp_' + Date.now());
+    
+    // Clear stored verification data
+    if (typeof window !== 'undefined') {
+      window.localStorage.removeItem('emailForSignIn');
+    }
+    
+    // Create user profile
+    await createUserProfile(result.user, { displayName: email.split('@')[0] });
+    
+    return result;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+// Complete email sign-in with verification link (legacy support)
 export const completeEmailSignIn = async (email?: string): Promise<UserCredential> => {
   try {
     const url = window.location.href;

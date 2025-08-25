@@ -746,3 +746,16 @@
     line-height: 1.5;
   }
 }
+
+// Auth method selection styles
+.authMethodSelection {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.authPrompt {
+  font-size: 16px;
+  color: var(--text-color);
+  margin: 0 0 20px 0;
+  font-weight: 500;
+}

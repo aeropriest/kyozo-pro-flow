@@ -6,6 +6,9 @@ import CustomCheckbox from '@/components/ui/Checkbox';
 import styles from './FormBase.module.scss';
 import ButtonUI from '../ui/Button';
 import { cards } from '../wizardData';
+import { saveOnboardingProgress, completeOnboardingStep } from '@/lib/onboarding';
+import { useAuth } from '@/hooks/useAuth';
+import { getUserProfile, createUserProfile } from '@/lib/auth';
 
 interface CommunityDetailsFormProps {
   onNext?: () => void;
@@ -20,6 +23,7 @@ const CommunityDetailsForm: React.FC<CommunityDetailsFormProps> = ({
   currentStep = 3,
   totalSteps = 5,
 }) => {
+  const { user } = useAuth();
   const stepData = cards[2]; // CommunityDetailsForm is the third card (index 2)
 
   const [communityName, setCommunityName] = useState('');
@@ -99,22 +103,52 @@ const CommunityDetailsForm: React.FC<CommunityDetailsFormProps> = ({
     return isValid;
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     console.log('🔵 CommunityDetailsForm: handleNext called');
     console.log('🔵 Form validation starting...');
     
     const isValid = validateForm();
     console.log('🔵 Form validation result:', isValid);
     
-    if (isValid) {
+    if (isValid && user) {
       console.log('🔵 Form is valid, proceeding with next step');
-      console.log('🔵 Community data:', { 
+      
+      const communityData = { 
         communityName, 
         communityDescription, 
         communityType,
         communityColor,
         isPrivate 
-      });
+      };
+      
+      console.log('🔵 Community data:', communityData);
+      
+      try {
+        // Save community details progress
+        let userProfile = await getUserProfile(user.uid);
+        
+        // If no profile exists or no tenantId, create/update profile
+        if (!userProfile || !userProfile.tenantId) {
+          console.log('🔵 Creating/updating user profile with tenantId');
+          userProfile = await createUserProfile(user);
+        }
+        
+        if (userProfile && userProfile.tenantId) {
+          await saveOnboardingProgress(
+            userProfile.tenantId,
+            user.uid,
+            'community_details',
+            communityData,
+            true // Mark as completed
+          );
+          console.log('🔵 Community details saved to onboarding progress');
+        } else {
+          console.error('🔴 Unable to get tenantId for user');
+        }
+      } catch (error) {
+        console.error('Error saving community details progress:', error);
+      }
+      
       console.log('🔵 onNext callback exists:', !!onNext);
       console.log('🔵 Calling onNext...');
       onNext?.();

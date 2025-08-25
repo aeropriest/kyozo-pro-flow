@@ -12,6 +12,9 @@ import CommunityDetailsForm from './forms/CommunityDetailsForm';
 import AddMembersForm from './forms/AddMembersForm';
 import DashboardForm from './forms/DashboardForm';
 import { cards } from './wizardData';
+import { useAuth } from '@/hooks/useAuth';
+import { getOnboardingProgress, OnboardingStep } from '@/lib/onboarding';
+import { getUserProfile, createUserProfile } from '@/lib/auth';
 
 interface Tab {
   label: string;
@@ -47,10 +50,13 @@ const Dialog: React.FC<DialogProps> = ({
   step = 1,
   totalSteps = 6,
 }) => {
+  const { user } = useAuth();
+  
   // State for card navigation with horizontal sliding animations
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [transitionDirection, setTransitionDirection] = useState<'next' | 'prev' | null>(null);
+  const [isLoadingProgress, setIsLoadingProgress] = useState(false);
 
   // Form state management
   const [signInForm, setSignInForm] = useState({ email: '', password: '' });
@@ -81,6 +87,57 @@ const Dialog: React.FC<DialogProps> = ({
     console.log('Sign Up:', signUpForm, 'Terms accepted:', termsAccepted);
     // Add actual sign up logic here
   };
+
+  // Load saved onboarding progress when user is authenticated
+  useEffect(() => {
+    const loadOnboardingProgress = async () => {
+      if (user && isOpen) {
+        setIsLoadingProgress(true);
+        try {
+          let userProfile = await getUserProfile(user.uid);
+          
+          if (!userProfile || !userProfile.tenantId) {
+            userProfile = await createUserProfile(user);
+          }
+          
+          if (userProfile && userProfile.tenantId) {
+            const progress = await getOnboardingProgress(userProfile.tenantId, user.uid);
+            
+            if (progress) {
+              // Resume from the current step or next incomplete step
+              const stepOrder: OnboardingStep[] = ['auth', 'avatar', 'community_details', 'add_members', 'dashboard'];
+              let resumeIndex = 0;
+              
+              // Find the current step index
+              if (progress.currentStep) {
+                const currentStepIndex = stepOrder.indexOf(progress.currentStep);
+                if (currentStepIndex !== -1) {
+                  resumeIndex = currentStepIndex;
+                }
+              }
+              
+              // If current step is completed, move to next step
+              if (progress.completedSteps.includes(progress.currentStep)) {
+                const nextIncompleteIndex = stepOrder.findIndex(step => !progress.completedSteps.includes(step));
+                if (nextIncompleteIndex !== -1) {
+                  resumeIndex = nextIncompleteIndex;
+                }
+              }
+              
+              setCurrentCardIndex(resumeIndex);
+              console.log(`🔵 Resuming onboarding from step: ${stepOrder[resumeIndex]} (index ${resumeIndex})`);
+            }
+          }
+        } catch (error) {
+          console.error('Error loading onboarding progress:', error);
+        } finally {
+          setIsLoadingProgress(false);
+        }
+      }
+    };
+
+    loadOnboardingProgress();
+  }, [user, isOpen]);
 
   // Handle tab changes
   const handleTabChange = (index: number) => {

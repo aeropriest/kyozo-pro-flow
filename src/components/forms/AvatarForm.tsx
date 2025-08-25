@@ -1,10 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Input, Checkbox, Tabs, AnimatedTitle, TextArea } from '@/components/ui';
 import styles from './FormBase.module.scss';
 import ButtonUI from '../ui/Button';
 import { cards } from '../wizardData';
+import { saveOnboardingProgress } from '@/lib/onboarding';
+import { useAuth } from '@/hooks/useAuth';
+import { getUserProfile, createUserProfile } from '@/lib/auth';
+import { uploadImage } from '@/lib/storage';
 
 interface AvatarFormProps {
   onSignIn?: (data: { email: string; password: string }) => void;
@@ -27,6 +31,8 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
   totalSteps = 6,
   description,
 }) => {
+  const { user } = useAuth();
+  
   // Get the step data from the cards array
   const stepData = cards[1]; // AvatarForm is the first card (index 0)
 
@@ -109,13 +115,48 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
     onPrev?.();
   };
 
-  const handleNext = () => {
-    if (validateForm()) {
-      console.log('Avatar data:', { 
-        avatarName, 
-        avatarBio, 
-        selectedAvatar: customAvatar || selectedAvatar 
-      });
+  const handleNext = async () => {
+    if (validateForm() && user) {
+      const avatarData = { 
+        displayName: avatarName, 
+        bio: avatarBio, 
+        avatarUrl: customAvatar || selectedAvatar 
+      };
+      
+      try {
+        // Auto-save avatar data
+        let userProfile = await getUserProfile(user.uid);
+        
+        if (!userProfile || !userProfile.tenantId) {
+          userProfile = await createUserProfile(user);
+        }
+        
+        if (userProfile && userProfile.tenantId) {
+          // Upload custom avatar if exists
+          let finalAvatarUrl = avatarData.avatarUrl;
+          if (customAvatar && customAvatar.startsWith('data:')) {
+            try {
+              const blob = await fetch(customAvatar).then(r => r.blob());
+              const file = new File([blob], 'avatar.jpg', { type: 'image/jpeg' });
+              finalAvatarUrl = await uploadImage(file, `avatars/${user.uid}`, userProfile.tenantId, user.uid);
+            } catch (uploadError) {
+              console.error('Error uploading avatar:', uploadError);
+            }
+          }
+          
+          await saveOnboardingProgress(
+            userProfile.tenantId,
+            user.uid,
+            'avatar',
+            { ...avatarData, avatarUrl: finalAvatarUrl },
+            true
+          );
+          console.log('🔵 Avatar data auto-saved');
+        }
+      } catch (error) {
+        console.error('Error saving avatar progress:', error);
+      }
+      
       onNext?.();
     }
   };

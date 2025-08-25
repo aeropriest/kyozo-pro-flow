@@ -5,6 +5,9 @@ import { Button, Input, TextArea, AnimatedTitle } from '@/components/ui';
 import styles from './FormBase.module.scss';
 import ButtonUI from '../ui/Button';
 import { cards } from '../wizardData';
+import { saveOnboardingProgress } from '@/lib/onboarding';
+import { useAuth } from '@/hooks/useAuth';
+import { getUserProfile, createUserProfile } from '@/lib/auth';
 
 interface AddMembersFormProps {
   onNext?: () => void;
@@ -19,6 +22,7 @@ const AddMembersForm: React.FC<AddMembersFormProps> = ({
   currentStep = 4,
   totalSteps = 5,
 }) => {
+  const { user } = useAuth();
   const stepData = cards[3]; // AddMembersForm is the fourth card (index 3)
 
   const [inviteMethod, setInviteMethod] = useState('email');
@@ -55,16 +59,59 @@ const AddMembersForm: React.FC<AddMembersFormProps> = ({
     return isValid;
   };
 
-  const handleNext = () => {
-    if (validateForm()) {
-      console.log('Members data:', { 
-        inviteMethod, 
-        emailList, 
-        csvFile: csvFile?.name,
-        eventbriteUrl 
-      });
+  const handleNext = async () => {
+    if (validateForm() && user) {
+      const membersData = {
+        inviteMethod,
+        invitedMembers: parseInvitedMembers(),
+        csvImported: !!csvFile,
+        eventbriteConnected: !!eventbriteUrl
+      };
+      
+      try {
+        // Auto-save members data
+        let userProfile = await getUserProfile(user.uid);
+        
+        if (!userProfile || !userProfile.tenantId) {
+          userProfile = await createUserProfile(user);
+        }
+        
+        if (userProfile && userProfile.tenantId) {
+          await saveOnboardingProgress(
+            userProfile.tenantId,
+            user.uid,
+            'add_members',
+            membersData,
+            true
+          );
+          console.log('🔵 Members data auto-saved');
+        }
+      } catch (error) {
+        console.error('Error saving members progress:', error);
+      }
+      
       onNext?.();
     }
+  };
+
+  const parseInvitedMembers = () => {
+    const members: Array<{ email: string; role: 'admin' | 'member'; name?: string }> = [];
+    
+    if (inviteMethod === 'csv' && csvFile) {
+      // This would be implemented to parse CSV file
+      // For now, return placeholder data
+      return [
+        { email: 'from-csv@example.com', role: 'member' as const, name: 'CSV User' }
+      ];
+    } else if (inviteMethod === 'email' && emailList) {
+      const emails = emailList.split('\n').filter(email => email.trim());
+      return emails.map(email => ({
+        email: email.trim(),
+        role: 'member' as const
+      }));
+    }
+    
+    return members;
   };
 
   const handleBack = () => {
@@ -132,7 +179,7 @@ const AddMembersForm: React.FC<AddMembersFormProps> = ({
                     <input
                       type="file"
                       id="csvUpload"
-                      accept=".csv"
+                      accept=".csv,.txt,.rtf"
                       onChange={handleCsvUpload}
                       className={styles.hiddenInput}
                     />
@@ -143,6 +190,9 @@ const AddMembersForm: React.FC<AddMembersFormProps> = ({
                         <span>📄 Choose CSV File</span>
                       )}
                     </label>
+                    <p className={styles.fileHint}>
+                      Accepts .csv, .txt, or .rtf files with email addresses
+                    </p>
                     {csvError && <span className={styles.errorText}>{csvError}</span>}
                   </div>
                 </div>

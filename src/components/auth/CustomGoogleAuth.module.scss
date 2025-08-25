@@ -1,0 +1,35 @@
+@import '../../styles/variables';
+
+.googleButton {
+  position: relative;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.buttonContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-weight: 500;
+}
+
+.googleIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+// Loading state
+.googleButton:disabled {
+  .googleIcon {
+    opacity: 0.6;
+  }
+}

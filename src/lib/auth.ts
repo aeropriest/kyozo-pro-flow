@@ -14,10 +14,14 @@ import {
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from './firebase';
 
-// Google Auth Provider
+// Google Auth Provider with custom settings
 const googleProvider = new GoogleAuthProvider();
 googleProvider.addScope('profile');
 googleProvider.addScope('email');
+// Force account selection to stay in popup
+googleProvider.setCustomParameters({
+  prompt: 'select_account'
+});
 
 // Email verification settings
 const actionCodeSettings = {

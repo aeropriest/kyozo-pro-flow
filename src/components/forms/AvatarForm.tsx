@@ -127,7 +127,7 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
         <AnimatedTitle
           text={stepData.title}
           subtitle={stepData.description}
-          size="medium"
+          size="large"
           className={styles.animatedTitle}
         />
       </div>

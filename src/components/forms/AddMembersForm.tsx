@@ -92,7 +92,7 @@ const AddMembersForm: React.FC<AddMembersFormProps> = ({
         <AnimatedTitle
           text={stepData.title}
           subtitle={stepData.description}
-          size="medium"
+          size="large"
           className={styles.animatedTitle}
         />
       </div>

@@ -4,6 +4,8 @@ import Image from 'next/image';
 import {Button as ButtonUI} from "@/components/ui";
 import styles from './FixedFooter.module.scss';
 import Dialog from '../Dialog';
+import { useAuth } from '@/hooks/useAuth';
+import { signOutUser } from '@/lib/auth';
 
 interface FormData {
   firstName: string;
@@ -19,7 +21,9 @@ interface FixedFooterProps {
 }
 
 const FixedFooter: React.FC<FixedFooterProps> = ({ className = '' }) => {
+  const { user } = useAuth();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const openDialog = () => {
     setIsDialogOpen(true);
@@ -27,6 +31,17 @@ const FixedFooter: React.FC<FixedFooterProps> = ({ className = '' }) => {
 
   const closeDialog = () => {
     setIsDialogOpen(false);
+  };
+
+  const handleLogout = async () => {
+    setIsLoggingOut(true);
+    try {
+      await signOutUser();
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      setIsLoggingOut(false);
+    }
   };
 
   // Form state
@@ -77,14 +92,26 @@ const FixedFooter: React.FC<FixedFooterProps> = ({ className = '' }) => {
             height={30} 
             className={styles.buttonLogo}
           />
-          <ButtonUI 
-            variant="solid" 
-            onClick={openDialog}
-            className={styles.joinButton}
-            size="small"
-          >
-            Join
-          </ButtonUI>
+          {user ? (
+            <ButtonUI 
+              variant="outline" 
+              onClick={handleLogout}
+              className={styles.joinButton}
+              size="small"
+              disabled={isLoggingOut}
+            >
+              {isLoggingOut ? 'Logging out...' : 'Log Out'}
+            </ButtonUI>
+          ) : (
+            <ButtonUI 
+              variant="solid" 
+              onClick={openDialog}
+              className={styles.joinButton}
+              size="small"
+            >
+              Join
+            </ButtonUI>
+          )}
         </div>
       </div>
       

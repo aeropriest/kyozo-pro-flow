@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button, Input, TextArea, AnimatedTitle } from '@/components/ui';
+import CustomCheckbox from '@/components/ui/Checkbox';
 import styles from './FormBase.module.scss';
 import ButtonUI from '../ui/Button';
 import { cards } from '../wizardData';
@@ -93,25 +94,33 @@ const CommunityDetailsForm: React.FC<CommunityDetailsFormProps> = ({
       isValid = false;
     }
     
-    // Validate community type
-    if (!communityType) {
-      setTypeError('Please select a community type');
-      isValid = false;
-    }
+    // Note: communityType validation removed since the field is commented out in the UI
     
     return isValid;
   };
 
   const handleNext = () => {
-    if (validateForm()) {
-      console.log('Community data:', { 
+    console.log('🔵 CommunityDetailsForm: handleNext called');
+    console.log('🔵 Form validation starting...');
+    
+    const isValid = validateForm();
+    console.log('🔵 Form validation result:', isValid);
+    
+    if (isValid) {
+      console.log('🔵 Form is valid, proceeding with next step');
+      console.log('🔵 Community data:', { 
         communityName, 
         communityDescription, 
         communityType,
         communityColor,
         isPrivate 
       });
+      console.log('🔵 onNext callback exists:', !!onNext);
+      console.log('🔵 Calling onNext...');
       onNext?.();
+      console.log('🔵 onNext called successfully');
+    } else {
+      console.log('🔴 Form validation failed, not proceeding');
     }
   };
 
@@ -215,20 +224,20 @@ const CommunityDetailsForm: React.FC<CommunityDetailsFormProps> = ({
 
               {/* Privacy Setting */}
               <div className={styles.formGroup}>
-                <div className={styles.privacyToggle}>
-                  <label className={styles.toggleLabel}>
-                    <input
-                      type="checkbox"
-                      checked={isPrivate}
-                      onChange={(e) => setIsPrivate(e.target.checked)}
-                      className={styles.checkbox}
-                    />
-                    <span className={styles.toggleText}>Make this community private</span>
-                  </label>
-                  <p className={styles.privacyDescription}>
-                    Private communities require approval to join and are not visible in public searches.
-                  </p>
-                </div>
+                <CustomCheckbox
+                  id="isPrivate"
+                  name="isPrivate"
+                  label={
+                    <div>
+                      <span>Make this community private</span>
+                      <p className={styles.privacyDescription}>
+                        Private communities require approval to join and are not visible in public searches.
+                      </p>
+                    </div>
+                  }
+                  checked={isPrivate}
+                  onChange={(e) => setIsPrivate(e.target.checked)}
+                />
               </div>
             </form>
           </div>
